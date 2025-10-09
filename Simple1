@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>vaniruli</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="img/IMG_0384.png" rel="icon">
+  <link href="img/IMG_0384.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Shippori+Mincho+B1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="vendor/aos/aos.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="img/testimonials/v/未命名的作品2.png.jpg" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html">琉璃</a></h1>
+       
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="#photo" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>角色資料</span></a></li>
+          <li><a href="#portfolio-details" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>圖片</span></a></li>
+          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>服設</span></a></li>
+          <li><a href="#story" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>故事</span></a></li>
+         
+        </ul>
+      </nav><!-- .nav-menu -->
+      
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <main id="main">
+    <section id="photo" class="custom-section container mt-4">
+  <h2 class="text-center"></h2>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="p-3 border bg-light">
+        <b>翠月琉璃</b>
+         <p>年齡:22<BR>身高:150<br>外觀：<br> •齊瀏海<br> •頭上辮子+雙馬尾<br> •左右兩邊有翹毛<br>
+容易害羞，但是很外向。<br></p>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-6 text-center">
+      <" alt="示意圖" class="img-fluid rounded">
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="p-3 border bg-light">
+        <b></b>
+        <p><BR><br><br>機車參考→<a href ="https://www.google.com/search?client=ms-android-asus&sca_esv=160c731af92cf5eb&sxsrf=AHTn8zrdvgSDdOhXQRxgDCKRHM2-uzoYBg:1747913914687&udm=2&fbs=ABzOT_AGBMogrnfXHu6GxeqSvos9YNXXoqT4M1zPLW-rz66fPS6nWbUndoCz-Bup9JcwNgaA8se1iUEusHQCFhBholU8XXNEvozyUhzCy0vCJxQoZFwVGp3jpE00D4_bY4HmOLCWiCDSPNfR8In5FqhP4BpFsL6YdVfHCwBc1adZm826E1SqlfLujf976kXquGGWwBxclv64sYn9QIWer1Th9gwgOFR3Qg&q=%E5%B7%9D%E5%B4%8E%E9%87%8D%E6%A9%9F&sa=X&sqi=2&ved=2ahUKEwioj-7f_raNAxW0i68BHdl2BboQtKgLegQIHBAB&biw=411&bih=810&dpr=2.63">川崎重機</a><br></p>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-6 text-center">
+      <
+" class="img-fluid rounded">
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="p-3 border bg-light">
+        <b>相處模式</b>
+         <p>
+對他的稱呼：<br>
+對我的稱呼：琉璃<br>
+兩人都是會仗著對方寵自己就肆無忌憚的人。
+</p>
+<br><a href ="https://drive.google.com/drive/folders/1MJ3mdjkqIBoUfSAF7QweOQEbNms2wgjp"class="btn btn-pink btn-sm" target="_blank">參考圖片下載處</a>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-6 text-center">
+      <img src="" alt="示意圖" class="img-fluid rounded"><br>
+
+      <br><p>其他男生正比q版參考
+</p>
+    </div>
+  </div>
+      
+      
+
+<br>
+    </section>
+
+    <!--=============== Portfolio Section ================-->
+<section id="portfolio" class="portfolio-section bg-light py-5">
+  <div class="container">
+    <div class="section-title">
+      <h2>服設</h2>
+      <p>琉璃的衣櫥</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <img src="img/testimonials/v/FB_IMG_1747046985693.jpg" class="card-img-top" alt="Selin">
+          <div class="card-body">
+            <h5 class="card-title">免費服設</h5>
+            <p class="card-text">繪師：shi shi</p>
+            <a href="https://www.facebook.com/share/p/16VrCy4NLF/" class="btn btn-pink btn-sm" target="_blank">查看詳情🎀</a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 再新增更多作品卡片 -->
+    </div>
+  </div>
+</section>
+
+<!--=============== Photo Section ================-->      
+<section id="portfolio-details" class="portfolio-details">
+  <div class="container">
+
+    <!-- 照片牆 Photo Wall -->
+    <div class="photo-wall mb-5">
+      <div class="row g-3">
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品1">
+              <div class="photo-caption">七一</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品1">
+              <div class="photo-caption">吧噗</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品1">
+              <div class="photo-caption">麑龗 520快樂！</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品1">
+              <div class="photo-caption"> 端午節快樂！</div>
+            </a>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品1">
+              <div class="photo-caption">白米米</div>
+            </a>
+          </div>
+        </div>
+        
+
+
+        
+
+       
+      </div>
+    </div>
+
+    </section>
+
+      
+<section id="draw" class="portfolio-details2">  
+  <div class="container">
+
+    <!-- 照片牆 Photo Wall -->
+    <div class="photo-wall mb-5">
+      <div class="row g-3">
+      <div class="section-title">
+      <h2>琉璃單人</h2>
+      </div>  
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品1">
+              <div class="photo-caption">白米米</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品1">
+              <div class="photo-caption">徐小愿</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品1">
+              <div class="photo-caption">徐小愿</div>
+            </a>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+<section id="draw" class="portfolio-details">  
+  <div class="container">
+
+    <!-- 照片牆 Photo Wall -->
+    <div class="photo-wall mb-5">
+      <div class="row g-3">
+      <div class="section-title">
+      <h2>自繪</h2>
+   </div>
+      
+ 
+
+   <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品2">
+              <div class="photo-caption">最喜歡了！</div>
+            </a>
+          </div>
+        </div>
+
+   <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品2">
+              <div class="photo-caption">チューリングラブ</div>
+            </a>
+          </div>
+        </div>
+
+           <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品2">
+              <div class="photo-caption">寶石之國paro</div>
+            </a>
+          </div>
+        </div>
+
+           <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品2">
+              <div class="photo-caption">金綠柱石</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="/" class="img-fluid" alt="作品2">
+              <div class="photo-caption">我的最推只有你！</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="" class="img-fluid" alt="作品2">
+              <div class="photo-caption">在看魔法史？</div>
+            </a>
+          </div>
+        </div>
+
+                <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="/img/testimonials/v/IMG_0654.png" class="img-fluid" alt="作品2">
+              <div class="photo-caption">最近流行的那個</div>
+            </a>
+          </div>
+        </div>
+     
+     
+    
+        
+
+
+      </div>
+    </div>
+
+    </section>
+
+  
+
+
+
+
+    <!-- ======= 滑動卡片區塊 ======= -->
+<section class="character-cards swiper my-5" id="doll">
+  
+  <div class="section-title" >
+      <h2>故事</h2>
+    </div>
+  <div class="swiper-wrapper">
+  <br><a href =""class="btn btn-pink btn-sm" target="_blank">一欄</a>
+  <br>
+
+    <!-- 卡片 1 -->
+    <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="img/testimonials/v/IMG_0624.png" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">推し</h5>
+          <p class="card-text"></p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- 卡片 2 -->
+    <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">hp paro</h5>
+          <p class="card-text">從她踏進斜角巷的那一刻起，世界像是忽然打開了某個隱藏通道。</p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+    </div>
+    <!--第三張卡片-->
+    <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">寶石paro</h5>
+          <p class="card-text"></p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <!--第四張卡片-->
+        <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">午後</h5>
+          <p class="card-text"></p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <!--第五張卡片-->
+        <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">電影</h5>
+          <p class="card-text">「……你在哭？」</p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <!--第六張卡片-->
+        <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">捧臉</h5>
+          <p class="card-text">沒有特別用力，也沒有抬起來，只是溫溫地、鬆鬆地捧著。</p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+        </div>
+
+    <!--第七張卡片-->
+        <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">兜風</h5>
+          <p class="card-text">接起電話的那瞬間，琉璃有點困惑，但也習慣了。</p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+        </div>
+
+    <!--第八張卡片-->
+        <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">冷氣</h5>
+          <p class="card-text">「冷可以加衣服，熱又不能叫你脫光在家走來走去……」</p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+        </div>
+
+    <!--第九張卡片-->
+        <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">こともの日</h5>
+          <p class="card-text">「冷靜、冷靜、 可能是到了男朋友變成小孩的季節了」</p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+        </div>
+
+            <div class="swiper-slide">
+      
+      <div class="card h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">不機嫌</h5>
+          <p class="card-text">不是沒發現，只是他一向不習慣逼問。</p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+      
+            </div>
+
+
+
+  </div>
+
+  <!-- 左右箭頭 -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</section>
+
+    
+</main>
+    <!-- End Portfolio Section -->
+    
+
+   
+
+
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>iPortfolio</span></strong>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="vendor/aos/aos.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="vendor/typed.js/typed.umd.js"></script>
+  <script src="vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+   <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+  const lightbox = GLightbox({
+    selector: '.glightbox'
+  });
+  new Swiper('.character-cards', {
+  slidesPerView: 1.2,
+  spaceBetween: 20,
+  loop: false,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 2.2,
+    },
+    992: {
+      slidesPerView: 3.2,
+    },
+  }
+});
+
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const lightbox = GLightbox({
+      selector: '.glightbox'
+    });
+  });
+</script>
+
+<style>
+  .character-cards .card {
+    min-width: 250px;
+  }
+</style>
+
+
+
+</body>
+
+</html>

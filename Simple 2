@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>yukirube</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="img/IMG_0384.png" rel="icon">
+  <link href="img/IMG_0384.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Shippori+Mincho+B1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="vendor/aos/aos.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="img/IMG_1441_1.jpg" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html">雪</a></h1>
+       
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="#photo" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>角色資料</span></a></li>
+          <li><a href="#portfolio-details" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>圖片</span></a></li>
+          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>服設</span></a></li>
+          <li><a href="#story" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>資料</span></a></li>
+         
+        </ul>
+      </nav><!-- .nav-menu -->
+      
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <main id="main">
+    <section id="photo" class="custom-section container mt-4">
+  <h2 class="text-center">.+*:ﾟ+｡.☆</h2>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="p-3 border bg-light">
+        <b>望月雪<br></b>
+        <p>身高:150<br>年齡：21<br>平常是長髮但偶爾會綁雙馬尾。</p>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-6 text-center">
+      <img src=" alt="示意圖" class="img-fluid rounded">
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="p-3 border bg-light">
+        <b><br></b>
+        <p><details><a href="Csp.html">一份機密報告書</a></details></p>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-6 text-center">
+      <img src="/" alt="示意圖" class="img-fluid rounded">
+      <img src="/i" alt="示意圖" class="img-fluid rounded">
+    </div>
+  </div>
+    </section>
+
+      
+<section id="portfolio-details" class="portfolio-details">
+  <div class="container">
+
+    <!-- 照片牆 Photo Wall -->
+    <div class="section-title">
+      <h2>紙娃娃</h2>
+       </div>
+    <div class="photo-wall mb-5">
+      
+      <div class="row g-3">
+        
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="/" class="img-fluid" alt="作品1">
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="/" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="/" class="img-fluid" alt="作品1">
+              <div class="photo-caption">🦋ずうっといっしょ🦋</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="/img/" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="/img/" class="img-fluid" alt="作品1">
+              <div class="photo-caption">大好き🩷</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="photo-container">
+            <a href="/img/" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="/img/" class="img-fluid" alt="作品1">
+              <div class="photo-caption">あなたは天使ですか？<br>
+さあ…どうかな…</div>
+            </a>
+          </div>
+        </div>
+
+         <div class="col-md-4">
+          <div class="photo-container">
+            <a href="/img/" class="portfolio-lightbox" data-gallery="gallery1">
+              <img src="/img/" class="img-fluid" alt="作品1">
+              <div class="photo-caption">萌え萌えキュン♡</div>
+            </a>
+          </div>
+        </div>
+
+
+       
+      </div>
+    </div>
+</div>
+    </section>
+<section id="draw" class="portfolio-details">
+  <div class="container">
+
+    <!-- 照片牆 Photo Wall -->
+    <div class="photo-wall mb-5">
+      <div class="row g-3">
+ <div class="section-title">
+      <h2>自繪</h2>
+     
+    </div>
+        
+
+
+      </div>
+    </div>
+
+    </section>
+  
+<!--=============== Portfolio Section ================-->
+<section id="portfolio" class="portfolio-section bg-light py-5">
+  <div class="container">
+    <div class="section-title">
+      <h2>服設</h2>
+      <p>雪的衣櫥</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+       
+      </div>
+
+      <!-- 再新增更多作品卡片 -->
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- ======= 滑動卡片區塊 ======= -->
+<section class="character-cards swiper my-5" id="doll">
+  
+  <div class="section-title" >
+      <h2>故事</h2>
+    </div>
+  <div class="swiper-wrapper">
+
+    <!-- 卡片 1 -->
+    <div class="swiper-slide">
+      <div class="card h-100 shadow-sm">
+        <img src="/" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">初見</h5>
+          <p class="card-text">先輩、なんて呼ばれたいですか？</p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卡片 2 -->
+    <div class="swiper-slide">
+      <div class="card h-100 shadow-sm">
+        <img src="img/IMG_0440.jpeg" class="card-img-top" alt="角色二">
+        <div class="card-body">
+          <h5 class="card-title">甜點</h5>
+          <p class="card-text">如果是你……會怎麼叫我？</p>
+          <a href="" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卡片 3 -->
+    <div class="swiper-slide">
+      <div class="card h-100 shadow-sm">
+        <img src="img/portfolio/IMG_0520.png" class="card-img-top" alt="角色三">
+        <div class="card-body">
+          <h5 class="card-title">水仙</h5>
+          <p class="card-text">實驗下的產物</p>
+          <a href="portfolio-details4.html" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 左右箭頭 -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</section>
+
+    
+</main>
+    <!-- End Portfolio Section -->
+    
+
+   
+
+
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>iPortfolio</span></strong>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="vendor/aos/aos.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="vendor/typed.js/typed.umd.js"></script>
+  <script src="vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+   <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+  const lightbox = GLightbox({
+    selector: '.glightbox'
+  });
+  new Swiper('.character-cards', {
+  slidesPerView: 1.2,
+  spaceBetween: 20,
+  loop: false,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 2.2,
+    },
+    992: {
+      slidesPerView: 3.2,
+    },
+  }
+});
+
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const lightbox = GLightbox({
+      selector: '.glightbox'
+    });
+  });
+</script>
+
+<style>
+  .character-cards .card {
+    min-width: 250px;
+  }
+</style>
+
+
+
+</body>
+
+</html>
