@@ -397,3 +397,58 @@
     </div>
   </div>
     </section>
+
+  </main>
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+<script src="vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="vendor/aos/aos.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/glightbox/js/glightbox.min.js"></script>
+<script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="vendor/swiper/swiper-bundle.min.js"></script>
+<script src="vendor/typed.js/typed.umd.js"></script>
+<script src="vendor/waypoints/noframework.waypoints.js"></script>
+<script src="vendor/php-email-form/validate.js"></script>
+
+<script src="main.js"></script>  
+<script>
+  // 您的 GLightbox 和 Swiper 初始化邏輯放在這裡
+  const lightbox = GLightbox({
+    selector: '.glightbox'
+  });
+  new Swiper('.character-cards', {
+    slidesPerView: 1.2,
+    spaceBetween: 20,
+    loop: false,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2.2,
+      },
+      992: {
+        slidesPerView: 3.2,
+      },
+    }
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const lightbox = GLightbox({
+      selector: '.glightbox'
+    });
+  });
+</script>
+  
+<style>
+  .character-cards .card {
+    min-width: 250px;
+  }
+</style>
+  
+</body>
+</html>
