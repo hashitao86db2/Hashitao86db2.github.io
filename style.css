@@ -72,6 +72,21 @@ h1 {
   
 }
 
+/* 修改 summary 的文字顏色和字體 */
+details summary {
+ 
+   
+    padding: 5px 0; /* 增加上下間距 */
+}
+
+/* 移除瀏覽器預設的點點 (可選，但通常建議) */
+details summary {
+    list-style: none;
+}
+details summary::-webkit-details-marker {
+    display: none;
+}
+
 
 /*--------------------------------------------------------------
 # Back to top button
