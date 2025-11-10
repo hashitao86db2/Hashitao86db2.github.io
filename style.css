@@ -803,7 +803,7 @@ section {
     
     /* ⚡️ 定位：在 mobile-nav-toggle (頂部 15px) 下方約 60px 處 */
     top: 60px;     
-    left: 15px;    
+    right: 15px;    
     z-index: 9998; 
     
     padding: 0;
