@@ -787,148 +787,14 @@ section {
 }
 
 /* ===================================== */
-/* 互動區塊：頂層與大框框樣式 */
-/* ===================================== */
 
-.interactive-gallery {
-    padding: 30px 0; 
-}
-
-/* 1. 頂層：實現【大長方形】圓角虛線框 */
-.emoji-list-container {
-    width: 90%; 
-    max-width: 400px; 
-    
-    /* 讓容器高度自動，並維持寬高比例 (這裡是寬度約是高度的兩倍，容納兩排) */
-    aspect-ratio: unset; 
-    height: auto; 
-    
-    margin: 0 auto; 
-    padding: 10px 20px; /* ⚡️ 上下間距縮小，左右保持 20px */
-    
-    border: 3px dashed #a17b6d; 
-    border-radius: 20px; 
-    background-color: #fff; 
-    
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-}
-
-
-/* 2. 表情符號佈局：實現兩排，一排四個 */
-.interactive-gallery .emoji-gallery {
-    display: flex;
-    flex-wrap: wrap; /* 允許換行 */
-    justify-content: space-between; /* 讓表情符號分散對齊 */
-    gap: 15px; /* 垂直間距 */
-    width: 95%; 
-    height: 100%;
-}
-
-/* 3. 單個文字標籤的容器大小 (確保四欄對齊) */
-.interactive-gallery .emoji-card {
-    /* 確保四個項目可以排在一行 */
-    width: calc(25% - 15px); 
-    flex-basis: calc(25% - 15px); /* 考慮到 flex-wrap: wrap; */
-    flex-grow: 0;
-    flex-shrink: 0;
-    
-    /* ⚡️【調整高度】文字卡片的高度 */
-    height: 35px; 
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none; /* 移除原生箭頭 */
-}
-
-.interactive-gallery .emoji-card summary {
-    list-style: none; 
-}
-.interactive-gallery .emoji-card summary::-webkit-details-marker {
-    display: none;
-}
-
-
-/* 4. summary (文字標籤) 樣式：底線、縮小字體 */
-.interactive-gallery .emoji-trigger {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    border: none;
-    border-radius: 0; 
-    
-    /* ⚡️【粉色底線】可點擊的提示線 */
-    border-bottom: 3px solid #a17b6d; 
-    
-    width: 100%;      
-    height: 100%;     
-    font-size: 1rem; 
-    
-    cursor: pointer;
-    background-color: transparent; 
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-/* 5. 文字樣式 (縮小字體) */
-.interactive-gallery .emoji-trigger .label-text {
-    /* ⚡️【文字縮小】 */
-    font-size: 0.85rem; 
-    font-weight: bold;
-    color: #a17b6d; 
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-}
-
-
-/* 6. 互動效果 */
-.interactive-gallery .emoji-trigger:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-    border-bottom-color:#785d53 ; 
-}
-
-.interactive-gallery .emoji-card.active .emoji-trigger {
-    transform: scale(1.08); 
-    background-color: #967265; 
-    box-shadow: 0 0 5px rgba(228, 153, 183, 0.5);
-    border-bottom-color: #c7a295;
-}
-
-/* 7. 展開內容區塊置中 */
-#expanded-content-area {
-    margin: 30px auto 50px; 
-    width: 90%; 
-    max-width: 500px; 
-    transition: all 0.3s ease; 
-    min-height: 100px; 
-    padding: 0 15px; 
-}
-
-.interactive-gallery .content-box { 
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fcf0e6; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-    text-align: center;
-}
-
-.interactive-gallery .content-box .story-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
 
 /* ===================================== */
 /* A. 音樂開關按鈕樣式 (手機版專屬) */
 /* ===================================== */
 .music-toggle-button {
     position: fixed; 
-    background: #a5d6f2; 
+    background: #b992d1; 
     color: #fff;
     width: 35px; 
     height: 35px;
@@ -955,7 +821,7 @@ section {
 }
 
 .music-toggle-button:hover {
-    background: #c2dff0;
+    background: #ccafde;
 }
 
 /* 確保在電腦版隱藏 (雖然 d-xl-none 已處理，但此處可作為保險) */
