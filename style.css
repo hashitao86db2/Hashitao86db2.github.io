@@ -794,7 +794,7 @@ section {
 /* ===================================== */
 .music-toggle-button {
     position: fixed; 
-    background: #b992d1; 
+    background: #986db2; 
     color: #fff;
     width: 35px; 
     height: 35px;
@@ -803,7 +803,7 @@ section {
     
     /* ⚡️ 定位：在 mobile-nav-toggle (頂部 15px) 下方約 60px 處 */
     top: 60px;     
-    right: 15px;    
+    right: 15.1px;    
     z-index: 9998; 
     
     padding: 0;
