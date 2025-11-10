@@ -1100,7 +1100,13 @@ section {
     margin-left: 0; /* 確保圖片靠左 */
 }
 
+
+
+/* ===================================== */
 /* 5. 章節導航按鈕 (返回/下一章) */
+/* ===================================== */
+
+/* 容器樣式：保持不變 */
 .chapter-nav-buttons {
     display: flex;
     justify-content: space-between;
@@ -1110,18 +1116,41 @@ section {
     border-top: 1px solid #eee;
 }
 
+/* ⚡️【核心修改】按鈕樣式：移除框線和背景，變成文字連結 */
 .cute-nav-btn {
-    padding: 8px 15px;
-
-    color: #173b6c;
-    cursor: pointer;
+    /* ⚡️ 移除邊框和背景 */
+    padding: 0; /* 移除 padding */
+    border: none;
+    background: none;
+    
+    /* 設置文字樣式 */
+    color: #173b6c; /* 使用您連結的顏色或粉色 */
+    font-size: 1rem;
     font-weight: bold;
-    transition: background-color 0.2s;
+    cursor: pointer;
+    text-decoration: none; /* 移除下劃線 (如果有) */
+    transition: color 0.2s; /* 讓 hover 效果平滑 */
+
+    /* 確保圖示和文字能排列 */
+    display: inline-flex;
+    align-items: center;
 }
 
+/* ⚡️【新增】三角形圖示樣式 */
+.cute-nav-btn i {
+    font-size: 1.2rem; /* 三角形圖示大小 */
+    margin: 0 5px;
+}
+
+/* ⚡️【新增】Hover 效果：顏色變深 */
 .cute-nav-btn:hover {
-    color: #fff;
+    background: none; /* 確保沒有背景變色 */
+    color: ##74f87; /* Hover 時變為您喜歡的粉色 */
 }
 
-
+/* 確保「故事已完結」標記保持居中 */
+.chapter-nav-buttons span {
+    color: #999;
+    font-style: italic;
+}
 
