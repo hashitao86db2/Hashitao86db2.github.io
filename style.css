@@ -923,3 +923,231 @@ section {
     margin-bottom: 15px;
 }
 
+/* ===================================== */
+/* A. 音樂開關按鈕樣式 (手機版專屬) */
+/* ===================================== */
+.music-toggle-button {
+    position: fixed; 
+    background: #a5d6f2; 
+    color: #fff;
+    width: 35px; 
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    
+    /* ⚡️ 定位：在 mobile-nav-toggle (頂部 15px) 下方約 60px 處 */
+    top: 60px;     
+    left: 15px;    
+    z-index: 9998; 
+    
+    padding: 0;
+    line-height: 0; 
+    cursor: pointer;
+    transition: background 0.3s;
+    
+    display: flex; /* 確保圖示居中 */
+    justify-content: center;
+    align-items: center;
+}
+
+.music-toggle-button i {
+    font-size: 18px;
+}
+
+.music-toggle-button:hover {
+    background: #c2dff0;
+}
+
+/* 確保在電腦版隱藏 (雖然 d-xl-none 已處理，但此處可作為保險) */
+@media (min-width: 1200px) {
+    .music-toggle-button {
+        display: none !important;
+    }
+}
+
+
+/* ===================================== */
+/* B. 底部導航按鈕樣式 (回上/下一頁) */
+/* ===================================== */
+
+.footer-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    gap: 25px; 
+    
+    /* 底部置中與留白 */
+    padding-top: 25px;   
+    padding-bottom: 50px; 
+}
+
+/* 統一圓形按鈕基礎樣式 (請確保移除原本的 cute-back-button/cute-next-button 樣式) */
+.cute-back-button,
+.cute-next-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px; 
+    height: 55px; 
+    padding: 0; 
+    border-radius: 50%; 
+    
+    background-color: #f7d9e4; /* 柔和粉色 */
+    color: #4a4a4a; 
+    font-size: 1.4rem; 
+    cursor: pointer;
+    text-decoration: none;
+    
+    box-shadow: 0 4px 6px rgba(247, 217, 228, 0.6), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease; 
+}
+
+.cute-back-button:hover,
+.cute-next-button:hover {
+    background-color: #fce7ec; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 10px rgba(247, 217, 228, 0.8), 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.cute-back-button .arrow-icon, 
+.cute-next-button .arrow-icon { 
+    font-size: 1.4rem;
+    line-height: 1; 
+}
+
+
+/* ===================================== */
+/* C. 互動區塊：表情符號圖庫樣式 */
+/* ===================================== */
+
+.interactive-gallery {
+    padding: 30px 0; 
+}
+
+/* 1. 頂層：實現【大虛線框】圓角 */
+.emoji-list-container {
+    width: 90%; 
+    max-width: 400px; 
+    height: auto; 
+    
+    margin: 0 auto; 
+    padding: 10px 20px; /* ⚡️ 上下間距縮小 */
+    
+    border: 3px dashed #e499b7; 
+    border-radius: 20px; 
+    background-color: #fff; 
+    
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; /* 讓內容從頂部開始排 */
+}
+
+/* 2. 表情符號佈局：兩排，一排四個 */
+.interactive-gallery .emoji-gallery {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    gap: 15px; 
+    width: 95%; 
+    height: 100%;
+}
+
+/* 3. 單個文字標籤的容器大小 (確保四欄對齊) */
+.interactive-gallery .emoji-card {
+    /* 四欄佈局計算 */
+    width: calc(25% - 15px); 
+    flex-basis: calc(25% - 15px); 
+    flex-grow: 0;
+    flex-shrink: 0;
+    
+    /* ⚡️ 調整高度 */
+    height: 35px; 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.interactive-gallery .emoji-card summary {
+    list-style: none; 
+}
+.interactive-gallery .emoji-card summary::-webkit-details-marker {
+    display: none;
+}
+
+/* 4. summary (文字標籤) 樣式：底線、縮小字體 */
+.interactive-gallery .emoji-trigger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: none;
+    border-radius: 0; 
+    
+    border-bottom: 3px solid #f7d9e4; /* ⚡️ 粉色底線 */
+    
+    width: 100%;      
+    height: 100%;     
+    font-size: 1rem; 
+    
+    cursor: pointer;
+    background-color: transparent; 
+    transition: transform 0.2s ease, border-bottom-color 0.2s ease;
+}
+
+/* 5. 文字樣式 (縮小字體) */
+.interactive-gallery .emoji-trigger .label-text {
+    font-size: 0.85rem; /* ⚡️ 縮小字體 */
+    font-weight: bold;
+    color: #4a4a4a; 
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+/* 6. 互動效果 */
+.interactive-gallery .emoji-trigger:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+    border-bottom-color: #e499b7; /* Hover 變深 */
+}
+
+.interactive-gallery .emoji-card.active .emoji-trigger {
+    transform: scale(1.08); 
+    background-color: #f7d9e4; 
+    box-shadow: 0 0 5px rgba(228, 153, 183, 0.5);
+    border-bottom-color: #e499b7;
+}
+
+/* 7. 展開內容區塊置中與置左 */
+#expanded-content-area {
+    margin: 30px auto 50px; 
+    width: 90%; 
+    max-width: 500px; 
+    transition: all 0.3s ease; 
+    min-height: 100px; 
+    padding: 0 15px; 
+}
+
+.interactive-gallery .content-box { 
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #e9e6fc; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    
+    /* ⚡️ 文字置左 */
+    text-align: left; 
+}
+.interactive-gallery .content-box h4 {
+    text-align: left;
+}
+
+.interactive-gallery .content-box .story-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+
