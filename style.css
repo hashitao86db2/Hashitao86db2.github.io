@@ -1112,9 +1112,7 @@ section {
 
 .cute-nav-btn {
     padding: 8px 15px;
-    border: 1px solid #a5d6f2;
-    border-radius: 5px;
-    background: #8a7862;
+
     color: #173b6c;
     cursor: pointer;
     font-weight: bold;
@@ -1122,7 +1120,6 @@ section {
 }
 
 .cute-nav-btn:hover {
-    background-color: #a5d6f2;
     color: #fff;
 }
 
