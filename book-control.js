@@ -65,28 +65,43 @@ document.addEventListener('DOMContentLoaded', () => {
         container.classList.add('chapter-nav-buttons'); 
 
         // 1. 返回目錄按鈕
+            // book-control.js 內的 createNavButtons 函數 (部分修改)
+    const createNavButtons = (currentChapterId, storyId) => {
+        // ... (省略前半部分) ...
+
+        // 1. 返回目錄按鈕
         const backToMenuBtn = document.createElement('button');
-        backToMenuBtn.textContent = '< 返回目錄';
+        backToMenuBtn.textContent = '返回目錄'; // 內容為純文字
         backToMenuBtn.classList.add('cute-nav-btn', 'back-to-menu');
+        
+        // ⚡️【新增】插入左箭頭圖示
+        backToMenuBtn.innerHTML = '<i class="bi bi-caret-left-fill"></i>' + backToMenuBtn.textContent;
+        
         backToMenuBtn.addEventListener('click', () => {
-            // 顯示目錄 (目錄的 ID 就是 storyId)
-            displayContent(storyId, storyId); 
-            // 重新激活上方標籤的 active 狀態
-            document.querySelector(`.emoji-card[data-content-id="${storyId}"]`).classList.add('active');
+             // ...
         });
         container.appendChild(backToMenuBtn);
 
-        // 2. 下一章按鈕
+        // 2. 下一章按鈕 (如果存在下一章)
         if (currentIndex < story.chapters.length - 1) {
             const nextChapterId = story.chapters[currentIndex + 1];
             const nextBtn = document.createElement('button');
-            nextBtn.textContent = '下一章 >';
+            nextBtn.textContent = '下一章'; // 內容為純文字
             nextBtn.classList.add('cute-nav-btn', 'next-chapter');
+            
+            // ⚡️【新增】插入右箭頭圖示
+            nextBtn.innerHTML = nextBtn.textContent + '<i class="bi bi-caret-right-fill"></i>';
+            
             nextBtn.addEventListener('click', () => {
                 displayContent(nextChapterId, storyId);
             });
             container.appendChild(nextBtn);
-        } else {
+        } 
+        // ... (省略結尾部分) ...
+        
+        return container;
+    };
+
             // 結尾標記
             const endMarker = document.createElement('span');
             endMarker.textContent = '一個紀錄的完結';
