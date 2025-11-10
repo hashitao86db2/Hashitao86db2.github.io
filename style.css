@@ -1016,4 +1016,13 @@ section {
     margin-bottom: 15px;
 }
 
+.centered-italic-text {
+    /* 1. ⚡️ 實現文字斜體 (斜線) 效果 */
+    font-style: italic; 
+    font-color: #6c6a6e;
+    /* 2. ⚡️ 實現文字水平置中效果 */
+    text-align: center;
+}
+
+
 
