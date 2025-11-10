@@ -1024,5 +1024,107 @@ section {
     text-align: center;
 }
 
+/* ===================================== */
+/* C. 展開內容區塊：書櫃與目錄樣式 */
+/* ===================================== */
+
+/* 1. 內容展示區容器 */
+#expanded-content-area {
+    margin: 30px auto 50px; 
+    width: 90%; 
+    max-width: 500px; 
+    transition: all 0.3s ease; 
+    min-height: 100px; 
+    padding: 0 15px; 
+}
+
+/* 2. 目錄模板樣式 (.menu-box) */
+.menu-box {
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #e6d4c8; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+}
+
+.menu-title {
+    text-align: center;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+}
+
+/* 3. 目錄列表 (直列式) */
+.chapter-list {
+    list-style: none; 
+    padding: 0;
+}
+
+.chapter-list li {
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    background-color: #fff;
+    border-left: 5px solid: #4f4330; /* 藍色側邊條，像書脊 */
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: left; /* 確保文字靠左 */
+    display: block; 
+}
+
+.chapter-list li:hover {
+    background-color: #bfb8ac;
+}
+
+/* 4. 書本內容樣式 (.content-box) */
+.interactive-gallery .content-box { 
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #e6d4c8; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    
+    /* ⚡️ 文字置左 */
+    text-align: left; 
+}
+
+.interactive-gallery .content-box h4,
+.interactive-gallery .content-box p {
+    text-align: left;
+}
+
+.interactive-gallery .content-box .story-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: block; /* 讓圖片可以獨立佔據一行 */
+    margin-left: 0; /* 確保圖片靠左 */
+}
+
+/* 5. 章節導航按鈕 (返回/下一章) */
+.chapter-nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.cute-nav-btn {
+    padding: 8px 15px;
+    border: 1px solid #a5d6f2;
+    border-radius: 5px;
+    background: #8a7862;
+    color: #173b6c;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.cute-nav-btn:hover {
+    background-color: #a5d6f2;
+    color: #fff;
+}
+
 
 
