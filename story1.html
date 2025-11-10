@@ -55,7 +55,15 @@
          
         </ul>
       </nav><!-- .nav-menu -->
-      
+        
+      <audio id="bgMusic" loop>
+      <source src="assets/bgm.mp3" type="audio/mpeg">
+      您的瀏覽器不支援 HTML5 音訊。
+  </audio>
+
+  <button id="musicToggle" class="music-toggle-button d-xl-none">
+    <i class="bi bi-play-fill"></i>
+  </button>
 
     </div>
   </header><!-- End Header -->
@@ -179,6 +187,9 @@
   <script src="vendor/typed.js/typed.umd.js"></script>
   <script src="vendor/waypoints/noframework.waypoints.js"></script>
   <script src="vendor/php-email-form/validate.js"></script>
+  <script src="music-control.js"></script> 
+
+
 
   <!-- Template Main JS File -->
    <script src="main.js"></script>
