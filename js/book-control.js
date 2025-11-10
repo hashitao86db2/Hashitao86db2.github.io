@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // 結尾標記
             const endMarker = document.createElement('span');
-            endMarker.textContent = '故事已完結'; 
+            endMarker.textContent = '一個記錄的結束'; 
             container.appendChild(endMarker);
         }
         
