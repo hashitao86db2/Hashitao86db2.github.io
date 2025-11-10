@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Story</title>
+  <meta content="" name="description"> <meta content="" name="keywords"> <link href="assets/favicon.png" rel="icon"> 
+  <link href="assets/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Shippori+Mincho+B1&display=swap" rel="stylesheet">
+  <link href="vendor/aos/aos.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet"> 
+  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="yume.css" rel="stylesheet">
+  </head>
+
+<body>
+
+
+
+<main id="main">
+<section id="emoji-section" class="interactive-gallery">
+    
+    <h2 class="text-center">赫伯利亞之上</h2>
+    <p>-記錄於世界樹之下無人知曉的記憶-</p>
+    <div class="emoji-list-container">
+        
+        <div class="emoji-gallery">
+            
+            <details class="emoji-card" data-content-id="story1">
+                <summary class="emoji-trigger">
+                    <span class="label-text">拉達娜娜</span>
+                </summary>
+            </details>
+
+            <details class="emoji-card" data-content-id="story2">
+                <summary class="emoji-trigger">
+                    <span class="label-text">拉提蜜</span>
+                </summary>
+            </details>
+
+            <details class="emoji-card" data-content-id="story3">
+                <summary class="emoji-trigger">
+                    <span class="label-text">瓦涅茲</span>
+                </summary>
+            </details>
+
+            <details class="emoji-card" data-content-id="story4">
+                <summary class="emoji-trigger">
+                    <span class="label-text">蘇嵐榭</span>
+                </summary>
+            </details>
+            
+            <details class="emoji-card" data-content-id="story5">
+                <summary class="emoji-trigger">
+                    <span class="label-text">穆奧</span>
+                </summary>
+            </details>
+
+            <details class="emoji-card" data-content-id="story6">
+                <summary class="emoji-trigger">
+                    <span class="label-text">庫纏</span>
+                </summary>
+            </details>
+            
+            <details class="emoji-card" data-content-id="story7">
+                <summary class="emoji-trigger">
+                    <span class="label-text">魯奧莫卡</span>
+                </summary>
+            </details>
+            
+            <details class="emoji-card" data-content-id="story8">
+                <summary class="emoji-trigger">
+                    <span class="label-text">伊拉達</span>
+                </summary>
+            </details>
+
+          <details class="emoji-card" data-content-id="story9">
+                <summary class="emoji-trigger">
+                    <span class="label-text">利托歐</span>
+                </summary>
+          </details>
+
+        </div>
+        
+    </div>
+    
+    <div id="expanded-content-area">
+        </div>
+    
+    <div id="content-templates" style="display: none;">
+        
+        <div class="content-box" id="story1">
+            <h4>第一個故事標題</h4>
+            <img src="img/story1.jpg" alt="第一個故事圖文" class="story-image">
+            <p>這是點擊「第一個故事」後會展開的詳細文字內容。</p>
+        </div>
+
+        <div class="content-box" id="story2">
+            <h4>第二篇標題</h4>
+            <img src="img/story2.jpg" alt="第二篇圖文" class="story-image">
+            <p>這是點擊「第二篇」後會展開的詳細文字內容。</p>
+        </div>
+
+        <div class="content-box" id="story3">
+            <h4>難過回憶標題</h4>
+            <img src="img/story3.jpg" alt="難過圖文" class="story-image">
+            <p>這是點擊「難過回憶」後會展開的詳細文字內容。</p>
+        </div>
+        
+        <div class="content-box" id="story8">
+            <h4>特別回憶標題</h4>
+            <img src="img/story8.jpg" alt="特別回憶圖文" class="story-image">
+            <p>這是點擊「特別回憶」後會展開的詳細文字內容。</p>
+        </div>
+        
+        </div>
+    
+</section>
+  
+
+
+
+
+</main>
+
+  
+  <!-- Vendor JS Files -->
+  <script src="vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="vendor/aos/aos.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="vendor/typed.js/typed.umd.js"></script>
+  <script src="vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+   <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+  const lightbox = GLightbox({
+    selector: '.glightbox'
+  });
+  new Swiper('.character-cards', {
+  slidesPerView: 1.2,
+  spaceBetween: 20,
+  loop: false,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 2.2,
+    },
+    992: {
+      slidesPerView: 3.2,
+    },
+  }
+});
+
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const lightbox = GLightbox({
+      selector: '.glightbox'
+    });
+  });
+</script>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 獲取所有表情符號的開關 (details 元素)
+    const emojiCards = document.querySelectorAll('.interactive-gallery .emoji-card');
+    // 獲取內容展示區
+    const contentArea = document.getElementById('expanded-content-area');
+
+    emojiCards.forEach(card => {
+        // 點擊事件監聽
+        card.addEventListener('click', (event) => {
+            // 阻止 <details> 標籤預設的開合行為，我們用 JS 控制
+            event.preventDefault(); 
+            
+            // 獲取該卡片對應的內容 ID
+            const contentId = card.getAttribute('data-content-id');
+            // 獲取內容模板
+            const templateContent = document.getElementById(contentId);
+            
+            // 檢查是否已經展開
+            const isActive = card.classList.contains('active');
+
+            // 1. 清除所有活動狀態和內容
+            // 關閉所有卡片的 active 狀態
+            emojiCards.forEach(c => c.classList.remove('active'));
+            // 清空展示區的內容
+            contentArea.innerHTML = '';
+            
+            // 2. 決定是關閉還是展開新的內容
+            if (!isActive) {
+                // 如果目前是關閉狀態，則展開新的內容
+                
+                // 標記為活動狀態 (用於 CSS 樣式)
+                card.classList.add('active');
+                
+                // 複製模板內容並添加到展示區
+                if (templateContent) {
+                    // 必須使用 cloneNode(true) 來複製內容，而不是移動
+                    const newContent = templateContent.cloneNode(true);
+                    newContent.removeAttribute('id'); // 移除 ID 避免重複
+                    
+                    // 為了動畫效果，可以先設置透明
+                    newContent.style.opacity = 0; 
+                    contentArea.appendChild(newContent);
+                    
+                    // 稍微延遲後顯示，產生淡入效果
+                    setTimeout(() => {
+                        newContent.style.opacity = 1;
+                    }, 50);
+                }
+            }
+            // 如果 isActive 為 true，則點擊會執行上面的清除，達到關閉效果。
+
+            // (可選) 滾動到內容區
+            contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+});
+  </script>
+  
+
+<style>
+  .character-cards .card {
+    min-width: 250px;
+  }
+</style>
+
+</body>
+</html>
