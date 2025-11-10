@@ -1033,7 +1033,7 @@ section {
     margin: 0 auto; 
     padding: 10px 20px; /* ⚡️ 上下間距縮小 */
     
-    border: 3px dashed #e499b7; 
+    border: 3px dashed #a68776; 
     border-radius: 20px; 
     background-color: #fff; 
     
@@ -1085,7 +1085,7 @@ section {
     border: none;
     border-radius: 0; 
     
-    border-bottom: 3px solid #f7d9e4; /* ⚡️ 粉色底線 */
+    border-bottom: 3px solid #a68776; /* ⚡️ 粉色底線 */
     
     width: 100%;      
     height: 100%;     
@@ -1110,14 +1110,14 @@ section {
 .interactive-gallery .emoji-trigger:hover {
     transform: scale(1.05);
     opacity: 0.9;
-    border-bottom-color: #e499b7; /* Hover 變深 */
+    border-bottom-color: #785f4a; /* Hover 變深 */
 }
 
 .interactive-gallery .emoji-card.active .emoji-trigger {
     transform: scale(1.08); 
-    background-color: #f7d9e4; 
+    background-color: #ebc9b7; 
     box-shadow: 0 0 5px rgba(228, 153, 183, 0.5);
-    border-bottom-color: #e499b7;
+    border-bottom-color: #c9a671;
 }
 
 /* 7. 展開內容區塊置中與置左 */
@@ -1133,7 +1133,7 @@ section {
 .interactive-gallery .content-box { 
     padding: 20px;
     border-radius: 10px;
-    background-color: #e9e6fc; 
+    background-color: #e6d4c8; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     
     /* ⚡️ 文字置左 */
