@@ -789,29 +789,27 @@ section {
 /* ===================================== */
 
 
+
 /* ===================================== */
-/* A. 音樂開關按鈕樣式 (手機版專屬) */
+/* A. 音樂開關按鈕樣式 (整體樣式與動畫) */
 /* ===================================== */
+
+/* 1. 基本樣式 (所有設備通用) */
 .music-toggle-button {
     position: fixed; 
     background: #986db2; 
     color: #fff;
-    width: 35px; 
-    height: 35px;
     border: none;
     border-radius: 50%;
     
-    /* ⚡️ 定位：在 mobile-nav-toggle (頂部 15px) 下方約 60px 處 */
-    top: 60px;     
-    right: 15.1px;    
-    z-index: 9998; 
+    width: 35px; /* 手機版尺寸 */
+    height: 35px; /* 手機版尺寸 */
     
-    padding: 0;
-    line-height: 0; 
+    z-index: 9998; 
     cursor: pointer;
     transition: background 0.3s;
     
-    display: flex; /* 確保圖示居中 */
+    display: flex; 
     justify-content: center;
     align-items: center;
 }
@@ -821,17 +819,53 @@ section {
 }
 
 .music-toggle-button:hover {
-    background: #ccafde;
+    background: #ccafde; /* Hover 時使用粉色 */
 }
 
-/* 確保在電腦版隱藏 (雖然 d-xl-none 已處理，但此處可作為保險) */
+/* 2. ⚡️ 手機版定位 */
+@media (max-width: 1199px) {
+    .music-toggle-button {
+        right: 15px;    
+        top: 60px;     
+    }
+}
+
+/* 3. ⚡️ 電腦版定位 (右上角) */
 @media (min-width: 1200px) {
     .music-toggle-button {
-        display: none !important;
+        right: 30px;    
+        top: 30px;     
+        
+        width: 45px; /* 電腦版設大一點 */
+        height: 45px; /* 電腦版設大一點 */
+    }
+    
+    .music-toggle-button i {
+        font-size: 24px;
     }
 }
 
 
+/* ===================================== */
+/* B. ⚡️ 淡入動畫控制 (新增) */
+/* ===================================== */
+
+/* 定義淡入動畫 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 設置初始隱藏狀態和動畫效果 */
+.music-toggle-button.fade-in-on-load {
+    opacity: 0; /* 初始完全透明 */
+    /* 動畫名稱: fadeIn
+        時長: 1s (慢慢浮現)
+        延遲: 2s (等 2 秒後開始)
+        填充模式: forwards (動畫結束後保持最後狀態: opacity: 1)
+    */
+    animation: fadeIn 1s ease-out 2s forwards;
+}
 /* ===================================== */
 /* B. 底部導航按鈕樣式 (回上/下一頁) */
 /* ===================================== */
