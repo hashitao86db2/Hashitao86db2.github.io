@@ -1,0 +1,55 @@
+/* 橫向捲動容器 */
+.video-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 15px 5px;
+  /* 捲動吸附效果 */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 隱藏捲軸但保留功能 (選用，若想讓介面更乾淨) */
+.video-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+.video-carousel::-webkit-scrollbar-thumb {
+  background: #986db2; /* 配合你主題的紫色 */
+  border-radius: 10px;
+}
+.video-carousel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 每一部影片的包裝盒 */
+.video-item {
+  flex: 0 0 350px; /* 電腦版寬度 */
+  scroll-snap-align: start;
+}
+
+/* 讓影片容器保持 16:9 */
+.video-responsive {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 比例計算 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.video-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* 手機版適應：讓影片窄一點，方便露出下一部的邊緣 */
+@media (max-width: 768px) {
+  .video-item {
+    flex: 0 0 280px; 
+  }
+}
