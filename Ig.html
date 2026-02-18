@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推し</title>
+    <style>
+        :root {
+            --bg-pattern: #f0f8ff;
+            --stripe-color: #d0e7ff;
+            --ig-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --border-color: #dbdbdb;
+        }
+
+        /* 1. 外層背景與置中 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-pattern);
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 15px,
+                var(--stripe-color) 15px,
+                var(--stripe-color) 17px
+            );
+        }
+
+        /* 2. 中間的正方形容器 */
+        .square-container {
+            width: 90vw;
+            max-width: 550px;
+            aspect-ratio: 1 / 1;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* 3. 可捲動的內容區 */
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            scrollbar-width: none;
+        }
+        .scrollable-content::-webkit-scrollbar { display: none; }
+
+        /* 4. 個人檔案頭部 */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 5px;
+        }
+        .profile-pic {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #eee;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .user-info h2 { font-size: 18px; margin: 0; }
+        .user-info p { font-size: 13px; color: #666; margin: 5px 0 0; }
+
+        /* 5. 精選動態區 (分類按鈕) */
+        .highlights {
+            display: flex;
+            gap: 15px;
+            padding: 10px 0;
+            overflow-x: auto;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 15px;
+        }
+        .highlight-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 65px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .highlight-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            padding: 2px;
+            background: white;
+            margin-bottom: 5px;
+            object-fit: cover;
+            transition: transform 0.2s;
+        }
+        .highlight-item.active .highlight-circle {
+            border: 2px solid transparent;
+            background-image: linear-gradient(white, white), var(--ig-gradient);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            transform: scale(1.08);
+        }
+        .highlight-name { font-size: 10px; font-weight: 600; color: #262626; }
+
+        /* 6. 前言文字區 (ALL 模式下顯示) */
+        #welcome-text {
+            padding: 20px 10px;
+            animation: fadeIn 0.5s ease;
+        }
+        .text-box {
+            background: #fafafa;
+            border: 1px dashed #dbdbdb;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 1.8;
+            color: #444;
+            font-size: 14px;
+        }
+
+        /* 7. 貼文網格 */
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+        }
+        .post {
+            aspect-ratio: 1 / 1;
+            background-color: #efefef;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+        .post img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* 輔助類 */
+        .hidden { display: none !important; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="square-container">
+        <div class="scrollable-content">
+            <header class="header">
+                <img src="img/788ad64d8a870606c2f8593da477dfb0.jpg" class="profile-pic">
+                <div class="user-info">
+                    <h2>hashita_986db2</h2>
+                    <p>雑多垢</p>
+                </div>
+            </header>
+
+            <div class="highlights">
+                <div class="highlight-item active" data-target="all">
+                    <div class="highlight-circle" style="display: flex; align-items: center; justify-content: center; background: #f0f0f0; font-size: 12px; font-weight: bold;">ALL</div>
+                    <span class="highlight-name">♡</span>
+                </div>
+                
+                <div class="highlight-item" data-target="char-2">
+                    <img src="img/Ig/a2504c66798a4c9ac8f6a341ff8ecd43.jpg" class="highlight-circle">
+                    <span class="highlight-name">ʜᴏꜱʜɪʀᴜʙᴇ</span>
+                </div>
+                                <div class="highlight-item" data-target="char-8">
+                    <img src="img/Ig/b80fb890b94659f2e559bdd60d7e0b24.jpg" class="highlight-circle">
+                    <span class="highlight-name">ʀᴇᴏ</span>
+                </div>
+              <div class="highlight-item" data-target="char-1">
+                    <img src="img/Ig/6101578a371553f6b6b34e118eac0e15.jpg" class="highlight-circle">
+                    <span class="highlight-name">ᴠᴀɴɪʟʟᴀ</span>
+                </div>
+                <div class="highlight-item" data-target="char-3">
+                    <img src="img/Ig/911538821d026764a5715f40b6c84af3.jpg" class="highlight-circle">
+                    <span class="highlight-name">ʜɪɴᴀᴛᴀ</span>
+                </div>
+                <div class="highlight-item" data-target="char-4">
+                    <img src="img/Ig/dd2b1ce635964bf575912ef49dcd68db.jpg" class="highlight-circle">
+                    <span class="highlight-name">ꜱᴏɢᴏ</span>
+                </div>
+                <div class="highlight-item" data-target="char-5">
+                    <img src="img/Ig/4768c039a11016e52e9f7a841414766e.jpg" class="highlight-circle">
+                    <span class="highlight-name">ʏᴀꜱᴀᴅᴀ</span>
+                </div>
+                <div class="highlight-item" data-target="char-6">
+                    <img src="img/Ig/82b1339cbc1014a363e8dd92df340ee4.jpg" class="highlight-circle">
+                    <span class="highlight-name">ʀᴇɴɢᴀ</span>
+                </div>
+                 <div class="highlight-item" data-target="char-9">
+                    <img src="img/Ig/35dce5fc1b247efe1dd92a01a5fbab98.jpg" class="highlight-circle">
+                    <span class="highlight-name">ɴᴀɢɪᴛᴏ</span>
+                </div>
+                <div class="highlight-item" data-target="char-7">
+                    <img src="img/Ig/4ecaefa448e2b7db1dd027f2bd68f978.jpg" class="highlight-circle">
+                    <span class="highlight-name">ᴋᴏʀᴇꜱʜɪᴋɪ</span>
+                </div>
+            </div>
+
+            <div id="welcome-text">
+                <div class="text-box">
+                    <strong>#推しのいる生活 ✨</strong><br>
+                    <small>Welcome to my collection</small>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                    <p> |にじさんじ | 星導ショウ | <br>
+                        |にじさんじ |  皇れお   | <br>
+                        |crazy raccoon | vanilLa | <br>
+                        |偶像夢幻祭 | 葵ひなた  | <br>
+                        | 刀剣乱舞 | 大和守安定 | <br>
+                        |idolishi7| 逢坂壮五  | <br>
+                        |  エイトリ | 西園練牙  | <br>
+                        | ファントムバスターズ | コレシキ |<br>
+                        
+
+
+
+
+
+
+
+
+                    </p>
+                </div>
+            </div>
+
+            <div id="post-grid" class="post-grid hidden">
+                <div class="post" data-category="char-2" data-secret><img src="img/Ig/Z/Picsart_26-02-18_03-13-03-611.jpg"></div>
+                <div class="post" data-category="char-8" data-secret><img src="img/Ig/Z/Picsart_26-02-18_03-02-35-940.jpg"></div>
+                <div class="post" data-category="char-3" data-secret><img src="img/Ig/Z/Picsart_26-02-18_19-43-10-660.jpg"></div>
+                <div class="post" data-category="char-6" data-secret><img src="img/Ig/Z/Picsart_26-02-18_19-06-22-916.jpg"></div>
+                <div class="post" data-category="char-8"><img src="img/Ig/Z/P_20251017_201117.jpg"></div>
+                <div class="post" data-category="char-1"><img src="img/Ig/Z/img/Ig/Z/WataameCamera_20251212_204321 (1).jpg"></div>
+                <div class="post" data-category="char-2"><img src="img/Ig/Z/P_20260213_003730.jpg"></div>
+                <div class="post" data-category="char-2"><img src="img/Ig/Z/P_20260116_003409_1.jpg"></div>
+                <div class="post" data-category="char-1" data-secret><img src="img/Ig/Z/1770181430744_1.jpg"></div>   
+                <div class="post" data-category="char-1"><img src="img/Ig/Z/P_20251225_212425.jpg"></div>
+                <div class="post" data-category="char-2"><img src="img/Ig/Z/P_20250907_132903.jpg" loading="lazy"></div>
+                <div class="post" data-category="char-2"><img src="img/Ig/Z/P_20250805_135721.jpg" loading="lazy"></div>
+                <div class="post" data-category="char-2" data-secret><img src="img/Ig/Z/IMG_4370_1.jpg" loading="lazy"></div>
+                <div class="post" data-category="char-2"><img src="img/Ig/Z/20250323_122729.jpg" loading="lazy"></div>
+                <div class="post" data-category="char-3"><img src="img/Ig/Z/P_20250808_232856_1.jpg"></div>
+                <div class="post" data-category="char-6"><img src="img/Ig/Z/Picsart_25-08-10_21-03-08-497.jpg"></div>
+                <div class="post" data-category="char-5"><img src="img/Ig/Z/P_20250822_222645.jpg"></div>
+                <div class="post" data-category="char-3"><img src="img/Ig/Z/P_20250323_155315.jpg"></div>
+                <div class="post" data-category="char-7"><img src="img/Ig/Z/P_20250322_231349.jpg"></div>
+                <div class="post" data-category="char-4"><img src="img/Ig/Z/P_20250315_000057.jpg"></div>
+                <div class="post" data-category="char-3"><img src="img/Ig/Z/無標題325_20260218013114.jpg"></div>
+                <div class="post" data-category="char-3"><img src="img/Ig/Z/1771349047279_3.jpg" loading="lazy"></div>
+                <div class="post" data-category="char-3"><img src="img/Ig/Z/P_20250323_155315.jpg" loading="lazy"></div>
+                <div class="post" data-category="char-9"><img src="img/Ig/Z/P_20230430_012521 (2).jpg"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>loading="lazy"
+        const filters = document.querySelectorAll('.highlight-item');
+        const posts = document.querySelectorAll('.post');
+        const welcomeText = document.getElementById('welcome-text');
+        const postGrid = document.getElementById('post-grid');
+
+        filters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                filters.forEach(f => f.classList.remove('active'));
+                filter.classList.add('active');
+
+                const target = filter.getAttribute('data-target');
+
+                if (target === 'all') {
+                    // 顯示文字區，隱藏圖片網格
+                    welcomeText.classList.remove('hidden');
+                    postGrid.classList.add('hidden');
+                } else {
+                    // 隱藏文字區，顯示圖片網格並過濾
+                    welcomeText.classList.add('hidden');
+                    postGrid.classList.remove('hidden');
+
+                    posts.forEach(post => {
+                        const category = post.getAttribute('data-category');
+                        if (category === target) {
+                            post.classList.remove('hidden');
+                        } else {
+                            post.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
