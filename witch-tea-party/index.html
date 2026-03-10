@@ -2,39 +2,63 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>魔女会で会いましょう</title>
+    <title>Aelian's Tea Party Invitation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* 匯入金魚燈籠字體 */
+        @font-face {
+            font-family: 'KingyoLantern';
+            src: url('kingyolanternmini.otf') format('opentype');
+        }
+
         :root {
-            --paper: #fdfaf3;
-            --gold: #d4af37;
-            --bg-color: #2b1b3d; 
+            --paper: #fdfaf3; /* 信件紙張色 */
+            --gold: #d4af37; /* 金色裝飾 */
+            --envelope-green: #1a2f23; /* 墨綠色本體 */
+            --envelope-flap: #243d2f; /* 稍亮的墨綠蓋子 */
+            --bg-beige: #f5f2e8; /* 優雅米黃色背景 */
         }
 
         body {
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 2px 2px, rgba(212,175,55,0.1) 1px, transparent 0);
+            background-color: var(--bg-beige);
+            /* 米黃色背景搭配淡金色微小點狀紋理 */
+            background-image: radial-gradient(circle at 2px 2px, rgba(212,175,55,0.15) 1px, transparent 0);
             background-size: 32px 32px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center; /* 確保所有子元素水平置中 */
+            align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
             font-family: 'Shippori Mincho B1', serif;
         }
 
-        /* 蕾絲裝飾邊界 */
+        /* 標題調整為較深的墨綠色或金色 */
+        .main-title {
+            font-family: 'KingyoLantern', serif;
+            color: #2d4a39; /* 深墨綠標題 */
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            letter-spacing: 0.2rem;
+            z-index: 20;
+        }
+
+        /* 蕾絲裝飾邊界改為深色 */
         body::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border: 20px solid transparent;
-            border-image: radial-gradient(circle, var(--gold) 2px, transparent 2px) 20% round;
-            opacity: 0.2;
+            top: 20px; left: 20px; right: 20px; bottom: 20px;
+            border: 2px solid rgba(26, 47, 35, 0.1);
+            background-image: radial-gradient(circle, rgba(212, 175, 55, 0.2) 1px, transparent 1px);
+            background-size: 15px 15px;
+            opacity: 0.5;
             pointer-events: none;
+            z-index: 1;
+            outline: 1px solid rgba(26, 47, 35, 0.05);
+            outline-offset: 10px;
         }
 
         .envelope-container {
@@ -50,22 +74,19 @@
             position: relative;
             width: 100%;
             height: 100%;
-            background: #b58d20;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.7);
-            overflow: hidden; /* 修正：防止信件在未開啟時溢出產生白色區塊 */
+            background: var(--envelope-green);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* 陰影讓它在米黃底上更立體 */
+            overflow: hidden;
         }
 
-        /* 當信封打開時，需要允許內容溢出以便信件升起 */
-        .opened .envelope {
-            overflow: visible;
-        }
+        .opened .envelope { overflow: visible; }
 
         .flap {
             position: absolute;
             top: 0; left: 0; width: 0; height: 0;
             border-left: 200px solid transparent;
             border-right: 200px solid transparent;
-            border-top: 150px solid #d4af37;
+            border-top: 150px solid var(--envelope-flap);
             transform-origin: top;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 4;
@@ -74,9 +95,9 @@
         .pocket {
             position: absolute;
             bottom: 0; left: 0; width: 0; height: 0;
-            border-left: 200px solid #c29a2d;
-            border-right: 200px solid #c29a2d;
-            border-bottom: 140px solid #a67c1a;
+            border-left: 200px solid #1f382a;
+            border-right: 200px solid #1f382a;
+            border-bottom: 140px solid #16291e;
             z-index: 3;
         }
 
@@ -86,23 +107,23 @@
             width: 100%;
             text-align: center;
             font-family: 'Great Vibes', cursive;
-            color: rgba(255,255,255,0.95);
+            color: rgba(212, 175, 55, 0.9); /* 金色字體在墨綠底上非常顯眼 */
             font-size: 52px;
             z-index: 5;
             pointer-events: none;
-            text-shadow: 2px 3px 6px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
             transition: opacity 0.4s;
         }
 
-            .letter {
+        .letter {
             position: absolute;
-            bottom: 0; /* 改為 0，讓它完全縮在口袋裡 */
+            bottom: 0;
             left: 20px;
             width: 360px;
             height: 300px;
             background: var(--paper);
             border: 5px double var(--gold);
-            z-index: 2; /* 確保在 pocket (z-index 3) 之下 */
+            z-index: 2;
             padding: 35px 30px 50px 30px;
             text-align: center;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s;
@@ -111,25 +132,18 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            pointer-events: none; /* 未打開前不可點擊，防止誤觸 */
+            pointer-events: none;
         }
 
-        .opened .letter { 
-            transform: translateY(-180px); 
-            opacity: 1; 
-            z-index: 5; /* 打開後才升到最前面 */
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
-            pointer-events: auto; /* 打開後恢復點擊 */
-        }
-
-
-        .opened .flap { transform: rotateX(180deg); z-index: 1; }
         .opened .letter { 
             transform: translateY(-180px); 
             opacity: 1; 
             z-index: 5; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            pointer-events: auto;
         }
+
+        .opened .flap { transform: rotateX(180deg); z-index: 1; }
         .opened .envelope-text { opacity: 0; }
 
         .option-btn {
@@ -150,7 +164,6 @@
             background: var(--gold); 
             color: white; 
             letter-spacing: 2px;
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
         }
 
         .wax-seal {
@@ -158,42 +171,32 @@
             bottom: 110px;
             left: 50%;
             transform: translateX(-50%);
-            width: 65px;
-            height: 65px;
-            background: radial-gradient(circle at 30% 30%, #a50000, #700000);
+            width: 65px; height: 65px;
+            background: radial-gradient(circle at 30% 30%, #8b0000, #5a0000); /* 實體圖那種暗紅封蠟 */
             border-radius: 50%;
             z-index: 6;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            display: flex; align-items: center; justify-content: center;
             color: var(--gold);
             font-size: 28px;
             transition: opacity 0.4s;
-            border: 1px solid #5a0000;
+            border: 1px solid #4a0000;
         }
 
-        /* 下方說明文字修正 */
         .footer-text {
             margin-top: 50px;
-            color: var(--gold);
+            color: #2d4a39; /* 配合標題的深墨綠 */
             font-size: 19px;
-            font-weight: 400;
             letter-spacing: 5px;
-            opacity: 0.9;
-            text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
-            animation: fadeInText 2.5s ease-in-out;
-            text-align: center; /* 修正：確保文字內容置中 */
-            width: 100%; /* 修正：確保佔滿寬度以便置中 */
-        }
-
-        @keyframes fadeInText {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 0.9; transform: translateY(0); }
+            opacity: 0.8;
+            text-align: center;
+            width: 100%;
         }
     </style>
 </head>
 <body>
+
+    <h1 class="main-title">魔女会で会いましょう</h1>
 
     <div class="envelope-container" id="envelope" onclick="this.classList.toggle('opened')">
         <div class="envelope">
@@ -211,7 +214,7 @@
                 <div class="options">
                     <a href="world.html" class="option-btn" onclick="event.stopPropagation();">✦ 世界觀 ✦</a>
                     <a href="witches.html" class="option-btn" onclick="event.stopPropagation();">✦ 邀請名單 ✦</a>
-                    <a href="story.html" class="option-btn" onclick="event.stopPropagation();">✦ 故事回憶 ✦</a>
+                    <a href="stories.html" class="option-btn" onclick="event.stopPropagation();">✦ 故事回憶 ✦</a>
                 </div>
                 <div class="h-4"></div> 
             </div>
@@ -221,18 +224,16 @@
     <div class="footer-text">
         一封來自時之魔女的茶會邀請函
     </div>
+
     <script>
-    // 確保每次進入頁面（包括按返回鍵）時信封都是關閉的
-    window.onpageshow = function(event) {
-        if (event.persisted || true) {
-            const envelope = document.getElementById('envelope');
-            if (envelope) {
-                envelope.classList.remove('opened');
+        window.onpageshow = function(event) {
+            if (event.persisted || true) {
+                const envelope = document.getElementById('envelope');
+                if (envelope) {
+                    envelope.classList.remove('opened');
+                }
             }
-        }
-    };
-</script>
-
-
+        };
+    </script>
 </body>
 </html>
