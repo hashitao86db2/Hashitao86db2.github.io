@@ -5,14 +5,36 @@
     "witch": "深海魔女",
     "title": "深海魔女-序章",
     "excerpt": "悠長歲月的代價是不可避免的孤寂，莉妮絲在50年間的宇宙漂泊就已經體會到了。",
-    "image": "witch-tea-party/picture/cb991fda4dd735147fa6854703b0c902.jpg",
+    "image": "picture/cb991fda4dd735147fa6854703b0c902.jpg",
     "content": "<p>莉妮絲•莫諾托並不屬於這片海洋。她的故鄉在群星之巔...</p><blockquote>「這裡的水，比故鄉的星雲要沈重得多。」</blockquote>"
   },
   {
-    "id": "nudia-01",
-    "date": "2026-03-08",
-    "witch": "深海魔女",
-    "title": "小孩",
+    "id": "Aelian-01",
+    "date": "2026-03-09",
+    "witch": "時之魔女",
+    "title": "序章",
+    "excerpt": "莉妮絲在空島定居後，沒想到會遇到同族的孩子...",
+    "image": "images/nudia.jpg",
+    "content": "<p>那是一個出生僅50天的孩子。鮮豔的綠色頭髮與鯊魚齒...</p>"
+  }
+]
+
+  {
+    "id": "Caiel-01",
+    "date": "2026-03-011",
+    "witch": "時之魔法師",
+    "title": "序章",
+    "excerpt": "莉妮絲在空島定居後，沒想到會遇到同族的孩子...",
+    "image": "images/nudia.jpg",
+    "content": "<p>那是一個出生僅50天的孩子。鮮豔的綠色頭髮與鯊魚齒...</p>"
+  }
+]
+
+  {
+    "id": "？-01",
+    "date": "2026-03-12",
+    "witch": "記憶魔女-碎片",
+    "title": "序章",
     "excerpt": "莉妮絲在空島定居後，沒想到會遇到同族的孩子...",
     "image": "images/nudia.jpg",
     "content": "<p>那是一個出生僅50天的孩子。鮮豔的綠色頭髮與鯊魚齒...</p>"
