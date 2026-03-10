@@ -110,10 +110,40 @@
             `).join('');
         }
 
-        // 3. 切換到文章頁面
+// 3. 切換到文章頁面
         function openArticle(id) {
             const s = allStories.find(item => item.id === id);
             if(!s) return;
 
             document.getElementById('list-view').classList.add('hidden');
             document.getElementById('controls').classList.add('hidden');
+            document.getElementById('article-view').classList.remove('hidden');
+            document.getElementById('back-btn').classList.remove('hidden');
+
+            const cover = document.getElementById('view-cover');
+            if(s.image) {
+                cover.src = s.image;
+                cover.style.display = 'block';
+            } else {
+                cover.style.display = 'none';
+            }
+
+            document.getElementById('view-tag').innerText = s.witch;
+            document.getElementById('view-title').innerText = s.title;
+            document.getElementById('view-date').innerText = s.date;
+            document.getElementById('view-body').innerHTML = s.content;
+
+            window.scrollTo(0, 0);
+        }
+
+        function closeArticle() {
+            document.getElementById('list-view').classList.remove('hidden');
+            document.getElementById('controls').classList.remove('hidden');
+            document.getElementById('article-view').classList.add('hidden');
+            document.getElementById('back-btn').classList.add('hidden');
+        }
+
+        init();
+    </script>
+</body>
+</html>
