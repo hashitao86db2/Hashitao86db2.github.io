@@ -185,30 +185,4 @@
 
 </body>
 </html>
-        /* 動畫觸發狀態 */
-        .open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
-        .open .letter { transform: translateY(-120px); z-index: 5; }
-        .open .wax-seal { opacity: 0; transition: 0.3s; }
-
-        .btn-magic { margin-top: 10px; padding: 5px 15px; border: 1px solid var(--gold); color: #8b7355; font-size: 14px; transition: 0.3s; }
-        .btn-magic:hover { background: var(--gold); color: white; }
-    </style>
-</head>
-<body>
-
-    <div class="envelope-wrapper" id="envelope" onclick="this.classList.toggle('open')">
-        <div class="envelope-flap"></div>
-        <div class="wax-seal">★</div>
         
-        <div class="letter">
-            <h2 class="text-xl font-bold text-yellow-900 mb-2">Afternoon Tea</h2>
-            <p class="text-xs text-gray-500 mb-4">誠摯邀請您參與魔女們的聚會</p>
-            <div class="flex flex-col gap-2">
-                <a href="witches.html" class="btn-magic">✦ 進入邀請名單</a>
-                <button class="btn-magic" onclick="alert('在靜謐的午後，時光的縫隙中...')">✦ 世界觀</button>
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
