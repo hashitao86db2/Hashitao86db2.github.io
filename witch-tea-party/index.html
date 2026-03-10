@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Aelian's Tea Party Invitation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --paper: #fdfaf3;
@@ -17,13 +17,14 @@
             background-image: radial-gradient(circle at 2px 2px, rgba(212,175,55,0.1) 1px, transparent 0);
             background-size: 32px 32px;
             display: flex;
-            flex-direction: column; /* 改為垂直排列以放置下方文字 */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
-            font-family: 'Noto Serif TC', serif;
+            /* 全域更換為 Shippori Mincho B1 */
+            font-family: 'Shippori Mincho B1', serif;
         }
 
         /* 蕾絲裝飾邊界 */
@@ -51,7 +52,7 @@
             width: 100%;
             height: 100%;
             background: #b58d20;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.7);
         }
 
         .flap {
@@ -61,7 +62,7 @@
             border-right: 200px solid transparent;
             border-top: 150px solid #d4af37;
             transform-origin: top;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 4;
         }
 
@@ -80,81 +81,99 @@
             width: 100%;
             text-align: center;
             font-family: 'Great Vibes', cursive;
-            color: rgba(255,255,255,0.9);
-            font-size: 48px;
+            color: rgba(255,255,255,0.95);
+            font-size: 52px;
             z-index: 5;
             pointer-events: none;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            text-shadow: 2px 3px 6px rgba(0,0,0,0.5);
             transition: opacity 0.4s;
         }
 
+        /* 邀請函內部卡片 */
         .letter {
             position: absolute;
             bottom: 10px;
             left: 20px;
             width: 360px;
-            height: 240px;
+            height: 300px; /* 稍微增加高度以容納更多空白 */
             background: var(--paper);
             border: 5px double var(--gold);
             z-index: 2;
-            padding: 30px;
+            padding: 35px 30px 50px 30px; /* 增加底部 Padding (50px) */
             text-align: center;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s;
             box-sizing: border-box;
             opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* 讓內容均勻分布，拉開間距 */
         }
 
         .opened .flap { transform: rotateX(180deg); z-index: 1; }
-        .opened .letter { transform: translateY(-160px); opacity: 1; z-index: 5; box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+        .opened .letter { 
+            transform: translateY(-180px); 
+            opacity: 1; 
+            z-index: 5; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+        }
         .opened .envelope-text { opacity: 0; }
 
         .option-btn {
             display: block;
-            margin: 10px auto;
-            padding: 8px 20px;
+            width: 100%;
+            padding: 10px 0;
             border: 1px solid var(--gold);
-            color: #8b7355;
-            font-size: 14px;
+            color: #7a6144;
+            font-size: 15px;
+            font-weight: 700;
             transition: all 0.3s;
             text-decoration: none;
-            background: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.4);
+            margin-bottom: 8px;
         }
 
-        .option-btn:hover { background: var(--gold); color: white; letter-spacing: 1px; }
+        .option-btn:hover { 
+            background: var(--gold); 
+            color: white; 
+            letter-spacing: 2px;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+        }
 
         .wax-seal {
             position: absolute;
             bottom: 110px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
-            background: #8b0000;
+            width: 65px;
+            height: 65px;
+            background: radial-gradient(circle at 30% 30%, #a50000, #700000);
             border-radius: 50%;
             z-index: 6;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--gold);
-            font-size: 24px;
+            font-size: 28px;
             transition: opacity 0.4s;
+            border: 1px solid #5a0000;
         }
 
         /* 下方說明文字 */
         .footer-text {
-            margin-top: 40px;
+            margin-top: 50px;
             color: var(--gold);
-            font-size: 18px;
-            letter-spacing: 4px;
-            opacity: 0.8;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-            animation: fadeInText 2s ease-in-out;
+            font-size: 19px;
+            font-weight: 400;
+            letter-spacing: 5px;
+            opacity: 0.9;
+            text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+            animation: fadeInText 2.5s ease-in-out;
         }
 
         @keyframes fadeInText {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 0.8; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 0.9; transform: translateY(0); }
         }
     </style>
 </head>
@@ -168,13 +187,17 @@
             <div class="wax-seal">✵</div>
             
             <div class="letter">
-                <h2 class="text-2xl font-bold text-yellow-900 mb-1" style="font-family: 'Great Vibes'; font-size: 36px;">Invitation</h2>
-                <p class="text-xs text-gray-500 mb-4 italic">～ 來自時之縫隙的邀約 ～</p>
-                <div class="space-y-2">
-                    <button class="option-btn w-full" onclick="event.stopPropagation(); alert('這是一個由四位魔女守護的世界...')">✦ 世界觀 ✦</button>
-                    <a href="witches.html" class="option-btn w-full" onclick="event.stopPropagation();">✦ 邀請名單 ✦</a>
-                    <button class="option-btn w-full" onclick="event.stopPropagation(); alert('請先前往邀請名單翻閱她們的故事。')">✦ 故事回憶 ✦</button>
+                <div>
+                    <h2 class="text-3xl font-bold text-yellow-900 mb-1" style="font-family: 'Great Vibes';">Invitation</h2>
+                    <p class="text-xs text-gray-500 mb-6 italic" style="letter-spacing: 2px;">～ 來自時之縫隙的邀約 ～</p>
                 </div>
+                
+                <div class="options">
+                    <button class="option-btn" onclick="event.stopPropagation(); alert('世界觀正在編織中...')">✦ 世界觀 ✦</button>
+                    <a href="witches.html" class="option-btn" onclick="event.stopPropagation();">✦ 邀請名單 ✦</a>
+                    <button class="option-btn" onclick="event.stopPropagation(); alert('記憶尚未在此處凝結。')">✦ 故事回憶 ✦</button>
+                </div>
+                <div class="h-4"></div> 
             </div>
         </div>
     </div>
