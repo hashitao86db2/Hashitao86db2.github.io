@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔女名冊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { transition: background 0.8s ease; min-height: 100vh; color: white; }
+        
+        /* 四種魔女風格定義 */
+        .style-time { background: #1b2e1b; --glow: #4ade80; } /* 時之魔女：森林綠 */
+        .style-deepsea { background: #0a192f; --glow: #3b82f6; } /* 深海：深藍星辰 */
+        .style-memory { background: #2d1b2d; --glow: #f472b6; } /* 記憶：糖果粉紫 */
+        .style-herbal { background: #ecfdf5; --glow: #10b981; color: #064e3b; } /* 草藥：活潑淺綠 */
+
+        .witch-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 30px var(--glow);
+        }
+
+        .nav-item { cursor: pointer; padding: 10px; border-radius: 8px; transition: 0.3s; }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.2); }
+    </style>
+</head>
+<body class="style-time" id="bg">
+
+    <div class="container mx-auto flex flex-col md:flex-row gap-8 p-10">
+        <div class="w-full md:w-1/4 space-y-4">
+            <h2 class="text-2xl font-bold mb-6">邀請名單</h2>
+            <div onclick="switchWitch('time')" class="nav-item">⏳ 時之魔女</div>
+            <div onclick="switchWitch('deepsea')" class="nav-item">🌊 深海魔女</div>
+            <div onclick="switchWitch('memory')" class="nav-item">🍬 記憶魔女</div>
+            <div onclick="switchWitch('herbal')" class="nav-item">🌿 草藥魔女</div>
+            <hr class="opacity-20">
+            <a href="index.html" class="block mt-4 text-sm opacity-60">← 返回邀請函</a>
+        </div>
+
+        <div class="w-full md:w-3/4 witch-card p-8 rounded-3xl" id="content">
+            <h1 class="text-4xl font-bold mb-4" id="w-title">時之魔女</h1>
+            <p class="mb-6 opacity-80" id="w-desc">綠色植物與齒輪交織的靜謐森林...</p>
+            
+            <div class="grid gap-4">
+                <div class="p-4 border border-white/20 rounded-lg hover:bg-white/10 cursor-pointer">
+                    <h4 class="font-bold">📖 個人故事</h4>
+                    <p class="text-sm opacity-70">在指針停止跳動的那一刻，她學會了永恆。</p>
+                </div>
+                <div class="p-4 border border-white/20 rounded-lg hover:bg-white/10 cursor-pointer">
+                    <h4 class="font-bold">🧒 魔女與孩子</h4>
+                    <p class="text-sm opacity-70">那個孩子問：「明天的昨天是什麼樣子的？」</p>
+                </div>
+                <div class="p-4 border border-white/20 rounded-lg hover:bg-white/10 cursor-pointer">
+                    <h4 class="font-bold">☕ 茶會錄</h4>
+                    <p class="text-sm opacity-70">當指針與浪花相遇，是品茶的好時機。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const data = {
+            time: { title: "時之魔女", desc: "主調：綠色、植物風格。操控著時間的流動，在古老的鐘塔與森林中漫步。", bg: "style-time" },
+            deepsea: { title: "深海魔女", desc: "主調：深藍色的星辰。在最深的海底仰望繁星，珍珠是她的眼淚。", bg: "style-deepsea" },
+            memory: { title: "記憶魔女", desc: "主調：童趣的糖果餅乾。每個回憶都被製成不同口味的糖果，苦澀或甜美。", bg: "style-memory" },
+            herbal: { title: "草藥魔女", desc: "主調：淺綠色、活潑森林。在陽光灑下的林間採集藥草，為受傷的靈魂調配良藥。", bg: "style-herbal" }
+        };
+
+        function switchWitch(key) {
+            const witch = data[key];
+            document.getElementById('bg').className = witch.bg;
+            document.getElementById('w-title').innerText = witch.title;
+            document.getElementById('w-desc').innerText = witch.desc;
+        }
+    </script>
+</body>
+</html>
