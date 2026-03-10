@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>來自魔女的邀請</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --paper: #fdfaf3; --gold: #d4af37; }
+        body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; height: 100vh; perspective: 1000px; overflow: hidden; }
+
+        /* 信封本體 */
+        .envelope-wrapper { position: relative; width: 350px; height: 230px; background: #c29a2d; cursor: pointer; transition: transform 0.6s; }
+        
+        /* 信封蓋子 */
+        .envelope-flap {
+            position: absolute; top: 0; left: 0; width: 0; height: 0;
+            border-left: 175px solid transparent; border-right: 175px solid transparent;
+            border-top: 130px solid #d4af37;
+            transform-origin: top; transition: transform 0.5s 0.3s; z-index: 3;
+        }
+
+        /* 封蠟 */
+        .wax-seal {
+            position: absolute; top: 110px; left: 50%; transform: translateX(-50%);
+            width: 50px; height: 50px; background: #8b0000; border-radius: 50%;
+            border: 2px solid #5a0000; z-index: 4; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 20px;
+        }
+
+        /* 裡面的邀請函卡片 */
+        .letter {
+            position: absolute; bottom: 0; left: 10px; width: 330px; height: 210px;
+            background: var(--paper); border: 4px double var(--gold);
+            padding: 20px; text-align: center; transition: transform 0.6s; z-index: 2;
+        }
+
+        /* 動畫觸發狀態 */
+        .open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+        .open .letter { transform: translateY(-120px); z-index: 5; }
+        .open .wax-seal { opacity: 0; transition: 0.3s; }
+
+        .btn-magic { margin-top: 10px; padding: 5px 15px; border: 1px solid var(--gold); color: #8b7355; font-size: 14px; transition: 0.3s; }
+        .btn-magic:hover { background: var(--gold); color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="envelope-wrapper" id="envelope" onclick="this.classList.toggle('open')">
+        <div class="envelope-flap"></div>
+        <div class="wax-seal">★</div>
+        
+        <div class="letter">
+            <h2 class="text-xl font-bold text-yellow-900 mb-2">Afternoon Tea</h2>
+            <p class="text-xs text-gray-500 mb-4">誠摯邀請您參與魔女們的聚會</p>
+            <div class="flex flex-col gap-2">
+                <a href="witches.html" class="btn-magic">✦ 進入邀請名單</a>
+                <button class="btn-magic" onclick="alert('在靜謐的午後，時光的縫隙中...')">✦ 世界觀</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
