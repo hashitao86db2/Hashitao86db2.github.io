@@ -36,15 +36,33 @@
         }
 
         /* 標題調整為較深的墨綠色或金色 */
+                /* 1. 調整大標題位置與間距 */
         .main-title {
             font-family: 'KingyoLantern', serif;
-            color: #2d4a39; /* 深墨綠標題 */
+            color: #2d4a39; 
             font-size: 3.5rem;
-            margin-bottom: 30px;
+            /* 原本是 margin-bottom: 30px，現在改成負數或更小的邊距，
+               或者使用 absolute 定位確保它在最上方 */
+            position: absolute;
+            top: 80px; /* 距離頂部 80px，可視情況改為 60px */
             text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
             letter-spacing: 0.2rem;
             z-index: 20;
+            text-align: center;
+            width: 100%;
         }
+
+        /* 2. 稍微調整信封容器，確保它不會太靠上 */
+        .envelope-container {
+            position: relative;
+            width: 400px;
+            height: 280px;
+            perspective: 1000px;
+            cursor: pointer;
+            z-index: 10;
+            margin-top: 100px; /* 增加頂部間距，把信封往下推一點 */
+        }
+
 
         /* 蕾絲裝飾邊界改為深色 */
         body::before {
