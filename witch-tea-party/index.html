@@ -12,6 +12,11 @@
             src: url('kingyolanternmini.otf') format('opentype');
         }
 
+        @font-face {
+            font-family: 'Hangyaku';
+            src: url('Hangyaku-G3rpg.ttf') format('opentype');
+        }
+
         :root {
             --paper: #fdfaf3; /* 信件紙張色 */
             --gold: #d4af37; /* 金色裝飾 */
@@ -35,24 +40,38 @@
             font-family: 'Shippori Mincho B1', serif;
         }
 
-        /* 標題調整為較深的墨綠色或金色 */
-                /* 1. 調整大標題位置與間距 */
+                /* 調整大標題容器 */
         .main-title {
-            font-family: 'KingyoLantern', serif;
-            color: #2d4a39; 
-            font-size: 3.5rem;
-            /* 原本是 margin-bottom: 30px，現在改成負數或更小的邊距，
-               或者使用 absolute 定位確保它在最上方 */
             position: absolute;
-            top: 80px; /* 距離頂部 80px，可視情況改為 60px */
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-            letter-spacing: 0.2rem;
-            z-index: 20;
-            text-align: center;
+            top: 60px; /* 距離頂部，確保信件升起時有呼吸空間 */
             width: 100%;
+            text-align: center;
+            z-index: 20;
+            color: #2d4a39;
+            letter-spacing: 0.1rem;
         }
 
-        /* 2. 稍微調整信封容器，確保它不會太靠上 */
+        /* 針對「魔女」兩個字的特殊設定 */
+        .witch-text {
+            font-family: 'Hangyaku', serif;
+            font-size: 4rem; /* 讓這兩個字特別醒目 */
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+            text-shadow: 2px 2px 0px rgba(212, 175, 55, 0.2);
+        }
+
+        /* 針對其餘文字的設定 */
+        .sub-text {
+            font-family: 'KingyoLantern', serif;
+            font-size: 3rem; /* 縮小一點，讓視覺重心在魔女二字 */
+            font-weight: 700;
+            display: inline-block;
+            vertical-align: middle;
+            opacity: 0.9;
+        }
+
+        /* 同時微調信封容器的間距 */
         .envelope-container {
             position: relative;
             width: 400px;
@@ -60,8 +79,9 @@
             perspective: 1000px;
             cursor: pointer;
             z-index: 10;
-            margin-top: 100px; /* 增加頂部間距，把信封往下推一點 */
+            margin-top: 120px; /* 增加推力，避免信件升起時蓋到標題 */
         }
+
 
 
         /* 蕾絲裝飾邊界改為深色 */
@@ -214,7 +234,11 @@
 </head>
 <body>
 
-    <h1 class="main-title">魔女会で会いましょう</h1>
+        <h1 class="main-title">
+        <span class="witch-text">魔女</span>
+        <span class="sub-text">会で会いましょう</span>
+    </h1>
+
 
     <div class="envelope-container" id="envelope" onclick="this.classList.toggle('opened')">
         <div class="envelope">
