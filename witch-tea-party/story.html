@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界觀 - Aelian's Tea Party</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff; /* Notion 式純白背景 */
+            color: #37352f; /* Notion 經典深灰文字 */
+            font-family: 'Shippori Mincho B1', serif;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 頂部封面圖區域 */
+        .cover-image {
+            width: 100%;
+            height: 30vh;
+            background: linear-gradient(to bottom, #2b1b3d, #4a3363);
+            position: relative;
+        }
+
+        /* 內容容器 */
+        .content-container {
+            max-width: 800px;
+            margin: -60px auto 100px; /* 讓標題往上浮動到封面圖上 */
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* 文章標題 */
+        h1.world-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+        }
+
+        /* 類 Notion 的區塊樣式 */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* 帶有魔女風格的引用塊 */
+        blockquote {
+            border-left: 3px solid #d4af37;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            color: #666;
+            font-style: italic;
+            background: #fdfaf3;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #d4af37;
+            font-size: 0.9rem;
+            z-index: 100;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover { opacity: 0.7; }
+
+        /* 裝飾性的小 icon */
+        .notion-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">← 返回邀請函</a>
+
+    <div class="cover-image"></div>
+
+    <article class="content-container">
+        <span class="notion-icon">📜</span>
+        <h1 class="world-title">世界觀設定</h1>
+
+        <section>
+            <p>這是一個被時間遺忘的角落。在人類文明的邊緣，存在著數個交疊的維度，而「魔女」便是這些維度的守護者與觀測者。</p>
+            
+            <blockquote>
+                「當最後一顆星辰墜入深海，茶會的鐘聲將會響起。」
+            </blockquote>
+
+            <h2>✦ 時光的流轉</h2>
+            <p>在這裡，時間並非線性的存在。時之魔女守護著齒輪的轉動，確保過去與未來的平衡。每一株生長的植物，都代表著一段被記錄的歲月。</p>
+
+            <h2>✦ 深海的呼喚</h2>
+            <p>深海魔女莉妮絲來自遙遠的星空。她所棲息的深海並非普通的水域，而是液態的星辰。她的身體透明且閃爍，胸口跳動著粉紅色的心臟。</p>
+
+            <h2>✦ 記憶的糖果</h2>
+            <p>所有的情感與回憶在這裡都不會消散。記憶魔女會將它們收集起來，熬製成不同風味的糖果。每一口甜美或苦澀，都是一段人生的縮影。</p>
+
+            <h2>✦ 藥草的活潑森林</h2>
+            <p>在充滿生機的淺綠色森林中，草藥魔女忙碌地穿梭著。她調配的藥水不僅能治癒肉體，更能撫平靈魂的創傷。</p>
+        </section>
+
+        <footer class="mt-20 pt-10 border-t border-gray-100 text-sm text-gray-400 text-center">
+            &copy; 2026 Aelian's Tea Party. All Rights Reserved.
+        </footer>
+    </article>
+
+</body>
+</html>
 
