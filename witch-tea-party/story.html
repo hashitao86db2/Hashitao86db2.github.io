@@ -28,12 +28,7 @@
             padding-bottom: 1rem;
         }
 
-        select {
-            appearance: none;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ccc' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 0.5rem center;
-            padding-right: 1.5rem;
-            cursor: pointer;
-        }
+        
 
         #view-cover {
             width: 100%;
@@ -53,11 +48,14 @@
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-[#d4af37] text-sm">← 返回邀請函</a>
             <div id="controls">
-                <select id="sort" onchange="applySortAndRender()" class="text-sm text-gray-500 bg-transparent outline-none">
-                    <option value="newest">最新發布</option>
-                    <option value="oldest">由舊到新</option>
-                    <option value="witch">按魔女名</option>
-                </select>
+                
+<select id="sort" onchange="applySortAndRender()" 
+        class="text-sm text-gray-500 bg-transparent outline-none cursor-pointer pr-6">
+    <option value="newest">最新發布</option>
+    <option value="oldest">由舊到新</option>
+    <option value="witch">按魔女名</option>
+</select>
+                
             </div>
             <button id="back-btn" class="hidden text-sm text-gray-400" onclick="closeArticle()">← 返回列表</button>
         </div>
