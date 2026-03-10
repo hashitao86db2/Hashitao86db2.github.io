@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>出席魔女名冊</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; }
+        :root { --gold: #d4af37; --gold-dark: #aa8a2e; }
         body { 
             font-family: 'Shippori Mincho B1', serif; 
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
@@ -17,87 +17,95 @@
             color: white;
         }
 
-        /* 各種主題風格 */
+        /* 主題背景 */
         .theme-default { background: #1a1a1a; }
         .theme-deepsea { background: radial-gradient(circle at center, #1e3a8a 0%, #020617 100%); color: #e0f2fe; }
         .theme-time { background: radial-gradient(circle at center, #064e3b 0%, #022c22 100%); color: #d1fae5; }
         .theme-memory { background: radial-gradient(circle at center, #701a75 0%, #2e1065 100%); color: #fdf2f8; }
         .theme-herbal { background: radial-gradient(circle at center, #dcfce7 0%, #14532d 100%); color: #064e3b; }
 
-        /* 頭像樣式 */
-        .avatar-circle {
-            width: 120px; height: 120px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
+        /* 橢圓形畫框頭像 */
+        .avatar-frame {
+            width: 130px; 
+            height: 170px;
+            border-radius: 50% / 60%; /* 橢圓比例 */
+            border: 3px solid var(--gold);
+            outline: 1px solid var(--gold-dark);
+            outline-offset: -8px; /* 內層細線 */
             cursor: pointer;
-            transition: 0.4s;
+            transition: transform 0.4s;
             overflow: hidden;
-            background: rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.3);
             display: flex; align-items: center; justify-content: center;
-            font-size: 40px;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            position: relative;
         }
-        .avatar-circle:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--gold); }
+        .avatar-frame:hover { transform: translateY(-10px); }
+        .avatar-frame img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .symbol-fallback { font-size: 50px; opacity: 0.8; }
         
         .flower-font { font-family: 'Great Vibes', cursive; color: var(--gold); }
 
-        /* 內容卡片 */
         .glass-panel {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 24px;
+            padding: 2.5rem;
         }
 
         .data-label { font-weight: bold; color: var(--gold); margin-right: 8px; }
 
-        /* 動畫 */
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* 隱藏與顯示 */
-        .hidden { display: none; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body class="theme-default" id="main-body">
 
-    <a href="index.html" class="fixed top-6 left-6 z-50 text-gold opacity-60 hover:opacity-100 transition">← Back to Invite</a>
+    <a href="index.html" class="fixed top-8 left-8 z-50 text-gold opacity-60 hover:opacity-100 transition tracking-widest text-sm">← Back to Invite</a>
 
-    <div class="container mx-auto px-6 py-12">
+    <div class="container mx-auto px-6 py-16">
         
-        <div id="witch-menu" class="text-center">
-            <h1 class="text-4xl font-bold mb-16 flower-font text-white" style="font-size: 50px;">The Witches</h1>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
-                <div class="flex flex-col items-center gap-3" onclick="showDetail('time')">
-                    <div class="avatar-circle">⏳</div>
-                    <p class="font-bold">時之魔女</p>
-                    <p class="flower-font text-xl">Aelian Santan</p>
+        <div id="witch-menu" class="text-center pt-20">
+            <h1 class="flower-font mb-16 text-white" style="font-size: 60px;">The Witches</h1>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 justify-items-center">
+                <div class="flex flex-col items-center gap-4" onclick="showDetail('time')">
+                    <div class="avatar-frame">
+                        <span class="symbol-fallback">⏳</span>
+                    </div>
+                    <p class="font-bold tracking-widest">時之魔女</p>
+                    <p class="flower-font text-2xl">Aelian Santan</p>
                 </div>
-                <div class="flex flex-col items-center gap-3" onclick="showDetail('deepsea')">
-                    <div class="avatar-circle">🌊</div>
-                    <p class="font-bold">深海魔女</p>
-                    <p class="flower-font text-xl">Lynis Monotor</p>
+                <div class="flex flex-col items-center gap-4" onclick="showDetail('deepsea')">
+                    <div class="avatar-frame">
+                        <span class="symbol-fallback">🌊</span>
+                    </div>
+                    <p class="font-bold tracking-widest">深海魔女</p>
+                    <p class="flower-font text-2xl">Lynis Monotor</p>
                 </div>
-                <div class="flex flex-col items-center gap-3" onclick="showDetail('memory')">
-                    <div class="avatar-circle">🍬</div>
-                    <p class="font-bold">記憶魔女</p>
-                    <p class="flower-font text-xl">？</p>
+                <div class="flex flex-col items-center gap-4" onclick="showDetail('memory')">
+                    <div class="avatar-frame">
+                        <span class="symbol-fallback">🍬</span>
+                    </div>
+                    <p class="font-bold tracking-widest">記憶魔女</p>
+                    <p class="flower-font text-2xl">Unknown</p>
                 </div>
-                <div class="flex flex-col items-center gap-3" onclick="showDetail('herbal')">
-                    <div class="avatar-circle">🌿</div>
-                    <p class="font-bold">草藥魔女</p>
-                    <p class="flower-font text-xl">Caiel</p>
+                <div class="flex flex-col items-center gap-4" onclick="showDetail('herbal')">
+                    <div class="avatar-frame">
+                        <span class="symbol-fallback">🌿</span>
+                    </div>
+                    <p class="font-bold tracking-widest">草藥魔女</p>
+                    <p class="flower-font text-2xl">Caiel</p>
                 </div>
             </div>
         </div>
 
         <div id="witch-detail" class="hidden max-w-4xl mx-auto fade-in">
-            <button onclick="backToMenu()" class="mb-8 text-sm border border-gold/50 px-4 py-1 rounded-full hover:bg-gold/20">← 返回名冊</button>
-            
-            <div class="glass-panel" id="detail-content">
-                </div>
+            <button onclick="backToMenu()" class="mb-10 text-xs tracking-widest border border-gold/40 px-6 py-2 rounded-full hover:bg-gold/10 transition">← 返回名冊</button>
+            <div class="glass-panel" id="detail-content"></div>
         </div>
     </div>
 
@@ -110,7 +118,7 @@
                 symbol: '🫧🫀',
                 info: [
                     { label: '外貌', value: '透明的身體、中間有一顆粉紅色心臟、頭髮是觸手狀（共10根），髮尾與指尖會散發螢光。身高約170cm（含鞋175cm）。' },
-                    { label: '人形', value: '白髮長髮、藍瞳。' },
+                    { label: '人形樣貌', value: '白髮長髮、藍瞳。' },
                     { label: '年齡', value: '約500歲。' },
                     { label: '種族', value: '非人、來自星空的深海海蛞蝓。' },
                     { label: '屬性', value: '光' },
@@ -122,14 +130,13 @@
                     desc: `
                         <p><span class="data-label">種族：</span>非人（也是海蛞蝓）</p>
                         <p><span class="data-label">外貌：</span>鮮豔綠髮，髮尾紅色。嘴巴與頭髮同色，擁有鯊魚齒。</p>
-                        <p><span class="data-label">背景：</span>迷路到魔女之家的孩子（出生後50日）。莉妮絲感到同族十分有趣便帶回扶養。對事物充滿好奇，十分樂天。</p>
-                        <p class="mt-2 opacity-70 italic text-sm">註：此種族來自外星，無性別之分。</p>
+                        <p><span class="data-label">背景：</span>迷路到魔女之家的孩子（出生後50日）。莉妮絲帶回扶養。對事物充滿好奇，十分樂天。</p>
                     `
                 }
             },
-            time: { theme: 'theme-time', title: '時之魔女', name: 'Artemis', symbol: '⏳', info: [{label:'狀態', value:'資料待補充...'}], child: null },
-            memory: { theme: 'theme-memory', title: '記憶魔女', name: 'Lulu', symbol: '🍬', info: [{label:'狀態', value:'資料待補充...'}], child: null },
-            herbal: { theme: 'theme-herbal', title: '草藥魔女', name: 'Flora', symbol: '🌿', info: [{label:'狀態', value:'資料待補充...'}], child: null }
+            time: { theme: 'theme-time', title: '時之魔女', name: 'Aelian Santan', symbol: '⏳', info: [{label:'狀態', value:'資料待補充...'}], child: null },
+            memory: { theme: 'theme-memory', title: '記憶魔女', name: 'Unknown', symbol: '🍬', info: [{label:'狀態', value:'資料待補充...'}], child: null },
+            herbal: { theme: 'theme-herbal', title: '草藥魔女', name: 'Caiel', symbol: '🌿', info: [{label:'狀態', value:'資料待補充...'}], child: null }
         };
 
         function showDetail(key) {
@@ -143,35 +150,29 @@
             menu.classList.add('hidden');
             detail.classList.remove('hidden');
 
-            // 構建 HTML
             let html = `
-                <div class="text-center mb-10">
+                <div class="text-center mb-12">
                     <span class="text-4xl">${data.symbol}</span>
-                    <h1 class="text-3xl font-bold mt-2">『${data.title}』</h1>
-                    <h2 class="flower-font text-2xl text-gold">${data.name}</h2>
+                    <h1 class="text-3xl font-bold mt-4 tracking-widest">『${data.title}』</h1>
+                    <h2 class="flower-font text-3xl mt-2">${data.name}</h2>
                 </div>
-                <div class="space-y-4 mb-10">
+                <div class="space-y-6 text-lg leading-relaxed mb-12">
                     ${data.info.map(item => `<p><span class="data-label">${item.label}：</span>${item.value}</p>`).join('')}
                 </div>
             `;
 
             if(data.child) {
                 html += `
-                    <div class="border-t border-gold/30 pt-8 mt-8">
-                        <h3 class="text-2xl font-bold mb-4 text-center">『孩子 - ${data.child.name}』 ${data.child.symbol}</h3>
-                        <div class="space-y-2">
-                            ${data.child.desc}
-                        </div>
+                    <div class="border-t border-gold/20 pt-10 mt-10">
+                        <h3 class="text-2xl font-bold mb-6 text-center tracking-widest">『孩子 - ${data.child.name}』 ${data.child.symbol}</h3>
+                        <div class="space-y-4">${data.child.desc}</div>
                     </div>
                 `;
             }
 
-            // 底部故事按鈕
             html += `
-                <div class="mt-12 flex justify-center gap-4">
-                    <button class="px-6 py-2 border border-gold hover:bg-gold hover:text-white transition rounded">個人故事</button>
-                    <button class="px-6 py-2 border border-gold hover:bg-gold hover:text-white transition rounded">與小孩的故事</button>
-                    <button class="px-6 py-2 border border-gold hover:bg-gold hover:text-white transition rounded">茶會錄</button>
+                <div class="mt-16 flex flex-wrap justify-center gap-6">
+                    <a href="stories.html" class="px-8 py-3 border border-gold/60 hover:bg-gold hover:text-white transition rounded-full text-sm tracking-widest">查看故事</a>
                 </div>
             `;
 
