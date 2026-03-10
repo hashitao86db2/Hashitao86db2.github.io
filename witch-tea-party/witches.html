@@ -125,11 +125,12 @@
             { label: '個性', value: '神祕溫柔的大姊姊。但在看不爽的人茶裡加瀉藥。喜歡小孩，見到總會忍不住抱起來摸摸。常戴大帽子（據說帽子是可以吃人的大嘴巴）。' }
         ],
         child: {
-            name: 'Nudia 努迪亞',
+            name: '努迪亞 Nudia',
             symbol: '🪸🌺',
             desc: `
                 <p><span class="data-label">種族：</span>非人（也是海蛞蝓）</p>
                 <p><span class="data-label">外貌：</span>鮮豔綠髮，髮尾紅色。嘴巴與頭髮同色，擁有鯊魚齒。</p>
+                <p><span class="data-label">初見年齡：</span>出生後50天</p>
                 <p><span class="data-label">背景：</span>迷路到魔女之家的孩子（出生後50日）。莉妮絲帶回扶養。對事物充滿好奇，十分樂天。</p>
             `
         }
@@ -147,7 +148,7 @@
             { label: '個性', value: '看上去優雅矜持，但實際上矜持不過三秒鐘。喜歡花草植物，把自己的家裝飾的像植物園。也喜歡把自己打扮的美美的，覺得自己世界第一漂亮。喜歡喊別人親愛的。' }
         ],
         child: {
-            name: 'Sethis Santan 瑟希斯•桑坦',
+            name: '瑟希斯•桑坦 Sethis Santan',
             symbol: '❄️🦊',
             desc: `
                 <p><span class="data-label">種族：</span>銀狐</p>
@@ -161,7 +162,31 @@
         }
     },
     memory: { theme: 'theme-memory', title: '記憶魔女', name: 'Unknown', symbol: '🍬', info: [{label:'狀態', value:'資料待補充...'}], child: null },
-    herbal: { theme: 'theme-herbal', title: '草藥魔女', name: 'Caiel', symbol: '🌿', info: [{label:'狀態', value:'資料待補充...'}], child: null }
+    herbal: { theme: 'herbal-herbal', title: '草藥魔法師', 
+        name: '夏伊爾（Caiel）', 
+        symbol: '🌿⚗️', 
+        info: [
+            { label: '外貌', value: '不高不矮、看著約17歲的年，總是穿著過長的白袍，一頭白髮漸層藍，總是亂糟糟的好看。有一雙藍黃的異色瞳' }, // 這裡修正了引號與結尾
+            { label: '年齡', value: '不知'},
+            { label: '種族', value: '半人半人外' },
+            { label: '屬性', value: '反魔法' },
+            { label: '個性', value: '屁孩，不過懂分寸。愛搗蛋，直話直說，個性開朗。' }
+        ],
+        friend: {
+            name: '希洛 Ciro',
+            symbol: '',
+            desc: `
+                <p><span class="data-label">種族：</span>雪貂</p>
+                <p><span class="data-label">外貌：</span>白色雪貂，在肩上待著也不會很重</p>
+                <p><span class="data-label">人形外貌：</span>白毛紅瞳的少年，比夏伊爾高出一點</p>
+                <p><span class="data-label">屬性：</span>冰</p>
+                <p><span class="data-label">背景：</span>是在瀕死之際被夏伊爾救回來的，有人形，但最常用動物的型態圈在夏伊爾的脖子那附近
+很喜歡夏伊爾。
+喜歡到用人形跟夏伊爾互動的時候大家都覺得你們有事情。
+不過夏伊爾並沒有自覺，希洛也只是覺得他在保護夏伊爾而已。
+只有希洛牽制的住夏伊爾。</p>
+            `
+        }
 };
         
         function showDetail(key) {
@@ -194,6 +219,15 @@
                     </div>
                 `;
             }
+
+            if(data.friend) {
+    html += `
+        <div class="border-t border-gold/20 pt-10 mt-10">
+            <h3 class="text-2xl font-bold mb-6 text-center tracking-widest">『朋友 - ${data.friend.name}』 ${data.friend.symbol}</h3>
+            <div class="space-y-4">${data.friend.desc}</div>
+        </div>
+    `;
+}
 
             html += `
                 <div class="mt-16 flex flex-wrap justify-center gap-6">
