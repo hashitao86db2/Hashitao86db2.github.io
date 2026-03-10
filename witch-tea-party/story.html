@@ -3,125 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>世界觀 - Aelian's Tea Party</title>
+    <title>故事回憶 - Aelian's Tea Party</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #ffffff; /* Notion 式純白背景 */
-            color: #37352f; /* Notion 經典深灰文字 */
+            background-color: #ffffff;
+            color: #37352f;
             font-family: 'Shippori Mincho B1', serif;
-            line-height: 1.8;
-            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
         }
 
-        /* 頂部封面圖區域 */
-        .cover-image {
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        /* 網誌卡片樣式 */
+        .story-card {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        /* 正方形圖片容器 */
+        .image-box {
             width: 100%;
-            height: 30vh;
-            background: linear-gradient(to bottom, #2b1b3d, #4a3363);
-            position: relative;
+            aspect-ratio: 1 / 1;
+            background-color: #f5f5f5;
+            overflow: hidden;
         }
 
-        /* 內容容器 */
-        .content-container {
-            max-width: 800px;
-            margin: -60px auto 100px; /* 讓標題往上浮動到封面圖上 */
-            padding: 0 20px;
-            position: relative;
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        /* 文章標題 */
-        h1.world-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: #1a1a1a;
-        }
+        .content-box { padding: 20px; }
 
-        /* 類 Notion 的區塊樣式 */
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #eaeaea;
-            padding-bottom: 0.5rem;
-        }
-
-        p {
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.02em;
-        }
-
-        /* 帶有魔女風格的引用塊 */
-        blockquote {
-            border-left: 3px solid #d4af37;
-            padding-left: 1.5rem;
-            margin: 2rem 0;
-            color: #666;
-            font-style: italic;
-            background: #fdfaf3;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-
-        .back-link {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            text-decoration: none;
+        .story-tag {
+            font-size: 0.75rem;
             color: #d4af37;
-            font-size: 0.9rem;
-            z-index: 100;
-            transition: opacity 0.3s;
-        }
-
-        .back-link:hover { opacity: 0.7; }
-
-        /* 裝飾性的小 icon */
-        .notion-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
             display: block;
         }
+
+        .story-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; }
+        .story-excerpt { font-size: 0.9rem; color: #666; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* 排序器樣式 */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        select {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Shippori Mincho B1', serif;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .back-home { color: #d4af37; text-decoration: none; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-link">← 返回邀請函</a>
+    <div class="container">
+        <div class="controls">
+            <a href="index.html" class="back-home">← 返回首頁</a>
+            <div>
+                <label for="sort" class="text-sm mr-2 text-gray-400">排序依據：</label>
+                <select id="sort" onchange="sortStories()">
+                    <option value="newest">最新發布</option>
+                    <option value="oldest">最舊發布</option>
+                    <option value="witch">魔女名字</option>
+                </select>
+            </div>
+        </div>
 
-    <div class="cover-image"></div>
+        <h1 class="text-3xl font-bold mb-10">故事回憶錄</h1>
 
-    <article class="content-container">
-        <span class="notion-icon">📜</span>
-        <h1 class="world-title">世界觀設定</h1>
+        <div id="story-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+    </div>
 
-        <section>
-            <p>這是一個被時間遺忘的角落。在人類文明的邊緣，存在著數個交疊的維度，而「魔女」便是這些維度的守護者與觀測者。</p>
-            
-            <blockquote>
-                「當最後一顆星辰墜入深海，茶會的鐘聲將會響起。」
-            </blockquote>
+    <script>
+        // 模擬數據（妳可以自行增加或修改）
+        const stories = [
+            {
+                id: 1,
+                date: "2026-03-01",
+                witch: "深海魔女",
+                title: "星空下的海蛞蝓",
+                excerpt: "莉妮絲望向海面上的繁星，那裡曾是她的家鄉。今天，她在茶裡加了點特別的東西...",
+                image: "https://via.placeholder.com/400?text=Lynis", // 這裡換成妳的圖片連結
+                url: "story-detail.html?id=1"
+            },
+            {
+                id: 2,
+                date: "2026-03-05",
+                witch: "時之魔女",
+                title: "停滯的齒輪",
+                excerpt: "阿爾特米絲撥動了指針，森林裡的每一片落葉都停在了半空中。時間對她而言，只是玩具。",
+                image: "https://via.placeholder.com/400?text=Artemis",
+                url: "story-detail.html?id=2"
+            },
+            {
+                id: 3,
+                date: "2026-02-20",
+                witch: "記憶魔女",
+                title: "苦澀的草莓糖",
+                excerpt: "這顆糖果記錄了一段被遺忘的童年。露露說，記憶的味道取決於妳如何回味它。",
+                image: "https://via.placeholder.com/400?text=Lulu",
+                url: "story-detail.html?id=3"
+            }
+        ];
 
-            <h2>✦ 時光的流轉</h2>
-            <p>在這裡，時間並非線性的存在。時之魔女守護著齒輪的轉動，確保過去與未來的平衡。每一株生長的植物，都代表著一段被記錄的歲月。</p>
+        function renderStories(data) {
+            const list = document.getElementById('story-list');
+            list.innerHTML = data.map(story => `
+                <div class="story-card" onclick="window.location.href='${story.url}'">
+                    <div class="image-box">
+                        <img src="${story.image}" alt="${story.title}">
+                    </div>
+                    <div class="content-box">
+                        <span class="story-tag">${story.witch} · ${story.date}</span>
+                        <h2 class="story-title">${story.title}</h2>
+                        <p class="story-excerpt">${story.excerpt}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-            <h2>✦ 深海的呼喚</h2>
-            <p>深海魔女莉妮絲來自遙遠的星空。她所棲息的深海並非普通的水域，而是液態的星辰。她的身體透明且閃爍，胸口跳動著粉紅色的心臟。</p>
+        function sortStories() {
+            const val = document.getElementById('sort').value;
+            let sorted = [...stories];
 
-            <h2>✦ 記憶的糖果</h2>
-            <p>所有的情感與回憶在這裡都不會消散。記憶魔女會將它們收集起來，熬製成不同風味的糖果。每一口甜美或苦澀，都是一段人生的縮影。</p>
+            if (val === "newest") {
+                sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+            } else if (val === "oldest") {
+                sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } else if (val === "witch") {
+                sorted.sort((a, b) => a.witch.localeCompare(b.witch, 'zh-TW'));
+            }
 
-            <h2>✦ 藥草的活潑森林</h2>
-            <p>在充滿生機的淺綠色森林中，草藥魔女忙碌地穿梭著。她調配的藥水不僅能治癒肉體，更能撫平靈魂的創傷。</p>
-        </section>
+            renderStories(sorted);
+        }
 
-        <footer class="mt-20 pt-10 border-t border-gray-100 text-sm text-gray-400 text-center">
-            &copy; 2026 Aelian's Tea Party. All Rights Reserved.
-        </footer>
-    </article>
-
+        // 初始渲染（默認最新）
+        sortStories();
+    </script>
 </body>
 </html>
-
