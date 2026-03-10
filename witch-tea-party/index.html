@@ -19,11 +19,10 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
+            align-items: center; /* 確保所有子元素水平置中 */
             height: 100vh;
             margin: 0;
             overflow: hidden;
-            /* 全域更換為 Shippori Mincho B1 */
             font-family: 'Shippori Mincho B1', serif;
         }
 
@@ -53,6 +52,12 @@
             height: 100%;
             background: #b58d20;
             box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+            overflow: hidden; /* 修正：防止信件在未開啟時溢出產生白色區塊 */
+        }
+
+        /* 當信封打開時，需要允許內容溢出以便信件升起 */
+        .opened .envelope {
+            overflow: visible;
         }
 
         .flap {
@@ -89,24 +94,23 @@
             transition: opacity 0.4s;
         }
 
-        /* 邀請函內部卡片 */
         .letter {
             position: absolute;
             bottom: 10px;
             left: 20px;
             width: 360px;
-            height: 300px; /* 稍微增加高度以容納更多空白 */
+            height: 300px;
             background: var(--paper);
             border: 5px double var(--gold);
             z-index: 2;
-            padding: 35px 30px 50px 30px; /* 增加底部 Padding (50px) */
+            padding: 35px 30px 50px 30px;
             text-align: center;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s;
             box-sizing: border-box;
             opacity: 0;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* 讓內容均勻分布，拉開間距 */
+            justify-content: space-between;
         }
 
         .opened .flap { transform: rotateX(180deg); z-index: 1; }
@@ -159,7 +163,7 @@
             border: 1px solid #5a0000;
         }
 
-        /* 下方說明文字 */
+        /* 下方說明文字修正 */
         .footer-text {
             margin-top: 50px;
             color: var(--gold);
@@ -169,6 +173,8 @@
             opacity: 0.9;
             text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
             animation: fadeInText 2.5s ease-in-out;
+            text-align: center; /* 修正：確保文字內容置中 */
+            width: 100%; /* 修正：確保佔滿寬度以便置中 */
         }
 
         @keyframes fadeInText {
