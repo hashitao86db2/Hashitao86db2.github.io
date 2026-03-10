@@ -12,9 +12,22 @@
             color: #37352f;
             font-family: 'Shippori Mincho B1', serif;
             line-height: 1.8;
+            /* 讓換頁動畫順一點 */
+            scroll-behavior: smooth;
         }
 
-        /* 讓選單更簡潔 */
+        /* 修正文字內容的間距 */
+        .prose p { margin-bottom: 1.8rem; text-align: justify; }
+        .prose blockquote { 
+            border-left: 3px solid #d4af37; 
+            padding-left: 1.5rem; 
+            margin: 2rem 0; 
+            color: #555;
+            background-color: #fdfaf3;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
         select {
             appearance: none;
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ccc' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 0.5rem center;
@@ -22,17 +35,15 @@
             cursor: pointer;
         }
 
-        /* 文章視圖的封面大圖 */
         #view-cover {
             width: 100%;
             height: 40vh;
             object-fit: cover;
             border-radius: 12px;
             margin-bottom: 2rem;
-            display: none; /* 有圖才顯示 */
+            display: none;
         }
 
-        .prose p { margin-bottom: 1.5rem; }
         .hidden { display: none !important; }
     </style>
 </head>
@@ -53,7 +64,6 @@
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-12">
-        
         <div id="list-view">
             <h1 class="text-3xl font-bold mb-12">故事回憶錄</h1>
             <div id="story-grid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -63,11 +73,11 @@
         <div id="article-view" class="hidden">
             <img id="view-cover" src="" alt="Cover">
             <div class="max-w-2xl mx-auto">
-                <span id="view-tag" class="text-[#d4af37] text-sm tracking-widest"></span>
-                <h1 id="view-title" class="text-4xl font-bold mt-2 mb-4 text-gray-900"></h1>
+                <span id="view-tag" class="text-[#d4af37] text-sm tracking-widest block mb-2"></span>
+                <h1 id="view-title" class="text-4xl font-bold mb-4 text-gray-900 leading-tight"></h1>
                 <p id="view-date" class="text-sm text-gray-400 mb-10 pb-6 border-b border-gray-100"></p>
                 
-                <div id="view-body" class="prose prose-gray">
+                <div id="view-body" class="prose">
                     </div>
             </div>
         </div>
@@ -76,19 +86,16 @@
     <script>
         let allStories = [];
 
-        // 1. 初始化讀取 JSON
         async function init() {
             try {
-                // 假設你的檔案叫 stories.json
                 const response = await fetch('stories.json');
                 allStories = await response.json();
                 applySortAndRender();
             } catch (e) {
-                console.error("無法載入故事資料，請檢查 stories.json 是否存在。");
+                console.error("無法載入故事資料，請檢查 stories.json 是否存在並符合 JSON 格式。");
             }
         }
 
-        // 2. 排序與渲染列表
         function applySortAndRender() {
             const method = document.getElementById('sort').value;
             let sorted = [...allStories];
@@ -101,7 +108,7 @@
             grid.innerHTML = sorted.map(s => `
                 <div class="group cursor-pointer" onclick="openArticle('${s.id}')">
                     <div class="aspect-square overflow-hidden rounded-lg bg-gray-100 mb-4">
-                        <img src="${s.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img src="${s.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://via.placeholder.com/400x400?text=No+Image'">
                     </div>
                     <span class="text-xs text-[#d4af37] tracking-widest">${s.witch}</span>
                     <h2 class="text-lg font-bold mt-1 group-hover:text-[#d4af37] transition">${s.title}</h2>
@@ -110,7 +117,6 @@
             `).join('');
         }
 
-// 3. 切換到文章頁面
         function openArticle(id) {
             const s = allStories.find(item => item.id === id);
             if(!s) return;
@@ -130,7 +136,7 @@
 
             document.getElementById('view-tag').innerText = s.witch;
             document.getElementById('view-title').innerText = s.title;
-            document.getElementById('view-date').innerText = s.date;
+            document.getElementById('view-date').innerText = "發佈日期：" + s.date;
             document.getElementById('view-body').innerHTML = s.content;
 
             window.scrollTo(0, 0);
@@ -141,6 +147,7 @@
             document.getElementById('controls').classList.remove('hidden');
             document.getElementById('article-view').classList.add('hidden');
             document.getElementById('back-btn').classList.add('hidden');
+            window.scrollTo(0, 0);
         }
 
         init();
