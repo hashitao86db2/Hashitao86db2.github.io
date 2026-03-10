@@ -94,15 +94,15 @@
             transition: opacity 0.4s;
         }
 
-        .letter {
+            .letter {
             position: absolute;
-            bottom: 10px;
+            bottom: 0; /* 改為 0，讓它完全縮在口袋裡 */
             left: 20px;
             width: 360px;
             height: 300px;
             background: var(--paper);
             border: 5px double var(--gold);
-            z-index: 2;
+            z-index: 2; /* 確保在 pocket (z-index 3) 之下 */
             padding: 35px 30px 50px 30px;
             text-align: center;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s;
@@ -111,7 +111,17 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            pointer-events: none; /* 未打開前不可點擊，防止誤觸 */
         }
+
+        .opened .letter { 
+            transform: translateY(-180px); 
+            opacity: 1; 
+            z-index: 5; /* 打開後才升到最前面 */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+            pointer-events: auto; /* 打開後恢復點擊 */
+        }
+
 
         .opened .flap { transform: rotateX(180deg); z-index: 1; }
         .opened .letter { 
@@ -211,6 +221,18 @@
     <div class="footer-text">
         一封來自時之魔女的茶會邀請函
     </div>
+    <script>
+    // 確保每次進入頁面（包括按返回鍵）時信封都是關閉的
+    window.onpageshow = function(event) {
+        if (event.persisted || true) {
+            const envelope = document.getElementById('envelope');
+            if (envelope) {
+                envelope.classList.remove('opened');
+            }
+        }
+    };
+</script>
+
 
 </body>
 </html>
