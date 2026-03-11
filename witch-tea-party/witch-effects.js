@@ -1,6 +1,6 @@
 /**
  * 魔女名冊專用過場特效系統 v2.0
- * 修正版：時之沙堆積與左向右吹散、草藥尖葉
+ * 修正版：包含時之沙堆積吹散、深海泡泡、糖果雨、草藥尖葉
  */
 const WitchEffects = {
     canvas: null,
@@ -38,7 +38,7 @@ const WitchEffects = {
         if (this.ctx) this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
 
-    // 1. 時之魔女：金色沙塵
+    // 1. 時之魔女：金色沙塵 (堆積 -> 左到右吹散)
     startSandEffect() {
         this.clear();
         this.sandState.phase = 'filling';
@@ -95,7 +95,7 @@ const WitchEffects = {
         this.animate('candy');
     },
 
-    // 4. 草藥魔法師：落葉 (尖葉版)
+    // 4. 草藥魔法師：尖葉
     startLeafEffect() {
         this.clear();
         for (let i = 0; i < 30; i++) {
@@ -105,9 +105,8 @@ const WitchEffects = {
                 size: Math.random() * 15 + 10,
                 speedY: Math.random() * 3 + 2,
                 speedX: Math.random() * 4 - 2,
-                angle: Math.random() * Math.PI * 2,
-                swing: Math.random() * 0.05 + 0.02,
-                color: '#4a7c59'
+                color: '#4a7c59',
+                swing: Math.random() * 0.05 + 0.02
             });
         }
         this.animate('leaf');
@@ -127,7 +126,7 @@ const WitchEffects = {
                 } 
                 else if (p.phase === 'settled') {
                     if (this.sandState.phase === 'blowing') {
-                        p.blowDelay = p.x * 0.8; // 左到右吹散的延遲
+                        p.blowDelay = p.x * 0.8; // 左到右的吹散延遲
                         p.phase = 'waitingToBlow';
                     }
                     stillRunning = true;
@@ -135,7 +134,7 @@ const WitchEffects = {
                 else if (p.phase === 'waitingToBlow') {
                     if ((now - this.sandState.blowStartTime) > p.blowDelay) {
                         p.phase = 'blowing';
-                        p.speedX = Math.random() * 25 + 20; // 向右飛
+                        p.speedX = Math.random() * 25 + 20; 
                         p.speedY = (Math.random() - 0.5) * 8;
                     }
                     stillRunning = true;
