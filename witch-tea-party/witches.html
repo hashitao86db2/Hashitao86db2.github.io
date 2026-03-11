@@ -168,11 +168,11 @@
         name: '未知', 
         symbol: '🍬🌌', 
         info: [
-            { label: '外貌', value: '藍紫色漸層短髮、黃橘色眼睛、青少年的體形（很適合穿女裝？）、總是笑笑的，但也不知道在笑啥' }, // 這裡修正了引號與結尾
+            { label: '外貌', value: '藍紫色漸層短髮、黃橘色眼睛、青少年的體形（很適合穿女裝？）、總是笑笑的，但也不知道在笑啥' },
             { label: '年齡', value: '永遠的17歲（^_^）✌️'},
             { label: '種族', value: '？' },
             { label: '屬性', value: '火' },
-            { label: '個性', value: '自由生物超級隨和，但被強迫做討厭或自認麻煩的事情會找機會開溜。自幼時因為「教導」的關係對外人都很有禮貌，在熟人面前才會有小孩子的一面，另外女子力意外的高。' }
+            { label: '個性', value: '自由生物超級隨和，但被強迫做討厭或自認麻煩的事情會找機會開溜。自幼時因為「教導」的關係對外人都很有禮貌，在熟人面前才會有小孩子的一面，另外女子力意外的高。' },
             { label: '謎之技能', value: '變出糖果餅乾、隨地大小變' },
         ],
         no: {
@@ -256,8 +256,8 @@
             if(data.no) {
     html += `
         <div class="border-t border-gold/20 pt-10 mt-10">
-            <h3 class="text-2xl font-bold mb-6 text-center tracking-widest">『孩子（偽）』<br> ${data.friend.name} ${data.friend.symbol}</h3>
-            <div class="space-y-4">${data.friend.desc}</div>
+            <h3 class="text-2xl font-bold mb-6 text-center tracking-widest">『孩子（偽）』<br> ${data.no.name} ${data.no.symbol}</h3>
+            <div class="space-y-4">${data.no.desc}</div>
         </div>
     `;
 }
