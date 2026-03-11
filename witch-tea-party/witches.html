@@ -112,6 +112,29 @@
         </div>
     </div>
 
+    <div class="text-center pb-20 mt-20">
+    <span id="easter-egg" class="opacity-10 cursor-pointer hover:opacity-100 transition-opacity duration-1000 text-gold" style="font-size: 10px;">✵</span>
+</div>
+
+<script>
+    let eggStep = 0;
+    const egg = document.getElementById('easter-egg');
+    
+    egg.addEventListener('click', () => {
+        eggStep++;
+        if (eggStep === 1) {
+            alert("喔？被你找到啦~");
+        } else if (eggStep === 2) {
+            if (confirm("你要來偷看一下魔女們的談話嗎？")) {
+                window.location.href = 'chat.html'; // 跳轉到聊天室頁面
+            } else {
+                eggStep = 0; // 重設
+            }
+        }
+    });
+</script>
+
+
     <script src="witch-effects.js"></script>
 
 
