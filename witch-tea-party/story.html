@@ -48,22 +48,21 @@
 <body class="bg-white">
 
     <nav class="sticky top-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-[#d4af37] text-sm">← 返回邀請函</a>
-            <div id="controls">
-                
-<select id="sort" onchange="applySortAndRender()" 
-        class="text-sm text-gray-500 bg-transparent outline-none cursor-pointer pr-6">
-    <option value="newest">最新發布</option>
-    <option value="oldest">由舊到新</option>
-    <option value="witch">按魔女名</option>
-</select>
-                
-            </div>
-            <button id="back-btn" class="hidden text-sm text-gray-400" onclick="closeArticle()">← 返回列表</button>
+    <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" id="nav-invite" class="text-[#d4af37] text-sm">← 返回邀請函</a>
+        
+        <button id="back-btn" class="hidden text-sm text-[#d4af37]" onclick="closeArticle()">← 返回列表</button>
+        
+        <div id="controls">
+            <select id="sort" onchange="applySortAndRender()" 
+                    class="text-sm text-gray-500 bg-transparent outline-none cursor-pointer pr-6">
+                <option value="newest">最新發布</option>
+                <option value="oldest">由舊到新</option>
+                <option value="witch">按魔女名</option>
+            </select>
         </div>
-    </nav>
-
+    </div>
+</nav>
     <main class="max-w-4xl mx-auto px-6 py-12">
         <div id="list-view">
             <h1 class="text-3xl font-bold mb-12">故事回憶錄</h1>
@@ -119,37 +118,47 @@
         }
 
         function openArticle(id) {
-            const s = allStories.find(item => item.id === id);
-            if(!s) return;
+    const s = allStories.find(item => item.id === id);
+    if(!s) return;
 
-            document.getElementById('list-view').classList.add('hidden');
-            document.getElementById('controls').classList.add('hidden');
-            document.getElementById('article-view').classList.remove('hidden');
-            document.getElementById('back-btn').classList.remove('hidden');
+    // 隱藏列表頁面元素
+    document.getElementById('list-view').classList.add('hidden');
+    document.getElementById('controls').classList.add('hidden');
+    document.getElementById('nav-invite').classList.add('hidden'); // 隱藏返回邀請函
 
-            const cover = document.getElementById('view-cover');
-            if(s.image) {
-                cover.src = s.image;
-                cover.style.display = 'block';
-            } else {
-                cover.style.display = 'none';
-            }
+    // 顯示文章頁面元素
+    document.getElementById('article-view').classList.remove('hidden');
+    document.getElementById('back-btn').classList.remove('hidden'); // 顯示返回列表
 
-            document.getElementById('view-tag').innerText = s.witch;
-            document.getElementById('view-title').innerText = s.title;
-            document.getElementById('view-date').innerText = "發佈日期：" + s.date;
-            document.getElementById('view-body').innerHTML = s.content;
+    // 填充文章內容 (這部分維持你原本的代碼)
+    const cover = document.getElementById('view-cover');
+    if(s.image) {
+        cover.src = s.image;
+        cover.style.display = 'block';
+    } else {
+        cover.style.display = 'none';
+    }
 
-            window.scrollTo(0, 0);
-        }
+    document.getElementById('view-tag').innerText = s.witch;
+    document.getElementById('view-title').innerText = s.title;
+    document.getElementById('view-date').innerText = "發佈日期：" + s.date;
+    document.getElementById('view-body').innerHTML = s.content;
 
-        function closeArticle() {
-            document.getElementById('list-view').classList.remove('hidden');
-            document.getElementById('controls').classList.remove('hidden');
-            document.getElementById('article-view').classList.add('hidden');
-            document.getElementById('back-btn').classList.add('hidden');
-            window.scrollTo(0, 0);
-        }
+    window.scrollTo(0, 0);
+}
+
+function closeArticle() {
+    // 恢復列表頁面元素
+    document.getElementById('list-view').classList.remove('hidden');
+    document.getElementById('controls').classList.remove('hidden');
+    document.getElementById('nav-invite').classList.remove('hidden'); // 重新顯示返回邀請函
+
+    // 隱藏文章頁面元素
+    document.getElementById('article-view').classList.add('hidden');
+    document.getElementById('back-btn').classList.add('hidden'); // 隱藏返回列表
+    
+    window.scrollTo(0, 0);
+}
 
         init();
     </script>
