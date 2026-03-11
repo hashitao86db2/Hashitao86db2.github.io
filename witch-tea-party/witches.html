@@ -112,6 +112,9 @@
         </div>
     </div>
 
+    <script src="witch-effects.js"></script>
+
+
     <script>
         const witchesData = {
     deepsea: {
@@ -214,26 +217,34 @@
 };
         
         function showDetail(key) {
-            const data = witchesData[key];
-            const body = document.getElementById('main-body');
-            const menu = document.getElementById('witch-menu');
-            const detail = document.getElementById('witch-detail');
-            const content = document.getElementById('detail-content');
+    // --- 新增：觸發過場動畫 ---
+    if (key === 'time') WitchEffects.startSandEffect();
+    else if (key === 'deepsea') WitchEffects.startBubbleEffect();
+    else if (key === 'memory') WitchEffects.startCandyEffect();
+    else if (key === 'herbal') WitchEffects.startLeafEffect();
 
-            body.className = data.theme;
-            menu.classList.add('hidden');
-            detail.classList.remove('hidden');
+    // 稍微延遲內容切換，讓動畫有感 (約 400 毫秒時切換)
+    setTimeout(() => {
+        const data = witchesData[key];
+        const body = document.getElementById('main-body');
+        const menu = document.getElementById('witch-menu');
+        const detail = document.getElementById('witch-detail');
+        const content = document.getElementById('detail-content');
 
-            let html = `
-                <div class="text-center mb-12">
-                    <span class="text-4xl">${data.symbol}</span>
-                    <h1 class="text-3xl font-bold mt-4 tracking-widest">『${data.title}』</h1>
-                    <h2 class="text-3xl mt-2">${data.name}</h2>
-                </div>
-                <div class="space-y-6 text-lg leading-relaxed mb-12">
-                    ${data.info.map(item => `<p><span class="data-label">${item.label}：</span>${item.value}</p>`).join('')}
-                </div>
-            `;
+        body.className = data.theme;
+        menu.classList.add('hidden');
+        detail.classList.remove('hidden');
+
+        let html = `
+            <div class="text-center mb-12">
+                <span class="text-4xl">${data.symbol}</span>
+                <h1 class="text-3xl font-bold mt-4 tracking-widest">『${data.title}』</h1>
+                <h2 class="text-3xl mt-2">${data.name}</h2>
+            </div>
+            <div class="space-y-6 text-lg leading-relaxed mb-12">
+                ${data.info.map(item => `<p><span class="data-label">${item.label}：</span>${item.value}</p>`).join('')}
+            </div>
+        `;
 
             if(data.child) {
                 html += `
@@ -261,21 +272,16 @@
     `;
 }
 
-            html += `
-                <div class="mt-16 flex flex-wrap justify-center gap-6">
+            html += `<div class="mt-16 flex flex-wrap justify-center gap-6">
                     <a href="story.html" class="px-8 py-3 border border-gold/60 hover:bg-gold hover:text-white transition rounded-full text-sm tracking-widest">查看故事</a>
-                </div>
-            `;
+                 </div>`;
 
-            content.innerHTML = html;
-            window.scrollTo(0,0);
-        }
-
-        function backToMenu() {
-            document.getElementById('main-body').className = 'theme-default';
-            document.getElementById('witch-menu').classList.remove('hidden');
-            document.getElementById('witch-detail').classList.add('hidden');
-        }
+        content.innerHTML = html;
+        window.scrollTo(0,0);
+    }, 400); // 這裡的 400ms 是等待特效剛好遮蓋畫面的時機
+}
     </script>
 </body>
 </html>
+
+        
