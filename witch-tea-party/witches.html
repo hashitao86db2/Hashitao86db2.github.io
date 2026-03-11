@@ -280,6 +280,13 @@
         window.scrollTo(0,0);
     }, 400); // 這裡的 400ms 是等待特效剛好遮蓋畫面的時機
 }
+        function backToMenu() {
+    document.getElementById('main-body').className = 'theme-default';
+    document.getElementById('witch-menu').classList.remove('hidden');
+    document.getElementById('witch-detail').classList.add('hidden');
+    WitchEffects.clear(); // 返回時也順便清除可能殘留的畫布內容
+}
+
     </script>
 </body>
 </html>
