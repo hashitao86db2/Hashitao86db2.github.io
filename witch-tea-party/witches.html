@@ -124,7 +124,7 @@
             { label: '人形樣貌', value: '白色及腰的長髮、藍瞳。' },
             { label: '年齡', value: '約500歲。' },
             { label: '種族', value: '非人、來自星空的深海海蛞蝓。' },
-            { label: '屬性', value: '光' },
+            { label: '屬性', value: '水、光' },
             { label: '個性', value: '神祕溫柔的大姊姊。但在看不爽的人茶裡加瀉藥。喜歡小孩，見到總會忍不住抱起來摸摸。常戴大帽子（據說帽子是可以吃人的大嘴巴）。' }
         ],
         child: {
@@ -164,12 +164,33 @@
             `
         }
     },
-    memory: { theme: 'theme-memory', title: '記憶魔女', name: 'Unknown', symbol: '🍬', info: [{label:'狀態', value:'資料待補充...'}], child: null },
+    memory: { theme: 'theme-memory', title: '記憶魔女•碎片', 
+        name: '未知', 
+        symbol: '🍬🌌', 
+        info: [
+            { label: '外貌', value: '藍紫色漸層短髮、黃橘色眼睛、青少年的體形（很適合穿女裝？）、總是笑笑的，但也不知道在笑啥' }, // 這裡修正了引號與結尾
+            { label: '年齡', value: '永遠的17歲（^_^）✌️'},
+            { label: '種族', value: '？' },
+            { label: '屬性', value: '火' },
+            { label: '個性', value: '自由生物超級隨和，但被強迫做討厭或自認麻煩的事情會找機會開溜。自幼時因為「教導」的關係對外人都很有禮貌，在熟人面前才會有小孩子的一面，另外女子力意外的高。' }
+            { label: '謎之技能', value: '變出糖果餅乾、隨地大小變' },
+        ],
+        no: {
+            name: '卍帥氣a餅乾小精靈X',
+            symbol: '🍪🐝',
+            desc: `
+                <p><span class="data-label">種族：</span>記憶魔女同位體</p>
+                <p><span class="data-label">外貌：</span>小小一隻的很可愛（9.9cm)</p>
+                <p><span class="data-label">人形外貌：</span>白毛紅瞳的少年，比夏伊爾高出一點</p>
+                <p><span class="data-label">個性：</span>樹懶</p>
+                
+            `}
+            },
     herbal: { theme: 'theme-herbal', title: '草藥魔法師', 
         name: '夏伊爾（Caiel）', 
         symbol: '🌿⚗️', 
         info: [
-            { label: '外貌', value: '不高不矮、看著約17歲的年，總是穿著過長的白袍，一頭白髮漸層藍，總是亂糟糟的好看。有一雙藍黃的異色瞳' }, // 這裡修正了引號與結尾
+            { label: '外貌', value: '不高不矮、看著約17歲的少年，總是穿著過長的白袍，一頭白髮漸層藍，總是亂糟糟的好看。有一雙藍黃的異色瞳' }, // 這裡修正了引號與結尾
             { label: '年齡', value: '不知'},
             { label: '種族', value: '半人半人外' },
             { label: '屬性', value: '反魔法' },
@@ -218,7 +239,7 @@
             if(data.child) {
                 html += `
                     <div class="border-t border-gold/20 pt-10 mt-10">
-                        <h3 class="text-2xl font-bold mb-6 text-center tracking-widest">『孩子 - ${data.child.name}』 ${data.child.symbol}</h3>
+                        <h3 class="text-2xl font-bold mb-6 text-center tracking-widest">『孩子』<br> ${data.child.name} ${data.child.symbol}</h3>
                         <div class="space-y-4">${data.child.desc}</div>
                     </div>
                 `;
@@ -227,7 +248,15 @@
             if(data.friend) {
     html += `
         <div class="border-t border-gold/20 pt-10 mt-10">
-            <h3 class="text-2xl font-bold mb-6 text-center tracking-widest">『朋友 - ${data.friend.name}』 ${data.friend.symbol}</h3>
+            <h3 class="text-2xl font-bold mb-6 text-center tracking-widest">『朋友』<br> ${data.friend.name} ${data.friend.symbol}</h3>
+            <div class="space-y-4">${data.friend.desc}</div>
+        </div>
+    `;
+}
+            if(data.no) {
+    html += `
+        <div class="border-t border-gold/20 pt-10 mt-10">
+            <h3 class="text-2xl font-bold mb-6 text-center tracking-widest">『孩子（偽）』<br> ${data.friend.name} ${data.friend.symbol}</h3>
             <div class="space-y-4">${data.friend.desc}</div>
         </div>
     `;
