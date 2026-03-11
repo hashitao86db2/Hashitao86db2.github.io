@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title># 魔女的祕密茶會 (Logged)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #313338; color: #dbdee1; font-family: 'Shippori Mincho B1', serif; }
+        .message-container { display: flex; padding: 10px 20px; transition: background 0.2s; }
+        .message-container:hover { background-color: #2e3035; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #4e5058; margin-right: 15px; flex-shrink: 0; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .user-name { font-weight: bold; color: #f2f3f5; margin-right: 8px; font-size: 0.95rem; }
+        .time-stamp { color: #949ba4; font-size: 0.75rem; }
+        .text-content { color: #dbdee1; line-height: 1.4; margin-top: 2px; }
+        .role-tag { font-size: 0.65rem; background: #d4af37; color: #1a1a1a; padding: 1px 4px; border-radius: 3px; margin-left: 5px; vertical-align: middle; }
+    </style>
+</head>
+<body>
+
+    <div class="sticky top-0 bg-[#313338] border-b border-[#26272d] p-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center">
+            <span class="text-[#80848e] text-2xl mr-2">#</span>
+            <span class="font-bold">魔女們的茶會紀錄</span>
+        </div>
+        <a href="witches.html" class="text-xs text-[#949ba4] hover:underline">退出頻道</a>
+    </div>
+
+    <div class="py-6">
+        <div class="message-container">
+            <div class="avatar"><img src="picture/IMG_2150.jpg" class="rounded-full h-full w-full object-cover"></div>
+            <div>
+                <div><span class="user-name">艾利安 • 桑坦</span><span class="role-tag">時之魔女</span><span class="time-stamp">今天 14:20</span></div>
+                <div class="text-content">親愛的莉妮絲，那個湖泊的名字是不是太長了點？「無敵閃亮亮」什麼的...</div>
+            </div>
+        </div>
+
+        <div class="message-container">
+            <div class="avatar"><img src="picture/IMG_2148.jpg" class="rounded-full h-full w-full object-cover"></div>
+            <div>
+                <div><span class="user-name">Unknown</span><span class="role-tag">記憶魔女</span><span class="time-stamp">今天 14:22</span></div>
+                <div class="text-content">我覺得很貼切啊，反正我的墓園生意變好了。</div>
+            </div>
+        </div>
+
+        <div class="message-container">
+            <div class="avatar"><img src="picture/IMG_2149.jpg" class="rounded-full h-full w-full object-cover"></div>
+            <div>
+                <div><span class="user-name">莉妮絲 • 莫諾托</span><span class="role-tag">深海魔女</span><span class="time-stamp">今天 14:25</span></div>
+                <div class="text-content">呵呵，只要大家開心就好。不過艾利安，瑟希斯是不是又偷吃了我的螢光小魚？</div>
+            </div>
+        </div>
+
+        <div class="message-container">
+            <div class="avatar"><img src="picture/IMG_2147.jpg" class="rounded-full h-full w-full object-cover"></div>
+            <div>
+                <div><span class="user-name">夏伊爾</span><span class="role-tag">草藥魔法師</span><span class="time-stamp">今天 14:30</span></div>
+                <div class="text-content">我也看到了！那隻小狐狸跑得超快，希洛都差點追不上。</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
