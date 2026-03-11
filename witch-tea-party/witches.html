@@ -48,17 +48,7 @@
         }
         .symbol-fallback { font-size: 50px; opacity: 0.8; }
         
-         .flower-font { 
-           font-family: 'Shippori Mincho B1', serif; /* 中文用明體 */
-           color: var(--gold);
-           letter-spacing: 0.1em;
-         }
-
-/* 針對英文部分，如果有單獨標籤的話 */
-.english-name {
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.2em;
-}
+        .flower-font { font-family: 'Great Vibes', cursive; color: var(--gold); }
 
         .glass-panel {
             background: rgba(255, 255, 255, 0.05);
@@ -90,28 +80,28 @@
                         <img src="picture/IMG_2150.jpg" alt="記憶魔女" onerror="this.style.display='none'">
                     </div>
                     <p class="font-bold tracking-widest">時之魔女</p>
-                    <p class="flower-font text-2xl"><span class="english-sub">Aelian Santan</span></p>
+                    <p class="flower-font text-2xl">Aelian Santan</p>
                 </div>
                 <div class="flex flex-col items-center gap-4" onclick="showDetail('deepsea')">
                     <div class="avatar-frame">
 <img src="picture/IMG_2149.jpg" alt="記憶魔女" onerror="this.style.display='none'">
                     </div>
                     <p class="font-bold tracking-widest">深海魔女</p>
-                    <p class="flower-font text-2xl"><span class="english-sub">Lynis Monotor</span></p>
+                    <p class="flower-font text-2xl">Lynis Monotor</p>
                 </div>
                 <div class="flex flex-col items-center gap-4" onclick="showDetail('memory')">
                     <div class="avatar-frame">
                      <img src="picture/IMG_2148.jpg" alt="記憶魔女" onerror="this.style.display='none'">
                     </div>
                     <p class="font-bold tracking-widest">記憶魔女</p>
-                    <p class="flower-font text-2xl"><span class="english-sub">Unknown</span></p>
+                    <p class="flower-font text-2xl">Unknown</p>
                 </div>
                 <div class="flex flex-col items-center gap-4" onclick="showDetail('herbal')">
                     <div class="avatar-frame">
                      <img src="picture/IMG_2147.jpg" alt="記憶魔女" onerror="this.style.display='none'">
                     </div>
                     <p class="font-bold tracking-widest">草藥魔法師</p>
-                    <p class="flower-font text-2xl"><span class="english-sub">Caiel</span></p>
+                    <p class="flower-font text-2xl">Caiel</p>
                 </div>
             </div>
         </div>
@@ -239,7 +229,7 @@
                 <div class="text-center mb-12">
                     <span class="text-4xl">${data.symbol}</span>
                     <h1 class="text-3xl font-bold mt-4 tracking-widest">『${data.title}』</h1>
-                    <h2 class="flower-font text-3xl mt-2">${data.name}</h2>
+                    <h2 class="text-3xl mt-2">${data.name}</h2>
                 </div>
                 <div class="space-y-6 text-lg leading-relaxed mb-12">
                     ${data.info.map(item => `<p><span class="data-label">${item.label}：</span>${item.value}</p>`).join('')}
