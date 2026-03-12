@@ -197,7 +197,8 @@ const WitchEffects = {
 
                 // 如果糖果還在畫面內且還沒透明，就繼續跑
                 if (p.y < this.canvas.height + 50 && p.opacity > 0) stillRunning = true;
-            }
+                });
+    }
 
         else if (type === 'leaf') {
             this.particles.forEach(p => {
