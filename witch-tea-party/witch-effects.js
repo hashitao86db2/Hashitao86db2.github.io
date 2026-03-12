@@ -1,6 +1,6 @@
 /**
- * 魔女名冊專用過場特效系統 v2.0
- * 修正版：包含時之沙堆積吹散、深海泡泡、糖果雨、草藥尖葉
+ * 魔女名冊專用過場特效系統 v2.1
+ * 修正版：包含時之沙堆積吹散、深海泡泡、糖果炸裂(驚嚇箱)、草藥尖葉
  */
 const WitchEffects = {
     canvas: null,
@@ -38,7 +38,7 @@ const WitchEffects = {
         if (this.ctx) this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
 
-    // 1. 時之魔女：金色沙塵 (堆積 -> 左到右吹散)
+    // 1. 時之魔女：金色沙塵
     startSandEffect() {
         this.clear();
         this.sandState.phase = 'filling';
@@ -84,20 +84,18 @@ const WitchEffects = {
         const centerX = this.canvas.width / 2;
         const centerY = this.canvas.height / 2;
 
-        for (let i = 0; i < 100; i++) {
-            // 隨機角度 (0 到 360度)
+        for (let i = 0; i < 120; i++) {
             const angle = Math.random() * Math.PI * 2;
-            // 隨機爆炸力道
-            const force = Math.random() * 15 + 10;
+            const force = Math.random() * 18 + 10;
             
             this.particles.push({
                 x: centerX,
                 y: centerY,
                 size: Math.random() * 12 + 6,
                 color: colors[Math.floor(Math.random() * colors.length)],
-                speedX: Math.cos(angle) * force, // 根據角度計算 X 分力
-                speedY: Math.sin(angle) * force, // 根據角度計算 Y 分力
-                gravity: 0.15, // 給一點重力感，讓糖果炸開後稍微往下墜
+                speedX: Math.cos(angle) * force, 
+                speedY: Math.sin(angle) * force, 
+                gravity: 0.2, 
                 rotation: Math.random() * 360,
                 rotSpeed: Math.random() * 20 - 10,
                 opacity: 1
@@ -105,7 +103,6 @@ const WitchEffects = {
         }
         this.animate('candy');
     },
-
 
     // 4. 草藥魔法師：尖葉
     startLeafEffect() {
@@ -138,7 +135,7 @@ const WitchEffects = {
                 } 
                 else if (p.phase === 'settled') {
                     if (this.sandState.phase === 'blowing') {
-                        p.blowDelay = p.x * 0.8; // 左到右的吹散延遲
+                        p.blowDelay = p.x * 0.8;
                         p.phase = 'waitingToBlow';
                     }
                     stillRunning = true;
@@ -178,28 +175,25 @@ const WitchEffects = {
                 if (p.y + p.r > 0) stillRunning = true;
             });
         }
-                    else if (type === 'candy') {
+        else if (type === 'candy') {
+            this.particles.forEach(p => {
                 p.x += p.speedX;
                 p.y += p.speedY;
-                p.speedY += p.gravity; // 加入重力
+                p.speedY += p.gravity; 
                 p.rotation += p.rotSpeed;
-                p.opacity -= 0.005; // 慢慢淡出
+                p.opacity -= 0.008; 
 
                 this.ctx.save();
                 this.ctx.globalAlpha = Math.max(0, p.opacity);
                 this.ctx.translate(p.x, p.y);
                 this.ctx.rotate(p.rotation * Math.PI / 180);
                 this.ctx.fillStyle = p.color;
-                
-                // 畫出不同形狀的糖果（小方形或長方形）
                 this.ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
                 this.ctx.restore();
 
-                // 如果糖果還在畫面內且還沒透明，就繼續跑
                 if (p.y < this.canvas.height + 50 && p.opacity > 0) stillRunning = true;
-                });
-    }
-
+            });
+        }
         else if (type === 'leaf') {
             this.particles.forEach(p => {
                 p.y += p.speedY; p.x += Math.sin(p.y * p.swing) * 3;
