@@ -1,71 +1,89 @@
-/* 全域設定 */
-body, html {
-    margin: 0; padding: 0;
-    font-family: 'serif';
-    background: #000; color: #fff;
-    overflow-x: hidden;
+/* 基礎設定 */
+:root {
+    --gold: #d4af37;
+    --sky: #e0f2f1;
+    --void: #1a1a2e;
+    --ghost-blue: #a2d2ff;
 }
 
-/* 1. 開頭動畫 */
-#intro {
-    height: 100vh;
-    display: flex; justify-content: center; align-items: center;
-    text-align: center; position: fixed; width: 100%; z-index: 100;
-    background: black;
+body, html {
+    margin: 0; padding: 0;
+    background: #000;
+    scroll-behavior: smooth;
+    overflow: hidden; /* 初始禁止滾動，直到進入世界 */
+}
+
+/* 開頭層 */
+#intro-layer {
+    height: 100vh; width: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+    position: fixed; z-index: 1000; transition: 2s;
 }
 
 .typewriter {
-    opacity: 0;
-    font-size: 1.5rem; letter-spacing: 3px;
-    animation: fadeInOut 4s forwards;
+    color: white; font-size: 1.2rem; letter-spacing: 5px;
+    opacity: 0; animation: fadeEffect 4s var(--d) forwards;
+    position: absolute; width: 100%; text-align: center;
 }
 
-/* 讓文字按順序出現 */
-.typewriter[data-delay="1"] { animation-delay: 1s; }
-.typewriter[data-delay="4"] { animation-delay: 4s; }
-.typewriter[data-delay="7"] { animation-delay: 7s; }
-
-@keyframes fadeInOut {
-    0% { opacity: 0; filter: blur(10px); }
-    20% { opacity: 1; filter: blur(0); }
-    80% { opacity: 1; filter: blur(0); }
+@keyframes fadeEffect {
+    0% { opacity: 0; transform: translateY(10px); filter: blur(5px); }
+    20% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    80% { opacity: 1; transform: translateY(0); filter: blur(0); }
     100% { opacity: 0; filter: blur(5px); }
 }
 
-/* 2. 主視界 - 金白藍色調 */
-#main-world {
-    background: linear-gradient(180deg, #0a192f 0%, #ffffff 50%, #d4af37 100%);
-    color: #1a1a1a; min-height: 200vh; transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
+/* 主導覽層 (現世) */
+#main-hub {
+    height: 100vh;
+    background: linear-gradient(to bottom, #000, #2c3e50);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: 1s;
 }
 
-.glass-nav {
-    position: sticky; top: 0; background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px); padding: 20px; z-index: 50;
+.hex-nav {
+    display: grid; grid-template-columns: repeat(3, 150px); gap: 20px;
 }
 
-.glass-nav ul { display: flex; justify-content: center; list-style: none; gap: 30px; }
-
-/* 3. 死後世界 - 幽靈紫與破碎感 */
-#afterlife {
-    height: 100vh; width: 100%;
-    background: #1a1a1a; color: #a0a0ff;
-    position: fixed; top: 0; left: 0; z-index: -1;
+.nav-item {
+    height: 150px; border: 1px solid var(--gold);
     display: flex; justify-content: center; align-items: center;
-    filter: grayscale(0.5) contrast(1.2);
+    text-decoration: none; color: var(--gold);
+    transition: 0.5s; backdrop-filter: blur(5px);
 }
 
-.upside-down { transform: rotate(180deg); opacity: 0.3; font-size: 4rem; }
-
-/* 飄進來的紙張 */
-.floating-paper {
-    background: #e0e0e0; color: #333; padding: 30px;
-    width: 250px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    transform: translateY(-150vh) rotate(15deg);
-    transition: transform 3s ease-out;
+.nav-item:hover {
+    background: var(--gold); color: #000; box-shadow: 0 0 20px var(--gold);
 }
 
-.falling #afterlife .floating-paper { transform: translateY(0) rotate(-5deg); }
+/* 死後世界層 */
+#afterlife-layer {
+    height: 100vh;
+    background: #050505;
+    position: relative; overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+}
 
-/* 隱藏元素用 */
-.hidden { display: none !important; }
-.falling #main-world { transform: translateY(-100vh); pointer-events: none; }
+/* 破碎感背景 */
+.mirror-shards {
+    position: absolute; width: 100%; height: 100%;
+    background: linear-gradient(45deg, #1a1a2e 25%, transparent 25%) -50px 0,
+                linear-gradient(-45deg, #1a1a2e 25%, transparent 25%) -50px 0;
+    background-size: 100px 100px; opacity: 0.1;
+}
+
+/* 飄進來的守則 */
+.paper {
+    background: #f0f0f0; color: #222; padding: 40px;
+    width: 300px; transform: rotate(-10deg) translateY(100vh);
+    transition: 3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.8);
+}
+
+/* 當進入死後世界視角時觸發動畫 */
+.in-afterlife .paper {
+    transform: rotate(2deg) translateY(0);
+}
+
+.hidden { display: none; }
