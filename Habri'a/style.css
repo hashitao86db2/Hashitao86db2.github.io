@@ -83,24 +83,6 @@ body.is-unlocked { overflow-y: auto; position: relative; }
     letter-spacing: 2px;
 }
 
-/* 修正：scroll-hint 及其文字與箭頭 */
-.scroll-hint { 
-    margin-top: 60px; 
-    color: #ffffff; /* 調整回白色 */
-    text-align: center; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    opacity: 0.6;
-    animation: bounce 2s infinite; 
-}
-
-/* 箭頭樣式 */
-.scroll-hint .arrow {
-    font-size: 1.5rem;
-    color: var(--gold); /* 讓箭頭維持金色作為指引 */
-}
 
 @keyframes bounce { 
     0%, 100% { transform: translateY(0); opacity: 0.4; } 
