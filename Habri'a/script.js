@@ -2,17 +2,25 @@ function showHub() {
     const intro = document.getElementById('intro-layer');
     const hub = document.getElementById('main-hub');
     
-    // 淡出開頭
+    // 1. 開始淡出動畫
     intro.style.opacity = '0';
-    
-    setTimeout(() => {
-        intro.style.display = 'none';
-        hub.classList.add('active');
-        // 開放滾動
-        document.body.style.overflowY = 'scroll';
-    }, 1500);
-}
+    intro.style.pointerEvents = 'none'; // 重要：防止透明層擋住下方的點擊與滾動
 
+    setTimeout(() => {
+        // 2. 徹底移除開頭層
+        intro.style.display = 'none';
+        
+        // 3. 顯示主頁面並啟動淡入
+        hub.classList.add('active');
+        
+        // 4. 強制恢復滾動權限
+        document.documentElement.style.overflowY = 'auto'; 
+        document.body.style.overflowY = 'auto';
+        
+        // 針對 iOS Safari 的特殊處理
+        document.body.style.position = 'static'; 
+    }, 1500); 
+}
 // 監聽滾動，觸發死後世界的紙張
 window.addEventListener('scroll', () => {
     const afterlifeSection = document.getElementById('afterlife-layer');
