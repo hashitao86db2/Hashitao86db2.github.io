@@ -1,36 +1,46 @@
+let hasBounced = false; // 紀錄是否已經彈回過一次
+
 function showHub() {
     const intro = document.getElementById('intro-layer');
     const hub = document.getElementById('main-hub');
     
-    // 1. 開始淡出動畫
     intro.style.opacity = '0';
-    intro.style.pointerEvents = 'none'; // 重要：防止透明層擋住下方的點擊與滾動
-
     setTimeout(() => {
-        // 2. 徹底移除開頭層
         intro.style.display = 'none';
-        
-        // 3. 顯示主頁面並啟動淡入
         hub.classList.add('active');
-        
-        // 4. 強制恢復滾動權限
-        document.documentElement.style.overflowY = 'auto'; 
-        document.body.style.overflowY = 'auto';
-        
-        // 針對 iOS Safari 的特殊處理
-        document.body.style.position = 'static'; 
-    }, 1500); 
+        // 解鎖 body 捲動
+        document.body.classList.remove('is-locked');
+        document.body.classList.add('is-unlocked');
+    }, 1500);
 }
-// 監聽滾動，觸發死後世界的紙張
-window.addEventListener('scroll', () => {
-    const afterlifeSection = document.getElementById('afterlife-layer');
-    const rect = afterlifeSection.getBoundingClientRect();
 
-    // 當死後世界區塊頂部進入視窗一半時
-    if (rect.top < window.innerHeight / 2) {
+// 監聽捲動邏輯
+window.addEventListener('scroll', () => {
+    const afterlife = document.getElementById('afterlife-layer');
+    const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const afterlifeTop = afterlife.offsetTop;
+
+    // --- 第一次滑動彈回邏輯 ---
+    // 當使用者滑到靠近死後世界 (觸發點在 afterlife 頂部上方 50px)
+    if (!hasBounced && scrollPos + windowHeight > afterlifeTop + 50) {
+        hasBounced = true;
+        // 強制彈回主頁面底部
+        window.scrollTo({
+            top: afterlifeTop - windowHeight,
+            behavior: 'smooth'
+        });
+        return; 
+    }
+
+    // --- 紙張飄落與背景變色觸發 ---
+    // 當死後世界進入畫面超過 20% 時
+    if (scrollPos + windowHeight > afterlifeTop + (windowHeight * 0.2)) {
         document.body.classList.add('in-afterlife');
     } else {
-        // 如果想重複動畫可以把下面這行打開
-        // document.body.classList.remove('in-afterlife');
+        document.body.classList.remove('in-afterlife');
     }
 });
+
+// 針對平板/手機點擊最佳化
+document.addEventListener('touchstart', function() {}, {passive: true});
