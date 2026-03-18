@@ -15,24 +15,42 @@ body, html {
 }
 
 /* --- 1. Intro 層 --- */
+/* 修改後的 Intro 層 */
 #intro-layer {
-    height: 100vh; width: 100%;
-    display: flex; justify-content: center; align-items: center;
+    height: 100vh; 
+    width: 100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
     background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
-    position: fixed; z-index: 1000;
-    transition: opacity 1.5s ease;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: opacity 1.5s ease, visibility 1.5s ease; /* 加入 visibility */
 }
 
-.intro-container {
-    position: relative;
-    width: 90%;          /* 增加到 90% 確保在手機上有邊距 */
-    max-width: 800px;    /* 限制最大寬度，避免在大螢幕上字太散 */
-    height: auto;        /* 讓高度隨文字內容調整 */
-    min-height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* 當透明度為 0 時，讓它徹底不影響觸碰 */
+#intro-layer[style*="opacity: 0"] {
+    visibility: hidden;
+    pointer-events: none;
 }
+
+/* 確保 body 在初始狀態也是禁止滾動的 */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* 初始狀態：禁止滾動 */
+body {
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* 讓 iOS 滾動更順滑 */
+}
+
+
 
 .typewriter {
     color: white; 
