@@ -3,54 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habri'a - 眾神之境</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Habri'a | 萬物紀錄之書</title>
+    <link rel="stylesheet" href="hub-style.css">
 </head>
 <body>
 
-    <section id="intro">
-        <div class="intro-content">
-            <p class="typewriter" data-delay="1">太初之時，眾神於虛無中睜眼...</p>
-            <p class="typewriter" data-delay="4">祂們編織光與影，打造了名為 Habri'a 的世界。</p>
-            <p class="typewriter" data-delay="7">而賽琳，是這一切萬物的紀錄者。</p>
+    <div id="intro-layer">
+        <div class="intro-text-box">
+            <p class="typewriter" style="--d: 0s;">眾神撥開了混沌的霧氣...</p>
+            <p class="typewriter" style="--d: 4s;">賽琳握起筆，開始記錄這世間的呼吸。</p>
+            <p class="typewriter" style="--d: 8s;">這裡是 Habri'a，一切故事的起源。</p>
         </div>
-        <button class="skip-btn" onclick="enterWorld()">Skip</button>
-    </section>
+        <button class="skip-btn" onclick="showHub()">進入世界</button>
+    </div>
 
-    <main id="main-world" class="hidden">
-        <nav class="glass-nav">
-            <ul>
-                <li><a href="#">神話</a></li>
-                <li><a href="#">地圖</a></li>
-                <li><a href="#">世界樹圖書館</a></li>
-                <li><a href="#">賽琳手記</a></li>
-                <li><a href="#">人物誌</a></li>
-                <li><a href="#">名詞解釋</a></li>
-            </ul>
+    <section id="main-hub" class="hidden">
+        <header>
+            <h1 class="world-title">Habri'a</h1>
+            <p class="subtitle">—— 觀測者的導引視窗 ——</p>
+        </header>
+
+        <nav class="hex-nav">
+            <a href="myth.html" class="nav-item"><span>神話</span></a>
+            <a href="map.html" class="nav-item"><span>地圖</span></a>
+            <a href="library.html" class="nav-item"><span>圖書館</span></a>
+            <a href="journal.html" class="nav-item"><span>賽琳手記</span></a>
+            <a href="characters.html" class="nav-item"><span>人物誌</span></a>
+            <a href="lexicon.html" class="nav-item"><span>名詞解釋</span></a>
         </nav>
 
-        <article class="content-wrapper">
-            <h1>眾神打造的世界</h1>
-            <p>（這裡放置你的地圖或介紹文本...）</p>
-            <div style="height: 150vh;"></div> <p class="hint">繼續向下探索深淵...</p>
-        </article>
-    </main>
+        <div class="scroll-hint">向下探尋深淵...</div>
+    </section>
 
-    <section id="afterlife" class="hidden">
-        <div class="broken-overlay"></div>
-        <div class="afterlife-content">
-            <div class="floating-paper" id="rules-paper">
-                <h3>死後世界守則</h3>
-                <ul>
-                    <li>一、遺忘你的名字。</li>
-                    <li>二、不可回頭望向光點。</li>
-                    <li>三、跟隨幽靈藍的指引。</li>
-                </ul>
+    <section id="afterlife-layer">
+        <div class="mirror-shards"></div> <div id="rules-paper" class="paper">
+            <div class="paper-content">
+                <h2>死後世界：守則</h2>
+                <hr>
+                <p>1. 放下生者的重量。</p>
+                <p>2. 越過忘川者，不可回頭。</p>
+                <p>3. 聲音在此處是禁忌。</p>
+                <p class="seal">—— 審判者署名</p>
             </div>
-            <h2 class="upside-down">此處為終焉，亦是起始</h2>
+        </div>
+
+        <div class="afterlife-nav">
+            <a href="afterlife-detail.html">深入探索終焉之地...</a>
         </div>
     </section>
 
-    <script src="script.js"></script>
+    <script src="hub-logic.js"></script>
 </body>
 </html>
