@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habri'a</title>
-    <link rel="stylesheet" href="hub-style.css">
+    <title>Habri'a | 萬物紀錄之書</title>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="intro-layer">
-        <div class="intro-text-box">
+        <button class="skip-btn" onclick="showHub()">SKIP ➔</button>
+        <div class="intro-container">
             <p class="typewriter" style="--d: 0s;">眾神撥開了混沌的霧氣...</p>
             <p class="typewriter" style="--d: 4s;">賽琳握起筆，開始記錄這世間的呼吸。</p>
             <p class="typewriter" style="--d: 8s;">這裡是 Habri'a，一切故事的起源。</p>
         </div>
-        <button class="skip-btn" onclick="showHub()">進入世界</button>
     </div>
 
-    <section id="main-hub" class="hidden">
-        <header>
+    <div id="main-hub">
+        <header class="hub-header">
             <h1 class="world-title">Habri'a</h1>
             <p class="subtitle">—— 觀測者的導引視窗 ——</p>
         </header>
@@ -32,26 +33,31 @@
             <a href="lexicon.html" class="nav-item"><span>名詞解釋</span></a>
         </nav>
 
-        <div class="scroll-hint">向下探尋深淵...</div>
-    </section>
+        <div class="scroll-hint">
+            <span>向下探尋深淵</span>
+            <div class="arrow">↓</div>
+        </div>
+    </div>
 
     <section id="afterlife-layer">
-        <div class="mirror-shards"></div> <div id="rules-paper" class="paper">
+        <div class="mirror-shards"></div>
+        
+        <div id="rules-paper" class="paper">
             <div class="paper-content">
                 <h2>死後世界：守則</h2>
                 <hr>
-                <p>1. 放下生者的重量。</p>
-                <p>2. 越過忘川者，不可回頭。</p>
-                <p>3. 聲音在此處是禁忌。</p>
+                <div class="rules-text">
+                    <p>1. 放下生者的重量。</p>
+                    <p>2. 越過忘川者，不可回頭。</p>
+                    <p>3. 聲音在此處是禁忌。</p>
+                </div>
                 <p class="seal">—— 審判者署名</p>
             </div>
         </div>
 
-        <div class="afterlife-nav">
-            <a href="afterlife-detail.html">深入探索終焉之地...</a>
-        </div>
+        <div class="afterlife-title">此處為終焉，亦是起始</div>
     </section>
 
-    <script src="hub-logic.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
