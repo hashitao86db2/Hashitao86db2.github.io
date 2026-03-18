@@ -4,18 +4,20 @@
     --ghost-blue: #a2d2ff;
 }
 
-body, html {
-    margin: 0; padding: 0;
-    background: #000;
-    scroll-behavior: smooth;
+/* 基礎設定：初始狀態鎖定滾動 */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     overflow-x: hidden;
-    /* 初始禁止滾動 */
-    overflow-y: hidden;
+    overflow-y: hidden; /* 關鍵：動畫播完前不准動 */
+    background: #000;
     font-family: "Shippori Mincho B1", serif;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* --- 1. Intro 層 --- */
-/* 修改後的 Intro 層 */
 #intro-layer {
     height: 100vh; 
     width: 100%;
@@ -24,53 +26,44 @@ body, html {
     align-items: center;
     background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
     position: fixed; 
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     z-index: 1000;
-    transition: opacity 1.5s ease, visibility 1.5s ease; /* 加入 visibility */
+    transition: opacity 1.5s ease, visibility 1.5s ease;
 }
 
-/* 當透明度為 0 時，讓它徹底不影響觸碰 */
-#intro-layer[style*="opacity: 0"] {
+/* 當 JS 執行隱藏時，確保徹底不擋住下層 */
+#intro-layer.hide {
+    opacity: 0;
     visibility: hidden;
     pointer-events: none;
 }
 
-/* 確保 body 在初始狀態也是禁止滾動的 */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+.intro-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
 }
-
-/* 初始狀態：禁止滾動 */
-body {
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch; /* 讓 iOS 滾動更順滑 */
-}
-
-
 
 .typewriter {
     color: white; 
-    font-size: 1.2rem;   /* 稍微調小一點點，對手機比較友善 */
-    letter-spacing: 3px; /* 稍微縮減字距 */
+    font-size: 1.2rem; 
+    letter-spacing: 3px; 
     opacity: 0; 
     position: absolute; 
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
     animation: fadeEffect 4s var(--d) forwards;
-    text-align: center;
     width: 100%;
-    line-height: 1.6;    /* 增加行高，換行時才不會黏在一起 */
-    word-break: break-all; /* 強制換行，防止超出 */
+    line-height: 1.8;
+    word-break: break-all;
 }
 
-
 @keyframes fadeEffect {
-    0% { opacity: 0; transform: translateY(10px); filter: blur(5px); }
-    20% { opacity: 1; transform: translateY(0); filter: blur(0); }
-    80% { opacity: 1; transform: translateY(0); filter: blur(0); }
-    100% { opacity: 0; filter: blur(5px); }
+    0% { opacity: 0; transform: translate(-50%, -40%); filter: blur(5px); }
+    20% { opacity: 1; transform: translate(-50%, -50%); filter: blur(0); }
+    80% { opacity: 1; transform: translate(-50%, -50%); filter: blur(0); }
+    100% { opacity: 0; transform: translate(-50%, -60%); filter: blur(5px); }
 }
 
 .skip-btn {
@@ -80,99 +73,68 @@ body {
     cursor: pointer; letter-spacing: 2px; transition: 0.3s;
     z-index: 1001;
 }
-.skip-btn:hover { color: white; border-color: white; }
 
 /* --- 2. Main Hub 層 --- */
 #main-hub {
-    min-height: 100vh;
+    min-height: 110vh; /* 增加一點高度確保手機可以捲動 */
     background: linear-gradient(to bottom, #000, #1a2a3a);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     opacity: 0; visibility: hidden; transition: 2s ease;
+    padding: 50px 0;
 }
 
 #main-hub.active { opacity: 1; visibility: visible; }
 
-.hub-header { text-align: center; margin-bottom: 50px; }
 .world-title { color: var(--gold); font-size: 3rem; margin: 0; letter-spacing: 10px; }
-.subtitle { color: #fff; opacity: 0.7; font-size: 0.9rem; }
+@media (max-width: 600px) { .world-title { font-size: 2rem; } }
 
-/* 預設 3 欄 (電腦) */
 .hex-nav {
     display: grid; 
     grid-template-columns: repeat(3, 140px); 
     gap: 20px;
+    margin-top: 40px;
 }
 
-/* 手機版自動切換成 2 欄 */
 @media (max-width: 600px) {
-    .world-title { font-size: 2rem; } /* 標題縮小 */
-    
-    .hex-nav {
-        grid-template-columns: repeat(2, 130px); 
-        gap: 15px;
-    }
-    
-    .nav-item {
-        height: 130px;
-        font-size: 0.9rem;
-    }
+    .hex-nav { grid-template-columns: repeat(2, 130px); gap: 15px; }
 }
+
 .nav-item {
     height: 140px; border: 1px solid var(--gold);
     display: flex; justify-content: center; align-items: center;
     text-decoration: none; color: var(--gold); transition: 0.4s;
     background: rgba(212, 175, 55, 0.05);
-    backdrop-filter: blur(5px);
 }
-
-.nav-item:hover {
-    background: var(--gold); color: #000; box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-    transform: translateY(-5px);
-}
-
-.scroll-hint {
-    margin-top: 60px; color: var(--gold); text-align: center;
-    animation: bounce 2s infinite; opacity: 0.6;
-}
-@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
 
 /* --- 3. Afterlife 層 --- */
-.afterlife-title {
-    position: absolute; 
-    bottom: 10%; 
-    color: #1a1a1a; /* 稍微調深一點，做出若隱若現感 */
-    font-size: 2rem; 
-    letter-spacing: 10px; /* 縮減字距 */
-    text-align: center;
-    width: 100%;
-    pointer-events: none;
+#afterlife-layer {
+    height: 100vh; width: 100%;
+    background: #050505;
+    position: relative; overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
 }
 
 .paper {
-    background: #e8e8e8; color: #222; padding: 40px;
-    width: 280px; position: absolute;
-    /* 初始狀態：在畫面外上方，且傾斜 */
-    top: -500px; transform: rotate(-15deg) translateX(-50px);
+    background: #e8e8e8; color: #222; padding: 30px;
+    width: 260px; position: absolute;
+    top: -500px; transform: rotate(-15deg);
     box-shadow: 15px 15px 40px rgba(0,0,0,0.7);
     transition: all 4s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 10;
 }
 
-/* 飄動動畫：加上一點搖擺感 */
 .in-afterlife .paper {
-    top: 20%; transform: rotate(2deg) translateX(0);
+    top: 20%; transform: rotate(2deg);
     animation: sway 6s infinite ease-in-out 4s;
 }
 
 @keyframes sway {
-    0%, 100% { transform: rotate(2deg) translateX(0); }
+    0%, 100% { transform: rotate(2deg); }
     50% { transform: rotate(-1deg) translateX(10px); }
 }
 
-.paper-content h2 { border-bottom: 1px solid #999; padding-bottom: 10px; font-size: 1.2rem; }
-.rules-text { line-height: 2; font-size: 0.95rem; margin: 20px 0; }
-.seal { text-align: right; font-style: italic; color: #777; margin-top: 30px; }
-
 .afterlife-title {
-    position: absolute; bottom: 10%; color: #333;
-    font-size: 3rem; letter-spacing: 20px; pointer-events: none;
+    position: absolute; bottom: 10%; color: #1a1a1a;
+    font-size: 2.5rem; letter-spacing: 10px; text-align: center;
+    width: 100%; pointer-events: none;
 }
