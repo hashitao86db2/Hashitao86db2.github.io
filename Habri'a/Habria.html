@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habri'a - 眾神之境</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="intro">
+        <div class="intro-content">
+            <p class="typewriter" data-delay="1">太初之時，眾神於虛無中睜眼...</p>
+            <p class="typewriter" data-delay="4">祂們編織光與影，打造了名為 Habri'a 的世界。</p>
+            <p class="typewriter" data-delay="7">而賽琳，是這一切萬物的紀錄者。</p>
+        </div>
+        <button class="skip-btn" onclick="enterWorld()">Skip</button>
+    </section>
+
+    <main id="main-world" class="hidden">
+        <nav class="glass-nav">
+            <ul>
+                <li><a href="#">神話</a></li>
+                <li><a href="#">地圖</a></li>
+                <li><a href="#">世界樹圖書館</a></li>
+                <li><a href="#">賽琳手記</a></li>
+                <li><a href="#">人物誌</a></li>
+                <li><a href="#">名詞解釋</a></li>
+            </ul>
+        </nav>
+
+        <article class="content-wrapper">
+            <h1>眾神打造的世界</h1>
+            <p>（這裡放置你的地圖或介紹文本...）</p>
+            <div style="height: 150vh;"></div> <p class="hint">繼續向下探索深淵...</p>
+        </article>
+    </main>
+
+    <section id="afterlife" class="hidden">
+        <div class="broken-overlay"></div>
+        <div class="afterlife-content">
+            <div class="floating-paper" id="rules-paper">
+                <h3>死後世界守則</h3>
+                <ul>
+                    <li>一、遺忘你的名字。</li>
+                    <li>二、不可回頭望向光點。</li>
+                    <li>三、跟隨幽靈藍的指引。</li>
+                </ul>
+            </div>
+            <h2 class="upside-down">此處為終焉，亦是起始</h2>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
