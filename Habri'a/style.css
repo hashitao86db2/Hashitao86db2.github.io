@@ -1,0 +1,71 @@
+/* 全域設定 */
+body, html {
+    margin: 0; padding: 0;
+    font-family: 'serif';
+    background: #000; color: #fff;
+    overflow-x: hidden;
+}
+
+/* 1. 開頭動畫 */
+#intro {
+    height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    text-align: center; position: fixed; width: 100%; z-index: 100;
+    background: black;
+}
+
+.typewriter {
+    opacity: 0;
+    font-size: 1.5rem; letter-spacing: 3px;
+    animation: fadeInOut 4s forwards;
+}
+
+/* 讓文字按順序出現 */
+.typewriter[data-delay="1"] { animation-delay: 1s; }
+.typewriter[data-delay="4"] { animation-delay: 4s; }
+.typewriter[data-delay="7"] { animation-delay: 7s; }
+
+@keyframes fadeInOut {
+    0% { opacity: 0; filter: blur(10px); }
+    20% { opacity: 1; filter: blur(0); }
+    80% { opacity: 1; filter: blur(0); }
+    100% { opacity: 0; filter: blur(5px); }
+}
+
+/* 2. 主視界 - 金白藍色調 */
+#main-world {
+    background: linear-gradient(180deg, #0a192f 0%, #ffffff 50%, #d4af37 100%);
+    color: #1a1a1a; min-height: 200vh; transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.glass-nav {
+    position: sticky; top: 0; background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px); padding: 20px; z-index: 50;
+}
+
+.glass-nav ul { display: flex; justify-content: center; list-style: none; gap: 30px; }
+
+/* 3. 死後世界 - 幽靈紫與破碎感 */
+#afterlife {
+    height: 100vh; width: 100%;
+    background: #1a1a1a; color: #a0a0ff;
+    position: fixed; top: 0; left: 0; z-index: -1;
+    display: flex; justify-content: center; align-items: center;
+    filter: grayscale(0.5) contrast(1.2);
+}
+
+.upside-down { transform: rotate(180deg); opacity: 0.3; font-size: 4rem; }
+
+/* 飄進來的紙張 */
+.floating-paper {
+    background: #e0e0e0; color: #333; padding: 30px;
+    width: 250px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    transform: translateY(-150vh) rotate(15deg);
+    transition: transform 3s ease-out;
+}
+
+.falling #afterlife .floating-paper { transform: translateY(0) rotate(-5deg); }
+
+/* 隱藏元素用 */
+.hidden { display: none !important; }
+.falling #main-world { transform: translateY(-100vh); pointer-events: none; }
