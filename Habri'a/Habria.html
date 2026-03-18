@@ -2,12 +2,12 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habri'a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Habri'a </title>
     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="is-locked">
 
     <div id="intro-layer">
         <button class="skip-btn" onclick="showHub()">SKIP ➔</button>
@@ -18,26 +18,27 @@
         </div>
     </div>
 
-    <div id="main-hub">
+    <main id="main-hub">
         <header class="hub-header">
-            <h1 class="world-title">Habri'a</h1>
-            <p class="subtitle">—— 觀測者的導引視窗 ——</p>
+            <h1 class="world-title">赫伯利亞</h1>
+            <p class="subtitle">—— 眾神的箱庭 ——</p>
         </header>
 
         <nav class="hex-nav">
             <a href="myth.html" class="nav-item"><span>神話</span></a>
             <a href="map.html" class="nav-item"><span>地圖</span></a>
-            <a href="library.html" class="nav-item"><span>世界樹圖書館</span></a>
+            <a href="library.html" class="nav-item"><span>圖書館</span></a>
             <a href="journal.html" class="nav-item"><span>賽琳手記</span></a>
             <a href="characters.html" class="nav-item"><span>人物誌</span></a>
-            <a href="lexicon.html" class="nav-item"><span>註記</span></a>
+            <a href="lexicon.html" class="nav-item"><span>名詞解釋</span></a>
         </nav>
 
         <div class="scroll-hint">
             <span>向下探尋深淵</span>
             <div class="arrow">↓</div>
         </div>
-    </div>
+        <div style="height: 30vh;"></div>
+    </main>
 
     <section id="afterlife-layer">
         <div class="mirror-shards"></div>
