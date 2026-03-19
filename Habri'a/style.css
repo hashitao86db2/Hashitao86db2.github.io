@@ -163,6 +163,8 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     font-size: 1rem;
     margin-bottom: 15px;
 }
+.char-title {color: #8d6e63;font-style: italic;font-size: 0.95rem;margin-top: -10px;margin-bottom: 15px;text-align: center;}
+.parchment-hr {border: none;border-top: 2px dashed rgba(136, 14, 79, 0.2); margin: 20px 0;}
 .parchment-hr {border: none;border-top: 2px dashed rgba(136, 14, 79, 0.2); margin: 20px 0;}
 .char-desc p { margin-bottom: 1.2rem; line-height: 1.8; text-align: justify;}
 .char-desc strong { color: #880e4f; /* 強調顏色 */}
