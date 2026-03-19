@@ -123,8 +123,8 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 
 /* 燙金裝飾線 */
 .book-spine::before, .book-filler::after {
-    content: ''; position: absolute; left: 10px; right: 10px;
-    height: 2px; background: rgba(212, 175, 55, 0.4); pointer-events: none;
+    content: ''; position: absolute; left: 0px; right: 0px;
+    height: 3px; background: rgba(212, 175, 55, 0.4); pointer-events: none;
 }
 .book-spine::before { top: 20px; }
 .book-filler::after { bottom: 20px; }
