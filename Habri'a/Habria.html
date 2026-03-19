@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Habri'a </title>
+    <title>Habri'a</title>
     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,28 +20,42 @@
 
     <main id="main-hub">
         <header class="hub-header">
-            <h1 class="world-title">赫伯利亞</h1>
-            <p class="subtitle">—— 眾神的箱庭 ——</p>
+            <h1 class="world-title">Mimameidr</h1>
+            <p class="subtitle">—— 萬物紀錄之書庫 ——</p>
         </header>
-
-        <nav class="hex-nav">
-            <a href="myth.html" class="nav-item"><span>神話</span></a>
-            <a href="map.html" class="nav-item"><span>地圖</span></a>
-            <a href="library.html" class="nav-item"><span>世界樹圖書館</span></a>
-            <a href="journal.html" class="nav-item"><span>賽琳手記</span></a>
-            <a href="characters.html" class="nav-item"><span>人物誌</span></a>
-            <a href="lexicon.html" class="nav-item"><span>魔法和代理人</span></a>
-        </nav>
-
-        <div class="scroll-hint">
-            <div class="arrow">↓</div>
+    <div class="library-container">
+        <div class="bookshelf">
+            <a href="myth.html" class="book-spine book-1">
+                <span class="book-title">神話：創世之章</span>
+            </a>
+            <a href="map.html" class="book-spine book-2">
+                <span class="book-title">地圖：現世疆域</span>
+            </a>
+            <a href="library.html" class="book-spine book-3">
+                <span class="book-title">世界軼聞</span>
+            </a>
+            <a href="journal.html" class="book-spine book-4">
+                <span class="book-title">賽琳的手記</span>
+            </a>
+            <a href="characters.html" class="book-spine book-5">
+                <span class="book-title">人物傳記</span>
+            </a>
+            <a href="lexicon.html" class="book-spine book-6">
+                <span class="book-title">世界的奧秘</span>
+            </a>
         </div>
-        <div style="height: 30vh;"></div>
-    </main>
+        <div class="shelf-board"></div>
+    </div>
 
-    <section id="afterlife-layer">
-        <div class="mirror-shards"></div>
+    <div class="scroll-hint white-hint">
         
+        <div class="arrow">↓</div>
+    </div>
+    <div style="height: 25vh;"></div>
+</main>
+
+<section id="afterlife-layer">
+        <div class="mirror-shards"></div>
         <div id="rules-paper" class="paper">
             <div class="paper-content">
                 <h2>死後世界：守則</h2>
@@ -54,7 +68,6 @@
                 <p class="seal">—— 審判者署名</p>
             </div>
         </div>
-
         <div class="afterlife-title">此處為終焉，亦是起始</div>
     </section>
 
