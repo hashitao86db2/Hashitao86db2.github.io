@@ -167,24 +167,27 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 
 /* --- 8. 響應式優化 (平板 & 手機) --- */
 @media (max-width: 768px) {
-    :root { --book-w: 60px; } /* 平板 & 手機：加胖書本到 60px */
+    :root { --book-w: 60px; }
     .bookshelf { gap: 6px; }
-    .parchment { width: 92%; padding: 40px 20px; }
     
-    /* 人物誌手機版：圖片改放介紹下方 */
-    .char-profile { display: flex; flex-direction: column; align-items: center; gap: 15px; }
-    .char-header { flex-direction: column; align-items: center; text-align: center; gap: 10px; margin-bottom: 0; }
-    .char-avatar-frame { flex: 0 0 90px; height: 90px; }
+    /* 修正：手機版增加更多頂部空間 */
+    .parchment { 
+        width: 95%; 
+        padding: 90px 20px 40px; /* 這裡增加到 90px 防止切到內容 */
+        height: 90vh; 
+    }
+    
+    /* 人物誌手機版：確保頭像與名字不擁擠 */
+    .char-header { flex-direction: row; align-items: center; gap: 15px; }
+    .char-avatar-frame { flex: 0 0 80px; height: 80px; }
     .char-name { font-size: 1.4rem; }
-    
-    /* 書脊文字手機版：縮小字級防止超出書脊 */
     .book-title { font-size: 0.95rem; letter-spacing: 3px; }
-    
     .journal-links { flex-direction: column; align-items: center; gap: 20px; }
 }
-
 @media (max-width: 480px) {
-    :root { --book-w: 52px; } /* 極窄手機：稍微控制寬度到 52px，以免塞不下 */
+    :root { --book-w: 52px; }
     .book-title { font-size: 0.85rem; letter-spacing: 2px; }
-    .bookshelf { gap: 4px; }
+    /* 手機版返回鍵縮小一點防止佔位 */
+    .back-to-shelf { font-size: 0.9rem; top: 20px; left: 20px; }
+    .close-book-tag { right: 20px; }
 }
