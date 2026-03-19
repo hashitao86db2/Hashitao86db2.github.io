@@ -136,8 +136,9 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .char-avatar-frame { flex: 0 0 120px; height: 120px; position: relative; display: flex; justify-content: center; align-items: center; }
 .char-avatar { width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
 .avatar-placeholder { position: absolute; width: 100%; height: 100%; background: #3e2723; color: var(--gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2.5rem; z-index: -1; }
-.char-name { margin: 0; font-size: 1.8rem; color: #3e2723; }
-.char-ename { margin: 0; font-size: 0.9rem; opacity: 0.6; }
+.char-name { margin: 0; font-size: 1.8rem; color: #3e2723; font-weight: bold; }
+.char-title { color: #8d6e63; font-style: italic; font-size: 0.95rem; margin-top: 5px; opacity: 0.8; }
+.char-ename { margin: 0; font-size: 0.9rem; opacity: 0.5; color: #3e2723; }
 .char-desc { line-height: 1.8; text-align: justify; }
 
 .char-page { display: none; }
