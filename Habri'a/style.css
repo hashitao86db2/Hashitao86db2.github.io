@@ -95,63 +95,56 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .book-2 { background: radial-gradient(circle at center, #1565c0 0%, #0d47a1 100%); }
 .book-3 { background: radial-gradient(circle at center, #b71c1c 0%, #880e4f 100%); }
 /* --- 賽琳手記：特殊設計 (CSS 橄欖葉) --- */
-.book-4 { background: #d7ccc8; border-left: 2px solid rgba(0,0,0,0.1);box-shadow: inset 5px 0 10px rgba(0,0,0,0.05), 5px 0 15px rgba(0,0,0,0.4);}
+.book-4 { 
+    background: #d7ccc8; 
+    border-left: 2px solid rgba(0,0,0,0.1);
+    box-shadow: inset 5px 0 10px rgba(0,0,0,0.05), 5px 0 15px rgba(0,0,0,0.4);
+}
 .book-4 .book-title { color: #3e2723; letter-spacing: 6px; font-weight: 700; }
 
-/* 圖騰外框 */
+/* 修正：補上缺失的大括號並優化圖騰定位 */
 .wreath {
     position: absolute;
-    bottom: 40px;
+    bottom: 35px; /* 稍微上移一點 */
     left: 50%;
     transform: translateX(-50%);
-    width: 50px;
-    height: 40px;
+    width: 44px; /* 稍微縮窄，適應書背 */
+    height: 30px;
+    pointer-events: none;
 }
 
-/* 葉片的基礎造型 */
 .leaf-left, .leaf-right {
     position: absolute;
-    width: 10px;
-    height: 16px;
+    width: 8px;
+    height: 14px;
     background: var(--wood);
-    border-radius: 100% 0% 100% 0%; /* 經典葉子形狀 */
+    border-radius: 100% 0% 100% 0%;
     opacity: 0.7;
 }
 
-/* 左側一串葉子 */
 .leaf-left {
-    left: 5px;
+    left: 8px;
     transform: rotate(-45deg);
-    /* 用多重陰影複製出其他葉片，不需要寫一堆 div */
-    box-shadow: 
-        -8px -12px 0 0 var(--wood), 
-        -16px -24px 0 -1px var(--wood),
-        -2px 12px 0 1px var(--wood); 
+    box-shadow: -6px -10px 0 0 var(--wood), -12px -20px 0 -1px var(--wood); 
 }
 
-/* 右側一串葉子 (水平反轉) */
 .leaf-right {
-    right: 5px;
+    right: 8px;
     transform: scaleX(-1) rotate(-45deg);
-    box-shadow: 
-        -8px -12px 0 0 var(--wood), 
-        -16px -24px 0 -1px var(--wood),
-        -2px 12px 0 1px var(--wood);
+    box-shadow: -6px -10px 0 0 var(--wood), -12px -20px 0 -1px var(--wood);
 }
 
-/* 中間連接點 */
 .wreath::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     background: var(--wood);
     border-radius: 50%;
 }
-
 
 
 .book-5 { background: radial-gradient(circle at center, #006064 0%, #00acc1 100%); }
