@@ -249,13 +249,85 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 
 .afterlife-title { position: absolute; bottom: 10%; color: #1a1a1a; font-size: 2rem; letter-spacing: 15px; text-align: center; width: 100%; pointer-events: none;}
 
-/* --- 人物誌排版 --- */
-.char-profile { display: flex; gap: 40px; align-items: flex-start; margin-top: 20px; }
-.char-avatar-frame { flex: 0 0 180px; display: flex; flex-direction: column; align-items: center; }
-.char-avatar { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; }
-.char-name-vertical { writing-mode: vertical-rl; color: #3e2723; font-size: 1.2rem; font-weight: bold; letter-spacing: 5px; margin-top: 20px; }
-.char-info { flex: 1; }
-.char-desc p { margin-bottom: 1.2rem; text-align: justify; }
+.book-container {
+    position: relative;
+    width: 100%;
+    min-height: 50vh;
+    overflow: hidden;
+}
+
+.char-page {
+    display: none; /* 預設隱藏 */
+    animation: fadeIn 0.5s ease;
+}
+
+.char-page.active {
+    display: block; /* 只顯示當前角色 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- 人物排版：左圖右名 --- */
+.char-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.char-avatar-frame {
+    flex: 0 0 100px; /* 手機版圖片寬度縮小 */
+    height: 100px;
+    position: relative;
+}
+
+.char-avatar {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    object-fit: cover;
+}
+
+.char-name-area {
+    flex: 1;
+}
+
+.char-name { margin: 0; font-size: 1.5rem; color: #3e2723; }
+.char-ename { margin: 0; font-size: 0.9rem; opacity: 0.6; }
+
+/* 底部介紹 */
+.char-desc {
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* --- 翻頁按鈕樣式 --- */
+.page-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+    padding-bottom: 20px;
+}
+
+.nav-btn {
+    background: none;
+    border: 1px solid #8d6e63;
+    color: #8d6e63;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+/* 電腦版調整：圖片可以大一點 */
+@media (min-width: 769px) {
+    .char-avatar-frame { flex: 0 0 150px; height: 150px; }
+    .char-header { gap: 40px; }
+}
 /* 賽琳手記內部的兩本書排版 */
 .journal-links {
     display: flex;
