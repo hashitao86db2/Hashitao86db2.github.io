@@ -67,7 +67,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 
 [data-h] {
     width: var(--book-w); flex-shrink: 0;
-    border-radius: 5px 10px 10px 5px; position: relative;
+    border-radius: 5px; position: relative;
     transform: rotateY(-25deg); transform-origin: left; transition: 0.5s;
 }
 
