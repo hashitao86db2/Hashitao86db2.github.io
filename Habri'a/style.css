@@ -41,7 +41,7 @@ body.is-unlocked { overflow-y: auto; position: relative; }
     width: var(--book-w);
     /* 高度由 JS 動態設定，CSS預設值 */
     height: calc(var(--base-h) * 1px);
-    border-radius: 5px 12px 12px 5px; /* 右側更圓角，像書頁的裝訂側 */
+    border-radius: 5px ; /* 右側更圓角，像書頁的裝訂側 */
     position: relative;
     transform: rotateY(-20deg); transform-origin: left; transition: 0.5s;
     box-shadow: 5px 0 15px rgba(0,0,0,0.5); 
@@ -80,8 +80,8 @@ body.is-unlocked { overflow-y: auto; position: relative; }
 .book-filler {
     opacity: 0.5; /* 輕微透明，讓它看起來是背景 */
     filter: grayscale(0.5); /* 輕微灰階，減少對互動書的干擾 */
-    background: #333; /* 雜書基色 */
-    border-radius: 4px 8px 8px 4px;
+    background: #979e90; /* 雜書基色 */
+    border-radius: 4px ;
 }
 
 /* 雜書顏色設定 */
