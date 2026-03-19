@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Habri'a</title>
+    <title>Habri'a | 萬物紀錄之書</title>
     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,41 +20,50 @@
 
     <main id="main-hub">
         <header class="hub-header">
-            <h1 class="world-title">Mimameidr</h1>
+            <h1 class="world-title">Habri'a</h1>
             <p class="subtitle">—— 萬物紀錄之書庫 ——</p>
         </header>
-    <div class="library-container">
-        <div class="bookshelf">
-            <a href="myth.html" class="book-spine book-1">
-                <span class="book-title">神話：創世之章</span>
-            </a>
-            <a href="map.html" class="book-spine book-2">
-                <span class="book-title">地圖：現世疆域</span>
-            </a>
-            <a href="library.html" class="book-spine book-3">
-                <span class="book-title">世界軼聞</span>
-            </a>
-            <a href="journal.html" class="book-spine book-4">
-                <span class="book-title">賽琳的手記</span>
-            </a>
-            <a href="characters.html" class="book-spine book-5">
-                <span class="book-title">人物傳記</span>
-            </a>
-            <a href="lexicon.html" class="book-spine book-6">
-                <span class="book-title">世界的奧秘</span>
-            </a>
+
+        <div class="library-container">
+            <div class="bookshelf">
+                <div class="book-filler filler-1" data-h="290"></div>
+                <div class="book-filler filler-2" data-h="310"></div>
+                <div class="book-filler filler-3" data-h="280"></div>
+
+                <div class="book-spine book-active book-1" data-h="340" onclick="openBook('myth')">
+                    <span class="book-title">神話：創世</span>
+                </div>
+                <div class="book-spine book-active book-2" data-h="310" onclick="openBook('map')">
+                    <span class="book-title">地圖：疆域</span>
+                </div>
+                <div class="book-spine book-active book-3" data-h="350" onclick="openBook('library')">
+                    <span class="book-title">圖書館：史詩</span>
+                </div>
+                <div class="book-spine book-active book-4" data-h="300" onclick="openBook('journal')">
+                    <span class="book-title">賽琳手記</span>
+                </div>
+                <div class="book-spine book-active book-5" data-h="330" onclick="openBook('characters')">
+                    <span class="book-title">人物誌：靈魂</span>
+                </div>
+                <div class="book-spine book-active book-6" data-h="290" onclick="openBook('lexicon')">
+                    <span class="book-title">名詞解釋</span>
+                </div>
+
+                <div class="book-filler filler-4" data-h="320"></div>
+                <div class="book-filler filler-5" data-h="270"></div>
+                <div class="book-filler filler-6" data-h="300"></div>
+            </div>
+            <div class="shelf-board"></div>
         </div>
-        <div class="shelf-board"></div>
-    </div>
 
-    <div class="scroll-hint white-hint">
-        
-        <div class="arrow">↓</div>
-    </div>
-    <div style="height: 25vh;"></div>
-</main>
+        <div class="scroll-hint">
+            <span>向下探尋深淵</span>
+            <div class="arrow">↓</div>
+        </div>
+        <div style="height: 25vh;"></div>
+    </main>
 
-<section id="afterlife-layer">
+    <section id="afterlife-layer">
         <div class="mirror-shards"></div>
         <div id="rules-paper" class="paper">
             <div class="paper-content">
@@ -65,11 +74,31 @@
                     <p>2. 越過忘川者，不可回頭。</p>
                     <p>3. 聲音在此處是禁忌。</p>
                 </div>
-                <p class="seal">—— 審判者署名</p>
+                <p class="seal">—— 审判者署名</p>
             </div>
         </div>
         <div class="afterlife-title">此處為終焉，亦是起始</div>
     </section>
+
+    <div id="reading-overlay" class="hidden">
+        <div class="parchment">
+            <button class="close-book" onclick="closeBook()">[ 闔上書籍 ]</button>
+            <article id="book-content" class="parchment-content">
+                </article>
+        </div>
+    </div>
+
+    <div id="content-depot" class="hidden">
+        <div id="content-myth">
+            <h1>神話：創世之章</h1>
+            <p>在Habri'a誕生的太初，萬物皆為虛無。眾神自混沌中睜眼，祂們的呼吸化作風，淚水化作海洋...</p>
+            <p>賽琳（Selin）作為眾神的觀測者，握起筆，開始在羊皮紙上寫下第一行紀錄：『太初，眾神打造了Habri'a。』</p>
+            </div>
+        <div id="content-map">
+            <h1>地圖：現世疆域</h1>
+            <p> Habri'a 被分為四個主要大陸，中央是神之圖書館所在的「聖域」。</p>
+            </div>
+        </div>
 
     <script src="script.js"></script>
 </body>
