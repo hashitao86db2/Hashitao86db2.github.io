@@ -2,7 +2,7 @@
     --gold: #d4af37;
     --wood: #3e2723;
     --paper-base: #f4e4bc; /* 羊皮紙基礎色 */
-    --book-w: 52px; /* 基礎書脊寬度 */
+    --book-w: 70px; /* 基礎書脊寬度 */
     --base-h: 300px; /* 基礎高度，JS會動態讀取data-h */
 }
 
