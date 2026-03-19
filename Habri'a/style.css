@@ -341,3 +341,38 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
     .back-to-shelf { font-size: 0.9rem; top: 20px; left: 20px; }
     .close-book-tag { right: 20px; }
 }
+
+/* --- 滾動提示 (向下探尋深淵) --- */
+.scroll-hint {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px; /* 調整與書架的距離 */
+    color: var(--gold);
+    opacity: 0.8;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    pointer-events: none; /* 防止擋到點擊 */
+}
+
+.scroll-hint .arrow {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    /* 加入上下浮動動畫 */
+    animation: arrowBounce 2s infinite ease-in-out;
+}
+
+@keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(10px); opacity: 1; }
+}
+
+/* 手機版微調 */
+@media (max-width: 768px) {
+    .scroll-hint {
+        margin-top: 40px;
+        font-size: 0.8rem;
+    }
+}
+
