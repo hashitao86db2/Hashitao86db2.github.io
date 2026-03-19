@@ -133,25 +133,30 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 #reading-overlay:not(.hidden) { opacity: 1; visibility: visible; pointer-events: auto; }
 
 .back-to-shelf {
-    position: absolute; top: 25px; left: 30px;
-    background: transparent !important; border: none !important;
-    color: #8d6e63; font-size: 1.1rem; cursor: pointer; z-index: 101;
-    font-family: inherit; letter-spacing: 2px; -webkit-appearance: none;
+    position: absolute; 
+    top: 20px; 
+    left: 20px;
+    background: transparent !important; 
+    border: none !important;
+    color: #8d6e63; 
+    font-size: 1rem; 
+    cursor: pointer; 
+    z-index: 10005; /* 確保在最最前面 */
+    font-family: inherit; 
+    letter-spacing: 2px;
+    -webkit-appearance: none;
+    padding: 10px; /* 增加點擊區域 */
 }
+
 .back-to-shelf:hover { color: #3e2723; transform: translateX(-5px); }
 
-.close-book-tag {
-    position: absolute; top: 0; right: 40px;
-    background: #b71c1c; color: white; padding: 10px 10px 25px;
-    border: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
-    cursor: pointer; writing-mode: vertical-rl; font-size: 0.8rem; z-index: 101;
-}
+
 
 .parchment {
     width: 85%; max-width: 850px; height: 85vh; background-color: var(--paper-base);
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEVMaXGcnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJyT945uAAAAGnRSTlMAAAAAAgMEBgcICQoMDQ4QEhMUFRYXGBkaG9pL/K4AAAAJcEhZcwAACxMAAAsTAQCanBgAAABESURBVHic7c4xAQAwDMCwX5K/5x9k4D4GAAAAAASUVORK5CYII=');
-    padding: 60px 40px; box-shadow: 0 10px 50px #000; position: relative; overflow-y: auto; 
-}
+    padding: 100px 60px 40px; box-shadow: 0 10px 50px #000; position: relative; overflow-y: auto;  box-sizing: border-box; /* 確保 padding 不會撐大盒子 */
+} 
+
 
 /* --- 6. 人物誌佈局 --- */
 .char-profile {display: flex;gap: 40px;align-items: flex-start; margin-top: 20px;}
