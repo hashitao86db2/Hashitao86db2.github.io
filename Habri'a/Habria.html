@@ -69,16 +69,16 @@
     </section>
 
     <div id="reading-overlay" class="hidden">
+        <div class="overlay-bg" onclick="closeBook()"></div>
         <div class="parchment">
             <button class="back-to-shelf" onclick="closeBook()">← 返回書庫</button>
             <button class="close-book-tag" onclick="closeBook()">闔上</button>
-            
             <article id="book-content" class="parchment-content">
                 </article>
         </div>
     </div>
 
-    <div id="content-depot" class="hidden">
+    <div id="content-depot" class="hidden" style="display:none !important;">
         <div id="content-myth">
             <h1>神話：創世之章</h1>
             <p>在Habri'a誕生的太初，萬物皆為虛無...</p>
@@ -109,7 +109,7 @@
                         <div class="char-header">
                             <div class="char-avatar-frame">
                                 <img src="你的圖片網址" alt="賽琳" class="char-avatar">
-                                  <div class="avatar-placeholder">觀</div>
+                                <div class="avatar-placeholder">觀</div>
                             </div>
                             <div class="char-name-area">
                                 <h1 class="char-name">賽琳</h1>
@@ -153,7 +153,6 @@
                 <span id="page-indicator">1 / 2</span>
                 <button class="nav-btn" onclick="changeChar(1)">後一卷 →</button>
             </div>
-        </div>
-    </div> <script src="script.js"></script>
+        </div> </div> <script src="script.js"></script>
 </body>
 </html>
