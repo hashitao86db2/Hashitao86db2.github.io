@@ -99,3 +99,27 @@ function closeBook() {
 
 // 針對行動裝置點擊與滾動的優化
 document.addEventListener('touchstart', function() {}, {passive: true});
+
+let currentCharIndex = 1;
+const totalChars = 3; // 如果你加了更多人，記得改這個數字
+
+function changeChar(direction) {
+    // 隱藏當前頁面
+    document.getElementById(`char-${currentCharIndex}`).classList.remove('active');
+    
+    // 計算下一頁索引
+    currentCharIndex += direction;
+    
+    // 循環判斷
+    if (currentCharIndex > totalChars) currentCharIndex = 1;
+    if (currentCharIndex < 1) currentCharIndex = totalChars;
+    
+    // 顯示新頁面
+    document.getElementById(`char-${currentCharIndex}`).classList.add('active');
+    
+    // 更新頁碼指示器
+    document.getElementById('page-indicator').innerText = `${currentCharIndex} / ${totalChars}`;
+    
+    // 讓滾動條回到頂部（如果內容很長）
+    document.querySelector('.parchment').scrollTop = 0;
+}
