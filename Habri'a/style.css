@@ -119,7 +119,7 @@ body.is-unlocked {
 }
 /* 燙金裝飾線修正 */
 .book-spine::before, .book-filler::after {
-    content: ''; position: absolute; left: 8px; right: 8px;
+    content: ''; position: absolute; left: 9px; right: 9px;
     height: 2px; background: rgba(212, 175, 55, 0.4); 
     pointer-events: none;
 }
@@ -148,7 +148,7 @@ body.is-unlocked {
 
 /* 2. 填充雜書 */
 .book-filler {
-    opacity: 0.4; filter: grayscale(0.7); background: #333;
+    opacity: 0.4; filter: grayscale(0.7); background: #adb5a8;
     border-radius: 4px; pointer-events: none;
 }
 .filler-1 { background: #444; } .filler-2 { background: #555; } .filler-3 { background: #3c3c3c; }
