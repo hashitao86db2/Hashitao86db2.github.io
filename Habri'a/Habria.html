@@ -30,24 +30,15 @@
                 <div class="book-filler filler-2" data-h="310"></div>
                 <div class="book-filler filler-3" data-h="280"></div>
 
-                <div class="book-spine book-active book-1" data-h="340" onclick="openBook('myth')">
-                    <span class="book-title">神話：創世</span>
-                </div>
-                <div class="book-spine book-active book-2" data-h="310" onclick="openBook('map')">
-                    <span class="book-title">地圖：疆域</span>
-                </div>
-                <div class="book-spine book-active book-3" data-h="350" onclick="openBook('library')">
-                    <span class="book-title">圖書館：史詩</span>
-                </div>
-                <div class="book-spine book-active book-4" data-h="300" onclick="openBook('journal')">
-                    <span class="book-title">賽琳手記</span>
-                </div>
-                <div class="book-spine book-active book-5" data-h="330" onclick="openBook('characters')">
-                    <span class="book-title">人物誌：靈魂</span>
-                </div>
-                <div class="book-spine book-active book-6" data-h="290" onclick="openBook('lexicon')">
-                    <span class="book-title">名詞解釋</span>
-                </div>
+                <div class="book-spine book-active book-1" data-h="340" onclick="openBook('myth')"><span class="book-title">神話：創世</span></div>
+                <div class="book-spine book-active book-2" data-h="310" onclick="openBook('map')"><span class="book-title">地圖：疆域</span></div>
+                
+                <div class="book-spine book-active book-3" data-h="350" onclick="window.open('https://你的外部網站連結.com', '_blank')"><span class="book-title">圖書館：史詩</span></div>
+                
+                <div class="book-spine book-active book-4" data-h="300" onclick="openBook('journal')"><span class="book-title">賽琳手記</span></div>
+                
+                <div class="book-spine book-active book-5" data-h="330" onclick="openBook('characters')"><span class="book-title">人物誌：靈魂</span></div>
+                <div class="book-spine book-active book-6" data-h="290" onclick="openBook('lexicon')"><span class="book-title">名詞解釋</span></div>
 
                 <div class="book-filler filler-4" data-h="320"></div>
                 <div class="book-filler filler-5" data-h="270"></div>
@@ -74,7 +65,7 @@
                     <p>2. 越過忘川者，不可回頭。</p>
                     <p>3. 聲音在此處是禁忌。</p>
                 </div>
-                <p class="seal">—— 审判者署名</p>
+                <p class="seal">—— 審判者署名</p>
             </div>
         </div>
         <div class="afterlife-title">此處為終焉，亦是起始</div>
@@ -83,52 +74,52 @@
     <div id="reading-overlay" class="hidden">
         <div class="parchment">
             <button class="close-book" onclick="closeBook()">[ 闔上書籍 ]</button>
-            <article id="book-content" class="parchment-content">
-                </article>
+            <article id="book-content" class="parchment-content"></article>
         </div>
     </div>
 
     <div id="content-depot" class="hidden">
         <div id="content-myth">
             <h1>神話：創世之章</h1>
-            <p>在Habri'a誕生的太初，萬物皆為虛無。眾神自混沌中睜眼，祂們的呼吸化作風，淚水化作海洋...</p>
-            <p>賽琳（Selin）作為眾神的觀測者，握起筆，開始在羊皮紙上寫下第一行紀錄：『太初，眾神打造了Habri'a。』</p>
-            </div>
+            <p>在Habri'a誕生的太初，萬物皆為虛無...</p>
+        </div>
+
         <div id="content-map">
             <h1>地圖：現世疆域</h1>
-            <p> Habri'a 被分為四個主要大陸，中央是神之圖書館所在的「聖域」。</p>
+            <p>Habri'a 被分為四個主要大陸...</p>
+        </div>
+
+        <div id="content-journal">
+            <h1>賽琳的手記</h1>
+            <p style="text-align:center;">紀錄者未曾公開的觀測隨筆</p>
+            <div class="journal-links">
+                <a href="https://外部連結1.com" target="_blank" class="journal-book">
+                    <div class="journal-book-cover">卷一：星辰軌跡</div>
+                </a>
+                <a href="https://外部連結2.com" target="_blank" class="journal-book">
+                    <div class="journal-book-cover">卷二：眾神之息</div>
+                </a>
             </div>
         </div>
 
-    <div id="content-depot" class="hidden">
-    <div id="content-characters">
-        <div class="char-profile">
-            <div class="char-avatar-frame">
-                <img src="path/to/selin-avatar.png" alt="賽琳" class="char-avatar">
-                <div class="char-name-vertical">賽琳 Selin</div>
-            </div>
-
-            <div class="char-info">
-                <h1>紀錄者：賽琳</h1>
-                <div class="char-title">—— 眾神的觀測者，萬物呼吸的紀錄家</div>
-                
-                <hr class="parchment-hr">
-
-                <div class="char-desc">
-                    <p><strong>身分：</strong> 眾神書記官、時間縫隙的觀測者。</p>
-                    <p><strong>能力：</strong> 擁有「絕對觀測」之眼，能看穿過去與未來的因果，但無法干涉現世。她手上的筆，是由創世神的一根髮絲化成，能在羊皮紙上寫下不可磨滅的歷史。</p>
-                    <p><strong>性格：</strong> 清冷寡言，猶如鏡面般映照著世間。對她而言，萬物的生滅僅是紀錄上的行行文字。然而，在漫長的紀錄中，她似乎對Habri'a的命運產生了微妙的執著。</p>
+        <div id="content-characters">
+            <div class="char-profile">
+                <div class="char-avatar-frame">
+                    <div class="avatar-placeholder">觀</div>
+                    <div class="char-name-vertical">賽琳 Selin</div>
+                </div>
+                <div class="char-info">
+                    <h1>紀錄者：賽琳</h1>
+                    <div class="char-title">—— 眾神的觀測者</div>
+                    <hr class="parchment-hr">
+                    <div class="char-desc">
+                        <p><strong>身分：</strong> 眾神書記官。</p>
+                        <p>性格清冷，猶如鏡面映照世間。</p>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="char-profile sep-line">
-             <h1>雙子守望者</h1>
-             <p>（這裡放置雙子的介紹文字...）</p>
-        </div>
     </div>
-</div>
-
 
     <script src="script.js"></script>
 </body>
