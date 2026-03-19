@@ -25,6 +25,12 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     background: #000; position: fixed; top: 0; left: 0;
     z-index: 9999; transition: opacity 1.5s ease;
 }
+.skip-btn { 
+    position: absolute; top: 30px; left: 20px; 
+    background: none; border: 1px solid rgba(255,255,255,0.3); 
+    color: rgba(255,255,255,0.6); padding: 6px 12px; 
+    cursor: pointer; z-index: 10001; font-size: 0.8rem; 
+}
 
 .typewriter {
     opacity: 0; position: absolute;
@@ -54,6 +60,10 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     opacity: 0; transition: opacity 2s ease;
 }
 #main-hub.active { display: flex; opacity: 1; }
+
+.world-title { color: var(--gold); font-size: 2.8rem; letter-spacing: 10px; margin: 0; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+
+.subtitle { color: #fff; opacity: 0.7; font-size: 0.8rem; margin-top: 10px; }
 
 /* --- 書架視覺 --- */
 .library-container { position: relative; width: 98%; max-width: 1100px; margin-top: 50px; perspective: 1800px; }
