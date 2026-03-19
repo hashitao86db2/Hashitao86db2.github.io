@@ -77,7 +77,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .book-title { 
     writing-mode: vertical-rl; color: #fff; letter-spacing: 5px; 
     font-size: 1.1rem; font-weight: bold; pointer-events: none; 
-    max-height: 80%; overflow: hidden;
+    max-height: 80%; overflow: hidden; text-align:center;
 }
 
 .book-filler { opacity: 0.7; filter: grayscale(1); background: #adb5a8; pointer-events: none; }
@@ -120,7 +120,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 
 .close-book-tag {
     position: absolute; top: 0; right: 40px;
-    background: #b71c1c; color: white; padding: 10px 10px 25px;
+    background: #b71c1c; color: white; padigning: 10px 10px 25px;
     border: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
     cursor: pointer; writing-mode: vertical-rl; font-size: 0.8rem; z-index: 101;
 }
@@ -135,7 +135,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .char-profile {display: flex;gap: 40px;align-items: flex-start; margin-top: 20px;}
 /* 左側頭像框 */
 .char-avatar-frame {flex: 0 0 180px; /* 固定寬度 */display: flex;flex-direction: column; align-items: center;position: relative;}
-.char-avatar {width: 150px;height: 150px;border-radius: 50%; /* 圓形頭像 */border: 3px solid var(--gold); /* 金框 */box-shadow: 0 5px 15px rgba(0,0,0,0.3);object-fit: cover; /* 確保圖片不變形 */ background: #fff; /* 無圖片時的底色 */
+.char-avatar {width: 150px;height: 150px;border-radius: 50%; /* 圓形頭像 */border: 3px solid var(--gold); /* 金框 */box-shadow: 0 5px 15px rgba(0,0,0,0.3);object-fit: cover; /* 確保圖片不變形 */ background: #fff; /* 無圖片時的底色 */}
 /* 無圖片時的替代樣式 */
 .avatar-placeholder {width: 150px; height: 150px; border-radius: 50%;border: 3px solid var(--gold); background: #3e2723; color: var(--gold); font-size: 4rem; display: flex; justify-content: center; align-items: center;font-family: serif;}
 /* 直式名字 */
