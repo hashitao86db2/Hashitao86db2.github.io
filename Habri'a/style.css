@@ -81,6 +81,50 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .book-title { writing-mode: vertical-rl; color: #fff; letter-spacing: 5px; font-size: 1.1rem; font-weight: bold; pointer-events: none; text-shadow: 1px 1px 2px #000; }
 
 .book-filler { opacity: 0.3; filter: grayscale(1); background: #adb5a8; pointer-events: none; }
+/* --- 重新加入：主角書的個別顏色設定 --- */
+
+/* 諾拉德福音 - 皮革棕 */
+.book-1 { 
+    background: radial-gradient(circle at center, #8d6e63 0%, #3e2723 100%); 
+    border-left: 4px solid var(--gold); 
+}
+
+/* 赫伯利亞地圖 - 深海藍 */
+.book-2 { 
+    background: radial-gradient(circle at center, #1565c0 0%, #0d47a1 100%); 
+}
+
+/* 各地軼聞 - 鮮血/史詩紅 */
+.book-3 { 
+    background: radial-gradient(circle at center, #b71c1c 0%, #880e4f 100%); 
+}
+
+/* 賽琳手記 - 淺色古卷 */
+.book-4 { 
+    background: #d7ccc8; 
+} 
+.book-4 .book-title { color: #3e2723; } /* 淺色書配深色字 */
+
+/* 人物傳記 - 神祕青綠 */
+.book-5 { 
+    background: radial-gradient(circle at center, #006064 0%, #00acc1 100%); 
+}
+
+/* 辭典 - 沉穩黑 */
+.book-6 { 
+    background: #212121; 
+    border: 1px solid #444; 
+}
+
+/* 燙金裝飾線 (補回通用設定) */
+.book-spine::before {
+    content: ''; 
+    position: absolute; 
+    left: 10px; right: 10px; top: 20px;
+    height: 2px; background: rgba(212, 175, 55, 0.4); 
+    pointer-events: none;
+}
+
 /* --- 羊皮紙閱讀視窗 (修正：初始隱藏防止擋住開頭) --- */
 #reading-overlay {
     position: fixed; 
