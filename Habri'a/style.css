@@ -80,7 +80,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     max-height: 80%; overflow: hidden;
 }
 
-.book-filler { opacity: 0.3; filter: grayscale(1); background: #adb5a8; pointer-events: none; }
+.book-filler { opacity: 0.7; filter: grayscale(1); background: #adb5a8; pointer-events: none; }
 
 /* 燙金裝飾線 */
 .book-spine::before, .book-filler::after {
