@@ -58,7 +58,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 }
 #main-hub.active { display: flex; opacity: 1; }
 .world-title { color: var(--gold); font-size: 2.8rem; letter-spacing: 10px; margin: 0; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
-.subtitle { color: #fff; opacity: 0.7; font-size: 0.8rem; margin-top: 10px; }
+.subtitle { color: #fff; opacity: 0.7; font-size: 0.8rem; margin-top: 10px; text-align: center; }
 
 /* --- 4. 書架視覺 --- */
 .library-container { position: relative; width: 98%; max-width: 1100px; margin-top: 50px; perspective: 1800px; }
@@ -78,7 +78,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     writing-mode: vertical-rl; 
     color: #fff; 
     letter-spacing: 5px; 
-    font-size: 1.1rem; 
+    font-size: 1.5rem; 
     font-weight: bold; 
     pointer-events: none; 
     
