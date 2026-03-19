@@ -379,13 +379,8 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
     :root { --book-w: 60px; }
     .bookshelf { gap: 0.3px; }
     
-    /* 修正：手機版增加更多頂部空間 */
-    .parchment { 
-        width: 95%; 
-        padding: 90px 20px 40px; /* 這裡增加到 90px 防止切到內容 */
-        height: 90vh; 
-    }
-    
+
+
     /* 人物誌手機版：確保頭像與名字不擁擠 */
     .char-header { flex-direction: row; align-items: center; gap: 15px; }
     .char-avatar-frame { flex: 0 0 80px; height: 80px; }
