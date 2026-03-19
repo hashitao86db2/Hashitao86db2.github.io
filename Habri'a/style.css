@@ -94,19 +94,28 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .book-1 { background: radial-gradient(circle at center, #8d6e63 0%, #3e2723 100%); border-left: 4px solid var(--gold); }
 .book-2 { background: radial-gradient(circle at center, #1565c0 0%, #0d47a1 100%); }
 .book-3 { background: radial-gradient(circle at center, #b71c1c 0%, #880e4f 100%); }
+/* --- 賽琳手記：特殊設計 (CSS 橄欖葉) --- */
 .book-4 { background: #d7ccc8; border-left: 2px solid rgba(0,0,0,0.1);box-shadow: inset 5px 0 10px rgba(0,0,0,0.05), 5px 0 15px rgba(0,0,0,0.4);}
-/* 賽琳手記題 */
-.book-4 .book-title { color: #3e2723; text-align: center;letter-spacing: 6px;font-weight: 700;}
-/* 橄欖葉花環圖騰 */
+.book-4 .book-title { color: #3e2723; letter-spacing: 6px; font-weight: 700; }
+
+/* 橄欖葉裝飾 */
 .book-4::after {
-    content: '◈'; /* 可以在中間加一個神祕符號 */
+    content: '';
     position: absolute;
-    bottom: 45px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    color: #8d6e63;
-    font-size: 0.8rem;
-    opacity: 0.5;}
+    width: 24px;
+    height: 30px;
+    /* 用背景漸層畫出橄欖葉環 */
+    background: 
+        radial-gradient(ellipse at center, transparent 40%, var(--wood) 45%, transparent 50%) 0 0/100% 100% no-repeat;
+    border-left: 2px solid rgba(62, 39, 35, 0.4);
+    border-right: 2px solid rgba(62, 39, 35, 0.4);
+    border-radius: 50% 50% 10% 10%;
+    opacity: 0.5;
+}
+
 
 .book-5 { background: radial-gradient(circle at center, #006064 0%, #00acc1 100%); }
 .book-6 { background: #212121; border: 1px solid #444; }
@@ -133,7 +142,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 
 .close-book-tag {
     position: absolute; top: 0; right: 40px;
-    background: #b71c1c; color: white; padigning: 10px 10px 25px;
+    background: #b71c1c; color: white; padding: 10px 10px 25px;
     border: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
     cursor: pointer; writing-mode: vertical-rl; font-size: 0.8rem; z-index: 101;
 }
@@ -148,7 +157,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .char-profile {display: flex;gap: 40px;align-items: flex-start; margin-top: 20px;}
 /* 左側頭像框 */
 .char-avatar-frame {flex: 0 0 180px; /* 固定寬度 */display: flex;flex-direction: column; align-items: center;position: relative;}
-.char-avatar {width: 150px;height: 150px;border-radius: 50%; /* 圓形頭像 */border: 3px solid var(--gold); /* 金框 */box-shadow: 0 5px 15px rgba(0,0,0,0.3);object-fit: cover; /* 確保圖片不變形 */ background: #fff; /* 無圖片時的底色 */}
+.char-avatar {width: 150px;height: 150px;border-radius: 50%; /* 圓形頭像 */border: 3px solid var(--gold); /* 金框 */box-shadow: 0 5px 15px rgba(0,0,0,0.3);object-fit: cover; /* 確保圖片不變形 */ background: #fff; }/* 無圖片時的底色 */
 /* 無圖片時的替代樣式 */
 .avatar-placeholder {width: 150px; height: 150px; border-radius: 50%;border: 3px solid var(--gold); background: #3e2723; color: var(--gold); font-size: 4rem; display: flex; justify-content: center; align-items: center;font-family: serif;}
 /* 直式名字 */
