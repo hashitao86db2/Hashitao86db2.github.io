@@ -100,21 +100,60 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 
 /* 橄欖葉裝飾 */
 .book-4::after {
-    content: '';
+/* 圖騰外框 */
+.wreath {
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    width: 24px;
-    height: 30px;
-    /* 用背景漸層畫出橄欖葉環 */
-    background: 
-        radial-gradient(ellipse at center, transparent 40%, var(--wood) 45%, transparent 50%) 0 0/100% 100% no-repeat;
-    border-left: 2px solid rgba(62, 39, 35, 0.4);
-    border-right: 2px solid rgba(62, 39, 35, 0.4);
-    border-radius: 50% 50% 10% 10%;
-    opacity: 0.5;
+    width: 50px;
+    height: 40px;
 }
+
+/* 葉片的基礎造型 */
+.leaf-left, .leaf-right {
+    position: absolute;
+    width: 10px;
+    height: 16px;
+    background: var(--wood);
+    border-radius: 100% 0% 100% 0%; /* 經典葉子形狀 */
+    opacity: 0.7;
+}
+
+/* 左側一串葉子 */
+.leaf-left {
+    left: 5px;
+    transform: rotate(-45deg);
+    /* 用多重陰影複製出其他葉片，不需要寫一堆 div */
+    box-shadow: 
+        -8px -12px 0 0 var(--wood), 
+        -16px -24px 0 -1px var(--wood),
+        -2px 12px 0 1px var(--wood); 
+}
+
+/* 右側一串葉子 (水平反轉) */
+.leaf-right {
+    right: 5px;
+    transform: scaleX(-1) rotate(-45deg);
+    box-shadow: 
+        -8px -12px 0 0 var(--wood), 
+        -16px -24px 0 -1px var(--wood),
+        -2px 12px 0 1px var(--wood);
+}
+
+/* 中間連接點 */
+.wreath::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--wood);
+    border-radius: 50%;
+}
+
 
 
 .book-5 { background: radial-gradient(circle at center, #006064 0%, #00acc1 100%); }
