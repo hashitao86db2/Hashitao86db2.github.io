@@ -249,6 +249,17 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         margin-top: 0;
     }
 }
+.char-main-title {
+        font-size: 1.8rem;      /* 手機版稍微縮小標題字體 */
+        margin-top: 10px;       /* 確保與上方有間距 */
+        margin-bottom: 8px;     /* 與副標題的間距 */
+        letter-spacing: 3px;
+    }
+
+    .char-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 25px;    /* 與分隔線的間距 */
+    }
 
 .char-page { display: none; }
 .char-page.active { display: block; animation: fadeIn 0.5s ease; }
