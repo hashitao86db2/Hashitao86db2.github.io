@@ -297,6 +297,30 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     overflow: hidden;
 }
 
+@media (max-width: 768px) {
+    /* 1. 調整羊皮紙容器 */
+    .parchment {
+        width: 95%;          /* 讓紙張更寬，利用更多空間 */
+        max-width: none;     /* 取消最大寬度限制 */
+        height: 88vh;        /* 稍微加高，增加閱讀長度 */    
+        padding: 90px 20px 30px !important;  
+        box-shadow: 0 5px 25px rgba(0,0,0,0.7); /* 陰影稍微減弱，更貼合螢幕 */
+    }
+
+    /* 2. 調整內容區域文字大小與間距 */
+    .parchment-content h1 {
+        font-size: 1.4rem;   /* 標題小一點，避免換行太亂 */
+        margin-bottom: 20px;
+        letter-spacing: 3px;
+    }
+
+    .parchment-content p {
+        font-size: 0.95rem;  /* 文字大小微調，增加易讀性 */
+        line-height: 1.6;    /* 行高稍微收緊 */
+        margin-bottom: 1rem;
+        text-align: justify; /* 左右對齊，看起來比較整齊 */
+    }
+}
 /* 書本：擺放位置與旋轉角度 (保持交疊不整齊) */
 .book-bottom {
     left: 45%;
