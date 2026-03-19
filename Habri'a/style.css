@@ -77,7 +77,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .book-title { 
     writing-mode: vertical-rl; color: #fff; letter-spacing: 5px; 
     font-size: 1.1rem; font-weight: bold; pointer-events: none; 
-    text-shadow: 1px 1px 2px #000; max-height: 80%; overflow: hidden;
+    max-height: 80%; overflow: hidden;
 }
 
 .book-filler { opacity: 0.3; filter: grayscale(1); background: #adb5a8; pointer-events: none; }
@@ -167,11 +167,24 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 
 /* --- 8. 響應式優化 (平板 & 手機) --- */
 @media (max-width: 768px) {
-    :root { --book-w: 45px; }
+    :root { --book-w: 60px; } /* 平板 & 手機：加胖書本到 60px */
     .bookshelf { gap: 6px; }
     .parchment { width: 92%; padding: 40px 20px; }
-    .char-header { gap: 15px; }
+    
+    /* 人物誌手機版：圖片改放介紹下方 */
+    .char-profile { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+    .char-header { flex-direction: column; align-items: center; text-align: center; gap: 10px; margin-bottom: 0; }
     .char-avatar-frame { flex: 0 0 90px; height: 90px; }
     .char-name { font-size: 1.4rem; }
+    
+    /* 書脊文字手機版：縮小字級防止超出書脊 */
+    .book-title { font-size: 0.95rem; letter-spacing: 3px; }
+    
     .journal-links { flex-direction: column; align-items: center; gap: 20px; }
+}
+
+@media (max-width: 480px) {
+    :root { --book-w: 52px; } /* 極窄手機：稍微控制寬度到 52px，以免塞不下 */
+    .book-title { font-size: 0.85rem; letter-spacing: 2px; }
+    .bookshelf { gap: 4px; }
 }
