@@ -204,6 +204,44 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 .char-name-vertical { writing-mode: vertical-rl; color: #3e2723; font-size: 1.2rem; font-weight: bold; letter-spacing: 5px; margin-top: 20px; }
 .char-info { flex: 1; }
 .char-desc p { margin-bottom: 1.2rem; text-align: justify; }
+/* 賽琳手記內部的兩本書排版 */
+.journal-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.journal-book {
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+
+.journal-book:hover {
+    transform: translateY(-10px);
+}
+
+.journal-book-cover {
+    width: 150px;
+    height: 220px;
+    background: #3e2723;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+    border-radius: 5px 15px 15px 5px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    border-left: 8px solid #2d1b18;
+    writing-mode: vertical-rl;
+}
+
+/* 確保內容倉庫徹底隱藏 */
+#content-depot.hidden {
+    display: none !important;
+}
 
 /* 響應式優化 */
 @media (max-width: 768px) {
