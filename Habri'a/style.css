@@ -129,6 +129,58 @@ body.is-unlocked { overflow-y: auto; position: relative; }
     z-index: 2000; opacity: 1; transition: opacity 0.5s ease;
 }
 
+/* 左上角返回按鈕 */
+.back-to-shelf {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    background: none;
+    border: 1px solid #8d6e63;
+    color: #8d6e63;
+    padding: 5px 15px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 3px;
+    z-index: 10;
+}
+
+.back-to-shelf:hover {
+    background: #8d6e63;
+    color: #f4e4bc;
+}
+
+/* 右上角書籤感按鈕 */
+.close-book-tag {
+    position: absolute;
+    top: 0;
+    right: 50px;
+    background: #b71c1c;
+    color: white;
+    padding: 10px 15px 20px;
+    border: none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+    cursor: pointer;
+    writing-mode: vertical-rl;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.close-book-tag:hover {
+    padding-top: 5px; /* 滑鼠移上去有一點拉動感 */
+}
+
+/* 底部裝飾 */
+.parchment-footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #8d6e63;
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+
 #reading-overlay.hidden { display: none; opacity: 0; pointer-events: none; }
 
 .parchment {
@@ -229,3 +281,110 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
     .parchment-content { font-size: 1rem; line-height: 1.8; }
     .parchment-content h1 { font-size: 1.6rem; }
 }
+
+/* --- 人物誌精美排版 --- */
+
+.char-profile {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+/* 左側頭像框 */
+.char-avatar-frame {
+    flex: 0 0 180px; /* 固定寬度 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.char-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* 圓形頭像 */
+    border: 3px solid var(--gold); /* 金框 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    object-fit: cover; /* 確保圖片不變形 */
+    background: #fff; /* 無圖片時的底色 */
+}
+
+/* 無圖片時的替代樣式 */
+.avatar-placeholder {
+    width: 150px; height: 150px; border-radius: 50%;
+    border: 3px solid var(--gold); background: #3e2723;
+    color: var(--gold); font-size: 4rem; display: flex;
+    justify-content: center; align-items: center;
+    font-family: serif;
+}
+
+/* 直式名字 */
+.char-name-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    color: #3e2723;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+/* 右側文字介紹 */
+.char-info {
+    flex: 1;
+}
+
+.char-title {
+    color: #8d6e63;
+    font-style: italic;
+    font-size: 0.95rem;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.parchment-hr {
+    border: none;
+    border-top: 2px dashed rgba(136, 14, 79, 0.2);
+    margin: 20px 0;
+}
+
+.char-desc p {
+    margin-bottom: 1.2rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.char-desc strong {
+    color: #880e4f; /* 強調顏色 */
+}
+
+/* 人物之間的分割線 */
+.sep-line {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+/* 手機版排版優化 */
+@media (max-width: 768px) {
+    .char-profile {
+        flex-direction: column; /* 直式排列 */
+        align-items: center;
+        gap: 20px;
+    }
+    .char-avatar-frame {
+        flex: 0 0 auto;
+        width: 100%;
+        flex-direction: row; /* 頭像與名字橫向 */
+        justify-content: center;
+        gap: 20px;
+    }
+    .char-name-vertical {
+        writing-mode: horizontal-tb; /* 名字變橫式 */
+        margin-top: 0;
+    }
+}
+
