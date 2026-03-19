@@ -75,11 +75,50 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .book-spine.book-active { cursor: pointer; padding: 40px 0; box-sizing: border-box; }
 .book-spine.book-active:hover { transform: rotateY(0deg) translateZ(60px); z-index: 10; box-shadow: 0 0 30px var(--gold); }
 .book-title { 
-    writing-mode: vertical-rl; color: #fff; letter-spacing: 5px; 
-    font-size: 1.1rem; font-weight: bold; pointer-events: none; 
-    max-height: 80%; overflow: hidden; text-align:center;
+    writing-mode: vertical-rl; 
+    color: #fff; 
+    letter-spacing: 5px; 
+    font-size: 1.1rem; 
+    font-weight: bold; 
+    pointer-events: none; 
+    
+    /* ✦ 新增：利用 Flexbox 讓書名在書脊內完全置中 */
+    display: flex;
+    justify-content: center; /* 垂直置中 (因為 writing-mode 的關係) */
+    align-items: center;     /* 水平置中 */
+    
+    width: 100%;             /* 撐開寬度才能置中 */
+    height: 80%;             /* 限制高度 */
+    margin: auto;            /* 子元素置中 */
+    overflow: hidden; 
+    text-align: center;
 }
 
+/* ✦ 新增：通用布面質感 (套用到所有主書脊) */
+.book-spine {
+    position: relative; /* 為了掛材質偽元素 */
+    overflow: hidden;    /* 防止材質超出 */
+}
+
+/* 利用偽元素製作細緻的布面紋理 */
+.book-spine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* 這裡使用雙層重複漸層模擬細線布紋 */
+    background-image: 
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 1px, transparent 6px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01) 1px, transparent 1px, transparent 6px);
+    opacity: 0.5; /* 控制材質的明顯程度 */
+    pointer-events: none;
+    z-index: 1; /* 放在顏色上面，文字下面 */
+}
+
+/* 確保文字在材質上面 */
+.book-title {
+    position: relative;
+    z-index: 2;
+}
 .book-filler { opacity: 0.7; filter: grayscale(1); background: #adb5a8; pointer-events: none; }
 
 /* 燙金裝飾線 */
