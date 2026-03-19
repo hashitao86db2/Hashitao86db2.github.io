@@ -48,7 +48,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     /* 修正方案：疊加半透明遮罩確保木紋不搶戲 */
     background: 
         linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(20,20,20,0.95) 100%),
-        url('你的木紋圖片網址');
+        url('IMG_2184.jpeg');
     background-repeat: no-repeat, repeat;
     background-size: cover, 400px;
     opacity: 0; transition: opacity 2s ease;
