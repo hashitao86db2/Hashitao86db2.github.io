@@ -56,10 +56,7 @@ body.is-unlocked { overflow-y: auto; position: relative; }
     height: 2px; background: rgba(212, 175, 55, 0.4); /* 暗金色裝飾線 */
     pointer-events: none;
     align-items: center; /* 垂直居中 */
-    /* 修正：增加上下內邊距，防止文字貼到裝飾線 */
-    padding: 30px 0; 
-    box-sizing: border-box; /* 確保 padding 不會撐大總高度 */
-}
+    }
 .book-spine::before { top: 20px; } /* 上燙金線 */
 .book-filler::after { bottom: 20px; } /* 下燙金線 */
 
@@ -67,6 +64,10 @@ body.is-unlocked { overflow-y: auto; position: relative; }
 .book-spine.book-active {
     cursor: pointer;
     border-left: 2px solid rgba(255,255,255,0.1); /* 輕微裝訂質感 */
+/* 修正：增加上下內邊距，防止文字貼到裝飾線 */
+    padding: 30px 0; 
+    box-sizing: border-box; /* 確保 padding 不會撐大總高度 */
+
 }
 
 /* 懸停抽出來轉正 */
