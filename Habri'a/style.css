@@ -149,7 +149,20 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .char-name-vertical { writing-mode: vertical-rl; text-orientation: mixed; color: #3e2723;font-size: 1.2rem;font-weight: bold;letter-spacing: 5px; margin-top: 20px;opacity: 0.8;}
 /* 右側文字介紹 */
 .char-info {flex: 1;}
-.char-title {color: #8d6e63;font-style: italic;font-size: 0.95rem;margin-top: -10px;margin-bottom: 15px;text-align: center;}
+.char-main-title {
+    font-size: 2rem;
+    color: #3e2723;
+    margin: 0 0 5px 0;
+    font-weight: 700;
+}
+
+/* 原本 Title 改為 Subtitle 樣式 */
+.char-subtitle {
+    color: #8d6e63;
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
 .parchment-hr {border: none;border-top: 2px dashed rgba(136, 14, 79, 0.2); margin: 20px 0;}
 .char-desc p { margin-bottom: 1.2rem; line-height: 1.8; text-align: justify;}
 .char-desc strong { color: #880e4f; /* 強調顏色 */}
