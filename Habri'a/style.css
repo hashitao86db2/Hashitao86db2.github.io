@@ -13,6 +13,24 @@ body.is-unlocked { overflow-y: auto; position: relative; }
 
 /* 修正：電影開頭的 SKIP 位置 */
 .skip-btn { position: absolute; top: 30px; left: 20px; background: none; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); padding: 6px 12px; cursor: pointer; z-index: 1001; font-size: 0.8rem; }
+.typewriter {
+    opacity: 0; /* 初始隱藏 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    /* 這裡要確保有引用到 var(--d) */
+    animation: fadeEffect 4s var(--d) ease-in-out forwards;
+}
+
+@keyframes fadeEffect {
+    0% { opacity: 0; transform: translate(-50%, -45%); }
+    20% { opacity: 1; transform: translate(-50%, -50%); }
+    80% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -55%); }
+}
 
 /* --- 書櫃 Hub --- */
 #main-hub {
