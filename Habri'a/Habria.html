@@ -103,24 +103,60 @@
         </div>
 
         <div id="content-characters">
+    <div class="book-container">
+        <div class="char-page active" id="char-1">
             <div class="char-profile">
-                <div class="char-avatar-frame">
-                <img src="path/to/selin-avatar.png" alt="賽琳" class="char-avatar">
-                <div class="avatar-placeholder">觀</div>
-                    <div class="char-name-vertical">賽琳 Selin</div>
+                <div class="char-header">
+                    <div class="char-avatar-frame">
+                        <img src="你的賽琳圖片網址" alt="賽琳" class="char-avatar">
+                        <div class="avatar-placeholder">觀</div>
+                    </div>
+                    <div class="char-name-area">
+                        <h1 class="char-name">賽琳</h1>
+                        <p class="char-ename">Selin</p>
+                        <div class="char-title">—— 眾神的觀測者</div>
+                    </div>
                 </div>
+
                 <div class="char-info">
-                    <h1>紀錄者：賽琳</h1>
-                    <div class="char-title">—— 眾神的觀測者</div>
                     <hr class="parchment-hr">
                     <div class="char-desc">
-                        <p><strong>身分：</strong> 眾神書記官。</p>
-                        <p>性格清冷，猶如鏡面映照世間。</p>
+                        <p><strong>身分：</strong> 眾神書記官</p>
+                        <p>性格清冷，猶如鏡面映照世間。在 Habri'a 的圖書館中，她是唯一的活物...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="char-page" id="char-2">
+            <div class="char-profile">
+                <div class="char-header">
+                    <div class="char-avatar-frame">
+                        <div class="avatar-placeholder">守</div>
+                    </div>
+                    <div class="char-name-area">
+                        <h1 class="char-name">雙子</h1>
+                        <p class="char-ename">Gemini</p>
+                        <div class="char-title">—— 門扉的守望者</div>
+                    </div>
+                </div>
+                <div class="char-info">
+                    <hr class="parchment-hr">
+                    <div class="char-desc">
+                        <p>這是在左右翻動後會看到的第二個人物介紹內容。</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="page-nav">
+        <button class="nav-btn" onclick="changeChar(-1)">← 前一卷</button>
+        <span id="page-indicator">1 / 2</span>
+        <button class="nav-btn" onclick="changeChar(1)">後一卷 →</button>
+    </div>
+</div>
+
 
     <script src="script.js"></script>
 </body>
