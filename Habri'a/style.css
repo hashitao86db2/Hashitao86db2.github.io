@@ -1,4 +1,4 @@
-/* --- 基礎設定與變數 --- */
+/* --- 1. 基礎設定與變數 --- */
 :root {
     --gold: #d4af37;
     --wood: #3e2723;
@@ -7,7 +7,6 @@
     --base-h: 300px;
 }
 
-/* --- 全域設定 --- */
 html, body { 
     margin: 0; padding: 0; width: 100%; 
     background: #000; 
@@ -15,10 +14,11 @@ html, body {
     overflow-x: hidden; 
 }
 
+/* 鎖定邏輯 */
 body.is-locked { overflow: hidden !important; height: 100vh; position: fixed; width: 100%; }
 body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 
-/* --- 電影開頭層 --- */
+/* --- 2. 電影開頭層 --- */
 #intro-layer {
     height: 100vh; width: 100vw;
     display: flex; justify-content: center; align-items: center;
@@ -31,7 +31,6 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     color: rgba(255,255,255,0.6); padding: 6px 12px; 
     cursor: pointer; z-index: 10001; font-size: 0.8rem; 
 }
-
 .typewriter {
     opacity: 0; position: absolute;
     top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -39,7 +38,6 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     color: white; font-size: 1.2rem; letter-spacing: 5px;
     animation: fadeEffect 4s var(--d) ease-in-out forwards;
 }
-
 @keyframes fadeEffect {
     0% { opacity: 0; transform: translate(-50%, -45%); }
     20% { opacity: 1; transform: translate(-50%, -50%); }
@@ -47,25 +45,22 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     100% { opacity: 0; transform: translate(-50%, -55%); }
 }
 
-/* --- 書櫃主 Hub (背景質感修正) --- */
+/* --- 3. 書櫃主 Hub --- */
 #main-hub {
     min-height: 120vh; display: none; flex-direction: column; align-items: center;
     padding-top: 8vh;
-    /* 修正方案：疊加半透明遮罩確保木紋不搶戲 */
     background: 
         linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(20,20,20,0.95) 100%),
-        url('IMG_2184.jpeg');
+        url('IMG_2184.jpeg'); /* 請確保圖片檔名大小寫正確 */
     background-repeat: no-repeat, repeat;
     background-size: cover, 400px;
     opacity: 0; transition: opacity 2s ease;
 }
 #main-hub.active { display: flex; opacity: 1; }
-
 .world-title { color: var(--gold); font-size: 2.8rem; letter-spacing: 10px; margin: 0; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
-
 .subtitle { color: #fff; opacity: 0.7; font-size: 0.8rem; margin-top: 10px; }
 
-/* --- 書架視覺 --- */
+/* --- 4. 書架視覺 --- */
 .library-container { position: relative; width: 98%; max-width: 1100px; margin-top: 50px; perspective: 1800px; }
 .bookshelf { display: flex; justify-content: center; align-items: flex-end; gap: 8px; height: 400px; }
 .shelf-board { width: 100%; height: 20px; background: var(--wood); border-radius: 3px; transform: rotateX(25deg); margin-top: -10px; box-shadow: 0 12px 30px #000; }
@@ -76,106 +71,53 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     transform: rotateY(-25deg); transform-origin: left; transition: 0.5s;
 }
 
+/* 主角書設定 */
 .book-spine.book-active { cursor: pointer; padding: 40px 0; box-sizing: border-box; }
 .book-spine.book-active:hover { transform: rotateY(0deg) translateZ(60px); z-index: 10; box-shadow: 0 0 30px var(--gold); }
-.book-title { writing-mode: vertical-rl; color: #fff; letter-spacing: 5px; font-size: 1.1rem; font-weight: bold; pointer-events: none; text-shadow: 1px 1px 2px #000; }
+.book-title { 
+    writing-mode: vertical-rl; color: #fff; letter-spacing: 5px; 
+    font-size: 1.1rem; font-weight: bold; pointer-events: none; 
+    text-shadow: 1px 1px 2px #000; max-height: 80%; overflow: hidden;
+}
 
 .book-filler { opacity: 0.3; filter: grayscale(1); background: #adb5a8; pointer-events: none; }
-/* --- 重新加入：主角書的個別顏色設定 --- */
 
-/* 諾拉德福音 - 皮革棕 */
-.book-1 { 
-    background: radial-gradient(circle at center, #8d6e63 0%, #3e2723 100%); 
-    border-left: 4px solid var(--gold); 
+/* 燙金裝飾線 */
+.book-spine::before, .book-filler::after {
+    content: ''; position: absolute; left: 10px; right: 10px;
+    height: 2px; background: rgba(212, 175, 55, 0.4); pointer-events: none;
 }
+.book-spine::before { top: 20px; }
+.book-filler::after { bottom: 20px; }
 
-/* 赫伯利亞地圖 - 深海藍 */
-.book-2 { 
-    background: radial-gradient(circle at center, #1565c0 0%, #0d47a1 100%); 
-}
+/* 書籍個別顏色 */
+.book-1 { background: radial-gradient(circle at center, #8d6e63 0%, #3e2723 100%); border-left: 4px solid var(--gold); }
+.book-2 { background: radial-gradient(circle at center, #1565c0 0%, #0d47a1 100%); }
+.book-3 { background: radial-gradient(circle at center, #b71c1c 0%, #880e4f 100%); }
+.book-4 { background: #d7ccc8; } .book-4 .book-title { color: #3e2723; }
+.book-5 { background: radial-gradient(circle at center, #006064 0%, #00acc1 100%); }
+.book-6 { background: #212121; border: 1px solid #444; }
 
-/* 各地軼聞 - 鮮血/史詩紅 */
-.book-3 { 
-    background: radial-gradient(circle at center, #b71c1c 0%, #880e4f 100%); 
-}
+/* --- 5. 閱讀視窗 & 羊皮紙 --- */
+.hidden { display: none !important; }
+#content-depot { display: none !important; }
 
-/* 賽琳手記 - 淺色古卷 */
-.book-4 { 
-    background: #d7ccc8; 
-} 
-.book-4 .book-title { color: #3e2723; } /* 淺色書配深色字 */
-
-/* 人物傳記 - 神祕青綠 */
-.book-5 { 
-    background: radial-gradient(circle at center, #006064 0%, #00acc1 100%); 
-}
-
-/* 辭典 - 沉穩黑 */
-.book-6 { 
-    background: #212121; 
-    border: 1px solid #444; 
-}
-
-/* 燙金裝飾線 (補回通用設定) */
-.book-spine::before {
-    content: ''; 
-    position: absolute; 
-    left: 10px; right: 10px; top: 20px;
-    height: 2px; background: rgba(212, 175, 55, 0.4); 
-    pointer-events: none;
-}
-
-/* --- 羊皮紙閱讀視窗 (修正：初始隱藏防止擋住開頭) --- */
 #reading-overlay {
-    position: fixed; 
-    top: 0; left: 0; 
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    z-index: 10000; 
-    
-    /* 關鍵修正 1：初始狀態完全透明且不可點擊 */
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center;
+    z-index: 10000; opacity: 0; visibility: hidden; pointer-events: none;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
+#reading-overlay:not(.hidden) { opacity: 1; visibility: visible; pointer-events: auto; }
 
-/* 關鍵修正 2：當 .hidden 類別不存在時，才顯示 */
-#reading-overlay:not(.hidden) {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-}
-
-/* 關鍵修正 3：確保 .hidden 擁有最高優先權 */
-.hidden {
-    display: none !important;
-}
-
-/* 內容倉庫也必須絕對隱藏 */
-#content-depot {
-    display: none !important;
-}
-
-
-/* 修正：徹底消除返回鍵灰底 */
 .back-to-shelf {
     position: absolute; top: 25px; left: 30px;
-    background: transparent !important; /* 強制透明 */
-    border: none !important;            /* 強制無邊框 */
-    box-shadow: none !important;        /* 強制無陰影 */
-    appearance: none;                   /* 消除系統預設外觀 */
-    -webkit-appearance: none;
-    color: #8d6e63; font-size: 1.1rem;
-    cursor: pointer; z-index: 101;
-    font-family: inherit; letter-spacing: 2px;
+    background: transparent !important; border: none !important;
+    color: #8d6e63; font-size: 1.1rem; cursor: pointer; z-index: 101;
+    font-family: inherit; letter-spacing: 2px; -webkit-appearance: none;
 }
 .back-to-shelf:hover { color: #3e2723; transform: translateX(-5px); }
 
-/* 紅色書籤按鈕 */
 .close-book-tag {
     position: absolute; top: 0; right: 40px;
     background: #b71c1c; color: white; padding: 10px 10px 25px;
@@ -184,40 +126,29 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 }
 
 .parchment {
-    width: 85%; max-width: 850px; height: 85vh;
-    background-color: var(--paper-base);
+    width: 85%; max-width: 850px; height: 85vh; background-color: var(--paper-base);
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEVMaXGcnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJyT945uAAAAGnRSTlMAAAAAAgMEBgcICQoMDQ4QEhMUFRYXGBkaG9pL/K4AAAAJcEhZcwAACxMAAAsTAQCanBgAAABESURBVHic7c4xAQAwDMCwX5K/5x9k4D4GAAAAAASUVORK5CYII=');
-    padding: 60px 40px; box-shadow: 0 10px 50px #000;
-    position: relative; overflow-y: auto; 
+    padding: 60px 40px; box-shadow: 0 10px 50px #000; position: relative; overflow-y: auto; 
 }
 
-/* --- 人物誌佈局 (修正平板文字錯位) --- */
-.char-header {
-    display: flex; align-items: center; /* 垂直居中，確保文字與圖對齊 */
-    gap: 25px; margin-bottom: 25px;
-    width: 100%;
-}
-
-.char-avatar-frame {
-    flex: 0 0 120px; height: 120px;
-    position: relative; display: flex; justify-content: center; align-items: center;
-}
-
+/* --- 6. 人物誌佈局 --- */
+.char-header { display: flex; align-items: center; gap: 25px; margin-bottom: 25px; width: 100%; }
+.char-avatar-frame { flex: 0 0 120px; height: 120px; position: relative; display: flex; justify-content: center; align-items: center; }
 .char-avatar { width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
+.avatar-placeholder { position: absolute; width: 100%; height: 100%; background: #3e2723; color: var(--gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2.5rem; z-index: -1; }
+.char-name { margin: 0; font-size: 1.8rem; color: #3e2723; }
+.char-ename { margin: 0; font-size: 0.9rem; opacity: 0.6; }
+.char-desc { line-height: 1.8; text-align: justify; }
 
-/* 修正：確保 placeholder 的字不會亂跑 */
-.avatar-placeholder {
-    position: absolute; width: 100%; height: 100%;
-    background: #3e2723; color: var(--gold); border-radius: 50%;
-    display: flex; justify-content: center; align-items: center;
-    font-size: 2.5rem; z-index: -1; /* 放在頭像下面，沒圖才看得到 */
-}
+.char-page { display: none; }
+.char-page.active { display: block; animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-.char-name-area { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-.char-name { margin: 0; font-size: 1.8rem; color: #3e2723; border: none; }
-.char-title { color: #8d6e63; font-style: italic; margin-top: 5px; }
+/* 翻頁按鈕 */
+.page-nav { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 30px; }
+.nav-btn { background: none; border: 1px solid #8d6e63; color: #8d6e63; padding: 5px 15px; cursor: pointer; border-radius: 20px; }
 
-/* --- 賽琳手記：書本連結樣式 --- */
+/* 賽琳手記連結 */
 .journal-links { display: flex; justify-content: center; gap: 30px; margin-top: 40px; }
 .journal-book-cover {
     width: 140px; height: 200px; background: #3e2723; color: var(--gold);
@@ -226,147 +157,21 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     writing-mode: vertical-rl; box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
     border-left: 6px solid #281a17;
 }
-/* --- 1. 修正隱藏邏輯 (最重要) --- */
-.hidden {
-    display: none !important;
-}
 
-/* --- 2. 修正閱讀視窗：預設必須是隱藏且不擋點擊 --- */
-#reading-overlay {
-    position: fixed; 
-    top: 0; left: 0; 
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    z-index: 10000; 
-    transition: opacity 0.5s ease;
-    
-    /* 初始狀態：完全透明且不可點擊 */
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-/* 當移除 .hidden 類別時，觸發顯示 */
-#reading-overlay:not(.hidden) {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-}
-
-/* --- 3. 內容倉庫：絕對不能顯示在畫面上 --- */
-#content-depot {
-    display: none !important;
-}
-
-/* --- 4. 人物誌分頁：預設隱藏，只有 active 顯示 --- */
-.char-page {
-    display: none;
-}
-.char-page.active {
-    display: block;
-    animation: fadeIn 0.5s ease;
-}
-/* --- 人物排版：左圖右名 --- */
-.char-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 15px;
-}
-
-.char-avatar-frame {
-    flex: 0 0 100px; /* 手機版圖片寬度縮小 */
-    height: 100px;
-    position: relative;
-}
-
-.char-avatar {
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    border: 2px solid var(--gold);
-    object-fit: cover;
-}
-
-.char-name-area {
-    flex: 1;
-}
-
-.char-name { margin: 0; font-size: 1.5rem; color: #3e2723; }
-.char-ename { margin: 0; font-size: 0.9rem; opacity: 0.6; }
-
-/* 底部介紹 */
-.char-desc {
-    line-height: 1.8;
-    text-align: justify;
-}
-
-/* --- 翻頁按鈕樣式 --- */
-.page-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 30px;
-    padding-bottom: 20px;
-}
-
-.nav-btn {
-    background: none;
-    border: 1px solid #8d6e63;
-    color: #8d6e63;
-    padding: 5px 15px;
-    cursor: pointer;
-    border-radius: 20px;
-}
-
-/* 電腦版調整：圖片可以大一點 */
-@media (min-width: 769px) {
-    .char-avatar-frame { flex: 0 0 150px; height: 150px; }
-    .char-header { gap: 40px; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-/* --- 死後世界 (Afterlife Layer) --- */
-#afterlife-layer {
-    height: 100vh; background: #050505; position: relative;
-    overflow: hidden; display: flex; justify-content: center; align-items: center;
-    z-index: 100;
-}
+/* --- 7. 死後世界 --- */
+#afterlife-layer { height: 100vh; background: #050505; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; z-index: 100; }
 .mirror-shards { position: absolute; width: 100%; height: 100%; background: linear-gradient(45deg, #1a1a2e 25%, transparent 25%) -50px 0; background-size: 100px 100px; opacity: 0.05; }
-.paper {
-    background: #f0f0f0; padding: 30px; width: 250px;
-    position: absolute; top: -600px; left: 50%; transform: translateX(-50%) rotate(-10deg);
-    box-shadow: 10px 10px 40px rgba(0,0,0,0.8);
-    transition: top 2.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 3s ease;
-}
+.paper { background: #f0f0f0; padding: 30px; width: 250px; position: absolute; top: -600px; left: 50%; transform: translateX(-50%) rotate(-10deg); box-shadow: 10px 10px 40px rgba(0,0,0,0.8); transition: top 2.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 3s ease; }
 body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
-
 .afterlife-title { position: absolute; bottom: 10%; color: #1a1a1a; font-size: 2rem; letter-spacing: 15px; text-align: center; width: 100%; pointer-events: none;}
 
-
-
-/* 響應式優化 */
+/* --- 8. 響應式優化 (平板 & 手機) --- */
 @media (max-width: 768px) {
     :root { --book-w: 45px; }
     .bookshelf { gap: 6px; }
-    .char-profile { flex-direction: column; align-items: center; }
-    .parchment { width: 95%; padding: 40px 20px; }
-}
-
-
-
-/* 響應式：手機版 */
-@media (max-width: 600px) {
-    :root { --book-w: 42px; }
+    .parchment { width: 92%; padding: 40px 20px; }
     .char-header { gap: 15px; }
-    .char-avatar-frame { flex: 0 0 80px; height: 80px; }
-    .char-name { font-size: 1.3rem; }
-    .parchment { padding: 40px 20px; width: 92%; }
-    .journal-links { flex-direction: column; align-items: center; }
+    .char-avatar-frame { flex: 0 0 90px; height: 90px; }
+    .char-name { font-size: 1.4rem; }
+    .journal-links { flex-direction: column; align-items: center; gap: 20px; }
 }
