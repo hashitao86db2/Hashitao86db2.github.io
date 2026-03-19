@@ -65,23 +65,25 @@ body.is-unlocked {
 
 /* --- 書櫃主 Hub --- */
 #main-hub {
-    min-height: 120vh; display: none; flex-direction: column; align-items: center;
-    padding-top: 8vh; transition: opacity 2s ease;
+    min-height: 120vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8vh;
+    transition: opacity 2s ease;
 
-    /* --- 修正：多重背景 (紋理疊加在漸層上) --- */
-    background-image: 
-        /* 第一層：質感紋理 (降低透明度) */
-        url('IMG_2184.jpeg'), 
-        /* 第二層：原本的漸層 (作為底色) */
-        linear-gradient(to bottom, #000 0%, #1a1a1a 100%);
+    /* --- 修正方案：將顏色疊在紋理之上 --- */
+    background: 
+        /* 第一層：半透明黑色遮罩 (解決太暗或顏色沒蓋上的問題) */
+        linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(26,26,26,0.9) 100%),
+        /* 第二層：木紋圖片 (改為稍微透明或深色圖) */
+        url('你的木紋圖片網址');
+
+    background-repeat: no-repeat, repeat;
+    background-size: cover, 300px; /* 紋理縮小才不會太粗糙 */
+    /* 移除 blend-mode 以確保平板相容性，改靠上面的 rgba 控制顏色 */
     
-    /* 設定紋理重複平鋪 */
-    background-repeat: repeat, no-repeat;
-    /* 設定紋理大小 (通常用 auto 或 cover，視紋理圖而定) */
-    background-size: auto, cover;
-    /* 設定紋理透明度 (混合模式) - 這是關鍵！ */
-    background-blend-mode: overlay; /* 使用 overlay 或 multiply 可以讓紋理自然混合 */
-    opacity: 0; /* 配合轉場動畫 */
+    opacity: 0;
 }
 
 #main-hub.active { display: flex; opacity: 1; }
