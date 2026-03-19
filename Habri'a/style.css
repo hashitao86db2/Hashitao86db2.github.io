@@ -216,6 +216,105 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 .afterlife-title { position: absolute; bottom: 10%; color: #1a1a1a; font-size: 2rem; letter-spacing: 15px; text-align: center; width: 100%; pointer-events: none;}
 
+/* --- 辭典：古代卷軸排版 --- */
+.scroll-container {
+    padding: 20px 10px;
+    border-left: 15px solid #8d6e63; /* 模擬卷軸轉軸 */
+    border-right: 15px solid #8d6e63;
+    background: rgba(0,0,0,0.03);
+    margin: 20px 0;
+}
+
+.scroll-title {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #3e2723;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+}
+
+.scroll-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lex-item {
+    border-bottom: 1px solid rgba(141, 110, 99, 0.3);
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lex-word {
+    font-weight: bold;
+    color: #880e4f;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.lex-desc {
+    color: #3e2723;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.scroll-seal {
+    margin-top: 40px;
+    text-align: right;
+    font-style: italic;
+    color: #8d6e63;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* --- 人物誌：翻頁按鈕恢復與樣式 --- */
+.page-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+    padding-bottom: 20px;
+}
+
+.nav-btn {
+    background: transparent !important;
+    border: 1px solid #8d6e63 !important;
+    color: #8d6e63;
+    padding: 6px 18px;
+    cursor: pointer;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    -webkit-appearance: none;
+}
+
+.nav-btn:hover {
+    background: #8d6e63 !important;
+    color: #f4e4bc;
+}
+
+#page-indicator {
+    color: #3e2723;
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+/* 修正：手機版翻頁按鈕不要被切到 */
+@media (max-width: 768px) {
+    .page-nav {
+        margin-top: 20px;
+        gap: 15px;
+    }
+    .nav-btn {
+        padding: 5px 12px;
+        font-size: 0.8rem;
+    }
+}
+
 /* --- 8. 響應式優化 (平板 & 手機) --- */
 @media (max-width: 768px) {
     :root { --book-w: 60px; }
