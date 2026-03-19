@@ -98,8 +98,6 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .book-4 { background: #d7ccc8; border-left: 2px solid rgba(0,0,0,0.1);box-shadow: inset 5px 0 10px rgba(0,0,0,0.05), 5px 0 15px rgba(0,0,0,0.4);}
 .book-4 .book-title { color: #3e2723; letter-spacing: 6px; font-weight: 700; }
 
-/* 橄欖葉裝飾 */
-.book-4::after {
 /* 圖騰外框 */
 .wreath {
     position: absolute;
