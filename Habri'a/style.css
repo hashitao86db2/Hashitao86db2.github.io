@@ -1,119 +1,136 @@
+/* --- 基礎設定與變數 --- */
 :root {
     --gold: #d4af37;
     --wood: #3e2723;
     --paper-base: #f4e4bc; /* 羊皮紙基礎色 */
     --book-w: 70px; /* 基礎書脊寬度 */
-    --base-h: 300px; /* 基礎高度，JS會動態讀取data-h */
+    --base-h: 300px; /* 基礎高度基準 */
 }
 
-/* --- (保留 Intro 層、全域設定、Afterlife 層不變) --- */
-html, body { margin: 0; padding: 0; width: 100%; background: #000; font-family: "Shippori Mincho B1", serif; overflow-x: hidden; }
-body.is-locked { overflow-y: hidden; position: fixed; }
-body.is-unlocked { overflow-y: auto; position: relative; }
+/* --- 全域設定：強制初始鎖定滾動 --- */
+html, body { 
+    margin: 0; padding: 0; width: 100%; 
+    background: #000; 
+    font-family: "Shippori Mincho B1", serif; 
+    overflow-x: hidden; 
+}
 
-/* 修正：電影開頭的 SKIP 位置 */
-.skip-btn { position: absolute; top: 30px; left: 20px; background: none; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); padding: 6px 12px; cursor: pointer; z-index: 1001; font-size: 0.8rem; }
+/* 修正：初始鎖定時不允許滾動，高度固定為 100vh */
+body.is-locked { 
+    overflow: hidden !important; 
+    height: 100vh; 
+    position: fixed; 
+}
+body.is-unlocked { 
+    overflow-y: auto; 
+    position: relative; 
+    height: auto;
+}
+
+/* --- 電影開頭層 (Intro Layer) 修正 --- */
+#intro-layer {
+    height: 100vh; width: 100vw;
+    display: flex; justify-content: center; align-items: center;
+    background: #000; /* 確保全黑遮擋後方 */
+    position: fixed; top: 0; left: 0;
+    z-index: 9999; /* 絕對置頂 */
+    transition: opacity 1.5s ease, visibility 1.5s ease;
+}
+
+.skip-btn { 
+    position: absolute; top: 30px; left: 20px; 
+    background: none; border: 1px solid rgba(255,255,255,0.3); 
+    color: rgba(255,255,255,0.6); padding: 6px 12px; 
+    cursor: pointer; z-index: 10001; font-size: 0.8rem; 
+}
+
+/* 文字動畫修正：確保一開始是隱藏的，由動畫喚醒 */
 .typewriter {
-    opacity: 0; /* 初始隱藏 */
+    opacity: 0; 
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
-    text-align: center;
-    /* 這裡要確保有引用到 var(--d) */
+    width: 100%; text-align: center;
+    color: white; font-size: 1.2rem; letter-spacing: 5px;
     animation: fadeEffect 4s var(--d) ease-in-out forwards;
+    pointer-events: none;
 }
 
 @keyframes fadeEffect {
-    0% { opacity: 0; transform: translate(-50%, -45%); }
-    20% { opacity: 1; transform: translate(-50%, -50%); }
-    80% { opacity: 1; transform: translate(-50%, -50%); }
-    100% { opacity: 0; transform: translate(-50%, -55%); }
+    0% { opacity: 0; transform: translate(-50%, -45%); filter: blur(5px); }
+    20% { opacity: 1; transform: translate(-50%, -50%); filter: blur(0); }
+    80% { opacity: 1; transform: translate(-50%, -50%); filter: blur(0); }
+    100% { opacity: 0; transform: translate(-50%, -55%); filter: blur(5px); }
 }
 
-/* --- 書櫃 Hub --- */
+/* --- 書櫃主 Hub --- */
 #main-hub {
     min-height: 120vh; display: none; flex-direction: column; align-items: center;
     background: linear-gradient(to bottom, #000 0%, #1a1a1a 100%); 
-    padding-top: 8vh; transition: opacity 2s ease;
+    padding-top: 8vh; opacity: 0; transition: opacity 2s ease;
 }
 #main-hub.active { display: flex; opacity: 1; }
+
 .world-title { color: var(--gold); font-size: 2.8rem; letter-spacing: 10px; margin: 0; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
 .subtitle { color: #fff; opacity: 0.7; font-size: 0.8rem; margin-top: 10px; }
 
-/* --- 升級版書架視覺 --- */
+/* --- 書架視覺設定 --- */
 .library-container { position: relative; width: 98%; max-width: 1100px; margin-top: 50px; perspective: 1800px; }
 .bookshelf { 
-    display: flex; justify-content: center; align-items: flex-end; /* 書本立在隔板上 */
-    gap: 8px; padding: 0 15px; 
-    height: 400px; /* 給予足夠高度容納有高有低的書 */
-    z-index: 5; 
+    display: flex; justify-content: center; align-items: flex-end; 
+    gap: 12px; padding: 0 15px; height: 400px; z-index: 5; 
 }
 
-/* 書架木板隔板 */
 .shelf-board { width: 100%; height: 20px; background: var(--wood); border-radius: 3px; transform: rotateX(25deg); margin-top: -10px; box-shadow: 0 12px 30px #000; }
 
-/* 全域書脊基礎 (含雜書與主角書) */
+/* 全域書脊基礎 */
 [data-h] {
     width: var(--book-w);
-    /* 高度由 JS 動態設定，CSS預設值 */
-    height: calc(var(--base-h) * 1px);
-    border-radius: 5px ; /* 右側更圓角，像書頁的裝訂側 */
+    border-radius: 5px 10px 10px 5px; /* 優化圓角：右側較圓，模擬封面邊緣 */
     position: relative;
     transform: rotateY(-20deg); transform-origin: left; transition: 0.5s;
     box-shadow: 5px 0 15px rgba(0,0,0,0.5); 
     display: flex; align-items: center; justify-content: center;
 }
 
-/* 燙金裝飾線 (上下) - 通用 */
+/* 燙金裝飾線修正 */
 .book-spine::before, .book-filler::after {
-    content: ''; 
-    position: absolute; 
-    left: 10px; right: 10px;
-    height: 2px; background: rgba(212, 175, 55, 0.4); /* 暗金色裝飾線 */
+    content: ''; position: absolute; left: 8px; right: 8px;
+    height: 2px; background: rgba(212, 175, 55, 0.4); 
     pointer-events: none;
-    align-items: center; /* 垂直居中 */
-    }
-.book-spine::before { top: 20px; } /* 上燙金線 */
-.book-filler::after { bottom: 20px; } /* 下燙金線 */
+}
+.book-spine::before { top: 20px; }
+.book-filler::after { bottom: 20px; }
 
-/* 1. 可互動的主角書脊 (`.book-active`) */
+/* 1. 主角書脊 */
 .book-spine.book-active {
     cursor: pointer;
-    border-left: 2px solid rgba(255,255,255,0.1); /* 輕微裝訂質感 */
-/* 修正：增加上下內邊距，防止文字貼到裝飾線 */
-    padding: 30px 0; 
-    box-sizing: border-box; /* 確保 padding 不會撐大總高度 */
-
+    border-left: 2px solid rgba(255,255,255,0.1);
+    padding: 40px 0; /* 增加上下邊距，不貼文字 */
+    box-sizing: border-box;
 }
 
-/* 懸停抽出來轉正 */
 .book-spine.book-active:hover { 
     transform: rotateY(0deg) translateZ(50px) translateY(-5px); 
-    z-index: 10; 
-    box-shadow: 0 0 30px var(--gold); 
+    z-index: 10; box-shadow: 0 0 30px var(--gold); 
 }
 
 .book-title { 
     writing-mode: vertical-rl; text-orientation: mixed;
-    color: #fff; letter-spacing: 4px; font-size: 1.1rem; font-weight: bold; 
+    color: #fff; letter-spacing: 5px; font-size: 1.1rem; font-weight: bold; 
     pointer-events: none; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    max-height: 80%; /* 防止文字溢出 */
 }
 
-/* 2. 不可互動的填充雜書 (`.book-filler`) */
+/* 2. 填充雜書 */
 .book-filler {
-    opacity: 0.5; /* 輕微透明，讓它看起來是背景 */
-    filter: grayscale(0.5); /* 輕微灰階，減少對互動書的干擾 */
-    background: #979e90; /* 雜書基色 */
-    border-radius: 4px ;
+    opacity: 0.4; filter: grayscale(0.7); background: #333;
+    border-radius: 4px; pointer-events: none;
 }
-
-/* 雜書顏色設定 */
 .filler-1 { background: #444; } .filler-2 { background: #555; } .filler-3 { background: #3c3c3c; }
 .filler-4 { background: #5a5a5a; } .filler-5 { background: #4a4a4a; } .filler-6 { background: #3d3d3d; }
 
-/* 3. 互動書顏色設定 (保留舊設定並微調) */
+/* 3. 書籍顏色微調 */
 .book-1 { background: radial-gradient(circle at center, #8d6e63 0%, #3e2723 100%); border-left: 4px solid var(--gold); }
 .book-2 { background: radial-gradient(circle at center, #1565c0 0%, #0d47a1 100%); }
 .book-3 { background: radial-gradient(circle at center, #b71c1c 0%, #880e4f 100%); }
@@ -121,270 +138,77 @@ body.is-unlocked { overflow-y: auto; position: relative; }
 .book-5 { background: radial-gradient(circle at center, #006064 0%, #00acc1 100%); }
 .book-6 { background: #212121; border: 1px solid #444; }
 
-/* --- 羊皮紙閱讀視窗 (`#reading-overlay`) --- */
+/* --- 羊皮紙閱讀視窗 (Reading Overlay) --- */
 #reading-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); /* 燈箱背景 */
+    background: rgba(0,0,0,0.85); 
     display: flex; justify-content: center; align-items: center;
-    z-index: 2000; opacity: 1; transition: opacity 0.5s ease;
+    z-index: 10000; opacity: 1; transition: opacity 0.5s ease;
 }
-
-/* 左上角返回按鈕 */
-.back-to-shelf {
-    position: absolute;
-    top: 25px;
-    left: 30px;
-    background: none;
-    border: 1px solid #8d6e63;
-    color: #8d6e63;
-    padding: 5px 15px;
-    font-family: inherit;
-    cursor: pointer;
-    transition: 0.3s;
-    border-radius: 3px;
-    z-index: 10;
-}
-
-.back-to-shelf:hover {
-    background: #8d6e63;
-    color: #f4e4bc;
-}
-
-/* 右上角書籤感按鈕 */
-.close-book-tag {
-    position: absolute;
-    top: 0;
-    right: 50px;
-    background: #b71c1c;
-    color: white;
-    padding: 10px 15px 20px;
-    border: none;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
-    cursor: pointer;
-    writing-mode: vertical-rl;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    transition: 0.3s;
-}
-
-.close-book-tag:hover {
-    padding-top: 5px; /* 滑鼠移上去有一點拉動感 */
-}
-
-/* 底部裝飾 */
-.parchment-footer {
-    text-align: center;
-    margin-top: 50px;
-    color: #8d6e63;
-    opacity: 0.6;
-    font-size: 0.9rem;
-}
-
-
 #reading-overlay.hidden { display: none; opacity: 0; pointer-events: none; }
 
+/* 返回與闔上按鈕 */
+.back-to-shelf {
+    position: absolute; top: 25px; left: 30px;
+    background: none; border: 1px solid #8d6e63; color: #8d6e63;
+    padding: 5px 15px; cursor: pointer; transition: 0.3s; z-index: 11;
+}
+.back-to-shelf:hover { background: #8d6e63; color: #f4e4bc; }
+
+.close-book-tag {
+    position: absolute; top: 0; right: 50px;
+    background: #b71c1c; color: white; padding: 10px 15px 20px;
+    border: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+    cursor: pointer; writing-mode: vertical-rl; letter-spacing: 2px; transition: 0.3s;
+}
+
 .parchment {
-    width: 80%; max-width: 800px; height: 80vh;
+    width: 85%; max-width: 850px; height: 80vh;
     background-color: var(--paper-base);
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEVMaXGcnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJyT945uAAAAGnRSTlMAAAAAAgMEBgcICQoMDQ4QEhMUFRYXGBkaG9pL/K4AAAAJcEhZcwAACxMAAAsTAQCanBgAAABESURBVHic7c4xAQAwDMCwX5K/5x9k4D4GAAAAAASUVORK5CYII='); /* 簡單的羊皮紙點狀紋理基色，可自行替換成羊皮紙圖 */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEVMaXGcnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJyT945uAAAAGnRSTlMAAAAAAgMEBgcICQoMDQ4QEhMUFRYXGBkaG9pL/K4AAAAJcEhZcwAACxMAAAsTAQCanBgAAABESURBVHic7c4xAQAwDMCwX5K/5x9k4D4GAAAAAASUVORK5CYII=');
     background-size: 300px;
-    padding: 60px;
-    box-shadow: 0 10px 50px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.1);
-    position: relative;
-    overflow-y: auto; /* 內容過長可滾動 */
-    border-radius: 10px; /* 閱讀窗本身不要太硬 */
-    animation: openParchment 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+    padding: 60px; box-shadow: 0 10px 50px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.1);
+    position: relative; overflow-y: auto; border-radius: 5px;
+    animation: openParchment 0.6s ease-out forwards;
 }
 
 @keyframes openParchment {
-    0% { transform: scale(0.9); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
 }
 
-.close-book {
-    position: absolute; top: 20px; right: 20px;
-    background: none; border: none;
-    color: #8d6e63; font-size: 0.9rem; cursor: pointer;
-    font-family: serif; letter-spacing: 2px;
-    transition: 0.3s;
-}
-.close-book:hover { color: #3e2723; }
+.parchment-content { color: #3e2723; line-height: 2; font-size: 1.1rem; }
+.parchment-content h1 { text-align: center; color: #880e4f; margin-bottom: 30px; border-bottom: 2px dashed rgba(136, 14, 79, 0.1); padding-bottom: 10px; }
 
-.parchment-content {
-    color: #3e2723; /* 仿古墨水色 */
-    line-height: 2; /* 閱讀行高 */
-    font-size: 1.1rem;
-    padding-bottom: 40px;
-}
-.parchment-content h1 { text-align: center; color: #880e4f; font-size: 2rem; margin-bottom: 30px; border-bottom: 2px dashed rgba(136, 14, 79, 0.2); padding-bottom: 10px; }
-.parchment-content p { margin-bottom: 1.8rem; text-align: justify; letter-spacing: 1px;}
-
-/* 隱藏代碼倉庫 */
-.hidden { display: none !important; }
-
-/* 針對 Afterlife 層的補強 (確保在閱讀窗之下) */
-#afterlife-layer { z-index: 100; }
-
-
-
-/* 提示滑動 */
-.scroll-hint { 
-    margin-top: 50px; color: #ffffff; text-align: center; 
-    animation: bounce 2s infinite; opacity: 0.5; 
-    display: flex; flex-direction: column; align-items: center; 
-}
-.scroll-hint .arrow { color: var(--gold); font-size: 1.5rem; }
-
-@keyframes bounce { 
-    0%, 100% { transform: translateY(0); opacity: 0.4; } 
-    50% { transform: translateY(10px); opacity: 0.9; } 
-}
-
-/* 4. Afterlife 層 (死後世界) */
+/* --- 死後世界 (Afterlife Layer) --- */
 #afterlife-layer {
     height: 100vh; background: #050505; position: relative;
     overflow: hidden; display: flex; justify-content: center; align-items: center;
-}
-
-.mirror-shards {
-    position: absolute; width: 100%; height: 100%;
-    background: linear-gradient(45deg, #1a1a2e 25%, transparent 25%) -50px 0,
-                linear-gradient(-45deg, #1a1a2e 25%, transparent 25%) -50px 0;
-    background-size: 100px 100px; opacity: 0.05;
-}
-
-.paper {
-    background: #f0f0f0; color: #222; padding: 30px; width: 250px;
-    position: absolute; top: -600px; left: 50%; transform: translateX(-50%) rotate(-10deg);
-    box-shadow: 10px 10px 40px rgba(0,0,0,0.8);
-    transition: top 3s cubic-bezier(0.2, 0.8, 0.2, 1), transform 3s ease;
     z-index: 100;
 }
-
-/* 觸發紙張飄入 */
+.mirror-shards { position: absolute; width: 100%; height: 100%; background: linear-gradient(45deg, #1a1a2e 25%, transparent 25%) -50px 0; background-size: 100px 100px; opacity: 0.05; }
+.paper {
+    background: #f0f0f0; padding: 30px; width: 250px;
+    position: absolute; top: -600px; left: 50%; transform: translateX(-50%) rotate(-10deg);
+    box-shadow: 10px 10px 40px rgba(0,0,0,0.8);
+    transition: top 2.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 3s ease;
+}
 body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 
-.paper-content h2 { border-bottom: 1px solid #ccc; font-size: 1.1rem; padding-bottom: 10px; }
-.rules-text p { font-size: 0.9rem; line-height: 1.8; margin: 5px 0; }
-.seal { text-align: right; font-style: italic; color: #888; font-size: 0.8rem; margin-top: 20px; }
+.afterlife-title { position: absolute; bottom: 10%; color: #1a1a1a; font-size: 2rem; letter-spacing: 15px; text-align: center; width: 100%; pointer-events: none;}
 
-.afterlife-title {
-    position: absolute; bottom: 10%; color: #1a1a1a;
-    font-size: 2rem; letter-spacing: 15px; text-align: center; width: 100%;
-}
+/* --- 人物誌排版 --- */
+.char-profile { display: flex; gap: 40px; align-items: flex-start; margin-top: 20px; }
+.char-avatar-frame { flex: 0 0 180px; display: flex; flex-direction: column; align-items: center; }
+.char-avatar { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; }
+.char-name-vertical { writing-mode: vertical-rl; color: #3e2723; font-size: 1.2rem; font-weight: bold; letter-spacing: 5px; margin-top: 20px; }
+.char-info { flex: 1; }
+.char-desc p { margin-bottom: 1.2rem; text-align: justify; }
 
-/* 5. 響應式優化 */
-@media (max-width: 600px) {
-    :root { --book-w: 36px; }
-    .bookshelf { gap: 5px; height: 350px; }
-    .parchment { width: 95%; height: 90vh; padding: 40px 20px; }
-    .parchment-content { font-size: 1rem; line-height: 1.8; }
-    .parchment-content h1 { font-size: 1.6rem; }
-}
-
-/* --- 人物誌精美排版 --- */
-
-.char-profile {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
-    margin-top: 20px;
-}
-
-/* 左側頭像框 */
-.char-avatar-frame {
-    flex: 0 0 180px; /* 固定寬度 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-.char-avatar {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%; /* 圓形頭像 */
-    border: 3px solid var(--gold); /* 金框 */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    object-fit: cover; /* 確保圖片不變形 */
-    background: #fff; /* 無圖片時的底色 */
-}
-
-/* 無圖片時的替代樣式 */
-.avatar-placeholder {
-    width: 150px; height: 150px; border-radius: 50%;
-    border: 3px solid var(--gold); background: #3e2723;
-    color: var(--gold); font-size: 4rem; display: flex;
-    justify-content: center; align-items: center;
-    font-family: serif;
-}
-
-/* 直式名字 */
-.char-name-vertical {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    color: #3e2723;
-    font-size: 1.2rem;
-    font-weight: bold;
-    letter-spacing: 5px;
-    margin-top: 20px;
-    opacity: 0.8;
-}
-
-/* 右側文字介紹 */
-.char-info {
-    flex: 1;
-}
-
-.char-title {
-    color: #8d6e63;
-    font-style: italic;
-    font-size: 0.95rem;
-    margin-top: -10px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.parchment-hr {
-    border: none;
-    border-top: 2px dashed rgba(136, 14, 79, 0.2);
-    margin: 20px 0;
-}
-
-.char-desc p {
-    margin-bottom: 1.2rem;
-    line-height: 1.8;
-    text-align: justify;
-}
-
-.char-desc strong {
-    color: #880e4f; /* 強調顏色 */
-}
-
-/* 人物之間的分割線 */
-.sep-line {
-    margin-top: 50px;
-    padding-top: 30px;
-    border-top: 1px solid rgba(0,0,0,0.1);
-}
-
-/* 手機版排版優化 */
+/* 響應式優化 */
 @media (max-width: 768px) {
-    .char-profile {
-        flex-direction: column; /* 直式排列 */
-        align-items: center;
-        gap: 20px;
-    }
-    .char-avatar-frame {
-        flex: 0 0 auto;
-        width: 100%;
-        flex-direction: row; /* 頭像與名字橫向 */
-        justify-content: center;
-        gap: 20px;
-    }
-    .char-name-vertical {
-        writing-mode: horizontal-tb; /* 名字變橫式 */
-        margin-top: 0;
-    }
+    :root { --book-w: 45px; }
+    .bookshelf { gap: 6px; }
+    .char-profile { flex-direction: column; align-items: center; }
+    .parchment { width: 95%; padding: 40px 20px; }
 }
-
