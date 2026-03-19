@@ -172,10 +172,30 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 
 
 .parchment {
-    width: 85%; max-width: 850px; height: 85vh; background-color: var(--paper-base);
-    padding: 100px 60px 40px; box-shadow: 0 10px 50px #000; position: relative; overflow-y: auto;  box-sizing: border-box; /* 確保 padding 不會撐大盒子 */
-} 
+    width: 85%; max-width: 850px; height: 85vh; 
+    
+    /* ✦ 修正：將原本的單色背景改為細緻的羊皮紙漸層紋理 */
+    background-color: var(--paper-base); /* 基礎底色 */
+    background-image: 
+        /* 1. 模擬紙張的不均勻污漬 (徑向漸層) */
+        radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
+        radial-gradient(circle at 20% 80%, rgba(141, 110, 99, 0.08) 0%, transparent 40%),
+        /* 2. 模擬細微的紙張纖維 (重複線性漸層) */
+        repeating-linear-gradient(120deg, rgba(0,0,0,0.01) 0px, rgba(0,0,0,0.01) 2px, transparent 2px, transparent 4px);
+    
+    padding: 100px 60px 40px; 
+    box-shadow: 0 10px 50px rgba(0,0,0,0.8); /* 優化陰影 */
+    position: relative; 
+    overflow-y: auto; 
+    box-sizing: border-box;
+    border-radius: 2px; /* 稍微圓角更有質感 */
+}
 
+/* 手機版適應：縮小書名與材質 */
+@media (max-width: 480px) {
+    .book-title { font-size: 0.85rem; letter-spacing: 2px; }
+    .book-spine::after { opacity: 0.3; } /* 手機版材質淡一點 */
+}
 
 /* --- 6. 人物誌佈局 --- */
 .char-profile {display: flex;gap: 40px;align-items: flex-start; margin-top: 20px;}
