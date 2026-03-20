@@ -166,6 +166,17 @@ function initFireflies() {
         container.appendChild(firefly);
     }
 }
+window.addEventListener('scroll', () => {
+    const afterlifeSection = document.getElementById('afterlife-layer');
+    const scrollPosition = window.scrollY + window.innerHeight / 2; // 偵測畫面中心點
+
+    if (afterlifeSection && scrollPosition >= afterlifeSection.offsetTop) {
+        document.body.classList.add('in-afterlife');
+    } else {
+        document.body.classList.remove('in-afterlife');
+    }
+});
+
 
 // 確保在頁面載入後執行
 document.addEventListener('DOMContentLoaded', initFireflies);
