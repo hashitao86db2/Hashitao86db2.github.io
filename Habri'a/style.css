@@ -457,7 +457,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     position: absolute;
     bottom: 20px;
     left: 15px;
-    font-family: 'Shippori Mincho B1', Dancing Script; /* 由於我無法直接載入英文草寫字體，建議你找到草寫字體後替換 */
+    font-family: 'Dancing Script', cursive; /*草寫字體後替換 */
     font-style: italic; /* 用斜體模擬草寫感 */
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.85rem;
@@ -668,7 +668,7 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
         white-space: nowrap; /* 強制文字不折行 */
         flex-shrink: 0; /* 防止按鈕被擠壓變形 */
     }
-
+}
 /* --- 8. 響應式優化 (平板 & 手機) --- */
 @media (max-width: 768px) {
     :root { --book-w: 60px; }
