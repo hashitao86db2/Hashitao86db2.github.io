@@ -141,41 +141,96 @@ function unlockBook(element, url) {
     }, 600); 
 }
 function initFireflies() {
-    const container = document.getElementById('firefly-container');
-    const count = 25; // 想讓畫面更華麗可以調高到 40
+    console.log("螢火蟲初始化啟動..."); // 可以在瀏覽器 F12 檢查是否有跑這行
+    const backContainer = document.getElementById('firefly-back');
+    const frontContainer = document.getElementById('firefly-front');
+    
+    if (!backContainer || !frontContainer) {
+        console.error("找不到粒子容器！");
+        return;
+    }
 
-    for (let i = 0; i < count; i++) {
+    const totalCount = 40; 
+
+    for (let i = 0; i < totalCount; i++) {
         const firefly = document.createElement('div');
         firefly.className = 'firefly';
         
-        // 隨機初始位置
+        // 隨機分配層次
+        const isFront = Math.random() > 0.7;
+        const targetContainer = isFront ? frontContainer : backContainer;
+        
         firefly.style.left = Math.random() * 100 + '%';
         firefly.style.top = Math.random() * 100 + '%';
         
-        // 隨機大小 (4px - 8px)
-        const size = (Math.random() * 4 + 4) + 'px';
-        firefly.style.width = size;
-        firefly.style.height = size;
+        const size = isFront ? (Math.random() * 4 + 5) : (Math.random() * 2 + 3);
+        firefly.style.width = size + 'px';
+        firefly.style.height = size + 'px';
         
-        // 隨機動畫時間與延遲，讓它們閃爍不同步
-        const duration = (Math.random() * 10 + 10) + 's';
-        const delay = (Math.random() * 10) + 's';
-        firefly.style.animationDuration = duration;
-        firefly.style.animationDelay = delay;
+        firefly.style.animationDuration = (Math.random() * 8 + 8) + 's';
+        firefly.style.animationDelay = (Math.random() * 10) + 's';
         
-        container.appendChild(firefly);
+        targetContainer.appendChild(firefly);
     }
 }
-window.addEventListener('scroll', () => {
-    const afterlifeSection = document.getElementById('afterlife-layer');
-    const scrollPosition = window.scrollY + window.innerHeight / 2; // 偵測畫面中心點
+function initFireflies() {
+    const backContainer = document.getElementById('firefly-back');
+    const frontContainer = document.getElementById('firefly-front');
+    if (!backContainer || !frontContainer) return;
 
-    if (afterlifeSection && scrollPosition >= afterlifeSection.offsetTop) {
+    const totalCount = 40; // 總數增加一點，因為分兩層了
+
+    for (let i = 0; i < totalCount; i++) {
+        const firefly = document.createElement('div');
+        firefly.className = 'firefly';
+        
+        // 隨機決定要放前面還是後面 (50% 機率)
+        const targetContainer = Math.random() > 0.5 ? frontContainer : backContainer;
+        
+        firefly.style.left = Math.random() * 100 + '%';
+        firefly.style.top = Math.random() * 100 + '%';
+        
+        // 前面的粒子可以稍微大一點點
+        const isFront = targetContainer === frontContainer;
+        const size = isFront ? (Math.random() * 5 + 5) : (Math.random() * 3 + 3);
+        
+        firefly.style.width = size + 'px';
+        firefly.style.height = size + 'px';
+        
+        firefly.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        firefly.style.animationDelay = (Math.random() * 10) + 's';
+        
+        targetContainer.appendChild(firefly);
+    }
+}
+
+// 確保在所有資源（包含圖片）載入後再跑一次，或是 DOM 好了就跑
+if (document.readyState === "complete" || document.readyState === "interactive") {
+    initFireflies();
+} else {
+    document.addEventListener('DOMContentLoaded', initFireflies);
+}
+
+// 修正：將變色偵測與你原本的 scroll 邏輯合併
+window.addEventListener('scroll', () => {
+    const afterlife = document.getElementById('afterlife-layer');
+    if (!afterlife || !isEntered) return; 
+
+    const scrollPos = window.scrollY || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const afterlifeTop = afterlife.offsetTop;
+
+    // 當畫面進入死後世界區域時變色
+    if (scrollPos + (windowHeight / 2) > afterlifeTop) {
         document.body.classList.add('in-afterlife');
     } else {
         document.body.classList.remove('in-afterlife');
     }
+    
+    // 你原本的 hasBounced 邏輯可以繼續寫在下面...
+
 });
+
 
 
 // 確保在頁面載入後執行
