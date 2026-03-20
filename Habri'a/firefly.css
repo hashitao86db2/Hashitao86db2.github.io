@@ -1,26 +1,30 @@
-/* 螢火蟲容器：固定在背景，不干擾點擊 */
+/* 螢火蟲容器 */
 .firefly-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1; /* 確保它在所有內容（如書架）的後方 */
+    z-index: 0; /* 調整到背景層 */
     pointer-events: none;
     overflow: hidden;
+    transition: filter 1s ease; /* 讓變色過程平滑 */
 }
 
-/* 粒子基礎樣式 */
+/* 當 body 有 'in-afterlife' 這個 class 時，粒子全部變藍色 */
+body.in-afterlife .firefly-container {
+    filter: hue-rotate(180deg) brightness(1.2); /* 將黃光轉為藍/青色 */
+}
+
 .firefly {
     position: absolute;
     border-radius: 50%;
-    background: #fff9ac; /* 淡淡的暖黃光 */
+    background: #fff9ac;
     box-shadow: 0 0 10px #fffd8d, 0 0 20px #ffea00;
     opacity: 0;
-    animation: firefly-flash linear infinite;
+    animation: firefly-flash 10s linear infinite;
 }
 
-/* 隨機移動與閃爍動畫 */
 @keyframes firefly-flash {
     0% { opacity: 0; transform: scale(0.1) translate(0, 0); }
     30% { opacity: 0.8; transform: scale(1) translate(30px, -30px); }
