@@ -457,7 +457,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     position: absolute;
     bottom: 20px;
     left: 15px;
-    font-family: 'Shippori Mincho B1', serif; /* 由於我無法直接載入英文草寫字體，建議你找到草寫字體後替換 */
+    font-family: 'Shippori Mincho B1', Dancing Script; /* 由於我無法直接載入英文草寫字體，建議你找到草寫字體後替換 */
     font-style: italic; /* 用斜體模擬草寫感 */
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.85rem;
