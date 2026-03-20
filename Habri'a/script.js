@@ -140,3 +140,32 @@ function unlockBook(element, url) {
         }, 500);
     }, 600); 
 }
+function initFireflies() {
+    const container = document.getElementById('firefly-container');
+    const count = 25; // 想讓畫面更華麗可以調高到 40
+
+    for (let i = 0; i < count; i++) {
+        const firefly = document.createElement('div');
+        firefly.className = 'firefly';
+        
+        // 隨機初始位置
+        firefly.style.left = Math.random() * 100 + '%';
+        firefly.style.top = Math.random() * 100 + '%';
+        
+        // 隨機大小 (4px - 8px)
+        const size = (Math.random() * 4 + 4) + 'px';
+        firefly.style.width = size;
+        firefly.style.height = size;
+        
+        // 隨機動畫時間與延遲，讓它們閃爍不同步
+        const duration = (Math.random() * 10 + 10) + 's';
+        const delay = (Math.random() * 10) + 's';
+        firefly.style.animationDuration = duration;
+        firefly.style.animationDelay = delay;
+        
+        container.appendChild(firefly);
+    }
+}
+
+// 確保在頁面載入後執行
+document.addEventListener('DOMContentLoaded', initFireflies);
