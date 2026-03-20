@@ -12,7 +12,7 @@
 
 /* 層級夾層設定 */
 .firefly-container.back {
-    z-index: 0; /* 內容之後 */
+    z-index: 1; /* 內容之後 */
 }
 
 .firefly-container.front {
