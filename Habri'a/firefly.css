@@ -1,0 +1,72 @@
+/* --- 螢火蟲粒子設定 --- */
+.firefly-container {
+    position: fixed; /* 固定在畫面上，不隨捲軸滾動 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* 放到底層 */
+    pointer-events: none; /* 確保粒子不會干擾滑點擊 */
+}
+
+.firefly {
+    position: absolute;
+    width: 6px;  /* 基礎大小 */
+    height: 6px; /* 基礎大小 */
+    border-radius: 50%; /* 圓形 */
+    background: #fffd8d; /* 螢火蟲的中心顏色（亮黃色） */
+    opacity: 0; /* 預設全透明，透過動畫變亮 */
+    
+    /* 核心：魔法感來源 - 雙層發光效果 */
+    /* 1st 內部發光, 2nd 外部光暈 */
+    box-shadow: 0 0 10px #fffd8d, 0 0 20px #ffea00; 
+
+    /* 動態設定 */
+    /* 我們將會對每個粒子設定不同的位置、延遲和速度，在下方使用 nth-child 分開設定 */
+}
+
+/* --- 動態核心: 閃爍 & 移動 --- */
+@keyframes flash-move {
+    /* 0%: 起始點，隱形，螢火蟲變暗 */
+    0% {
+        opacity: 0;
+        transform: scale(0.1) translate(0, 0);
+    }
+    
+    /* 10%-40%: 螢火蟲亮起 */
+    20% {
+        opacity: 0.8;
+        transform: scale(1) translate(20px, -20px); /* 輕微移動 */
+    }
+
+    /* 60%-90%: 繼續移動並開始變暗 */
+    70% {
+        opacity: 0.6;
+        transform: scale(1.1) translate(-20px, 10px); /* 換個方向移動 */
+    }
+
+    /* 100%: 終點，完全變暗，螢火蟲完全飛離（模擬死亡或離開） */
+    100% {
+        opacity: 0;
+        transform: scale(0.1) translate(0, -100vh); /* 往上飛離開畫面 */
+    }
+}
+
+/* --- 分別設定每個粒子的個性 (位置, 速度, 延遲) --- */
+/* 這部分最花時間，我們手動設定 15 個不同的組合。 */
+
+.firefly:nth-child(1) { top: 10%; left: 10%; animation: flash-move 8s infinite 1s; }
+.firefly:nth-child(2) { top: 20%; left: 30%; animation: flash-move 12s infinite 0s; width: 4px; height: 4px; }
+.firefly:nth-child(3) { top: 70%; left: 20%; animation: flash-move 9s infinite 3s; box-shadow: 0 0 10px #fffd8d, 0 0 25px #ffea00; }
+.firefly:nth-child(4) { top: 40%; left: 50%; animation: flash-move 10s infinite 2s; width: 8px; height: 8px; }
+.firefly:nth-child(5) { top: 80%; left: 60%; animation: flash-move 7s infinite 5s; }
+.firefly:nth-child(6) { top: 15%; left: 80%; animation: flash-move 11s infinite 1s; width: 5px; height: 5px; }
+.firefly:nth-child(7) { top: 60%; left: 90%; animation: flash-move 9s infinite 4s; }
+.firefly:nth-child(8) { top: 5%; left: 60%; animation: flash-move 13s infinite 2s; }
+.firefly:nth-child(9) { top: 85%; left: 10%; animation: flash-move 8s infinite 6s; width: 7px; height: 7px; }
+.firefly:nth-child(10) { top: 30%; left: 70%; animation: flash-move 10s infinite 0s; }
+.firefly:nth-child(11) { top: 90%; left: 80%; animation: flash-move 12s infinite 3s; }
+.firefly:nth-child(12) { top: 50%; left: 10%; animation: flash-move 9s infinite 5s; width: 4px; height: 4px;}
+.firefly:nth-child(13) { top: 65%; left: 40%; animation: flash-move 7s infinite 1s; }
+.firefly:nth-child(14) { top: 10%; left: 90%; animation: flash-move 11s infinite 4s; }
+.firefly:nth-child(15) { top: 75%; left: 95%; animation: flash-move 10s infinite 2s; width: 9px; height: 9px;}
