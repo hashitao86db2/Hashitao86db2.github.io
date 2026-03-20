@@ -44,4 +44,90 @@ function initFireflies() {
 }
 
 // 3. 進入世界
-function showHub()
+function showHub() {
+    isEntered = true; 
+    const intro = document.getElementById('intro-layer');
+    const hub = document.getElementById('main-hub');
+    if (!intro || !hub) return;
+
+    intro.style.opacity = '0';
+    initBookshelf();
+
+    setTimeout(() => {
+        intro.style.display = 'none';
+        hub.classList.add('active');
+        document.body.classList.remove('is-locked');
+        document.body.classList.add('is-unlocked');
+    }, 1500);
+}
+
+// 4. 合併後的滾動邏輯 (變色 + 回彈 + 紙張)
+window.addEventListener('scroll', () => {
+    const afterlife = document.getElementById('afterlife-layer');
+    if (!afterlife || !isEntered || document.body.classList.contains('is-locked')) return; 
+    
+    const scrollPos = window.scrollY || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const afterlifeTop = afterlife.offsetTop;
+
+    // A. 處理第一次滑動回彈
+    if (!hasBounced && (scrollPos + windowHeight > afterlifeTop + 50)) {
+        hasBounced = true;
+        window.scrollTo({ top: afterlifeTop - windowHeight, behavior: 'smooth' });
+        return; 
+    }
+
+    // B. 處理變色與紙張飄入
+    // 只要滑到一半接近死後世界，就觸發 body class
+    if (scrollPos + (windowHeight / 2) > afterlifeTop) {
+        document.body.classList.add('in-afterlife');
+    } else {
+        document.body.classList.remove('in-afterlife');
+    }
+});
+
+// --- 其他功能 (閱讀、切換角色、束帶動畫) ---
+
+function openBook(contentId) {
+    const overlay = document.getElementById('reading-overlay');
+    const article = document.getElementById('book-content');
+    const depotContent = document.getElementById(`content-${contentId}`);
+    if (!overlay || !article || !depotContent) return;
+    article.innerHTML = depotContent.innerHTML;
+    overlay.classList.remove('hidden');
+    document.body.classList.replace('is-unlocked', 'is-locked');
+}
+
+function closeBook() {
+    const overlay = document.getElementById('reading-overlay');
+    if (!overlay) return;
+    overlay.classList.add('hidden');
+    document.body.classList.replace('is-locked', 'is-unlocked');
+}
+
+let currentCharIndex = 1;
+const totalChars = 3; 
+function changeChar(direction) {
+    document.getElementById(`char-${currentCharIndex}`).classList.remove('active');
+    currentCharIndex += direction;
+    if (currentCharIndex > totalChars) currentCharIndex = 1;
+    if (currentCharIndex < 1) currentCharIndex = totalChars;
+    document.getElementById(`char-${currentCharIndex}`).classList.add('active');
+    document.getElementById('page-indicator').innerText = `${currentCharIndex} / ${totalChars}`;
+}
+
+function unlockBook(element, url) {
+    if (element.classList.contains('is-opening')) return;
+    element.classList.add('is-opening');
+    setTimeout(() => {
+        window.open(url, '_blank');
+        setTimeout(() => element.classList.remove('is-opening'), 500);
+    }, 600); 
+}
+
+// 啟動！
+document.addEventListener('DOMContentLoaded', () => {
+    initFireflies();
+    // 再次確認載入完成
+    window.onload = initFireflies;
+});
