@@ -123,3 +123,20 @@ function changeChar(direction) {
     // 讓滾動條回到頂部（如果內容很長）
     document.querySelector('.parchment').scrollTop = 0;
 }
+function unlockBook(element, url) {
+    // 1. 防止重複點擊
+    if (element.classList.contains('is-opening')) return;
+
+    // 2. 加入動畫 Class
+    element.classList.add('is-opening');
+
+    // 3. 等待動畫完成 (0.6秒) 後跳轉
+    setTimeout(() => {
+        window.open(url, '_blank');
+        
+        // 跳轉後移除 class，這樣回來時束帶又是關著的
+        setTimeout(() => {
+            element.classList.remove('is-opening');
+        }, 500);
+    }, 600); 
+}
