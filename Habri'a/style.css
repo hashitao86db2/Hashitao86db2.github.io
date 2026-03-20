@@ -479,67 +479,51 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 /* =========================================
    ✦ 新增：束帶與磁扣 CSS 繪圖
    ========================================= */
-
-/* 束帶主體 (橫跨書封的帶子) */
+/* --- 束帶主體：右邊貼到底 --- */
 .book-strap {
     position: absolute;
-    top: 50%;       /* 垂直置中 */
-    right: 12px;    /* 靠右對齊 */
+    top: 50%;
+    right: 0;        /* ✦ 修正：貼到最右邊邊界 */
     transform: translateY(-50%);
-    width: 60px;     /* 束帶寬度 */
-    height: 25px;    /* 束帶高度 */
-    background: #4e342e; /* 比書皮稍微深一點的皮革色 */
-    border-radius: 5px;
-    z-index: 3;      /* 壓在所有東西上面 */
-    
-    /* 利用多重陰影做出凹陷感與厚度感 */
-    box-shadow: 
-        inset 0 2px 4px rgba(0,0,0,0.3), /* 內陰影做出壓痕 */
-        3px 3px 6px rgba(0,0,0,0.4);   /* 外陰影做出厚度 */
+    width: 70px;     /* 寬度稍微加長一點點 */
+    height: 30px;
+    background: #4e342e; 
+    border-radius: 5px 0 0 5px; /* 只有左邊圓角，右邊是平的貼齊書邊 */
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.3);
 }
 
-/* 束帶的皮革紋理偽元素 */
-.book-strap::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 4px);
-    border-radius: 5px;
-}
-
-/* 磁扣 (半圓長條狀扣環) */
-.strap-clasp {
+/* --- 黃色圓點 --- */
+.strap-dot {
     position: absolute;
     top: 50%;
-    left: -15px;    /* 讓扣環扣到束帶外面 */
+    left: 15px;      /* 圓點放在帶子的左側一點 */
     transform: translateY(-50%);
-    width: 30px;     /* 扣環寬度 */
-    height: 16px;    /* 扣環高度 */
-    background: var(--gold); /* 磁扣用燙金色 */
-    
-    /* ✦ 核心修正：半圓長條狀 (左邊圓，右邊直) */
-    border-radius: 10px 0 0 10px; 
-    
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.5); /* 磁扣立體陰影 */
-    z-index: 4;      /* 壓在束帶上面 */
-}
-
-/* 磁扣的小細節 (模擬金屬光澤) */
-.strap-clasp::after {
-    content: "";
-    position: absolute;
-    top: 4px; left: 6px; width: 6px; height: 6px;
-    background: rgba(255,255,255,0.6); /* 金屬光澤點 */
+    width: 12px;
+    height: 12px;
+    background: var(--gold);
     border-radius: 50%;
-    filter: blur(1px);
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
 }
 
-/* 滑鼠懸停時束帶的輕微動畫 */
-.physical-book:hover .book-strap {
-    transform: translateY(-50%) translateX(3px); /* 束帶稍微往右移，模擬鬆開感 */
-    box-shadow: 
-        inset 0 2px 4px rgba(0,0,0,0.3),
-        5px 5px 10px rgba(0,0,0,0.5);   /* 懸停時陰影加深 */
+/* --- 動畫狀態：束帶打開 (往右滑出並旋轉) --- */
+.physical-book.is-opening .book-strap {
+    transform: translateY(-50%) translateX(100%) rotate(10deg); /* 往右彈開 */
+    opacity: 0; /* 彈開後消失 */
+}
+
+/* 讓書本點擊時有一點點震動感 */
+.physical-book.is-opening {
+    animation: bookShake 0.4s ease;
+}
+
+@keyframes bookShake {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-52%) rotate(-1deg); }
+    75% { transform: translateX(-48%) rotate(1deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
 }
 
 /* 手機版排版適應 */
