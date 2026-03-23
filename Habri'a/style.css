@@ -199,11 +199,91 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 
 /* --- 6. 人物誌佈局 --- */
 .char-profile {display: flex;gap: 40px;align-items: flex-start; margin-top: 20px;}
-/* 左側頭像框 */
-.char-avatar-frame {flex: 0 0 180px; /* 固定寬度 */display: flex;flex-direction: column; align-items: center;position: relative;}
-.char-avatar {width: 150px;height: 150px;border-radius: 50%; /* 圓形頭像 */border: 3px solid var(--gold); /* 金框 */box-shadow: 0 5px 15px rgba(0,0,0,0.3);object-fit: cover; /* 確保圖片不變形 */ background: #fff; }/* 無圖片時的底色 */
-/* 無圖片時的替代樣式 */
-.avatar-placeholder {width: 150px; height: 150px; border-radius: 50%;border: 3px solid var(--gold); background: #3e2723; color: var(--gold); font-size: 4rem; display: flex; justify-content: center; align-items: center;font-family: serif;}
+/* --- 人物誌頭像：自定義 SVG 框架 --- */
+
+.char-avatar-frame {
+    flex: 0 0 180px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* 頭像主體 */
+.char-avatar {
+    width: 140px; /* 稍微縮小，確保被框包住 */
+    height: 140px;
+    object-fit: cover;
+    background: #fff;
+    z-index: 2;
+}
+
+/* 框架裝飾層：共同樣式 */
+.char-avatar-frame::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    z-index: 10; /* 壓在照片上面 */
+    pointer-events: none;
+}
+
+/* --- 第一頁：花型框 (圓形) --- */
+.char-avatar-frame.type-flower .char-avatar,
+.char-avatar-frame.type-flower .avatar-placeholder {
+    border-radius: 50%; /* 強制圓形 */
+    border: none; /* 移除原本的金邊，改由 SVG 提供邊界感 */
+}
+
+.char-avatar-frame.type-flower::after {
+    background-image: url('img/花.svg');
+    transform: scale(1.1); /* 稍微放大框架 */
+}
+
+/* --- 第二、三頁：方形框 --- */
+.char-avatar-frame.type-square .char-avatar,
+.char-avatar-frame.type-square .avatar-placeholder {
+    border-radius: 5px; /* 稍微帶點圓角的方形 */
+    width: 120px; /* 方形框內徑不同，稍微調整尺寸 */
+    height: 120px;
+    border: none;
+}
+
+.char-avatar-frame.type-square::after {
+    background-image: url('img/方.svg');
+    transform: scale(1.3); /* 方形框通常需要放大一點才好看 */
+}
+
+/* 修正 placeholder 位置與大小 */
+.avatar-placeholder {
+    position: absolute;
+    z-index: 1;
+    /* 繼承父層縮放與圓角設定 */
+}
+
+/* 手機版縮放修正 */
+@media (max-width: 768px) {
+    .char-avatar-frame {
+        flex: 0 0 140px;
+        height: 140px;
+    }
+    .char-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    .char-avatar-frame.type-square .char-avatar {
+        width: 85px;
+        height: 85px;
+    }
+}
+
 /* 直式名字 */
 .char-name-vertical { writing-mode: vertical-rl; text-orientation: mixed; color: #3e2723;font-size: 1.2rem;font-weight: bold;letter-spacing: 5px; margin-top: 20px;opacity: 0.8;}
 /* 右側文字介紹 */
