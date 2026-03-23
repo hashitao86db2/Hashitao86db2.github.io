@@ -924,52 +924,78 @@ section {
 }
 
 /* 1. 頂層：實現【大虛線框】圓角 */
-/* --- 修正：放大花紋、找回直線、改咖啡色、縮小空白 --- */
+/* --- 修正版：咖啡色邊框邏輯 (電腦與手機通用) --- */
+
 .emoji-list-container {
     width: 95%; 
-    max-width: 480px; /* 稍微放寬，配合大花紋 */
-    margin: 40px auto; 
+    max-width: 480px; 
+    margin: 60px auto 40px; /* 增加頂部間距給裝飾圖 */
     
-    /* 1. 調整內邊距：縮小四周空白 */
-    padding: 35px 15px 15px; 
-    
-    background-color: #fff; 
+    /* 1. 調整背景：使用純白，不套用濾鏡，避免干擾內容顏色 */
+    background-color: #ffffff; 
     position: relative; 
-    
-    /* 2. 放大花紋：border 從 40px 增加到 60px */
-    border: 60px solid transparent; 
+    border-radius: 10px; /* 基礎圓角防止背景溢出 */
+
+    /* 2. 邊框設定：確保直線顯示出來 */
+    border: 55px solid transparent; 
     border-image-source: url('img/角.svg'); 
-    
-    /* 3. 找回直線：slice 數值調小 (從 40% 降到 25%) */
-    /* 這會讓瀏覽器抓到更多直線部分，確保框線連起來 */
-    border-image-slice: 25%; 
+    border-image-slice: 28% fill; /* 增加 fill 確保內部背景完整，數值 28% 較能抓到直線 */
     border-image-repeat: stretch; 
     
-    /* 4. 咖啡色濾鏡：使用 sepia 讓黑色轉為原本的深咖啡色 */
-    /* #574728 對應的濾鏡效果近似如下 */
-    filter: sepia(0.6) saturate(1.5) brightness(0.6) hue-rotate(10deg);
+    /* 3. 顏色控制：改用單純的 sepia 轉咖啡色，不調亮度就不會變灰白 */
+    filter: sepia(1) saturate(1.2) hue-rotate(10deg);
 
     display: flex;
     justify-content: center; 
     align-items: flex-start;
+    padding: 15px !important; /* 縮小內邊距，讓內容靠近框 */
 }
 
-/* 5. 頂部裝飾同步調整 */
+/* 4. 頂部裝飾：固定比例與定位 */
 .emoji-list-container::before {
     content: '';
     position: absolute;
-    /* 配合變粗的邊框，調整位置 */
-    top: -45px; 
+    top: -55px; /* 配合邊框寬度上移 */
     left: 50%;
     transform: translateX(-50%);
-    width: 180px; /* 放大中央裝飾 */
-    height: 80px;
+    width: 200px; 
+    height: 100px;
     background: url('img/上面.svg') no-repeat center/contain;
-    z-index: 11;
+    z-index: 100;
     pointer-events: none;
+    /* 濾鏡需與父層一致 */
+    filter: sepia(1) saturate(1.2) hue-rotate(10deg);
+}
+
+/* --- 手機版精確修正 --- */
+@media (max-width: 768px) {
+    .emoji-list-container {
+        /* 手機版花紋稍微縮小到 40px */
+        border-width: 40px; 
+        border-image-slice: 28% fill;
+        
+        width: 90%;
+        margin-top: 50px;
+        padding: 10px !important;
+    }
     
-    /* 同樣套用咖啡色濾鏡 */
-    filter: sepia(0.6) saturate(1.5) brightness(0.6) hue-rotate(10deg);
+    .emoji-list-container::before {
+        width: 150px; /* 手機版裝飾圖適度縮放 */
+        height: 70px;
+        top: -40px;
+    }
+}
+
+/* 5. 修正內部的 emoji-gallery，確保不會因為邊框太厚而擠壞 */
+.interactive-gallery .emoji-gallery {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 10px; 
+    width: 100%;
+    /* 確保裡面的細節標籤不會被邊框擋住 */
+    position: relative;
+    z-index: 5;
 }
 /* 2. 表情符號佈局：兩排，一排四個 */
 .interactive-gallery .emoji-gallery {
@@ -1087,45 +1113,6 @@ section {
     text-align: center;
 }
 
-/* --- 手機版同步修正：放大花紋、找回直線、縮小間距 --- */
-@media (max-width: 768px) {
-    .emoji-list-container {
-        /* 1. 放大花紋：手機版設為 45px 比較顯眼但不過大 */
-        border-width: 45px; 
-        
-        /* 2. 確保直線不消失：必須重複宣告 slice */
-        border-image-slice: 25%; 
-        
-        /* 3. 縮小空白：內邊距調緊 */
-        padding: 25px 10px 10px; 
-        
-        max-width: 98%;
-        margin: 30px auto;
-
-        /* 咖啡色濾鏡 (若電腦版沒生效，手機版也要加) */
-        filter: sepia(0.6) saturate(1.5) brightness(0.6) hue-rotate(10deg);
-    }
-    
-    .emoji-list-container::before {
-        /* 配合變粗的邊框調大中央裝飾 */
-        width: 140px; 
-        height: 60px;
-        top: -35px; /* 調整位置讓它壓在加厚的邊框上 */
-        
-        /* 咖啡色濾鏡 */
-        filter: sepia(0.6) saturate(1.5) brightness(0.6) hue-rotate(10deg);
-    }
-
-    /* 修正內部畫廊，確保在窄螢幕不會太擠 */
-    .interactive-gallery .emoji-gallery {
-        gap: 10px;
-    }
-    
-    /* 讓故事標籤字體稍微小一點點，避免在框內擠太滿 */
-    .interactive-gallery .emoji-trigger .label-text {
-        font-size: 0.75rem;
-    }
-}
 
 /* ===================================== */
 /* C. 展開內容區塊：書櫃與目錄樣式 */
