@@ -125,43 +125,37 @@ function unlockBook(element, url) {
     }, 600); 
 }
 
-// --- 地圖展開動畫控制 ---
+// 展開地圖
 function animateMapUnfold() {
     const trigger = document.querySelector('.map-trigger');
-    const actualMap = document.getElementById('actual-map');
+    const overlay = document.getElementById('actual-map');
     
-    // 1. 儀式感第一步：讓折紙圖示快速淡出
-    trigger.style.opacity = '0';
-    trigger.style.transition = 'opacity 0.3s ease';
+    // 取得觸發器的位置資訊
+    const rect = trigger.getBoundingClientRect();
+    const originX = rect.left + rect.width / 2;
+    const originY = rect.top + rect.height / 2;
+
+    // 設定動畫的起點為觸發器的中心
+    overlay.style.transformOrigin = `${originX}px ${originY}px`;
     
-    // 延遲一小段時間後讓它徹底消失，防止擋到地圖
+    // 執行動畫
+    overlay.classList.add('unfolded');
+    
+    // 鎖定背景捲動防止跑位
+    document.body.style.overflow = 'hidden';
+}
+
+// 收起地圖 (退出)
+function animateMapFold() {
+    const overlay = document.getElementById('actual-map');
+    
+    // 執行縮小動畫
+    overlay.classList.remove('unfolded');
+    
+    // 恢復捲動
     setTimeout(() => {
-        trigger.classList.add('hidden');
-    }, 300);
-
-    // 2. 計算動畫起點 (Transform Origin)
-    // 我們需要地圖從折紙圖示所在的「左上角」攤開
-    const parchment = document.querySelector('.parchment');
-    const parchmentRect = parchment.getBoundingClientRect();
-    const triggerRect = trigger.getBoundingClientRect();
-    
-    // 計算折紙圖示相對於羊皮紙容器的中心點百分比
-    const originX = ((triggerRect.left + triggerRect.width / 2) - parchmentRect.left) / parchmentRect.width * 100;
-    const originY = ((triggerRect.top + triggerRect.height / 2) - parchmentRect.top) / parchmentRect.height * 100;
-    
-    // 動態設定地圖的動畫起點
-    actualMap.style.transformOrigin = `${originX}% ${originY}%`;
-
-    // 3. 儀式感第二步：觸發 CSS 動畫 (攤平)
-    // 加上一個極短的延遲，確保 transform-origin 先生效
-    requestAnimationFrame(() => {
-        actualMap.classList.remove('hidden-map'); // 確保 display 不是 none
-        
-        // 加上一點點延遲讓 CSS 動畫能順利執行
-        setTimeout(() => {
-            actualMap.classList.add('unfolded');
-        }, 50);
-    });
+        document.body.style.overflow = '';
+    }, 800);
 }
 
 // 啟動！
