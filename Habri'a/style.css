@@ -792,6 +792,112 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
     animation: arrowBounce 2s infinite ease-in-out;
 }
 
+/* --- 地圖頁面專用佈局 --- */
+.map-page-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 400px; /* 確保有足夠空間展開 */
+}
+
+/* --- 1. 靜態折紙觸發器 --- */
+.map-trigger {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    /* ✦ 修正：歪歪的角度 */
+    transform: rotate(-8deg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
+}
+
+.map-trigger:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* SVG 破邊質感設定 */
+.folded-paper-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(2px 3px 5px rgba(0,0,0,0.5));
+}
+
+.folded-paper-svg .paper-outline {
+    fill: #e0cda9; /* 稍微深一點的折紙色 */
+    stroke: #8d6e63; /* 褐色邊框 */
+    stroke-width: 1;
+    /* ✦ 修正：這裡利用 SVG 特性讓邊邊看起來破破的 */
+    stroke-dasharray: 2 1; 
+}
+
+.folded-paper-svg .fold-lines {
+    fill: none;
+    stroke: rgba(141, 110, 99, 0.4); /* 淡淡的折痕 */
+    stroke-width: 0.5;
+}
+
+.map-label {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: #3e2723;
+    white-space: nowrap;
+    opacity: 0.8;
+}
+
+/* --- 2. 實際地圖 PNG (動畫初始狀態) --- */
+.map-content {
+    position: absolute;
+    inset: 0; /* 撐滿整個容器 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    /* ✦ 核心動畫初始狀態：縮小成點、透明 */
+    transform: scale(0.01); 
+    transform-origin: 50px 50px; /* 動畫起點在折紙圖示的位置 (需精確計算) */
+    opacity: 0;
+    
+    /* 設定動畫過渡 */
+    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+    z-index: 5;
+}
+
+/* ✦ 核心動畫結束狀態：攤平成 1:1、完全透明 */
+.map-content.unfolded {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+}
+
+.map-png {
+    max-width: 90%;
+    max-height: 70vh; /* 限制高度防止超出書頁 */
+    border: 1px solid #8d6e63;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    background: #fff; /* 地圖底色 */
+    padding: 5px;
+}
+
+.map-title {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #3e2723;
+    letter-spacing: 5px;
+}
+
+/* 手機版修正：折紙圖示小一點 */
+@media (max-width: 768px) {
+    .map-trigger { width: 70px; height: 70px; top: 15px; left: 15px; }
+    .map-png { max-width: 95%; }
+}
+
 @keyframes arrowBounce {
     0%, 100% { transform: translateY(0); opacity: 0.5; }
     50% { transform: translateY(10px); opacity: 1; }
