@@ -125,38 +125,27 @@ function unlockBook(element, url) {
     }, 600); 
 }
 
-// 展開地圖
 function animateMapUnfold() {
-    const trigger = document.querySelector('.map-trigger');
+    const trigger = document.querySelector('.map-trigger-scrap');
     const overlay = document.getElementById('actual-map');
     
-    // 取得觸發器的位置資訊
+    // 計算觸發器相對於螢幕的位置
     const rect = trigger.getBoundingClientRect();
-    const originX = rect.left + rect.width / 2;
-    const originY = rect.top + rect.height / 2;
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
 
-    // 設定動畫的起點為觸發器的中心
-    overlay.style.transformOrigin = `${originX}px ${originY}px`;
-    
-    // 執行動畫
+    // 將動畫起點釘在紙塊位置
+    overlay.style.transformOrigin = `${x}px ${y}px`;
     overlay.classList.add('unfolded');
-    
-    // 鎖定背景捲動防止跑位
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('is-locked'); // 鎖定背景捲動
 }
 
-// 收起地圖 (退出)
 function animateMapFold() {
     const overlay = document.getElementById('actual-map');
-    
-    // 執行縮小動畫
     overlay.classList.remove('unfolded');
-    
-    // 恢復捲動
-    setTimeout(() => {
-        document.body.style.overflow = '';
-    }, 800);
+    document.body.classList.remove('is-locked');
 }
+
 
 // 啟動！
 document.addEventListener('DOMContentLoaded', () => {
