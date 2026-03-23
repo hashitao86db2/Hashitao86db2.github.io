@@ -69,10 +69,13 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 }
 .book-spine.book-active { cursor: pointer; padding: 40px 0; box-sizing: border-box; }
 .book-spine.book-active:hover { transform: rotateY(0deg) translateZ(60px); z-index: 10; box-shadow: 0 0 30px var(--gold); }
+.book-filler { opacity: 0.7; filter: grayscale(1); background: #adb5a8; pointer-events: none; }
+
 .book-title { 
     writing-mode: vertical-rl; color: #fff; letter-spacing: 5px; font-size: 1.5rem; font-weight: bold; pointer-events: none; 
-    display: flex; justify-content: center; align-items: center; width: 100%; height: 80%; margin: auto; overflow: hidden; text-align: center;
+    display: flex; justify-content: center; align-items: center; width: 100%; height: 80%; margin: auto; overflow: hidden; text-align: center; z-index: 2; position: relative;
 }
+
 .book-spine::after {
     content: ""; position: absolute; inset: 0; opacity: 0.5; z-index: 1;
     background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 1px, transparent 6px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01) 1px, transparent 1px, transparent 6px);
@@ -80,7 +83,6 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 .book-spine::before, .book-filler::after { content: ''; position: absolute; left: 0px; right: 0px; height: 3px; background: rgba(212, 175, 55, 0.4); pointer-events: none; }
 .book-spine::before { top: 20px; }
 .book-filler::after { bottom: 20px; }
-
 .book-1 { background: radial-gradient(circle at center, #43341B 0%, #563F2E 100%); }
 .book-2 { background: radial-gradient(circle at center, #183c96 0%, #113285 100%); }
 .book-3 { background: radial-gradient(circle at center, #a64146 0%, #9f353a 100%); }
