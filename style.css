@@ -958,7 +958,7 @@ section {
     top: -55px; /* 配合邊框寬度上移 */
     left: 50%;
     transform: translateX(-50%);
-    width: 200px; 
+    width: 280px; 
     height: 100px;
     background: url('img/上面.svg') no-repeat center/contain;
     z-index: 100;
