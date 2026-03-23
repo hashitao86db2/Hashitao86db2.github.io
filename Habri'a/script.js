@@ -125,6 +125,45 @@ function unlockBook(element, url) {
     }, 600); 
 }
 
+// --- 地圖展開動畫控制 ---
+function animateMapUnfold() {
+    const trigger = document.querySelector('.map-trigger');
+    const actualMap = document.getElementById('actual-map');
+    
+    // 1. 儀式感第一步：讓折紙圖示快速淡出
+    trigger.style.opacity = '0';
+    trigger.style.transition = 'opacity 0.3s ease';
+    
+    // 延遲一小段時間後讓它徹底消失，防止擋到地圖
+    setTimeout(() => {
+        trigger.classList.add('hidden');
+    }, 300);
+
+    // 2. 計算動畫起點 (Transform Origin)
+    // 我們需要地圖從折紙圖示所在的「左上角」攤開
+    const parchment = document.querySelector('.parchment');
+    const parchmentRect = parchment.getBoundingClientRect();
+    const triggerRect = trigger.getBoundingClientRect();
+    
+    // 計算折紙圖示相對於羊皮紙容器的中心點百分比
+    const originX = ((triggerRect.left + triggerRect.width / 2) - parchmentRect.left) / parchmentRect.width * 100;
+    const originY = ((triggerRect.top + triggerRect.height / 2) - parchmentRect.top) / parchmentRect.height * 100;
+    
+    // 動態設定地圖的動畫起點
+    actualMap.style.transformOrigin = `${originX}% ${originY}%`;
+
+    // 3. 儀式感第二步：觸發 CSS 動畫 (攤平)
+    // 加上一個極短的延遲，確保 transform-origin 先生效
+    requestAnimationFrame(() => {
+        actualMap.classList.remove('hidden-map'); // 確保 display 不是 none
+        
+        // 加上一點點延遲讓 CSS 動畫能順利執行
+        setTimeout(() => {
+            actualMap.classList.add('unfolded');
+        }, 50);
+    });
+}
+
 // 啟動！
 document.addEventListener('DOMContentLoaded', () => {
     initFireflies();
