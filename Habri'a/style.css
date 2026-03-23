@@ -792,160 +792,101 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
     animation: arrowBounce 2s infinite ease-in-out;
 }
 
-/* --- 地圖頁面專用佈局 --- */
-.map-page-container {
+
+
+
+
+/* 標題與紙塊的排版 */
+.map-header-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* 隨意擺放的小紙塊 */
+.map-trigger-scrap {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transform: rotate(-12deg); /* 歪歪的感覺 */
+    transition: 0.3s ease;
     position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: 400px; /* 確保有足夠空間展開 */
 }
 
-/* --- 1. 靜態折紙觸發器 --- */
-./* 讓觸發器在頁面排版中佔據一個自然的位置 */
-.map-trigger-wrapper {
-    text-align: left;
-    margin: 20px 0;
+.map-trigger-scrap:hover {
+    transform: rotate(0deg) scale(1.1);
 }
 
-/* --- 全螢幕地圖浮層 --- */
-.map-overlay {
+/* 全幅地圖容器 */
+.map-full-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.85); /* 深色遮罩 */
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 20000;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20000;
-    
-    /* 初始狀態：縮小到左上角觸發點的位置 */
     opacity: 0;
     visibility: hidden;
+    /* 初始狀態：完全縮小成點 */
     transform: scale(0);
-    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: opacity 0.4s ease, visibility 0.4s;
 }
 
-/* 展開狀態 */
-.map-overlay.unfolded {
+/* 展開動畫邏輯：模擬摺紙攤平 */
+.map-full-overlay.unfolded {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
+    /* 這裡使用自定義動畫達成階梯感 */
+    animation: unfoldPaper 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 仿紙張容器 */
-.map-modal-content {
+@keyframes unfoldPaper {
+    0% { transform: scale(0.1, 0.1); }
+    50% { transform: scale(1, 0.2); } /* 先變成長方形 (橫向攤開) */
+    100% { transform: scale(1, 1); }   /* 再縱向攤開成滿版 */
+}
+
+/* 滿版地圖紙張 */
+.map-paper-container {
+    width: 90vw;
+    height: 90vh;
     background: #f4e4bc;
-    padding: 40px;
-    max-width: 90%;
-    max-height: 90%;
     position: relative;
-    box-shadow: 0 0 50px rgba(0,0,0,1);
-    border-radius: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* 這裡可以加一張紙質紋理背景圖 */
+    box-shadow: 0 0 40px #000;
+    overflow: hidden; /* 確保地圖滿版不溢出 */
 }
 
-/* 退出按鈕 */
-.close-map-btn {
+.full-map-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 滿版填充 */
+    display: block;
+}
+
+/* 左上角關閉按鈕 */
+.exit-map-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: 1px solid #8d6e63;
-    color: #8d6e63;
-    padding: 5px 15px;
+    top: 20px;
+    left: 20px;
+    z-index: 20001;
+    background: rgba(62, 39, 35, 0.8);
+    color: #f4e4bc;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
     cursor: pointer;
-    font-family: inherit;
+    font-size: 1.2rem;
     transition: 0.3s;
 }
 
-.close-map-btn:hover {
-    background: #8d6e63;
-    color: #f4e4bc;
+.exit-map-btn:hover {
+    background: #3e2723;
 }
 
-.map-png {
-    max-width: 100%;
-    max-height: 70vh;
-    object-fit: contain;
-}
-
-
-/* SVG 破邊質感設定 */
-.folded-paper-svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(2px 3px 5px rgba(0,0,0,0.5));
-}
-
-.folded-paper-svg .paper-outline {
-    fill: #e0cda9; /* 稍微深一點的折紙色 */
-    stroke: #8d6e63; /* 褐色邊框 */
-    stroke-width: 1;
-    /* ✦ 修正：這裡利用 SVG 特性讓邊邊看起來破破的 */
-    stroke-dasharray: 2 1; 
-}
-
-.folded-paper-svg .fold-lines {
-    fill: none;
-    stroke: rgba(141, 110, 99, 0.4); /* 淡淡的折痕 */
-    stroke-width: 0.5;
-}
-
-.map-label {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.75rem;
-    color: #3e2723;
-    white-space: nowrap;
-    opacity: 0.8;
-}
-
-/* --- 2. 實際地圖 PNG (動畫初始狀態) --- */
-.map-content {
-    position: absolute;
-    inset: 0; /* 撐滿整個容器 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    /* ✦ 核心動畫初始狀態：縮小成點、透明 */
-    transform: scale(0.01); 
-    transform-origin: 50px 50px; /* 動畫起點在折紙圖示的位置 (需精確計算) */
-    opacity: 0;
-    
-    /* 設定動畫過渡 */
-    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
-    z-index: 5;
-}
-
-/* ✦ 核心動畫結束狀態：攤平成 1:1、完全透明 */
-.map-content.unfolded {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-}
-
-
-
-.map-title {
-    margin-top: 20px;
-    font-size: 1.5rem;
-    color: #3e2723;
-    letter-spacing: 5px;
-}
-
-/* 手機版修正：折紙圖示小一點 */
-@media (max-width: 768px) {
-    .map-trigger { width: 70px; height: 70px; top: 15px; left: 15px; }
-    .map-png { max-width: 95%; }
-}
 
 @keyframes arrowBounce {
     0%, 100% { transform: translateY(0); opacity: 0.5; }
