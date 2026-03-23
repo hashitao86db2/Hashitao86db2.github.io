@@ -924,23 +924,46 @@ section {
 }
 
 /* 1. 頂層：實現【大虛線框】圓角 */
+/* --- 互動區塊：套用自定義 SVG 邊框 --- */
 .emoji-list-container {
     width: 90%; 
-    max-width: 400px; 
+    max-width: 450px; /* 稍微加大一點點，讓花紋有空間展現 */
     height: auto; 
+    margin: 30px auto; 
+    padding: 50px 30px 30px; /* 頂部留更多空間給「上面.svg」 */
     
-    margin: 0 auto; 
-    padding: 10px 20px; /* ⚡️ 上下間距縮小 */
-    
-    border: 3px dashed #a68776; 
-    border-radius: 20px; 
+    /* 設定背景色與基礎位置 */
     background-color: #fff; 
+    position: relative; 
+    
+    /* 1. 使用「角.svg」作為邊框 */
+    /* 這裡的 40px 控制花紋的大小 */
+    border: 40px solid transparent; 
+    border-image-source: url('img/角.svg'); 
+    
+    /* 關鍵：slice 設為 30% 到 45% 之間，讓它精確抓取角落裝飾 */
+    border-image-slice: 40%; 
+    border-image-repeat: stretch; 
     
     display: flex;
     justify-content: center; 
-    align-items: flex-start; /* 讓內容從頂部開始排 */
+    align-items: flex-start;
 }
 
+/* 2. 加入頂部中央裝飾「上面.svg」 */
+.emoji-list-container::before {
+    content: '';
+    position: absolute;
+    /* 調整 top 值讓它剛好壓在邊框線上 */
+    top: -28px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px; /* 根據「上面.svg」的比例調整 */
+    height: 70px;
+    background: url('img/上面.svg') no-repeat center/contain;
+    z-index: 11;
+    pointer-events: none;
+}
 /* 2. 表情符號佈局：兩排，一排四個 */
 .interactive-gallery .emoji-gallery {
     display: flex;
@@ -1055,6 +1078,20 @@ section {
     font-color: #6c6a6e;
     /* 2. ⚡️ 實現文字水平置中效果 */
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    .emoji-list-container {
+        /* 縮小邊框寬度 */
+        border-width: 25px; 
+        padding-top: 40px;
+        max-width: 95%;
+    }
+    
+    .emoji-list-container::before {
+        width: 120px;
+        top: -22px;
+    }
 }
 
 /* ===================================== */
