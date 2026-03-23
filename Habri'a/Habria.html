@@ -105,10 +105,21 @@
             <p>在Habri'a誕生的太初，萬物皆為虛無...</p>
         </div>
 
-        <div id="content-map">
-            <h1>地圖：現世疆域</h1>
-            <p>Habri'a 被分為四個主要大陸...</p>
+        <div id="content-map" class="map-page-container">
+    
+    <div class="map-trigger" onclick="animateMapUnfold()">
+        <svg viewBox="0 0 100 100" class="folded-paper-svg">
+            <path d="M10,15 L30,12 L50,15 L70,13 L90,18 L88,38 L92,58 L89,78 L93,92 L73,89 L53,93 L33,90 L13,94 L15,74 L12,54 L16,34 Z" class="paper-outline"/>
+            <path d="M50,15 L50,93 M10,54 L92,58" class="fold-lines"/> </svg>
+        <span class="map-label">展開地圖</span>
+    </div>
+
+    <div class="map-content hidden-map" id="actual-map">
+        <img src="你的地圖.png" alt="Habri'a 現世疆域圖" class="map-png">
+        <h1 class="map-title">Habri'a 現世疆域</h1>
         </div>
+</div>
+
 
         <div id="content-journal">
     <h1>賽琳的手記</h1>
