@@ -108,3 +108,33 @@ function changeChar(direction) {
     document.getElementById(`char-${currentCharIndex}`).classList.add('active');
     document.getElementById('page-indicator').innerText = `${currentCharIndex} / ${totalChars}`;
 }
+
+function initFireflies() {
+    const backContainer = document.getElementById('firefly-back');
+    const frontContainer = document.getElementById('firefly-front');
+    if (!backContainer || !frontContainer) return;
+
+    backContainer.innerHTML = '';
+    frontContainer.innerHTML = '';
+
+    const totalCount = 45; 
+    for (let i = 0; i < totalCount; i++) {
+        const firefly = document.createElement('div');
+        firefly.className = 'firefly';
+        
+        const isFront = Math.random() > 0.7; 
+        const targetContainer = isFront ? frontContainer : backContainer;
+        
+        firefly.style.left = Math.random() * 100 + '%';
+        firefly.style.top = Math.random() * 100 + '%';
+        
+        // 隨機大小與速度
+        const size = Math.random() * 4 + 2;
+        firefly.style.width = size + 'px';
+        firefly.style.height = size + 'px';
+        firefly.style.animationDuration = (Math.random() * 15 + 10) + 's, ' + (Math.random() * 3 + 2) + 's';
+        firefly.style.animationDelay = (Math.random() * 10) + 's';
+        
+        targetContainer.appendChild(firefly);
+    }
+}
