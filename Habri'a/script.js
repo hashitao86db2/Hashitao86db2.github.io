@@ -89,3 +89,22 @@ function unlockBook(element, url) {
         setTimeout(() => element.classList.remove('is-opening'), 500);
     }, 600); 
 }
+
+let currentCharIndex = 1;
+const totalChars = 3; // 總共有三位角色
+
+function changeChar(direction) {
+    // 移除當前頁面的 active 狀態
+    document.getElementById(`char-${currentCharIndex}`).classList.remove('active');
+    
+    // 計算下一頁索引
+    currentCharIndex += direction;
+    
+    // 循環邏輯：第一頁往回走變最後一頁，最後一頁往後走變第一頁
+    if (currentCharIndex > totalChars) currentCharIndex = 1;
+    if (currentCharIndex < 1) currentCharIndex = totalChars;
+    
+    // 顯示新頁面並更新下方數字提示
+    document.getElementById(`char-${currentCharIndex}`).classList.add('active');
+    document.getElementById('page-indicator').innerText = `${currentCharIndex} / ${totalChars}`;
+}
