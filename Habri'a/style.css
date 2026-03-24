@@ -795,92 +795,201 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
     animation: arrowBounce 2s infinite ease-in-out;
 }
 
-
-/* 展開動畫邏輯：模擬摺紙攤平 */
-/* --- 地圖觸發器定位 --- */
+/* =========================================
+   ✦ 修正：地圖觸發器（紙片）- 定位與外觀
+   ========================================= */
 .map-scrap-anchor {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
+    position: fixed; /* 改為 fixed，確保捲動時仍在右下角 */
+    top: 40px;    
+    right: 40px;     /* 定位在右側 */
+    z-index: 1000;   /* 確保在書架上方 */
+    perspective: 1000px; /* 為摺疊動畫加入透視感 */
 }
 
 .map-trigger-scrap {
-    width: 60px;
-    height: 60px;
+    width: 80px;      /* 稍微放大一點點 */
+    height: 80px;
     cursor: pointer;
-    transform: rotate(-15deg);
-    transition: transform 0.3s ease, opacity 0.3s;
+    background: radial-gradient(circle at center, #8d6e63 0%, #3e2723 100%); /* 舊紙片顏色 */
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+    
+    /* ✦ 新增：摺紙外觀 (利用偽元素做出摺痕) */
+    position: relative;
+    overflow: hidden;
+    transform: rotate(15deg) rotateX(10deg); /* 初始旋轉角度 */
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s;
+}
+
+/* 摺痕線 */
+.map-trigger-scrap::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    width: 1px; height: 100%;
+    background: rgba(0,0,0,0.2); /* 垂直摺痕 */
+    transform: translateX(-50%);
+}
+.map-trigger-scrap::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0;
+    width: 100%; height: 1px;
+    background: rgba(0,0,0,0.2); /* 水平摺痕 */
+    transform: translateY(-50%);
 }
 
 .map-trigger-scrap:hover {
-    transform: rotate(0deg) scale(1.1);
+    transform: rotate(0deg) rotateX(0deg) scale(1.1);
+    box-shadow: 8px 8px 25px rgba(0,0,0,0.7);
 }
 
-/* --- 全幅地圖浮層 --- */
+
+/* =========================================
+   ✦ 修正：全幅地圖浮層與展開動畫
+   ========================================= */
 .map-full-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.92); /* 稍微加深背景 */
     z-index: 20000;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    /* 動畫起點會由 JS 動態計算 */
-    transition: opacity 0.5s ease, visibility 0.5s;
+    transition: opacity 0.6s ease, visibility 0.6s;
+    
+    /* ✦ 核心：將動畫起點設定為右下角觸發器的位置 */
+    /* 這需要 JS 動態計算，但我們可以在 CSS 設定初始狀態 */
 }
 
-/* 展開動畫：從中心攤開 */
+/* 展開狀態 */
 .map-full-overlay.unfolded {
     opacity: 1;
     visibility: visible;
 }
 
+/* ✦ 核心優化：摺紙展開動畫 */
 .map-full-overlay.unfolded .map-paper-container {
-    animation: unfoldStepAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* 使用自定義的摺紙展開動畫 */
+    animation: foldUnfoldAnim 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    
+    /* 設定動畫起點為右下角，這需要 JS 配合 */
+    /* 如果沒有 JS 計算，預設會從螢幕中心展開，但動畫仍有摺疊感 */
 }
 
-@keyframes unfoldStepAnim {
-    0% { transform: scale(0.1, 0.1); }
-    40% { transform: scale(1, 0.15); } /* 先變成長方形 (橫向) */
-    100% { transform: scale(1, 1); }   /* 再縱向展開 */
+@keyframes foldUnfoldAnim {
+    0% {
+        /* 初始狀態：小的、摺疊好的、在觸發器位置 (需要 JS 平移) */
+        transform: scale(0.1, 0.1) rotateX(20deg) rotateY(-20deg);
+        opacity: 0;
+    }
+    30% {
+        /* 第一階段：移動到中心，並稍微放大 */
+        transform: scale(0.2, 0.2) rotateX(0deg) rotateY(0deg);
+        opacity: 1;
+    }
+    60% {
+        /* 第二階段：橫向展開 (像展開一卷紙) */
+        transform: scale(1, 0.2);
+    }
+    100% {
+        /* 第三階段：縱向展開 (完全攤平) */
+        transform: scale(1, 1);
+    }
 }
 
-/* 滿版容器 */
+
+/* =========================================
+   ✦ 修正：地圖質感與內容
+   ========================================= */
 .map-paper-container {
-    width: 90vw;
-    height: 90vh;
-    background: #f4e4bc;
+    width: 85vw; /* 稍微縮小，留出邊距 */
+    height: 85vh;
+    
+    /* ✦ 修正：舊舊的咖啡色紙 */
+    background-color: #d7ccc8; /* 基礎咖啡色底 */
+    background-image: 
+        /* 1. 模擬紙張的不均勻污漬 */
+        radial-gradient(circle at 50% 50%, rgba(62, 39, 35, 0.1) 0%, transparent 80%),
+         radial-gradient(circle at 20% 80%, rgba(141, 110, 99, 0.15) 0%, transparent 50%),
+        /* 2. 模擬纖維感 */
+        repeating-linear-gradient(120deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 3px),
+        /* 3. 加入摺痕線 (模擬對折再對折) */
+        linear-gradient(to right, transparent 49.5%, rgba(0,0,0,0.1) 50%, transparent 50.5%),
+        linear-gradient(to bottom, transparent 49.5%, rgba(0,0,0,0.1) 50%, transparent 50.5%);
+        
     position: relative;
-    box-shadow: 0 0 50px #000;
+    box-shadow: 0 0 60px rgba(0,0,0,0.9);
     overflow: hidden;
-    transform-origin: center center;
+    transform-origin: center center; /* 動畫中心點 */
+    border-radius: 2px;
 }
 
 .full-map-img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* 確保地圖不被裁切 */
+    object-fit: contain;
     display: block;
+    /* ✦ 新增：地圖圖片本身也加一點濾鏡，讓它更有年代感 */
+    filter: sepia(0.5) contrast(1.1) brightness(0.9);
+    opacity: 0.9;
 }
 
 /* 左上角退出按鈕 */
 .exit-map-btn {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 25px;
+    left: 25px;
     z-index: 20001;
-    background: rgba(62, 39, 35, 0.8);
+    background: rgba(62, 39, 35, 0.9); /* 更深的咖啡色 */
     color: #f4e4bc;
-    border: none;
-    width: 40px;
-    height: 40px;
+    border: 1px solid rgba(244, 228, 188, 0.3);
+    width: 45px;
+    height: 45px;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     border-radius: 5px;
+    transition: background 0.3s;
 }
+.exit-map-btn:hover {
+    background: #3e2723;
+}
+
+
+/* =========================================
+   ✦ 手機版適應
+   ========================================= */
+@media (max-width: 768px) {
+    .map-scrap-anchor {
+        bottom: 20px;
+        right: 20px;
+    }
+    .map-trigger-scrap {
+        width: 60px;
+        height: 60px;
+    }
+    .map-paper-container {
+        width: 95vw;
+        height: 80vh;
+        /* 手機版摺痕可以淡一點 */
+        background-image: 
+            radial-gradient(circle at 50% 50%, rgba(62, 39, 35, 0.1) 0%, transparent 80%),
+            radial-gradient(circle at 20% 80%, rgba(141, 110, 99, 0.15) 0%, transparent 50%),
+            repeating-linear-gradient(120deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 3px);
+    }
+    .exit-map-btn {
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+
+
+
 
 
 @keyframes arrowBounce {
