@@ -809,10 +809,11 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
    ========================================= */
 .map-scrap-anchor {
     position: fixed; /* 改為 fixed，確保捲動時仍在右下角 */
-    top: 40px;    
-    right: 40px;     /* 定位在右側 */
-    z-index: 1000;   /* 確保在書架上方 */
+    top: 30px;    
+    right: 20px;     /* 定位在右側 */
+    z-index: 10050;   /* 確保在書架上方 */
     perspective: 1000px; /* 為摺疊動畫加入透視感 */
+    display: block !important;
 }
 
 .map-trigger-scrap {
@@ -984,14 +985,11 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 
 /* 摺紙動畫總容器 */
 .unfold-wrapper {
-    width: 90vw;
-    height: 90vh; /* 地圖最終顯示大小 */
-    max-width: 1100px; /* 限制最大寬度防止圖片失真 */
+    width: 85vw;       /* 改為 85% 寬度，留白 */
+    height: 85vh;      /* 改為 85% 高度 */
+    max-width: 1000px; /* 限制最大尺寸，避免在大螢幕拉得太扁 */
     position: relative;
-    transform-style: preserve-3d; /* 啟用子元素 3D 效果 */
-    
-    /* 初始狀態：縮小並稍微傾斜，增加動感 */
-    transform: rotateX(10deg) scale(0.1); 
+    transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1019,9 +1017,10 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 .map-image-part {
     position: absolute;
     width: 100%;
-    height: 300%; /* 圖片是容器高度的三倍 */
-    object-fit: cover; /* 確保圖片填滿 */
+    height: 300%;      /* 因為是三層摺疊，圖片高度需為三倍 */
+    object-fit: contain; /* ✦ 重要：改為 contain，地圖左右才不會不見 */
     left: 0;
+    background-color: transparent; 
 }
 
 /* --- 各層定位與初始摺疊狀態 --- */
