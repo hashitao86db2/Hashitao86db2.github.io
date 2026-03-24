@@ -125,26 +125,38 @@ function unlockBook(element, url) {
     }, 600); 
 }
 
-function animateMapUnfold() {
-    const trigger = document.querySelector('.map-trigger-scrap');
+function animateMapUnfold(element) {
     const overlay = document.getElementById('actual-map');
     
-    // 計算觸發器相對於螢幕的位置
-    const rect = trigger.getBoundingClientRect();
+    // 1. 取得紙片當前相對於螢幕的位置
+    const rect = element.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
 
-    // 將動畫起點釘在紙塊位置
+    // 2. 將地圖的動畫起點設定在點擊位置
     overlay.style.transformOrigin = `${x}px ${y}px`;
+    
+    // 3. 讓原本的小紙片暫時隱藏，增加「它變大了」的錯覺
+    element.style.opacity = '0';
+    
+    // 4. 執行動畫
     overlay.classList.add('unfolded');
-    document.body.classList.add('is-locked'); // 鎖定背景捲動
+    document.body.style.overflow = 'hidden'; // 鎖定背景
 }
 
 function animateMapFold() {
     const overlay = document.getElementById('actual-map');
+    const trigger = document.querySelector('.map-trigger-scrap');
+    
     overlay.classList.remove('unfolded');
-    document.body.classList.remove('is-locked');
+    
+    // 恢復紙片顯示
+    setTimeout(() => {
+        trigger.style.opacity = '1';
+        document.body.style.overflow = '';
+    }, 500);
 }
+
 
 
 // 啟動！
