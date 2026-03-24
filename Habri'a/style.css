@@ -278,6 +278,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         height: 140px;
         left: 10px;
         top: 20px;
+        margin-bottom: 20px;
     }
     .char-avatar {
         width: 100px;
