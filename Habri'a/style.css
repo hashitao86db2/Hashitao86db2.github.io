@@ -287,7 +287,8 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     .char-avatar-frame.type-square .char-avatar {
         width: 85px;
         height: 85px;
-        right: 110px
+        right: 100px;
+        top:50px
     }
 }
 
