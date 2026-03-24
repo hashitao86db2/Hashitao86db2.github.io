@@ -126,36 +126,41 @@ function unlockBook(element, url) {
 }
 
 function animateMapUnfold(element) {
+// --- 地圖展開動畫 (信封摺紙版) ---
+function animateMapUnfold(element) {
     const overlay = document.getElementById('actual-map');
     
-    // 1. 取得紙片當前相對於螢幕的位置
+    // 1. 取得紙片當前相對於螢幕的位置 (為了讓起點看起來是從這開始)
     const rect = element.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
 
-    // 2. 將地圖的動畫起點設定在點擊位置
+    // 2. 將動畫的基準點釘在螢幕中心 (摺紙在中央攤開)
+    // 但我們保留 transform-origin 的設定，讓初始 scale 從點擊處延伸的感覺
     overlay.style.transformOrigin = `${x}px ${y}px`;
     
-    // 3. 讓原本的小紙片暫時隱藏，增加「它變大了」的錯覺
+    // 3. 讓原本的小紙片暫時隱藏
     element.style.opacity = '0';
     
-    // 4. 執行動畫
+    // 4. 啟用網頁鎖定與展開類別
     overlay.classList.add('unfolded');
-    document.body.style.overflow = 'hidden'; // 鎖定背景
+    document.body.classList.add('is-locked'); 
 }
 
 function animateMapFold() {
     const overlay = document.getElementById('actual-map');
     const trigger = document.querySelector('.map-trigger-scrap');
     
+    // 1. 收起地圖
     overlay.classList.remove('unfolded');
     
-    // 恢復紙片顯示
+    // 2. 動畫結束後恢復狀態
     setTimeout(() => {
-        trigger.style.opacity = '1';
-        document.body.style.overflow = '';
-    }, 500);
+        trigger.style.opacity = '1'; // 恢復小紙片顯示
+        document.body.classList.remove('is-locked'); // 解除鎖定
+    }, 800); // 延遲時間需與 CSS 動畫時間一致
 }
+
 
 
 
