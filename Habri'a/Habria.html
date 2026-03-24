@@ -86,7 +86,7 @@
         </div>
         <div class="afterlife-title">此處為終焉，亦是起始</div>
     </section>
-
+>
     <div id="reading-overlay" class="hidden">
         <div class="overlay-bg" onclick="closeBook()"></div>
         <div class="parchment">
@@ -104,26 +104,40 @@
             <h1>神話：創世之章</h1>
             <p>在Habri'a誕生的太初，萬物皆為虛無...</p>
         </div>
-<div class="map-full-overlay" id="actual-map">
-    <button class="exit-map-btn" onclick="animateMapFold()">✕</button>
+    </div>
+ <div id="content-map">
+    <div class="map-header-area">
+        <h1>現世疆域</h1>
+        <div class="map-trigger-scrap" onclick="animateMapUnfold(this)">
+            <svg viewBox="0 0 100 100" class="folded-paper-svg" style="width:100%;height:100%;">
+                <path d="M10,15 L30,12 L50,15 L70,13 L90,18 L88,38 L92,58 L89,78 L93,92 L73,89 L53,93 L33,90 L13,94 L15,74 L12,54 L16,34 Z" fill="#e0cda9" stroke="#8d6e63" stroke-width="1" />
+            </svg>
+            <span style="position:absolute;bottom:5px;left:50%;transform:translateX(-50%);font-size:10px;color:#3e2723;">MAP</span>
+        </div>
+    </div>
 
-    <div class="unfold-wrapper">
-        
-        <div class="fold-layer layer-bottom">
-            <img src="../img/IMG_0592.png" class="map-image-part">
-        </div>
-        
-        <div class="fold-layer layer-middle">
-            <img src="../img/IMG_0592.png" class="map-image-part">
-        </div>
-        
-        <div class="fold-layer layer-top">
-            <img src="../img/IMG_0592.png" class="map-image-part">
-            <div class="paper-back"></div> 
-        </div>
+    <p>這裡可以放一些關於現世疆域的文字介紹...</p>
 
+    <div class="map-full-overlay" id="actual-map">
+        <button class="exit-map-btn" onclick="animateMapFold()">✕</button>
+
+        <div class="unfold-wrapper">
+            <div class="fold-layer layer-bottom">
+                <img src="../img/IMG_0592.png" class="map-image-part">
+            </div>
+            
+            <div class="fold-layer layer-middle">
+                <img src="../img/IMG_0592.png" class="map-image-part">
+            </div>
+            
+            <div class="fold-layer layer-top">
+                <img src="../img/IMG_0592.png" class="map-image-part">
+                <div class="paper-back"></div> 
+            </div>
+        </div>
     </div>
 </div>
+
 
 
 
