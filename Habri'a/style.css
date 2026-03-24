@@ -225,7 +225,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: 30px;
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
@@ -273,6 +273,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     .char-avatar-frame {
         flex: 0 0 140px;
         height: 140px;
+        left: 50px;
     }
     .char-avatar {
         width: 100px;
@@ -793,32 +794,28 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 }
 
 
-
-
-
-/* 標題與紙塊的排版 */
-.map-header-area {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 30px;
+/* 展開動畫邏輯：模擬摺紙攤平 */
+/* --- 地圖觸發器定位 --- */
+.map-scrap-anchor {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
 }
 
-/* 隨意擺放的小紙塊 */
 .map-trigger-scrap {
     width: 60px;
     height: 60px;
     cursor: pointer;
-    transform: rotate(-12deg); /* 歪歪的感覺 */
-    transition: 0.3s ease;
-    position: relative;
+    transform: rotate(-15deg);
+    transition: transform 0.3s ease, opacity 0.3s;
 }
 
 .map-trigger-scrap:hover {
     transform: rotate(0deg) scale(1.1);
 }
 
-/* 全幅地圖容器 */
+/* --- 全幅地圖浮層 --- */
 .map-full-overlay {
     position: fixed;
     inset: 0;
@@ -829,44 +826,45 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    /* 初始狀態：完全縮小成點 */
-    transform: scale(0);
-    transition: opacity 0.4s ease, visibility 0.4s;
+    /* 動畫起點會由 JS 動態計算 */
+    transition: opacity 0.5s ease, visibility 0.5s;
 }
 
-/* 展開動畫邏輯：模擬摺紙攤平 */
+/* 展開動畫：從中心攤開 */
 .map-full-overlay.unfolded {
     opacity: 1;
     visibility: visible;
-    transform: scale(1);
-    /* 這裡使用自定義動畫達成階梯感 */
-    animation: unfoldPaper 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes unfoldPaper {
+.map-full-overlay.unfolded .map-paper-container {
+    animation: unfoldStepAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes unfoldStepAnim {
     0% { transform: scale(0.1, 0.1); }
-    50% { transform: scale(1, 0.2); } /* 先變成長方形 (橫向攤開) */
-    100% { transform: scale(1, 1); }   /* 再縱向攤開成滿版 */
+    40% { transform: scale(1, 0.15); } /* 先變成長方形 (橫向) */
+    100% { transform: scale(1, 1); }   /* 再縱向展開 */
 }
 
-/* 滿版地圖紙張 */
+/* 滿版容器 */
 .map-paper-container {
     width: 90vw;
     height: 90vh;
     background: #f4e4bc;
     position: relative;
-    box-shadow: 0 0 40px #000;
-    overflow: hidden; /* 確保地圖滿版不溢出 */
+    box-shadow: 0 0 50px #000;
+    overflow: hidden;
+    transform-origin: center center;
 }
 
 .full-map-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 滿版填充 */
+    object-fit: contain; /* 確保地圖不被裁切 */
     display: block;
 }
 
-/* 左上角關閉按鈕 */
+/* 左上角退出按鈕 */
 .exit-map-btn {
     position: absolute;
     top: 20px;
@@ -877,14 +875,9 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
     border: none;
     width: 40px;
     height: 40px;
-    border-radius: 5px;
     cursor: pointer;
-    font-size: 1.2rem;
-    transition: 0.3s;
-}
-
-.exit-map-btn:hover {
-    background: #3e2723;
+    font-size: 1.5rem;
+    border-radius: 5px;
 }
 
 
