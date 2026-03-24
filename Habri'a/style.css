@@ -288,7 +288,10 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         width: 85px;
         height: 85px;
         right: 100px;
-        top:50px
+        top:50px;
+        transform: scale(1.4) ;
+        
+        
     }
 }
 
