@@ -236,7 +236,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     background-size: contain;
     z-index: 10;
     pointer-events: none;
-    margin-botton: 20px;
+    
 }
 
 /* --- 第一頁：花型框 (圓形) --- */
@@ -291,7 +291,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         right: 100px;
         top:50px;
         transform: scale(1.4) ;
-        
+        margin-botton: 20px;
         
     }
 }
