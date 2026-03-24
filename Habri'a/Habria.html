@@ -104,28 +104,27 @@
             <h1>神話：創世之章</h1>
             <p>在Habri'a誕生的太初，萬物皆為虛無...</p>
         </div>
+<div class="map-full-overlay" id="actual-map">
+    <button class="exit-map-btn" onclick="animateMapFold()">✕</button>
 
-        <div id="content-map">
-    <div class="map-scrap-anchor">
-        <div class="map-trigger-scrap" onclick="animateMapUnfold(this)">
-            <svg viewBox="0 0 100 100" class="folded-paper-svg">
-                <path d="M10,15 L30,12 L50,15 L70,13 L90,18 L88,38 L92,58 L89,78 L93,92 L73,89 L53,93 L33,90 L13,94 L15,74 L12,54 L16,34 Z" class="paper-outline"/>
-                <path d="M50,15 L50,93 M10,54 L92,58" class="fold-lines"/>
-            </svg>
-            <span class="map-label">MAP</span>
+    <div class="unfold-wrapper">
+        
+        <div class="fold-layer layer-bottom">
+            <img src="../img/IMG_0592.png" class="map-image-part">
         </div>
-    </div>
-
-    <h1 style="margin-left: 80px;">現世疆域</h1>
-    <p>Habri'a 被分為四個主要大陸，每一塊土地都承載著古老的記憶...</p>
-
-    <div class="map-full-overlay" id="actual-map">
-        <div class="map-paper-container">
-            <button class="exit-map-btn" onclick="animateMapFold()">✕</button>
-            <img src="../img/IMG_0592.png" class="full-map-img">
+        
+        <div class="fold-layer layer-middle">
+            <img src="../img/IMG_0592.png" class="map-image-part">
         </div>
+        
+        <div class="fold-layer layer-top">
+            <img src="../img/IMG_0592.png" class="map-image-part">
+            <div class="paper-back"></div> 
+        </div>
+
     </div>
 </div>
+
 
 
 
