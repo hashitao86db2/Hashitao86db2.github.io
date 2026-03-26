@@ -308,31 +308,29 @@ details summary {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("img/IMG_2255.jpg") top center;
+  /* 加上背景底色為白色，讓 contain 產生的空白與背景融合 */
+  background: #ffffff url("img/IMG_2255.jpg") center center no-repeat;
   background-size: cover;
+  position: relative;
+  display: flex; /* 建議加上 flex 讓文字內容能垂直居中 */
+  align-items: center;
+  justify-content: center;
 }
 
-#hero:before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
+/* 1. 已移除 :before 灰色遮罩相關代碼 */
 
 #hero .hero-container {
   position: relative;
   z-index: 2;
   min-width: 300px;
+  text-align: center; /* 讓文字在容器內居中 */
 }
 
 #hero h1 {
   margin: 0 0 10px 0;
   font-size: 70px;
   font-weight: 700;
-  line-height: 56px;
+  line-height: 1.2;
   color: #212431;
 }
 
@@ -356,13 +354,28 @@ details summary {
   }
 }
 
+/* 2. 手機版調整：確保圖片完整顯示（不切邊） */
 @media (max-width: 768px) {
+  #hero {
+    /* 改為 contain 確保圖片左右不被切到 */
+    background-size: contain; 
+    /* 維持 100vh，左右留白會因為背景是白色而看不出來 */
+    height: 100vh;
+    background-position: center center;
+  }
+
   #hero h1 {
     font-size: 28px;
     line-height: 36px;
   }
 
-  #hero h2 {
+  #hero p {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+}
+#hero h2 {
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 30px;
