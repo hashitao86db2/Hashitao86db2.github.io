@@ -294,6 +294,18 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         
     }
 }
+@media (max-width: 768px) {
+    /* ... 你原本的設定 ... */
+
+    .char-avatar-frame::after {
+        
+        transform: translate(-100%, -50%) scale(2); 
+        
+        /* 如果 translate 調整後位置還是不夠精準，也可以動 right 或 left */
+
+    }
+}
+
 
 /* 直式名字 */
 .char-name-vertical { writing-mode: vertical-rl; text-orientation: mixed; color: #3e2723;font-size: 1.2rem;font-weight: bold;letter-spacing: 5px; margin-top: 20px;opacity: 0.8;}
