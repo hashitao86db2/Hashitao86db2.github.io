@@ -15,6 +15,22 @@
             font-family: 'Shippori Mincho B1', serif; 
             -webkit-font-smoothing: antialiased;
         }
+        /* 基礎訊息樣式 */
+        .message-container { 
+            position: relative; display: flex; flex-direction: column; 
+            padding: 8px 16px; opacity: 0; /* 預設隱藏，由動畫觸發顯示 */
+        }
+        
+        /* 💡 核心動畫：由下而上淡入 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 當父層 active 時，內部的訊息執行動畫 */
+        .topic-content.active .message-container {
+            animation: fadeInUp 0.4s ease forwards;
+        }
         
         .message-container { 
             position: relative;
@@ -372,25 +388,33 @@
 
 </body>
         <script>
+         function applyMessageDelay(containerId) {
+            const messages = document.querySelectorAll(`#${containerId} .message-container`);
+            messages.forEach((msg, index) => {
+                // 每一條訊息比前一條晚 0.2 秒出現
+                msg.style.animationDelay = `${index * 0.25}s`;
+            });
+        }
+
         function switchTopic(topicId, titleText) {
-            // 1. 隱藏所有內容
+            // 隱藏所有
             document.querySelectorAll('.topic-content').forEach(content => {
                 content.classList.remove('active');
             });
-            // 2. 顯示點選的內容
-            document.getElementById('topic-' + topicId).classList.add('active');
             
-            // 3. 更新標題
+            // 顯示目標並重新計算動畫
+            const target = document.getElementById('topic-' + topicId);
+            target.classList.add('active');
+            applyMessageDelay('topic-' + topicId);
+            
+            // 更新 UI 狀態
             document.getElementById('current-title').innerText = titleText;
-            
-            // 4. 更新按鈕樣式
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('btn-' + topicId).classList.add('active');
-            
-            // 自動捲動到最上方
             window.scrollTo(0, 0);
         }
+
+        // 初始化第一頁的動畫
+        window.onload = () => applyMessageDelay('topic-garden');
     </script>
 </html>
