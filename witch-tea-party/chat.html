@@ -209,33 +209,45 @@
         </div>
 
 
-    <div class="message-container">
-            <div class="avatar"><img src="picture/IMG_2150.jpg" class="rounded-full h-full w-full object-cover"></div>
-               
-                <div class="reply-wrapper">
-                <div class="reply-line"></div>
-                <img src="picture/I3.jpeg" class="reply-avatar">
-                <span class="reply-user">？</span>
-                <span class="reply-text">婉拒了，沒有想要看濕漉漉美麗魔女的意思</span>
+<div class="message-container">
+    <div class="reply-wrapper">
+        <div class="reply-line"></div>
+        <img src="picture/3.jpeg" class="reply-avatar">
+        <span class="reply-user">？</span>
+        <span class="reply-text">婉拒了，沒有想要看濕漉漉美麗魔女的意思</span>
+    </div>
+    <div class="main-msg-content">
+        <div class="avatar"><img src="picture/IMG_2150.jpg" class="rounded-full h-full w-full object-cover"></div>
+        <div>
+            <div>
+                <span class="user-name">Aelian</span>
+                <span class="role-tag">時之魔女</span>
+                <span class="time-stamp">01:36</span>
             </div>
-              <div class="main-msg-content">
-                      <div>
-                    <div><span class="user-name">Aelian</span><span class="role-tag">時之魔女</span><span class="time-stamp"> ??/03/08 01:36</span></div>
-                    <div class="text-content">那真是太遺憾了</div>
-                  </div>
-                </div>
-                  <div class="reply-wrapper">
-                <div class="reply-line"></div>
-                <img src="picture/IMG_2149.jpg" class="reply-avatar">
-                <span class="reply-user">Lynis</span>
-                <span class="reply-text">噢，想要的話，我也可以教你喔？</span>
+            <div class="text-content">那真是太遺憾了</div>
+        </div>
+    </div>
+</div>
+
+<div class="message-container">
+    <div class="reply-wrapper">
+        <div class="reply-line"></div>
+        <img src="picture/IMG_2149.jpg" class="reply-avatar">
+        <span class="reply-user">Lynis</span>
+        <span class="reply-text">噢，想要的話，我也可以教你喔？</span>
+    </div>
+    <div class="main-msg-content">
+        <div class="avatar"><img src="picture/IMG_2150.jpg" class="rounded-full h-full w-full object-cover"></div>
+        <div>
+            <div>
+                <span class="user-name">Aelian</span>
+                <span class="role-tag">時之魔女</span>
+                <span class="time-stamp">01:37</span>
             </div>
-              <div class="main-msg-content">
-                  <div>
-                    <div class="text-content">那真是太棒了</div>          
-              </div>
-              </div>
-             </div>
+            <div class="text-content">那真是太棒了</div>
+        </div>
+    </div>
+</div>
         
     </div>
         <div id="topic-secret" class="topic-content">
@@ -286,7 +298,7 @@
                 <span class="reply-text">你們一個個真是殘暴</span>
             </div>
             <div class="main-msg-content">
-                <div class="avatar"><img src="3.jpeg" class="rounded-full h-full w-full object-cover"></div>
+                <div class="avatar"><img src="picture/3.jpeg" class="rounded-full h-full w-full object-cover"></div>
                 <div>
                     <div><span class="user-name">？</span><span class="role-tag">記憶魔女</span><span class="time-stamp"> ??/03/08 01:40</span></div>
                     <div class="text-content">我沒燒你那名字長到爆炸的植物園</div>
@@ -392,7 +404,7 @@
             const messages = document.querySelectorAll(`#${containerId} .message-container`);
             messages.forEach((msg, index) => {
                 // 每一條訊息比前一條晚 0.2 秒出現
-                msg.style.animationDelay = `${index * 0.25}s`;
+                msg.style.animationDelay = `${index * 0.5}s`;
             });
         }
 
