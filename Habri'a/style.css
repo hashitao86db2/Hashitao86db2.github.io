@@ -217,7 +217,6 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     width: 140px; /* 稍微縮小，確保被框包住 */
     height: 140px;
     object-fit: cover;
-    background: none;
     z-index: 2;
     margin-right: 20px;
 }
