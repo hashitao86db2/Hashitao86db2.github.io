@@ -215,7 +215,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 /* 頭像主體 */
 .char-avatar {
     width: 140px; /* 稍微縮小，確保被框包住 */
-    height: 130px;
+    height: 140px;
     object-fit: cover;
     background: none;
     z-index: 2;
