@@ -270,7 +270,19 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     z-index: 10;
     pointer-events: none;
 }
+/* --- 月亮框專屬背景與縮放 --- */
+.char-avatar-frame.type-moon::after {
+    background-image: url('./moon.svg');
+    /* 基礎縮放 (電腦版) */
+    transform: translate(-50%, -50%) scale(1.2); 
+}
 
+/* --- 長方框專屬背景與縮放 --- */
+.char-avatar-frame.type-rect::after {
+    background-image: url('./長方.svg');
+    /* 基礎縮放 (電腦版) */
+    transform: translate(-50%, -50%) scale(1.2);
+}
 /* --- 第一頁：花型框 (圓形) --- */
 .char-avatar-frame.type-flower .char-avatar,
 .char-avatar-frame.type-flower .avatar-placeholder {
