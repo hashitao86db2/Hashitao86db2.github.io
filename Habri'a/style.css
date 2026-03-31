@@ -1,4 +1,19 @@
 /* --- 1. 基礎設定與變數 --- */
+
+.dancing-script-<uniquifier> {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+.unifrakturcook-bold {
+  font-family: "UnifrakturCook", cursive;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
 :root {
     --gold: #d4af37;
     --wood: #3e2723;
@@ -57,7 +72,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     opacity: 0; transition: opacity 2s ease;
 }
 #main-hub.active { display: flex; opacity: 1; }
-.world-title { color: var(--gold); font-size: 2.8rem; letter-spacing: 10px; margin: 0; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+.world-title { color: var(--gold); font-family: 'UnifrakturCook' ;font-size: 2.8rem; letter-spacing: 10px; margin: 0; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
 .subtitle { color: #fff; opacity: 0.7; font-size: 0.8rem; margin-top: 10px; text-align: center; }
 
 /* --- 4. 書架視覺 --- */
