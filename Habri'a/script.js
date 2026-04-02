@@ -133,23 +133,34 @@ function unlockBook(element, url) {
 // 啟動螢火蟲
 document.addEventListener('DOMContentLoaded', initFireflies);
 
-// 自動將 content-myth 內的段落轉為可執行動畫的行
-const mythContainer = document.querySelector('#content-myth');
-if (mythContainer) {
-    const paragraphs = mythContainer.querySelectorAll('p');
-    paragraphs.forEach(p => p.classList.add('myth-line'));
+function openBook(contentId) {
+    const overlay = document.getElementById('reading-overlay');
+    const article = document.getElementById('book-content');
+    const depotContent = document.getElementById(`content-${contentId}`);
+    if (!overlay || !article || !depotContent) return;
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // 增加延遲感，讓它一行接一行
-                setTimeout(() => {
-                    entry.target.classList.add('is-visible');
-                }, index * 300); // 每一行間隔 300ms
-            }
-        });
-    }, { threshold: 0.1 });
+    // 1. 搬運內容
+    article.innerHTML = depotContent.innerHTML;
+    overlay.classList.remove('hidden');
+    document.body.classList.replace('is-unlocked', 'is-locked');
 
-    paragraphs.forEach(line => observer.observe(line));
+    // 2. ✦ 新增：如果打開的是神話，啟動動畫觀察器
+    if (contentId === 'myth') {
+        const lines = article.querySelectorAll('.myth-line');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // 取得目前這一行在所有行中的索引來計算延遲
+                    const index = Array.from(lines).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, index * 300); 
+                    observer.unobserve(entry.target); // 觸發後就不再觀察
+                }
+            });
+        }, { threshold: 0.1 });
+
+        lines.forEach(line => observer.observe(line));
+    }
 }
-
