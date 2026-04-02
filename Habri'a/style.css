@@ -863,8 +863,10 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 }
 
 .map-trigger-scrap {
-    width: 80px;      /* 稍微放大一點點 */
-    height: 80px;
+    width: 200px;      /* 稍微放大一點點 */
+    height: 180px;
+    top:-40px;
+    right:-30px;
     cursor: pointer;
     background: radial-gradient(circle at center, #8d6e63 0%, #3e2723 100%); /* 舊紙片顏色 */
     border-radius: 5px;
