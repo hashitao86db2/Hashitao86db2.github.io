@@ -1190,6 +1190,20 @@ body.in-afterlife .paper { top: 15%; transform: translateX(-50%) rotate(2deg); }
 }
 
 
+/* 設定每一行文字的初始狀態與動畫 */
+.myth-line {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    margin-bottom: 1.5rem; /* 保持行距 */
+    display: block;
+}
+
+/* 當觸發 active 類別時浮現 */
+.myth-line.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 
 
