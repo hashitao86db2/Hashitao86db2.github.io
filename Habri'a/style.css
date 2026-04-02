@@ -338,7 +338,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         height: 100%;
         /* 放大 2.2 倍，並向左位移 */
         transform: translate(-120%, -55%) scale(2.2) !important;
-        left: 0%;
+        left: 15%;
         z-index: 10;
     }
 }
