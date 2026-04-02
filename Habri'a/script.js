@@ -132,3 +132,24 @@ function unlockBook(element, url) {
 
 // 啟動螢火蟲
 document.addEventListener('DOMContentLoaded', initFireflies);
+
+// 自動將 content-myth 內的段落轉為可執行動畫的行
+const mythContainer = document.querySelector('#content-myth');
+if (mythContainer) {
+    const paragraphs = mythContainer.querySelectorAll('p');
+    paragraphs.forEach(p => p.classList.add('myth-line'));
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // 增加延遲感，讓它一行接一行
+                setTimeout(() => {
+                    entry.target.classList.add('is-visible');
+                }, index * 300); // 每一行間隔 300ms
+            }
+        });
+    }, { threshold: 0.1 });
+
+    paragraphs.forEach(line => observer.observe(line));
+}
+
