@@ -75,9 +75,39 @@ function openBook(contentId) {
     const article = document.getElementById('book-content');
     const depotContent = document.getElementById(`content-${contentId}`);
     if (!overlay || !article || !depotContent) return;
+
+    // 1. 搬運內容
     article.innerHTML = depotContent.innerHTML;
     overlay.classList.remove('hidden');
     document.body.classList.replace('is-unlocked', 'is-locked');
+
+    // 2. 如果打開的是人物誌，初始化分頁
+    if (contentId === 'characters') {
+        currentChar = 1; 
+        const pages = article.querySelectorAll('.char-page');
+        pages.forEach(p => p.classList.remove('active'));
+        if (pages[0]) pages[0].classList.add('active');
+        
+        const indicator = article.querySelector('#page-indicator');
+        if (indicator) indicator.innerText = `1 / ${pages.length}`;
+    }
+
+    // 3. 如果打開的是神話，啟動動畫觀察器
+    if (contentId === 'myth') {
+        const lines = article.querySelectorAll('.myth-line');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(lines).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, index * 300); 
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        lines.forEach(line => observer.observe(line));
+    }
 }
 
 function closeBook() {
@@ -91,22 +121,7 @@ function closeBook() {
 // 宣告全域變數
 let currentChar = 1;
 
-function openBook(type) {
-    const depot = document.getElementById(`content-${type}`);
-    const display = document.getElementById('book-content');
-    
-    // 將內容放入顯示區
-    display.innerHTML = depot.innerHTML;
-    
-    // 如果打開的是人物誌，強制重新初始化頁碼與顯示
-    if (type === 'characters') {
-        currentChar = 1; // 每次打開都從第一頁開始
-        updateCharDisplay();
-    }
-    
-    // 顯示 overlay
-    document.getElementById('reading-overlay').classList.remove('hidden');
-}
+
 
 function changeChar(dir) {
     const pages = document.querySelectorAll('#book-content .char-page');
@@ -174,34 +189,5 @@ function unlockBook(element, url) {
 // 啟動螢火蟲
 document.addEventListener('DOMContentLoaded', initFireflies);
 
-function openBook(contentId) {
-    const overlay = document.getElementById('reading-overlay');
-    const article = document.getElementById('book-content');
-    const depotContent = document.getElementById(`content-${contentId}`);
-    if (!overlay || !article || !depotContent) return;
 
-    // 1. 搬運內容
-    article.innerHTML = depotContent.innerHTML;
-    overlay.classList.remove('hidden');
-    document.body.classList.replace('is-unlocked', 'is-locked');
 
-    // 2. ✦ 新增：如果打開的是神話，啟動動畫觀察器
-    if (contentId === 'myth') {
-        const lines = article.querySelectorAll('.myth-line');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    // 取得目前這一行在所有行中的索引來計算延遲
-                    const index = Array.from(lines).indexOf(entry.target);
-                    setTimeout(() => {
-                        entry.target.classList.add('is-visible');
-                    }, index * 300); 
-                    observer.unobserve(entry.target); // 觸發後就不再觀察
-                }
-            });
-        }, { threshold: 0.1 });
-
-        lines.forEach(line => observer.observe(line));
-    }
-}
