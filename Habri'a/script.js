@@ -136,5 +136,43 @@ function changeChar(dir) {
 }
 
 function updateCharDisplay() {
-    const pages
+    const pages = document.querySelectorAll('#book-content .char-page');
+    const indicator = document.querySelector('#book-content #page-indicator');
+    if (indicator) {
+        indicator.innerText = `1 / ${pages.length}`;
+    }
+}
 
+// 8. 地圖與實體書動畫功能
+function animateMapUnfold(element) {
+    const overlay = document.getElementById('actual-map');
+    const rect = element.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    overlay.style.transformOrigin = `${x}px ${y}px`;
+    element.style.opacity = '0';
+    overlay.classList.add('unfolded');
+    document.body.classList.replace('is-unlocked', 'is-locked'); 
+}
+
+function animateMapFold() {
+    const overlay = document.getElementById('actual-map');
+    const trigger = document.querySelector('.map-trigger-scrap');
+    overlay.classList.remove('unfolded');
+    setTimeout(() => {
+        if(trigger) trigger.style.opacity = '1';
+        document.body.classList.replace('is-locked', 'is-unlocked');
+    }, 800);
+}
+
+function unlockBook(element, url) {
+    if (element.classList.contains('is-opening')) return;
+    element.classList.add('is-opening');
+    setTimeout(() => {
+        window.open(url, '_blank');
+        setTimeout(() => element.classList.remove('is-opening'), 500);
+    }, 600); 
+}
+
+// 啟動初始化
+document.addEventListener('DOMContentLoaded', initFireflies);
