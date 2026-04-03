@@ -315,10 +315,19 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 }
 
 .book-container {
-    flex: 1 0 auto;  /* 讓文字內容區自動撐開剩餘空間 */
+    position: relative;
+    min-height: 500px; 
 }
-/* 手機版縮放修正 */
-@media (max-width: 768px) {
+#book-content .char-page {
+    display: none; /* 預設全部隱藏 */
+    position: relative;
+}
+
+#book-content .char-page.active {
+    display: block !important; /* 只有 active 顯示 */
+    animation: fadeIn 0.6s ease forwards;
+}
+
     
 
 /* 讓每一頁具備相對定位，以便放置背景圖 */
@@ -347,15 +356,15 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 }
 
 /* --- 針對每一頁設定不同的圖片 --- */
-#char-1::after {
+#book-content #char-1::after {
     background-image: url('無標題349_20260403063523.png'); /* 第一個人物線稿 */
 }
 
-#char-2::after {
+#book-content #char-2::after {
     background-image: url('你的第二個人物圖路徑.png'); 
 }
 
-#char-3::after {
+#book-content #char-3::after {
     background-image: url('你的第三個人物圖路徑.png');
 }
 
