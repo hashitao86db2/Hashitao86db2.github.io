@@ -88,16 +88,34 @@ function closeBook() {
 }
 
 // 6. 人物誌切換
-let currentCharIndex = 1;
-const totalChars = 3; 
+let currentCharPage = 1;
+const totalCharPages = 3; // 手動設定為 3，或用 document.querySelectorAll('.char-page').length;
+
 function changeChar(direction) {
-    document.getElementById(`char-${currentCharIndex}`).classList.remove('active');    
-    currentCharIndex += direction; 
-    if (currentCharIndex > totalChars) currentCharIndex = 1;
-    if (currentCharIndex < 1) currentCharIndex = totalChars;    
-    document.getElementById(`char-${currentCharIndex}`).classList.add('active');
-    document.getElementById('page-indicator').innerText = `${currentCharIndex} / ${totalChars}`;
+    // 隱藏當前頁面
+    const currentElem = document.getElementById(`char-${currentCharPage}`);
+    if (currentElem) currentElem.classList.remove('active');
+
+    // 計算新頁碼
+    currentCharPage += direction;
+    if (currentCharPage < 1) currentCharPage = totalCharPages;
+    if (currentCharPage > totalCharPages) currentCharPage = 1;
+
+    // 顯示新頁面
+    const nextElem = document.getElementById(`char-${currentCharPage}`);
+    if (nextElem) {
+        nextElem.classList.add('active');
+        // 強制觸發重繪，防止背景圖閃現消失
+        nextElem.style.display = 'block'; 
+    }
+
+    // 更新頁碼文字顯示
+    const indicator = document.getElementById('page-indicator');
+    if (indicator) {
+        indicator.innerText = `${currentCharPage} / ${totalCharPages}`;
+    }
 }
+
 
 // 7. 地圖動畫
 function animateMapUnfold(element) {
