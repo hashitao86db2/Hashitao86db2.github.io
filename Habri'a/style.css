@@ -334,14 +334,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         position: relative;
     }
 
-    /* 處理頭像本身 */
-    .char-avatar {
-        width: 80px !important;  
-        height: 110px !important;
-        border-radius: 10px; 
-        z-index: 5;
-        transform: scale(1.2);
-    }
+  
 
     /* 處理邊框放大與左移 */
     .char-avatar-frame::after {
@@ -426,6 +419,14 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         align-items: center;
         gap: 20px;
     }
+      .char-avatar {
+        width: 80px !important;  
+        height: 110px !important;
+        border-radius: 10px; 
+        z-index: 5;
+        transform: scale(1.2);
+    }
+
     .char-avatar-frame {
         flex: 0 0 auto;
         width: 100%;
