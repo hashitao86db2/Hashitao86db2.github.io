@@ -234,6 +234,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     object-fit: cover;
     z-index: 2;
     margin-right: 20px;
+    
 }
 
 /* 框架裝飾層：共同樣式 */
@@ -338,6 +339,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         height: 110px !important;
         border-radius: 10px; 
         z-index: 5;
+        transform: scale(1.2);
     }
 
     /* 處理邊框放大與左移 */
@@ -346,7 +348,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         height: 100%;
         /* 放大 2.2 倍，並向左位移 */
         transform: translate(-120%, -55%) scale(2.2) !important;
-        left: 0%;
+        left: 50%;
         z-index: 10;
     }
 }
@@ -362,7 +364,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     content: "";
     position: absolute;
     bottom: -20px; /* 稍微超出邊界增加層次感 */
-    left: -40px;   /* 往左偏移，製造出半身像從邊緣切入的視覺 */
+    right: -40px;   /* 往左偏移，製造出半身像從邊緣切入的視覺 */
     width: 300px;  /* 根據圖片比例調整 */
     height: 450px;
     background-repeat: no-repeat;
