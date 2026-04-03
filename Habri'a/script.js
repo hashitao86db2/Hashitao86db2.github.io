@@ -88,31 +88,54 @@ function closeBook() {
 }
 
 // 6. 人物誌切換
-let currentCharPage = 1;
-const totalCharPages = 3; // 手動設定為 3，或用 document.querySelectorAll('.char-page').length;
+// 宣告全域變數
+let currentChar = 1;
 
-function changeChar(direction) {
-    // 隱藏當前頁面
-    const currentElem = document.getElementById(`char-${currentCharPage}`);
-    if (currentElem) currentElem.classList.remove('active');
+function openBook(type) {
+    const depot = document.getElementById(`content-${type}`);
+    const display = document.getElementById('book-content');
+    
+    // 將內容放入顯示區
+    display.innerHTML = depot.innerHTML;
+    
+    // 如果打開的是人物誌，強制重新初始化頁碼與顯示
+    if (type === 'characters') {
+        currentChar = 1; // 每次打開都從第一頁開始
+        updateCharDisplay();
+    }
+    
+    // 顯示 overlay
+    document.getElementById('reading-overlay').classList.remove('hidden');
+}
 
-    // 計算新頁碼
-    currentCharPage += direction;
-    if (currentCharPage < 1) currentCharPage = totalCharPages;
-    if (currentCharPage > totalCharPages) currentCharPage = 1;
+function changeChar(dir) {
+    const pages = document.querySelectorAll('#book-content .char-page');
+    const total = pages.length; // 自動抓取正確的總頁數
+
+    // 隱藏當前頁
+    pages[currentChar - 1].classList.remove('active');
+
+    // 計算下一頁
+    currentChar += dir;
+    if (currentChar < 1) currentChar = total;
+    if (currentChar > total) currentChar = 1;
 
     // 顯示新頁面
-    const nextElem = document.getElementById(`char-${currentCharPage}`);
-    if (nextElem) {
-        nextElem.classList.add('active');
-        // 強制觸發重繪，防止背景圖閃現消失
-        nextElem.style.display = 'block'; 
-    }
-
-    // 更新頁碼文字顯示
-    const indicator = document.getElementById('page-indicator');
+    pages[currentChar - 1].classList.add('active');
+    
+    // 更新頁碼文字
+    const indicator = document.querySelector('#book-content #page-indicator');
     if (indicator) {
-        indicator.innerText = `${currentCharPage} / ${totalCharPages}`;
+        indicator.innerText = `${currentChar} / ${total}`;
+    }
+}
+
+// 輔助函式：確保打開時頁碼正確
+function updateCharDisplay() {
+    const pages = document.querySelectorAll('#book-content .char-page');
+    const indicator = document.querySelector('#book-content #page-indicator');
+    if (indicator) {
+        indicator.innerText = `1 / ${pages.length}`;
     }
 }
 
