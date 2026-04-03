@@ -459,7 +459,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
 }
 
 /* 確保圖片路徑正確 */
-#book-content #char-1::after { background-image: url('無標題350_20260403063457.png') !important; }
+#book-content #char-1::after { background-image: url('無標題349_20260403063523.png') !important; }
 #book-content #char-2::after { background-image: url('IMG_2284.png') !important; }
 #book-content #char-3::after { background-image: url('IMG_2280.png') !important; }
 
