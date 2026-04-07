@@ -424,7 +424,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
     /* 讓框準確置中 */
     .char-avatar-frame::after {
         top: 50% !important;
-        left: 50% !important;
+        left: 40% !important;
         width: 100%;
         height: 100%;
         transform: translate(-50%, -50%) scale(1.8) !important; 
