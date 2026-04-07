@@ -379,7 +379,7 @@ body.is-unlocked { overflow-y: auto; position: relative; height: auto; }
         height: 110px !important;
         border-radius: 10px; 
         z-index: 5;
-        transform: scale(1.2);
+        transform: scale(1.3);
     }
 
 
