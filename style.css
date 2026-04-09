@@ -322,7 +322,7 @@ details summary {
   /* 1. 設定純白背景色，並讓圖片置中不重複 */
   background: #ffffff url("img/IMG_2255.jpg") center center no-repeat;
   /* 2. 電腦版預設填滿螢幕 */
-  background-size: cover;
+  background-size: contain;
   position: relative;
   /* 已經在 HTML 使用 Bootstrap class，這裡維持相對定位即可 */
 }
