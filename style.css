@@ -382,6 +382,17 @@ details summary {
     height: 100vh;
   }
 
+  @media (min-width: 1200px) {
+  #hero {
+    /* 1. 讓 hero 區塊寬度扣除左側導航欄 (300px) */
+    width: calc(100% - 300px);
+    /* 2. 將整個區塊向右推 300px */
+    margin-left: 300px;
+    /* 3. 背景固定效果（如果需要） */
+    background-attachment: fixed;
+  }
+}
+
   #hero h1 {
     font-size: 28px;
     line-height: 36px;
@@ -1250,7 +1261,7 @@ section {
 /* ⚡️【新增】Hover 效果：顏色變深 */
 .cute-nav-btn:hover {
     background: none; /* 確保沒有背景變色 */
-    color: ##74f87; /* Hover 時變為您喜歡的粉色 */
+    color: #7faff0; 
 }
 
 /* 確保「故事已完結」標記保持居中 */
