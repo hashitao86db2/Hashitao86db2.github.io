@@ -1270,3 +1270,55 @@ section {
     font-style: italic;
 }
 
+/* 切換按鈕容器 */
+.tab-header-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  border-bottom: 2px solid #ebebeb;
+  margin-bottom: 10px;
+}
+
+/* 讓 h2 變成可點擊的按鈕 */
+.tab-btn {
+  cursor: pointer;
+  margin-bottom: -2px !important; /* 蓋住底線 */
+  border-bottom: 3px solid transparent;
+  padding-bottom: 10px;
+  transition: 0.3s;
+  font-size: 24px !important;
+  color: #173b6c !important;
+}
+
+.tab-btn.active {
+  color: #149ddd !important;
+  border-bottom: 3px solid #149ddd;
+}
+
+.tab-btn:hover {
+  color: #149ddd !important;
+}
+
+/* 隱藏未選中的卡片 */
+.gallery-card.hidden {
+  display: none !important;
+}
+
+/* 確保原本的 photo-caption 依然運作 */
+.photo-container {
+  position: relative;
+  overflow: hidden;
+}
+.photo-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: 0.3s;
+}
+.photo-container:hover .photo-caption {
+  opacity: 1;
+}
