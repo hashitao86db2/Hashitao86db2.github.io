@@ -266,3 +266,73 @@
 const photoWallLightbox = GLightbox({
   selector: '.glightbox'
 });
+document.addEventListener('DOMContentLoaded', function() {
+  const grid = document.getElementById('galleryGrid');
+  const originalOrder = Array.from(grid.querySelectorAll('.gallery-card'));
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const sortRow = document.getElementById('sortRow');
+  const sortSelect = document.getElementById('sortSelect');
+  let currentTab = 'commission';
+
+  // 1. 初始化 GLightbox (設定關閉時自動銷毀以停止音樂)
+  let lightbox = GLightbox({
+    selector: '.glightbox',
+    touchNavigation: true,
+    loop: true,
+    autoplayVideos: true
+  });
+
+  // 2. Tab 切換功能
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentTab = btn.dataset.tab;
+      
+      // 只有委託顯示排序
+      sortRow.style.display = currentTab === 'commission' ? 'block' : 'none';
+      
+      applyFilterAndSort();
+    });
+  });
+
+  // 3. 排序選擇功能
+  sortSelect.addEventListener('change', applyFilterAndSort);
+
+  function applyFilterAndSort() {
+    // 過濾
+    const visible = originalOrder.filter(c => c.dataset.tab === currentTab);
+    const hidden = originalOrder.filter(c => c.dataset.tab !== currentTab);
+
+    hidden.forEach(c => c.classList.add('hidden'));
+
+    // 排序
+    if (currentTab === 'commission') {
+      const sort = sortSelect.value;
+      if (sort === 'default') {
+        visible.sort((a, b) => originalOrder.indexOf(a) - originalOrder.indexOf(b));
+      } else {
+        visible.sort((a, b) => {
+          if (sort === 'date-desc') return b.dataset.date.localeCompare(a.dataset.date);
+          if (sort === 'date-asc') return a.dataset.date.localeCompare(b.dataset.date);
+          if (sort === 'artist-az') return a.dataset.artist.localeCompare(b.dataset.artist, 'zh-TW');
+          if (sort === 'artist-za') return b.dataset.artist.localeCompare(a.dataset.artist, 'zh-TW');
+        });
+      }
+    } else {
+      visible.sort((a, b) => originalOrder.indexOf(a) - originalOrder.indexOf(b));
+    }
+
+    // 重新排列 DOM
+    visible.forEach(c => {
+      c.classList.remove('hidden');
+      grid.appendChild(c);
+    });
+
+    // 關鍵：每次過濾/排序後，必須重新刷新 Lightbox 實例，否則上下張順序會錯亂
+    lightbox.reload();
+  }
+
+  // 初始套用
+  applyFilterAndSort();
+});
