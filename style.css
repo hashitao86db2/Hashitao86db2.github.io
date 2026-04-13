@@ -1270,33 +1270,48 @@ section {
     font-style: italic;
 }
 
-/* 切換按鈕容器 */
+/* --- 修改後的切換按鈕樣式 --- */
+
+/* 1. 容器：改為靠左對齊 (flex-start) */
 .tab-header-wrapper {
   display: flex;
-  justify-content: center;
-  gap: 30px;
-  border-bottom: 2px solid #ebebeb;
-  margin-bottom: 10px;
+  justify-content: flex-start; /* 靠左 */
+  gap: 40px;                   /* 按鈕之間的間距 */
+  border-bottom: 2px solid #f2f2f2; /* 淡灰底色橫線 */
+  margin-bottom: 20px;
 }
 
-/* 讓 h2 變成可點擊的按鈕 */
+/* 2. 按鈕基礎樣式：使用紫色系與原本標題顏色 */
 .tab-btn {
   cursor: pointer;
-  margin-bottom: -2px !important; /* 蓋住底線 */
-  border-bottom: 3px solid transparent;
+  margin-bottom: -2px !important;  /* 讓 active 的底線蓋在容器橫線上 */
+  border-bottom: 3px solid transparent; /* 預設隱藏底線 */
   padding-bottom: 10px;
-  transition: 0.3s;
-  font-size: 24px !important;
-  color: #173b6c !important;
+  transition: all 0.3s ease;
+  font-size: 26px !important;      /* 稍微大一點點 */
+  font-weight: bold;
+  color: #555555 !important;       /* 預設沒點擊時的文字顏色 (深灰，比較耐看) */
 }
 
+/* 3. 點選後 (Active) 的顏色：改為漂亮的紫色 + 紫色底線 */
 .tab-btn.active {
-  color: #149ddd !important;
-  border-bottom: 3px solid #149ddd;
+  color: #986db2 !important;       /* 點擊後的文字顏色 (你的主題紫色) */
+  border-bottom: 3px solid #986db2; /* 點擊後的底線顏色 (紫色) */
 }
 
+/* 4. 滑鼠懸停 (Hover) 的顏色：稍微變色，增加互動感 */
 .tab-btn:hover {
-  color: #149ddd !important;
+  color: #ccafde !important;       /* 懸停時變淺紫色 */
+}
+
+/* 針對移動端的小調整，確保靠左不會太擠 */
+@media (max-width: 768px) {
+  .tab-header-wrapper {
+    gap: 20px;
+  }
+  .tab-btn {
+    font-size: 20px !important;
+  }
 }
 
 /* 隱藏未選中的卡片 */
