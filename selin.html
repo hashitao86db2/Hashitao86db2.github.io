@@ -159,7 +159,17 @@
     transition: opacity 0.3s;
   }
   .feat-item:hover .feat-overlay { opacity: 1; }
-
+ @media (max-width: 700px) {
+  
+    .featured-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 180px 120px 120px;
+    }
+    .featured-grid .feat-item:nth-child(1) {
+      grid-column: 1 / 3;
+      grid-row: 1;
+    }
+  }
 
     </style>
 </head>
