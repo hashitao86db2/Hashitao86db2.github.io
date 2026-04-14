@@ -469,27 +469,27 @@
    <script src="main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
+  // 您的 GLightbox 和 Swiper 初始化邏輯放在這裡
   const lightbox = GLightbox({
     selector: '.glightbox'
   });
   new Swiper('.character-cards', {
-  slidesPerView: 1.2,
-  spaceBetween: 20,
-  loop: false,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  breakpoints: {
-    768: {
-      slidesPerView: 2.2,
+    slidesPerView: 1.2,
+    spaceBetween: 20,
+    loop: false,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
-    992: {
-      slidesPerView: 3.2,
-    },
-  }
-});
-
+    breakpoints: {
+      768: {
+        slidesPerView: 2.2,
+      },
+      992: {
+        slidesPerView: 3.2,
+      },
+    }
+  });
 </script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
