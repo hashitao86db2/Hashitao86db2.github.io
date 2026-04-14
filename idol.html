@@ -162,60 +162,58 @@
 </section>
 
       
-<section id="portfolio-details" class="portfolio-details">
+ <section id="portfolio-details" class="portfolio-details">
   <div class="container">
-
-    <!-- 照片牆 Photo Wall -->
-    <div class="photo-wall mb-5">
-      <div class="row g-3">
-
-        <div class="col-md-4">
-          <div class="photo-container">
-            <a href="iimg/未命名的作品 (5).png" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/未命名的作品 (5).png" class="img-fluid" alt="作品4">
-              <div class="photo-caption">不荷邏輯</div>
-            </a>
-          </div>
-        </div>
-
-        
-
-        
-
-
-
+    
+    <div class="section-title">
+      <div class="tab-header-wrapper">
+        <h2 class="tab-btn active" data-tab="commission">委託</h2>
+        <h2 class="tab-btn" data-tab="original">自繪</h2>
       </div>
     </div>
-  </div>
-    </section>
-    
-<section id="draw" class="portfolio-details">
-  <div class="container">
 
-    <!-- 照片牆 Photo Wall -->
-    <div class="photo-wall mb-5">
-      <div class="row g-3">
- <div class="section-title">
-      <h2>自繪</h2>
-     
+    <div class="sort-row mb-4 text-center" id="sortRow">
+      <span style="font-size: 0.8rem; color: #666;">排序：</span>
+      <select id="sortSelect" style="border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem; padding: 2px 5px;">
+        <option value="default">默認排序</option>
+        <option value="date-desc">新到舊</option>
+        <option value="date-asc">舊到新</option>
+        <option value="artist-az">繪師 A-Z</option>
+        <option value="artist-za">繪師 Z-A</option>
+      </select>
     </div>
-        <div class="col-md-4">
+
+    <div class="photo-wall mb-5">
+      <div class="row g-3" id="galleryGrid">
+        
+
+
+       
+       
+        <div class="col-md-4 gallery-card" data-tab="original" data-artist="自繪" data-date="2025-05-10">
           <div class="photo-container">
-            <a href="img/portfolio/IMG_1147.png" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/portfolio/IMG_1147.png" class="img-fluid" alt="作品1">
-              <div class="photo-caption">100年生きてる </div>
+            <a href="img/portfolio/IMG_1147.png" class="glightbox" data-gallery="gallery1" data-title="100年生きてる">
+              <img src="img/portfolio/IMG_1147.png" class="img-fluid" alt=""> 
+              <div class="photo-caption">100年生きてる</div>
             </a>
           </div>
         </div>
 
-                <div class="col-md-4">
+        <div class="col-md-4 gallery-card" data-tab="original" data-artist="自繪" data-date="2025-05-10">
           <div class="photo-container">
-            <a href="img/portfolio/壓縮/IMG_1816.jpg" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/portfolio/壓縮/IMG_1816.jpg" class="img-fluid" alt="作品1">
+            <a href="img/portfolio/壓縮/IMG_1816.jpg" class="glightbox" data-gallery="gallery1" data-title="カイコ">
+              <img src="img/portfolio/壓縮/IMG_1816.jpg" class="img-fluid" alt=""> 
               <div class="photo-caption">カイコ</div>
             </a>
           </div>
         </div>
+
+        </div>
+    </div>
+  </div>
+</section>
+    
+
 
 
 
