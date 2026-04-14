@@ -131,115 +131,126 @@
   </div>
 </section>
 
-      
 <section id="portfolio-details" class="portfolio-details">
   <div class="container">
+    
+    <div class="section-title">
+      <div class="tab-header-wrapper">
+        <h2 class="tab-btn active" data-tab="commission">委託</h2>
+        <h2 class="tab-btn" data-tab="original">自繪</h2>
+      </div>
+    </div>
 
-    <!-- 照片牆 Photo Wall -->
+    <div class="sort-row mb-4 text-center" id="sortRow">
+      <span style="font-size: 0.8rem; color: #666;">排序：</span>
+      <select id="sortSelect" style="border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem; padding: 2px 5px;">
+        <option value="default">默認排序</option>
+        <option value="date-desc">新到舊</option>
+        <option value="date-asc">舊到新</option>
+        <option value="artist-az">繪師 A-Z</option>
+        <option value="artist-za">繪師 Z-A</option>
+      </select>
+    </div>
+
     <div class="photo-wall mb-5">
-      <div class="row g-3">
-
-        <div class="col-md-4">
+      <div class="row g-3" id="galleryGrid">
+        
+  
+  <div class="col-md-4 gallery-card" data-tab="commission" data-artist="不荷邏輯" data-date="2025-09-06">
           <div class="photo-container">
-            <a href="img/未命名的作品 (5).png" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/未命名的作品 (5).png" class="img-fluid" alt="無償">
+            <a href="img/未命名的作品 (5).png" loading="lazy" data-gallery="gallery1" data-title="不荷邏輯">
+              <img src="img/未命名的作品 (5).png"class="img-fluid" alt="0">
               <div class="photo-caption">不荷邏輯</div>
             </a>
           </div>
         </div>
 
-        <div class="col-md-4">
+          <div class="col-md-4 gallery-card" data-tab="commission" data-artist="Ruko Ma" data-date="2025-09-06">
           <div class="photo-container">
-            <a href="img/1000011631.png" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/1000011631.png" class="img-fluid" alt="500">
+            <a href="img/1000011631.png" loading="lazy" data-gallery="gallery1" data-title="Ruko Ma">
+              <img src="img/1000011631.png"class="img-fluid" alt="500">
               <div class="photo-caption">Ruko Ma</div>
             </a>
           </div>
         </div>
 
-        <div class="col-md-4">
+          <div class="col-md-4 gallery-card" data-tab="commission" data-artist="林雨澄" data-date="2025-09-06">
           <div class="photo-container">
-            <a href="img/FB_IMG_1766848217251.jpg" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/FB_IMG_1766848217251.jpg" class="img-fluid" alt="500">
+            <a href="img/FB_IMG_1766848217251.jpg" loading="lazy" data-gallery="gallery1" data-title="林雨澄">
+              <img src="img/FB_IMG_1766848217251.jpg"class="img-fluid" alt="0">
               <div class="photo-caption">林雨澄</div>
             </a>
           </div>
         </div>
 
-        <div class="col-md-4">
+          <div class="col-md-4 gallery-card" data-tab="commission" data-artist="飯糰" data-date="2025-09-06">
           <div class="photo-container">
-            <a href="img/IMG_5468.png" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/IMG_5468.png" class="img-fluid" alt="0">
+            <a href="img/IMG_5468.png" loading="lazy" data-gallery="gallery1" data-title="飯糰">
+              <img src="img/IMG_5468.png"class="img-fluid" alt="0">
               <div class="photo-caption">飯糰</div>
             </a>
           </div>
         </div>
 
-        <div class="col-md-4">
+          <div class="col-md-4 gallery-card" data-tab="commission" data-artist="江南瓜" data-date="2025-09-06">
           <div class="photo-container">
-            <a href="img/IMG_20260318_000502_214.jpg" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/IMG_20260318_000502_214.jpg" class="img-fluid" alt="0">
+            <a href="img/IMG_20260318_000502_214.jpg" loading="lazy" data-gallery="gallery1" data-title="江南瓜">
+              <img src="img/IMG_20260318_000502_214.jpg"class="img-fluid" alt="0">
               <div class="photo-caption">江南瓜</div>
             </a>
           </div>
         </div>
 
-        <div class="col-md-4">
+        
+          <div class="col-md-4 gallery-card" data-tab="commission" data-artist="茜子" data-date="2025-09-06">
           <div class="photo-container">
-            <a href="img/IMG_0269.png" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/IMG_0269.png" class="img-fluid" alt="0">
+            <a href="img/IMG_0269.png" loading="lazy" data-gallery="gallery1" data-title="茜子">
+              <img src="img/IMG_0269.png"class="img-fluid" alt="0">
               <div class="photo-caption">茜子</div>
             </a>
           </div>
         </div>
 
-        
-
-        
-
-        
-
-
-
-      </div>
-    </div>
-  </div>
-    </section>
-    
-<section id="draw" class="portfolio-details">
-  <div class="container">
-
-    <!-- 照片牆 Photo Wall -->
-    <div class="photo-wall mb-5">
-      <div class="row g-3">
- <div class="section-title">
-      <h2>自繪</h2>
-     
-    </div>
-        <div class="col-md-4">
+       
+       
+        <div class="col-md-4 gallery-card" data-tab="original" data-artist="自繪" data-date="2025-05-10">
           <div class="photo-container">
-            <a href="img/portfolio/IMG_1047.png" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/portfolio/IMG_1047.png" class="img-fluid" alt="作品1">
+            <a href="img/portfolio/IMG_1047.png" class="glightbox" data-gallery="gallery1" data-title="『宇宙』">
+              <img src="img/portfolio/IMG_1047.png" class="img-fluid" alt=""> 
               <div class="photo-caption">『宇宙』</div>
             </a>
           </div>
         </div>
 
-              <div class="col-md-4">
+           
+        <div class="col-md-4 gallery-card" data-tab="original" data-artist="自繪" data-date="2025-05-10">
           <div class="photo-container">
-            <a href="img/portfolio/IMG_1136.png" loading="lazy" class="portfolio-lightbox" data-gallery="gallery1">
-              <img src="img/portfolio/IMG_1136.png" class="img-fluid" alt="作品1">
+            <a href="img/portfolio/IMG_1136.png" class="glightbox" data-gallery="gallery1" data-title="異星にいこうね">
+              <img src="img/portfolio/IMG_1136.png" class="img-fluid" alt=""> 
               <div class="photo-caption">異星にいこうね</div>
             </a>
           </div>
         </div>
 
-
-        
-    </div>
+        </div>
     </div>
   </div>
-    </section>
+</section>      
+
+
+
+
+    
+
+        
+
+        
+
+        
+
+
+
+
     </main>
       <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
