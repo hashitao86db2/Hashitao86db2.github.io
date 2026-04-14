@@ -29,7 +29,101 @@
 
   <!-- Template Main CSS File -->
   <link href="style.css" rel="stylesheet">
+<style>
+/* 引用你的 Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Shippori+Mincho+B1:wght@400;700&display=swap');
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.scene { padding: 2rem 0 1.5rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 24px; }
+
+.card-wrap { perspective: 900px; cursor: pointer; }
+.card-inner {
+  position: relative;
+  width: 100%;
+  padding-top: 175%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(.4, 0, .2, 1);
+}
+
+.card-wrap.flipped .card-inner { transform: rotateY(180deg); }
+
+.card-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ── 正面：保持塔羅的神祕感，但邊框微調為你的紫色 ── */
+.card-front {
+  background: #1a1520;
+  border: 2px solid #986db2; /* 你的主題紫 */
+}
+
+.tarot-frame {
+  position: absolute; inset: 8px;
+  border: 1px solid #986db244;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.tarot-corner {
+  position: absolute; width: 14px; height: 14px;
+  border-color: #e7e0be; /* 你的黃金色調 */
+  border-style: solid;
+}
+.tc-tl { top: 4px; left: 4px; border-width: 1.5px 0 0 1.5px; }
+.tc-tr { top: 4px; right: 4px; border-width: 1.5px 1.5px 0 0; }
+.tc-bl { bottom: 4px; left: 4px; border-width: 0 0 1.5px 1.5px; }
+.tc-br { bottom: 4px; right: 4px; border-width: 0 1.5px 1.5px 0; }
+
+.tarot-img { width: 100%; height: 78%; object-fit: cover; object-position: top center; display: block; }
+
+.tarot-bot {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 6px 8px; gap: 3px;
+  background: #1a1520;
+}
+.tarot-num { font-family: 'Noto Serif TC', serif; font-size: 9px; letter-spacing: 0.2em; color: #986db2; }
+.tarot-name { font-family: 'Shippori Mincho B1', serif; font-size: 13px; font-weight: 500; color: #e7e0be; letter-spacing: 0.05em; text-align: center; }
+
+/* ── 背面：角色卡（配色改為你的網頁風） ── */
+.card-back {
+  transform: rotateY(180deg);
+  background: #ffffff;
+  border: 1px solid #986db222;
+  display: flex; flex-direction: column;
+}
+
+.back-img { width: 100%; height: 50%; object-fit: cover; object-position: top center; display: block; }
+
+.back-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+
+.world-tag { 
+  font-size: 9px; padding: 2px 7px; border-radius: 4px; 
+  background: #f4f0f7; color: #986db2; /* 紫色標籤 */
+  letter-spacing: 0.04em; width: fit-content; font-family: 'Noto Sans TC', sans-serif; 
+}
+
+.back-name { font-family: 'Shippori Mincho B1', serif; font-size: 15px; font-weight: 700; color: #272829; line-height: 1.2; }
+.back-sub { font-size: 11px; color: #986db2; font-family: 'Shippori Mincho B1', serif; }
+.back-desc { font-size: 10px; color: #555; line-height: 1.6; font-family: 'Shippori Mincho B1', serif; flex: 1; }
+
+.kws { display: flex; flex-wrap: wrap; gap: 4px; }
+.kw { font-size: 9px; padding: 2px 8px; border-radius: 99px; font-family: 'Noto Sans TC', sans-serif; border: 1px solid; }
+
+/* 關鍵字配色微調 */
+.kw-moon { border-color: #986db2; color: #986db2; background: #fdfbff; }
+.kw-teal { border-color: #7ab5a8; color: #2e7a6a; background: #f0f8f6; }
+.kw-pink { border-color: #ff90b3; color: #a54a68; background: #fff5f8; }
+
+.hint { font-size: 9px; color: #b0aab5; text-align: center; padding: 8px 0; letter-spacing: 0.05em; background: #fdfbff; border-top: 1px solid #f0edf2; }
+</style>
 </head>
 
 <body>
