@@ -33,7 +33,75 @@
   <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet" />
   <link href="video-carousel.css" rel="stylesheet"> 
 
+<style>
+ 
+  /* 1. 背景改為深色毛玻璃感 */
+  .goverlay {
+    background: rgba(20, 15, 12, 0.92) !important;
+    backdrop-filter: blur(8px);
+  }
 
+  /* 2. 圖片/影片容器移除預設陰影與邊框，加入圓角 */
+  .gslide-image img, .gslide-video video {
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+  }
+
+  /* 3. 修改下方文字描述欄位 (Caption) */
+  .gslide-description {
+    background: transparent !important; /* 移除原本的白色背景 */
+    color: #ffffff !important;
+    text-align: center !important;
+    font-family: 'Raleway', 'Noto Serif TC', sans-serif !important;
+  }
+
+  .gslide-title {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.1em !important;
+    margin-bottom: 5px !important;
+  }
+
+  .gslide-desc {
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* 4. 修改左右切換按鈕的外觀 (圓形、半透明背景) */
+  .gnext, .gprev {
+    background: rgba(255, 255, 255, 0.1) !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .gnext:hover, .gprev:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  /* 讓箭頭顏色變白 */
+  .gnext svg path, .gprev svg path {
+    fill: #ffffff !important;
+  }
+
+  /* 5. 修改關閉按鈕 */
+  .gclose {
+    background: none !important;
+  }
+
+  .gclose svg path {
+    fill: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  /* 6. 針對手機板優化：隱藏多餘的欄位線條 */
+  .gslide-description.description-bottom {
+    border: none !important;
+  }
+</style>
 </head>
 
 <body>
