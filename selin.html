@@ -32,7 +32,67 @@
   <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet" />
   <link href="video-carousel.css" rel="stylesheet"> 
   <link href="memo.css" rel="stylesheet">
+  <style>
+  .featured-section {
+    padding: 2rem 2rem 1rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .featured-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .featured-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
 
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 240px 180px;
+    gap: 8px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .featured-grid .feat-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .featured-grid .feat-item:nth-child(1) {
+    grid-row: 1 / 3;
+  }
+  .featured-grid .feat-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .featured-grid .feat-item:hover img {
+    transform: scale(1.05);
+  }
+  .feat-item .feat-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.2rem 1rem 0.8rem;
+    background: linear-gradient(transparent, rgba(42,35,32,0.5));
+    color: #fff;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .feat-item:hover .feat-overlay { opacity: 1; }
+    </style>
 </head>
 
 <body>
@@ -73,6 +133,34 @@
 
   <!-- ======= Hero Section ======= -->
   <main id="main">
+
+    <section class="featured-section">
+  <div class="featured-label">精選</div>
+  <div class="featured-grid" id="featuredGrid">
+    <!-- 精選圖片：把 src 換成你想展示的圖 -->
+    <div class="feat-item" data-full="img/壓縮/IMG_3682.jpg" data-caption="勿以">
+      <img src="img/壓縮/IMG_3682.jpg" alt="精選1"  loading="lazy">
+      <div class="feat-overlay">勿以</div>
+    </div>
+    <div class="feat-item" data-full="img/壓縮/IMG_6103.jpg" data-caption="花開招財">
+      <img src="img/壓縮/IMG_6103.jpg" alt="精選2" style="object-fit: cover; object-position: 70% center;" loading="lazy">
+      <div class="feat-overlay">花開招財</div>
+    </div>
+    <div class="feat-item" data-full="img/壓縮/半半.jpg" data-caption="六七零">
+      <img src="img/壓縮/半半.jpg" alt="精選3" loading="lazy">
+      <div class="feat-overlay">六七零</div>
+    </div>
+    <div class="feat-item" data-full="img/壓縮/3404871-2.jpg" data-caption="Rukka">
+      <img src="img/壓縮/3404871-2.jpg" alt="精選4" loading="lazy">
+      <div class="feat-overlay">Rukka</div>
+    </div>
+    <div class="feat-item" data-full="iimg/壓縮/vaporwave-BASIC (1).jpg" data-caption="江般若">
+      <img src="img/壓縮/vaporwave-BASIC (1).jpg" alt="精選5" loading="lazy">
+      <div class="feat-overlay">江般若</div>
+    </div>
+  </div>
+</section>
+    
     <section id="photo" class="custom-section container mt-4">
   <h2 class="text-center">賽琳娜芙朵</h2>
 
@@ -910,7 +998,7 @@
               <div class="photo-caption">🍓🍰 點進去是巧克力口味🍫</div>
             </a>
           </div>
-        </div>\
+        </div>
 
         
                <div class="col-md-4 gallery-card" data-tab="original" data-artist="自繪" data-date="2025-07-28>
@@ -1030,7 +1118,7 @@
 
         
         
-
+       </div>
       </div>
     </div>
 
