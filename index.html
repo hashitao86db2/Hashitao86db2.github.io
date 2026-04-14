@@ -123,6 +123,25 @@
 .kw-pink { border-color: #ff90b3; color: #a54a68; background: #fff5f8; }
 
 .hint { font-size: 9px; color: #b0aab5; text-align: center; padding: 8px 0; letter-spacing: 0.05em; background: #fdfbff; border-top: 1px solid #f0edf2; }
+  
+/* 針對 iPortfolio 容器的 Grid 微調 */
+.grid { 
+  display: grid; 
+  /* 自動填充，確保在不同螢幕寬度下都能對齊 */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  gap: 30px; 
+  padding: 20px 0;
+}
+
+/* 讓卡片尺寸在手機版稍微縮小，避免太擁擠 */
+@media (max-width: 576px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+  }
+}
+
+/* ... 這裡保留你之前加入的 .card-wrap, .card-inner, .card-front, .card-back 等所有樣式 ... */
 </style>
 </head>
 
@@ -181,7 +200,7 @@
   </section><!-- End Hero -->
 
   <main id="main">
-<!--=============== Portfolio Section ================-->
+<!--=============== Portfolio Section ================-
 <section id="portfolio" class="portfolio-section bg-light py-5">
   <div class="container">
     <div class="section-title">
@@ -190,7 +209,7 @@
     </div>
     
     <div class="row g-4">
-      <!-- 第一張卡片 -->
+      <!-- 第一張卡片 --
       <div class="col-md-4">
         <div class="card shadow-sm h-100">
           <img src="img/壓縮/IMG_1441.jpg" class="card-img-top" alt="Selin">
@@ -201,7 +220,7 @@
           </div>
         </div>
       </div>
-      <!-- 第二張卡片 -->
+      <!-- 第二張卡片 --
       <div class="col-md-4">
         <div class="card shadow-sm h-100">
           <img src="img/壓縮/無標題261_20250927070249.jpg" class="card-img-top" alt="Selin">
@@ -213,7 +232,7 @@
         </div>
       </div>
 
-      <!-- 第三張卡片 -->
+      <!-- 第三張卡片 --
       <div class="col-md-4">
         <div class="card shadow-sm h-100">
           <img src="img/壓縮/無標題345_20260402103655 (1).jpg" class="card-img-top" alt="Selin">
@@ -225,7 +244,7 @@
         </div>
       </div>
 
-            <!-- 第四張卡片 -->
+            <!-- 第四張卡片 --
       <div class="col-md-4">
         <div class="card shadow-sm h-100">
           <img src="img/無標題259_20250926130538_2.jpg" class="card-img-top" alt="Selin">
@@ -237,7 +256,7 @@
         </div>
       </div>
       
-            <!-- 第五張卡片 -->
+            <!-- 第五張卡片 
       <div class="col-md-4">
         <div class="card shadow-sm h-100">
           <img src="img/壓縮/IMG_1351.jpg" class="card-img-top" alt="Selin">
@@ -250,15 +269,25 @@
       </div>
       
       
-    </div> <!-- ❗這裡結束 row -->
+    </div> <!-- ❗這裡結束 row -
     
   </div>
-</section>
+</section>-->
 
 
     <!-- End Portfolio Section -->
     
-
+<section id="portfolio" class="portfolio-section bg-light py-5">
+  <div class="container">
+    <div class="section-title">
+      <h2>角色</h2>
+      <p>我家孩子們</p>
+    </div>
+    
+    <div id="tarot-grid" class="grid"></div>
+    
+  </div>
+</section>
    
 
 <section id="gun" class="d-flex flex-column justify-content-center align-items-center">
@@ -527,6 +556,115 @@
 
   <!-- Template Main JS File -->
   <script src="js/main.js"></script>
+
+    <script>
+// 定義角色資料
+var tarotCards = [
+  {
+    num: "I",
+    name: "Selin",
+    img: "img/壓縮/IMG_1441.jpg",
+    world: "Habri'a · 赫伯利亞",
+    sub: "自設",
+    desc: "世界樹根系圖書館的管理員，奉創世者之命誕生的記錄者。",
+    kws: [{t: "🌙 月亮元素", c: "kw-moon"}, {t: "記錄者", c: "kw-moon"}],
+    link: "selin.html"
+  },
+  {
+    num: "II",
+    name: "Nes & Meyutar",
+    img: "img/壓縮/無標題261_20250927070249.jpg",
+    world: "Habri'a · 赫伯利亞",
+    sub: "雙子",
+    desc: "一對雙生，性格與命運緊緊相扣，共享同一個故事的兩面。",
+    kws: [{t: "🌗 雙子", c: "kw-teal"}, {t: "對立共生", c: "kw-teal"}],
+    link: "twin.html"
+  },
+  {
+    num: "III",
+    name: "bug醬",
+    img: "img/壓縮/無標題345_20260402103655 (1).jpg",
+    world: "世界觀未定",
+    sub: "小史萊姆",
+    desc: "神明創造世界時出現的 bug 意識綜合體。既非神也非人。",
+    kws: [{t: "液體元素", c: "kw-pink"}, {t: "意識體", c: "kw-pink"}],
+    link: "bug.html"
+  },
+  {
+    num: "IV",
+    name: "努迪亞",
+    img: "img/無標題259_20250926130538_2.jpg",
+    world: "魔女会で会いましょう",
+    sub: "魔女的孩子",
+    desc: "被魔女撿來的小海蛞蝓，活潑開朗樂天",
+    kws: [{t: "🌺 海蛞蝓", c: "kw-sea"}, {t: "海洋系", c: "kw-sea"}],
+    link: "Nudibranchia.html"
+  },
+  {
+    num: "V",
+    name: "小偶像",
+    img: "img/壓縮/IMG_1351.jpg",
+    world: "世界觀未定",
+    sub: "Idol",
+    desc: "詳情待補充。",
+    kws: [{t: "🦋 偶像", c: "kw-star"}],
+    link: "idol.html"
+  }
+];
+
+var tarotGrid = document.getElementById('tarot-grid');
+
+tarotCards.forEach(function(c) {
+  var wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+
+  var kwHtml = c.kws.map(function(k){
+    return '<span class="kw '+k.c+'">'+k.t+'</span>';
+  }).join('');
+
+  wrap.innerHTML = `
+    <div class="card-inner">
+      <div class="card-face card-front">
+        <img class="tarot-img" src="${c.img}" alt="${c.name}">
+        <div class="tarot-bot">
+          <span class="tarot-num">${c.num}</span>
+          <span class="tarot-name">${c.name}</span>
+        </div>
+        <div class="tarot-frame">
+          <div class="tarot-corner tc-tl"></div><div class="tarot-corner tc-tr"></div>
+          <div class="tarot-corner tc-bl"></div><div class="tarot-corner tc-br"></div>
+        </div>
+      </div>
+      <div class="card-face card-back">
+        <img class="back-img" src="${c.img}" alt="${c.name}">
+        <div class="back-body">
+          <span class="world-tag">${c.world}</span>
+          <p class="back-name">${c.name}</p>
+          ${c.sub ? `<p class="back-sub">${c.sub}</p>` : ''}
+          <p class="back-desc">${c.desc}</p>
+          <div class="kws">${kwHtml}</div>
+        </div>
+        <p class="hint">雙擊進入詳情</p>
+      </div>
+    </div>`;
+
+  // --- 互動邏輯 ---
+  
+  // 單擊：切換翻面
+  wrap.addEventListener('click', function() {
+    wrap.classList.toggle('flipped');
+  });
+
+  // 雙擊：跳轉頁面（僅限翻面狀態下）
+  wrap.addEventListener('dblclick', function(e) {
+    if (wrap.classList.contains('flipped')) {
+      window.open(c.link, '_blank');
+    }
+  });
+
+  tarotGrid.appendChild(wrap);
+});
+</script>
 
 </body>
 
