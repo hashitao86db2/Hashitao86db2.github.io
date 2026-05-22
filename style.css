@@ -1158,7 +1158,7 @@ section {
 .menu-box {
     padding: 25px;
     border-radius: 10px;
-    background-color: #e6d4c8; 
+    background-color: #dedbd9; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     width: 100%;
 }
@@ -1194,8 +1194,8 @@ section {
 /* 4. 書本內容樣式 (.content-box) */
 .interactive-gallery .content-box { 
     padding: 20px;
-    border-radius: 10px;
-    background-color: #e6d4c8; 
+    border-radius: 3px;
+    background-color: #e0e0e0; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     
     /* ⚡️ 文字置左 */
