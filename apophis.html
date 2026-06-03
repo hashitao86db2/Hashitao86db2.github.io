@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>阿波菲絲</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="img/無標題292_20251114024345.png" rel="icon">
+  <link href="img/無標題292_20251114024345.png" rel="apple-touch-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/無標題292_20251114024345.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Shippori+Mincho+B1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="vendor/aos/aos.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+  <link href="video-carousel.css" rel="stylesheet"> 
+
+<style>
+ 
+  /* 1. 背景改為深色毛玻璃感 */
+  .goverlay {
+    background: rgba(20, 15, 12, 0.92) !important;
+    backdrop-filter: blur(8px);
+  }
+
+  /* 2. 圖片/影片容器移除預設陰影與邊框，加入圓角 */
+  .gslide-image img, .gslide-video video {
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+  }
+
+  /* 3. 修改下方文字描述欄位 (Caption) */
+  .gslide-description {
+    background: transparent !important; /* 移除原本的白色背景 */
+    color: #ffffff !important;
+    text-align: center !important;
+    font-family: 'Raleway', 'Noto Serif TC', sans-serif !important;
+  }
+
+  .gslide-title {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.1em !important;
+    margin-bottom: 5px !important;
+  }
+
+  .gslide-desc {
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* 4. 修改左右切換按鈕的外觀 (圓形、半透明背景) */
+  .gnext, .gprev {
+    background: rgba(255, 255, 255, 0.1) !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .gnext:hover, .gprev:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  /* 讓箭頭顏色變白 */
+  .gnext svg path, .gprev svg path {
+    fill: #ffffff !important;
+  }
+
+  /* 5. 修改關閉按鈕 */
+  .gclose {
+    background: none !important;
+  }
+
+  .gclose svg path {
+    fill: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  /* 6. 針對手機板優化：隱藏多餘的欄位線條 */
+  .gslide-description.description-bottom {
+    border: none !important;
+  }
+</style>
+</head>
+
+<body>
+
+       
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="img/IMG_1441_1.jpg" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html">半</a></h1>
+       <!--    <div class="social-links text-center mt-3">
+  <a href="https://facebook.com/ukitsuki" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>
+  <a href="https://instagram.com/hashita_986db2" class="instagram" target="_blank"><i class="bx bxl-instagram"></i></a>
+  <a href="https://www.threads.net/@hashita_986db2" class="threads" target="_blank">
+    <img src="img/Threads_(app)_logo.svg" alt="Threads" class="threads-icon">
+  </a>
+</div>
+       -->
+
+  <!-- .nav-menu -->
+     <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="https://hashitao86db2.github.io/index.html" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>回首頁</span></a></li>
+          <li><a href="#photo" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>角色資料</span></a></li>
+          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>服設</span></a></li>
+          <li><a href="#story" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>故事</span></a></li>
+         
+        </ul>
+     </nav>  
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <main id="main">
+    <section id="photo" class="custom-section container mt-4">
+  <h2 class="text-center">阿波菲絲</h2>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="p-3 border bg-light">
+        <b><br>驍勇善戰的裁決代理人</b>
+        <p><br>人型外觀：</p>
+        <lit> • 黑髮</lit><br>
+        <lit> • 尖耳</lit><br>
+        <lit> • 龍角</lit><br>
+
+         <p><br>半龍型外觀：</p>
+        <lit> • 白髮黑色皮膚</lit><br>
+        <lit> • 高馬尾</lit><br>
+      
+        
+        
+        <br><p>元素：西方龍、羽毛<br>個性：好戰且高傲<br>生日：6/21 <br><br>年齡：上千<br>身高：182<br>
+        <details>
+<br>是眾裁決代理人當中最年長的。<br>
+<br>一般沒事的話喜歡用龍型出現，打架時會用半龍形，只有在特定祭祀場合才會以人形出現。<br>
+<br>對人類十分感興趣，平常出門也會利用魔法做出人類的外表。<br>  
+
+        </details>
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <img src="img/portfolio/壓縮/IMG_2374.jpg" loading="eager" alt="示意圖" class="img-fluid rounded">
+    </div>
+  </div>
+    </section>
+
+    <!--=============== Portfolio Section ================-->
+<section id="portfolio" class="portfolio-section bg-light py-5">
+  <div class="container">
+    <div class="section-title">
+      <h2>服設</h2>
+      <p>莉妮絲的衣櫥</p>
+    </div>
+    <div class="row g-4">
+      
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <img src="img/壓縮/未命名的作品 (3)_2.jpg" class="card-img-top" alt="352">
+          <div class="card-body">
+            <h5 class="card-title">人形型態</h5>
+            <p class="card-text">繪師：小郝</p>
+    
+          </div>
+        </div>
+      </div>
+      
+<div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <img src="img/未命名的作品 (1).png" class="card-img-top" alt="Selin">
+          <div class="card-body">
+            <h5 class="card-title">共同衣櫥</h5>
+            <p class="card-text">封面服設繪師：花迎楹</p>
+            <a href="clothes" loading="lazy" class="btn btn-pink btn-sm" target="_blank">查看詳情👗</a>
+
+          </div>
+        </div>
+    </div>
+
+                
+
+      <!-- 再新增更多作品卡片 -->
+    </div>
+  </div>
+</section>
+
+<section id="portfolio-details" class="portfolio-details">
+  <div class="container">
+    
+    <div class="section-title">
+      <div class="tab-header-wrapper">
+        <h2 class="tab-btn active" data-tab="commission">委託</h2>
+        <h2 class="tab-btn" data-tab="original">自繪</h2>
+      </div>
+    </div>
+
+    <div class="sort-row mb-4 text-center" id="sortRow">
+      <span style="font-size: 0.8rem; color: #666;">排序：</span>
+      <select id="sortSelect" style="border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem; padding: 2px 5px;">
+        <option value="default">默認排序</option>
+        <option value="date-desc">新到舊</option>
+        <option value="date-asc">舊到新</option>
+        <option value="artist-az">繪師 A-Z</option>
+        <option value="artist-za">繪師 Z-A</option>
+      </select>
+    </div>
+
+    <div class="photo-wall mb-5">
+      <div class="row g-3" id="galleryGrid">
+        
+  
+  <div class="col-md-4 gallery-card" data-tab="commission" data-artist="小郝" data-date="2025-09-06">
+          <div class="photo-container">
+            <a href="img/壓縮/未命名的作品 (3)_1.jpg" loading="lazy" class="glightbox"data-gallery="gallery1" data-title="小郝">
+              <img src="img/壓縮/未命名的作品 (3)_1.jpg"class="img-fluid" alt="0">
+              <div class="photo-caption">小郝</div>
+            </a>
+          </div>
+        </div>
+
+          
+
+       
+       
+        <div class="col-md-4 gallery-card" data-tab="original" data-artist="自繪" data-date="2025-05-10">
+          <div class="photo-container">
+            <a href="img/portfolio/IMG_1047.png" class="glightbox" data-gallery="gallery1" data-title="『宇宙』">
+              <img src="img/portfolio/IMG_1047.png" class="img-fluid" alt=""> 
+              <div class="photo-caption">『宇宙』</div>
+            </a>
+          </div>
+        </div>
+
+           
+        <div class="col-md-4 gallery-card" data-tab="original" data-artist="自繪" data-date="2025-05-10">
+          <div class="photo-container">
+            <a href="img/portfolio/IMG_1136.png" class="glightbox" data-gallery="gallery1" data-title="異星にいこうね">
+              <img src="img/portfolio/IMG_1136.png" class="img-fluid" alt=""> 
+              <div class="photo-caption">異星にいこうね</div>
+            </a>
+          </div>
+        </div>
+
+        </div>
+    </div>
+  </div>
+</section>      
+
+    <!-- ======= 滑動卡片區塊 ======= -->
+<section class="character-cards swiper my-5" id="story">
+  
+  <div class="section-title" >
+      <h2>故事</h2>
+    </div>
+  <div class="swiper-wrapper">
+
+
+    
+    <!-- 卡片 1 -->
+    <div class="swiper-slide">
+      <div class="card h-100 shadow-sm">
+        <img src="img/portfolio/IMG_1441_2.jpg" class="card-img-top" alt="角色一">
+        <div class="card-body">
+          <h5 class="card-title">世界觀</h5>
+          <p class="card-text">它所在的世界</p>
+          <a href="/Habri'a/Habria.html" class="btn btn-pink btn-sm" target="_blank">查看更多✨</a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+  <!-- 左右箭頭 -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</section>
+
+
+    
+
+        
+
+        
+
+        
+
+
+
+
+    </main>
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+<script src="vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="vendor/aos/aos.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/glightbox/js/glightbox.min.js"></script>
+<script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="vendor/swiper/swiper-bundle.min.js"></script>
+<script src="vendor/typed.js/typed.umd.js"></script>
+<script src="vendor/waypoints/noframework.waypoints.js"></script>
+<script src="vendor/php-email-form/validate.js"></script>
+
+<script src="main.js"></script>  
+<script>
+  // 您的 GLightbox 和 Swiper 初始化邏輯放在這裡
+  const lightbox = GLightbox({
+    selector: '.glightbox'
+  });
+  new Swiper('.character-cards', {
+    slidesPerView: 1.2,
+    spaceBetween: 20,
+    loop: false,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2.2,
+      },
+      992: {
+        slidesPerView: 3.2,
+      },
+    }
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const lightbox = GLightbox({
+      selector: '.glightbox'
+    });
+  });
+</script>
+  
+<style>
+  .character-cards .card {
+    min-width: 250px;
+  }
+</style>
+  
+</body>
+  </html>
+  
