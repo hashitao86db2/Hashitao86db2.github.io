@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'story7', chapters: ['chapter7-1'] },
         { id: 'story8', chapters: ['chapter8-1'] },
         { id: 'story9', chapters: ['chapter9-1'] },
-        { id: 'story10', chapters: ['chapter10-1'] },
+        { id: 'story10', chapters: ['chapter10-1','chapter:10-2'] },
         // 確保這裡的 ID 和章節數量與您的 HTML 模板完全對應
     ];
 
