@@ -155,6 +155,9 @@
     .hidden { display: none !important; }
     .fade-out { opacity: 0 !important; transition: opacity 0.2s; }
 
+    /* 圖片資料夾時隱藏側邊欄 */
+    .sidebar-hidden { display: none !important; }
+
     /* ===== 密碼彈窗 ===== */
     .pw-overlay {
         position: fixed; inset: 0; background: rgba(0,0,0,0.5);
@@ -291,10 +294,6 @@
                         <div class="folder-icon"></div>
                         <div class="folder-name">Nishizono Renga</div>
                     </div>
-                     <div class="folder-item" data-folder="pikmin">
-                        <div class="folder-icon"></div>
-                        <div class="folder-name">Pikmin</div>
-                    </div>
                 </div>
 
                 <!-- Read me -->
@@ -394,21 +393,7 @@
                         <div class="photo-item"><div class="photo-placeholder" style="height:125px;">🖼</div></div>
                     </div>
                 </div>
-              <!-- pikmin -->
-                 <div class="detail-view" id="detail-pikmin">
-                    <h2 class="detail-title">Pikmin</h2>
-                    <div class="photo-grid" data-gallery="renga">
-                        <div class="photo-item"><div class="photo-placeholder" style="height:160px;">🖼</div></div>
-                        <div class="photo-item"><div class="photo-placeholder" style="height:100px;">🖼</div></div>
-                        <div class="photo-item"><div class="photo-placeholder" style="height:130px;">🖼</div></div>
-                        <div class="photo-item"><div class="photo-placeholder" style="height:150px;">🖼</div></div>
-                        <div class="photo-item"><div class="photo-placeholder" style="height:90px;">🖼</div></div>
-                        <div class="photo-item"><div class="photo-placeholder" style="height:120px;">🖼</div></div>
-                        <div class="photo-item"><div class="photo-placeholder" style="height:140px;">🖼</div></div>
-                        <div class="photo-item"><div class="photo-placeholder" style="height:110px;">🖼</div></div>
-                        <div class="photo-item"><div class="photo-placeholder" style="height:125px;">🖼</div></div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -418,7 +403,7 @@
 <div class="pw-overlay hidden" id="pwOverlay">
     <div class="pw-box">
         <h3>🔒 密碼確認</h3>
-        <p>輸入一次即可全頁解鎖<br><span style="color: #5fad8a;">たこさんの誕生日</span>></p>
+        <p>輸入一次即可全頁解鎖</p>
         <div class="pw-input-wrap">
             <input type="password" id="pwInput" placeholder="輸入密碼" autocomplete="off">
             <button class="pw-toggle" id="pwToggle">👁</button>
@@ -443,7 +428,7 @@
     /* ============================================================
        密碼設定（與 Ig.html 保持一致，改這裡就好）
     ============================================================ */
-    const CORRECT_PASSWORD = '0910'; // ← 改成你的密碼
+    const CORRECT_PASSWORD = 'your_password_here'; // ← 改成你的密碼
     /* ============================================================ */
 
     // ===== Finder 資料夾切換 =====
@@ -456,10 +441,14 @@
     let selected = null;
     let current  = null;
 
+    const sidebar = document.querySelector('.sidebar');
+
     function openFolder(name) {
         current = name;
         const target = document.getElementById('detail-' + name);
         if (!target) return;
+        const hasPhotos = !!target.querySelector('.photo-grid');
+
         folderGrid.classList.add('fade-out');
         setTimeout(() => {
             folderGrid.classList.add('hidden');
@@ -468,6 +457,8 @@
             target.classList.add('visible');
             breadcrumb.textContent = 'Recent / ' + name;
             backBtn.style.visibility = 'visible';
+            // 有圖片的資料夾才隱藏側邊欄
+            if (hasPhotos) sidebar.classList.add('sidebar-hidden');
         }, 200);
     }
 
@@ -483,6 +474,7 @@
         folderGrid.classList.remove('hidden');
         breadcrumb.textContent = 'Recent';
         backBtn.style.visibility = 'hidden';
+        sidebar.classList.remove('sidebar-hidden'); // 返回時恢復側邊欄
         if (selected) selected.classList.remove('selected');
         selected = null;
     }
