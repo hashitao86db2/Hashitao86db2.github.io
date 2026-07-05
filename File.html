@@ -799,7 +799,7 @@ function renderNode(node) {
                 if (selectedItem) selectedItem.classList.remove('selected');
                 selectedItem = item; item.classList.add('selected');
             });
-            item.addEventListener('dblclick', () => navigateTo(child.id));
+            item.addEventListener('click', () => navigateTo(child.id));
             grid.appendChild(item);
         });
         contentScroll.appendChild(grid);
