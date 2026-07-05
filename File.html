@@ -102,7 +102,6 @@
     .content-scroll::-webkit-scrollbar { width: 5px; }
     .content-scroll::-webkit-scrollbar-thumb { background: var(--mint-mid); border-radius: 4px; }
 
-    /* ===== 資料夾格狀（共用於根目錄與子資料夾） ===== */
     .folder-grid {
         display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
         gap: 20px 10px; animation: fadeIn 0.22s ease;
@@ -127,12 +126,21 @@
     }
     .folder-name { font-size: 12px; color: var(--choco-dark); text-align: center; word-break: break-word; }
 
-    /* ===== 內容頁（文字 or 圖片） ===== */
     .content-page { animation: fadeIn 0.22s ease; }
-
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
     .page-title { font-size: 18px; font-weight: 700; margin: 0 0 16px; color: var(--choco-dark); }
+
+    /* ===== 計時器（與 Ig.html 相同風格：灰色文字，下分隔線，無外框） ===== */
+    .anniv-card {
+        display: flex; align-items: flex-start; justify-content: space-between;
+        gap: 10px; margin: 0 2px 16px; padding-bottom: 10px;
+        border-bottom: 1px solid #ddeee5;
+    }
+    .anniv-left { min-width: 0; }
+    .anniv-title { font-size: 12px; font-weight: 600; color: #999; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .anniv-time  { font-size: 19px; font-weight: 700; color: #777; letter-spacing: 0.3px; margin-top: 2px; }
+    .anniv-sub   { font-size: 10.5px; color: #aaa; margin-top: 1px; }
 
     .photo-grid { columns: 3; column-gap: 10px; }
     @media (max-width: 500px) { .photo-grid { columns: 2; } }
@@ -144,17 +152,12 @@
     }
     .photo-item img { width: 100%; display: block; object-fit: cover; transition: transform 0.3s ease; }
     .photo-item:hover img { transform: scale(1.04); }
-    .photo-placeholder {
-        width: 100%; background: var(--mint-mid);
-        display: flex; align-items: center; justify-content: center;
-        color: var(--choco-mid); font-size: 22px;
-    }
 
     .page-body { font-size: 13.5px; line-height: 1.85; color: var(--choco-dark); }
     .page-body ul { padding-left: 18px; margin: 8px 0; }
     .page-body li { margin-bottom: 5px; }
 
-    /* ===== 密碼彈窗 ===== */
+    /* 密碼彈窗 */
     .pw-overlay {
         position: fixed; inset: 0; background: rgba(0,0,0,0.5);
         display: flex; align-items: center; justify-content: center;
@@ -186,7 +189,7 @@
     .btn-confirm { background: var(--mint-dark); color: white; }
     .btn-cancel-pw { background: #eee; color: #333; }
 
-    /* ===== Lightbox ===== */
+    /* Lightbox */
     .lb-overlay {
         position: fixed; inset: 0; background: rgba(0,0,0,0.88);
         display: flex; align-items: center; justify-content: center;
@@ -286,30 +289,9 @@
 const CORRECT_PASSWORD = '0910';
 
 /* ================================================================
-   資料結構定義
-   ----------------------------------------------------------------
-   每個 node 的格式：
-   {
-     id:      唯一 ID（字串，英數字 + 連字號）,
-     label:   顯示名稱,
-     type:    'folder-list' | 'photos' | 'text',
-
-     // type === 'folder-list'：裡面放子資料夾，children 是 node 陣列
-     children: [ ...nodes ],
-
-     // type === 'photos'：放圖片
-     photos: [
-       'img/路徑/圖片.jpg',
-       ...
-     ],
-
-     // type === 'text'：放文字（HTML 字串）
-     html: '<p>內容</p>',
-   }
-
-   新增資料夾方式：
-   ① 在 children 陣列裡加一個 node 物件即可
-   ② 支援無限層巢狀，type:'folder-list' 的 node 可以繼續有 children
+   資料結構
+   anniv: { title, date } → 該資料夾的計時器
+   date 格式：'YYYY-MM-DD'
 ================================================================ */
 const ROOT = {
     id: 'root', label: 'Recent', type: 'folder-list',
@@ -320,7 +302,6 @@ const ROOT = {
             html: '<p>歡迎半的娃娃周邊照片存檔處꒰ ྀི ∩⸝⸝∩ ꒱♥︎<br><br>照片很多載入可能需要一點時間請多包涵꒰ᐢ⸝⸝´ඉᯅඉ⸝⸝ᐢ꒱<br>照片可以點擊放大，但是需要密碼ฅ•ﻌ•´ฅ  <br>很簡單的請放心✊<br><br><span style="color:var(--mint-dark);">今日はどこへお出かけしよう♪</span></p>'
         },
 
-        /* ── Hoshirube Sho：裡面有子資料夾 ── */
         {
             id: 'GO', label: '現地記錄', type: 'folder-list',
             children: [
@@ -345,727 +326,378 @@ const ROOT = {
                 {
                     id: 'GO-NIJI FES 2025', label: 'NIJI FES 2025', type: 'photos',
                     photos: [
-                       'img/Ig/Z/P_20250222_080421.jpg',
-                        'img/Ig/Z/IMG_1050-1.jpg',
-                        'img/Ig/Z/IMG_4370_1.jpg',
-                        'img/Ig/Z/P_20250222_132651.jpg',
-                        'img/Ig/Z/P_20250222_134905.jpg',
-                        'img/Ig/Z/P_20250222_134930.jpg',
-                        'img/Ig/Z/P_20250222_141041_1_1.jpg',
-                        'img/Ig/Z/P_20250222_150552.jpg',
-                        'img/Ig/Z/P_20250223_103127_1.jpg',
-                        'img/Ig/Z/IMG_0808.jpg',
-                        'img/Ig/Z/IMG_0809.jpg',
-                        'img/Ig/Z/IMG_0811.jpg',
-                        'img/Ig/Z/IMG_0817.jpg',
-                        'img/Ig/Z/IMG_0953.jpg',
-                        'img/Ig/Z/IMG_1046.jpg',
-                        'img/Ig/Z/P_20250223_160127.jpg',
-                        'img/Ig/Z/P_20250223_162212.jpg'
-                        
+                        'img/Ig/Z/P_20250222_080421.jpg','img/Ig/Z/IMG_1050-1.jpg','img/Ig/Z/IMG_4370_1.jpg',
+                        'img/Ig/Z/P_20250222_132651.jpg','img/Ig/Z/P_20250222_134905.jpg','img/Ig/Z/P_20250222_134930.jpg',
+                        'img/Ig/Z/P_20250222_141041_1_1.jpg','img/Ig/Z/P_20250222_150552.jpg','img/Ig/Z/P_20250223_103127_1.jpg',
+                        'img/Ig/Z/IMG_0808.jpg','img/Ig/Z/IMG_0809.jpg','img/Ig/Z/IMG_0811.jpg',
+                        'img/Ig/Z/IMG_0817.jpg','img/Ig/Z/IMG_0953.jpg','img/Ig/Z/IMG_1046.jpg',
+                        'img/Ig/Z/P_20250223_160127.jpg','img/Ig/Z/P_20250223_162212.jpg',
                     ]
                 },
                 {
                     id: 'GO-にじさんじ フェス展 TAIPEI', label: 'にじさんじ フェス展 TAIPEI', type: 'photos',
                     photos: [
-                        'img/Ig/Z/P_20260125_161756.jpg',
-                        'img/Ig/Z/P_20260125_161301.jpg',
-                        'img/Ig/Z/P_20260125_143023.jpg',
-                        'img/Ig/Z/P_20260125_144525.jpg',
-                        'img/Ig/Z/P_20260125_145142.jpg',
-                        'img/Ig/Z/P_20260125_150431.jpg',
-                        'img/Ig/Z/P_20260125_151441.jpg',
-                        'img/Ig/Z/P_20260125_155818 (1).jpg',
-
+                        'img/Ig/Z/P_20260125_161756.jpg','img/Ig/Z/P_20260125_161301.jpg','img/Ig/Z/P_20260125_143023.jpg',
+                        'img/Ig/Z/P_20260125_144525.jpg','img/Ig/Z/P_20260125_145142.jpg','img/Ig/Z/P_20260125_150431.jpg',
+                        'img/Ig/Z/P_20260125_151441.jpg','img/Ig/Z/P_20260125_155818 (1).jpg',
                     ]
                 },
                 {
                     id: 'GO-NIJISANJI 8TH', label: 'NIJISANJI 8TH', type: 'photos',
                     photos: [
-                      'img/Ig/Z/P_20260204_171438 (1).jpg',
-                        'img/Ig/Z/P_20260204_171452.jpg',
-                        'img/Ig/Z/P_20260204_172117.jpg',
-                        'img/Ig/Z/P_20260204_195327.jpg',
-                        'img/Ig/Z/P_20260204_205235 (1).jpg',
-                        'img/Ig/Z/P_20260204_205235(1).jpg',
-                        'img/Ig/Z/P_20260204_205243.jpg',
-                        'img/Ig/Z/P_20260204_205256.jpg',
-                        'img/Ig/Z/P_20260204_205314.jpg',
+                        'img/Ig/Z/P_20260204_171438 (1).jpg','img/Ig/Z/P_20260204_171452.jpg','img/Ig/Z/P_20260204_172117.jpg',
+                        'img/Ig/Z/P_20260204_195327.jpg','img/Ig/Z/P_20260204_205235 (1).jpg','img/Ig/Z/P_20260204_205235(1).jpg',
+                        'img/Ig/Z/P_20260204_205243.jpg','img/Ig/Z/P_20260204_205256.jpg','img/Ig/Z/P_20260204_205314.jpg',
                         'img/Ig/Z/P_20260204_205529.jpg',
-
                     ]
                 },
                 {
                     id: 'GO-CR FES&LIVE 2026', label: 'CR FES&LIVE 2026', type: 'photos',
                     photos: [
-                      'img/Ig/Z/P_20260417_193228_1.jpg',
-                        'img/Ig/Z/P_20260418_203745.jpg',
-                        'img/Ig/Z/P_20260418_204635_1.jpg',
-                        'img/Ig/Z/P_20260419_122749.jpg',
-                        'img/Ig/Z/IMG_0025.jpg',
+                        'img/Ig/Z/P_20260417_193228_1.jpg','img/Ig/Z/P_20260418_203745.jpg',
+                        'img/Ig/Z/P_20260418_204635_1.jpg','img/Ig/Z/P_20260419_122749.jpg','img/Ig/Z/IMG_0025.jpg',
                     ]
                 },
-                /* ── 繼續加子資料夾：複製上面的 {} 區塊貼在這裡 ── */
             ]
         },
 
-         /* ── Hoshirube Sho ── */
         {
             id: 'rube', label: 'Hoshirube Sho', type: 'photos',
+            anniv: { title: 'ʜᴏꜱʜɪʀᴜʙᴇ 推し中...', date: '2023-07-15' },
             photos: [
-                'img/Ig/Z/IMG_20230721_212356_300.jpg',
-                'img/Ig/Z/IMG_20230813_232134_016.jpg',
-                'img/Ig/Z/IMG_20231001_012241_999.jpg',
-                'img/Ig/Z/P_20231012_173650.jpg',
-                'img/Ig/Z/IMG_20231203_140329_446.jpg',
-                'img/Ig/Z/IMG_20231203_140329_565.jpg',
-                'img/Ig/Z/IMG_20231203_140329_644.jpg',
-                'img/Ig/Z/P_20231206_164046.jpg',
-                'img/Ig/Z/P_20231209_191109.jpg',
-                'img/Ig/Z/P_20231210_161204.jpg',
-                'img/Ig/Z/P_20231210_161224_1.jpg',
-                'img/Ig/Z/P_20231211_234107.jpg',
-                'img/Ig/Z/P_20231214_212537.jpg',
-                'img/Ig/Z/P_20231215_201631 (1).jpg',
-                'img/Ig/Z/P_20231215_202112 (1).jpg',
-                'img/Ig/Z/IMG_20231224_221520_059.jpg',
-                'img/Ig/Z/P_20231224_185930.jpg',
-                'img/Ig/Z/P_20231224_190255.jpg',
-                'img/Ig/Z/P_20231224_191124.jpg',
-                'img/Ig/Z/P_20231225_181030.jpg',
-                'img/Ig/Z/P_20231229_221225.jpg',
-                'img/Ig/Z/P_20231231_175854.jpg',
-                'img/Ig/Z/P_20231231_182712.jpg',
-                'img/Ig/Z/P_20231231_182724.jpg',
-                'img/Ig/Z/P_20231231_182745.jpg',
-                'img/Ig/Z/IMG_20240113_145456_160.jpg',
-                'img/Ig/Z/IMG_20240129_205922_014.jpg',
-                'img/Ig/Z/P_20240126_122436.jpg',
-                'img/Ig/Z/P_20240126_155158.jpg',
-                'img/Ig/Z/P_20240127_190703.jpg',
-                'img/Ig/Z/P_20240127_192954.jpg',
-                'img/Ig/Z/P_20240129_162542.jpg',
-                'img/Ig/Z/P_20240130_125107.jpg',
-                'img/Ig/Z/P_20240202_171029.jpg',
-                'img/Ig/Z/P_20240202_171852.jpg',
-                'img/Ig/Z/P_20240203_095637.jpg',
-                'img/Ig/Z/P_20240203_103052_1.jpg',
-                'img/Ig/Z/P_20240203_115747.jpg',
-                'img/Ig/Z/P_20240203_115843.jpg',
-                'img/Ig/Z/P_20240203_154216.jpg',
-                'img/Ig/Z/IMG_20240203_135422_811.jpg',
-                'img/Ig/Z/IMG_20240203_140315_934.jpg',
-                'img/Ig/Z/IMG_20240203_140652_077.jpg',
-                'img/Ig/Z/IMG_20240203_141312_963.jpg',
-                'img/Ig/Z/IMG_20240203_141559_086.jpg',
-                'img/Ig/Z/IMG_20240203_152516_870.jpg',
-                'img/Ig/Z/IMG_20240203_153208_828.jpg',
-                'img/Ig/Z/IMG_20240203_153443_780.jpg',
-                'img/Ig/Z/IMG_20240203_153517_333.jpg',
-                'img/Ig/Z/IMG_20240203_160038_803.jpg',
-                'img/Ig/Z/IMG_20240204_113705_191.jpg',
-                'img/Ig/Z/IMG_20240204_115902_411.jpg',
-                'img/Ig/Z/P_20240204_121946.jpg',
-                'img/Ig/Z/P_20240204_123835 (1).jpg',
-                'img/Ig/Z/P_20240207_153820.jpg',
-                'img/Ig/Z/P_20240207_153950.jpg',
-                'img/Ig/Z/P_20240207_161903.jpg',
-                'img/Ig/Z/P_20240208_162804.jpg',
-                'img/Ig/Z/P_20240208_163824 (1).jpg',
-'img/Ig/Z/P_20240208_165414.jpg',
-'img/Ig/Z/P_20240208_173202.jpg',
-'img/Ig/Z/P_20240210_183802.jpg',
-'img/Ig/Z/IMG_20240211_160523_272.jpg',
-'img/Ig/Z/IMG_20240211_211652_795.jpg',
-'img/Ig/Z/P_20240214_213217.jpg',
-'img/Ig/Z/P_20240425_225016.jpg',
-'img/Ig/Z/無標題169_20240512182142.jpg',
-'img/Ig/Z/IMG_20240425_191600_063.jpg',
-'img/Ig/Z/IMG_20240604_142211_675.jpg',
-'img/Ig/Z/P_20240712_183612.jpg',
-'img/Ig/Z/IMG_20240714_181813_894.jpg',
-'img/Ig/Z/P_20240715_175240.jpg',
-'img/Ig/Z/P_20240715_175504.jpg',
-'img/Ig/Z/P_20240718_114339.jpg',
-'img/Ig/Z/P_20240718_140105.jpg',
-'img/Ig/Z/P_20240718_144706.jpg',
-'img/Ig/Z/P_20240718_144729.jpg',
-'img/Ig/Z/P_20240718_180205.jpg',
-'img/Ig/Z/P_20240719_132453.jpg',
-'img/Ig/Z/P_20240719_144641.jpg',
-'img/Ig/Z/P_20240719_160106.jpg',
-'img/Ig/Z/P_20240719_165936.jpg',
-'img/Ig/Z/P_20240721_114344.jpg',
-'img/Ig/Z/P_20240730_120346.jpg',
-'img/Ig/Z/P_20240730_143906.jpg',
-'img/Ig/Z/P_20240801_142544.jpg',
-'img/Ig/Z/P_20240801_155647.jpg',
-'img/Ig/Z/P_20240811_184443 (1).jpg',
-'img/Ig/Z/P_20240816_135004.jpg',
-'img/Ig/Z/P_20240819_190537.jpg',
-'img/Ig/Z/P_20240822_184756 (1).jpg',
-'img/Ig/Z/P_20240826_123258.jpg',
-'img/Ig/Z/P_20240916_202945.jpg',
-'img/Ig/Z/P_20240917_144029.jpg',
-'img/Ig/Z/P_20240917_170320.jpg',
-'img/Ig/Z/IMG_20240819_202850.jpg',
-'img/Ig/Z/P_20240921_182054.jpg',
-'img/Ig/Z/Messenger_creation_FA1F6238-E300-4D21-8439-D49F6CFC7DF5.jpg',
-'img/Ig/Z/1000024603.jpg',
-'img/Ig/Z/P_20240928_165934.jpg',
-'img/Ig/Z/P_20240928_171240.jpg',
-'img/Ig/Z/P_20241005_144659 (1).jpg',
-'img/Ig/Z/IMG_20241010_125015_963.jpg',
-'img/Ig/Z/P_20241018_165625.jpg',
-'img/Ig/Z/P_20241027_141129.jpg',
-'img/Ig/Z/P_20241027_195639_1.jpg',
-'img/Ig/Z/P_20241102_133908_1.jpg',
-'img/Ig/Z/P_20241102_153116_2.jpg',
-'img/Ig/Z/P_20241102_183149.jpg',
-'img/Ig/Z/P_20241116_182301.jpg',
-'img/Ig/Z/MEITU_20241123_095407636.jpg',
-'img/Ig/Z/P_20241130_115916.jpg',
-'img/Ig/Z/P_20241130_135911.jpg',
-'img/Ig/Z/P_20241130_150458.jpg',
-'img/Ig/Z/P_20241206_163941.jpg',
-'img/Ig/Z/P_20241206_174814.jpg',
-'img/Ig/Z/P_20241206_183644.jpg',
-'img/Ig/Z/P_20241206_200718_2.jpg',
-'img/Ig/Z/P_20241208_194041.jpg',
-'img/Ig/Z/P_20241208_194105.jpg',
-'img/Ig/Z/P_20241208_203649.jpg',
-'img/Ig/Z/P_20241220_200540.jpg',
-'img/Ig/Z/P_20241220_200855.jpg',
-'img/Ig/Z/IMG_20241220_150051_999.jpg',
-'img/Ig/Z/IMG_20241220_150744_630.jpg',
-'img/Ig/Z/無標題200_20241221013849.jpg',
-'img/Ig/Z/P_20241228_171459.jpg',
-'img/Ig/Z/P_20241229_164401.jpg',
-'img/Ig/Z/P_20241231_203023.jpg',
-'img/Ig/Z/P_20241231_224415.jpg',
-'img/Ig/Z/P_20250101_000231.jpg',
-'img/Ig/Z/P_20250101_000232.jpg',
-'img/Ig/Z/P_20250101_000352.jpg',
-'img/Ig/Z/P_20250101_013053.jpg',
-'img/Ig/Z/P_20250121_005327_1.jpg',
-'img/Ig/Z/P_20250122_233644.jpg',
-'img/Ig/Z/P_20250126_211332.jpg',
-'img/Ig/Z/P_20250128_202224.jpg',
-'img/Ig/Z/P_20250205_190322.jpg',
-'img/Ig/Z/P_20250206_003725_1.jpg',
-'img/Ig/Z/P_20250213_223542_1.jpg',
-'img/Ig/Z/P_20250214_125024.jpg',
-'img/Ig/Z/1753242023277.jpg',
-'img/Ig/Z/P_20250223_192008.jpg',
-'img/Ig/Z/P_20250228_162156.jpg',
-'img/Ig/Z/P_20250228_173428.jpg',
-'img/Ig/Z/P_20250228_173740.jpg',
-'img/Ig/Z/P_20250228_173912.jpg',
-'img/Ig/Z/P_20250228_210531.jpg',
-'img/Ig/Z/P_20250301_090659.jpg',
-'img/Ig/Z/P_20250301_090847.jpg',
-'img/Ig/Z/P_20250301_092619.jpg',
-'img/Ig/Z/P_20250301_092838.jpg',
-'img/Ig/Z/P_20250301_094201.jpg',
-'img/Ig/Z/P_20250301_094310.jpg',
-'img/Ig/Z/P_20250301_095649.jpg',
-'img/Ig/Z/P_20250301_101150.jpg',
-'img/Ig/Z/P_20250301_105838.jpg',
-'img/Ig/Z/P_20250301_110102.jpg',
-'img/Ig/Z/P_20250303_164523.jpg',
-'img/Ig/Z/P_20250315_175017 (1).jpg',
-                
-
-'img/Ig/Z/P_20250322_104908.jpg',
-'img/Ig/Z/P_20250323_110828.jpg',
-                'img/Ig/Z/20250323_122729.jpg',
-'img/Ig/Z/P_20250323_122758.jpg',
-'img/Ig/Z/20250323_154845_1.jpg',
-'img/Ig/Z/P_20250323_160547.jpg',
-'img/Ig/Z/P_20250329_115038.jpg',
-'img/Ig/Z/IMG_20250329_153541_702.jpg',
-'img/Ig/Z/P_20250331_210927.jpg',
-'img/Ig/Z/P_20250404_125911.jpg',
-'img/Ig/Z/P_20250404_132242_1 (1).jpg',
-'img/Ig/Z/WataameCamera_20250419_140438.jpg',
-'img/Ig/Z/WataameCamera_20250419_140614.jpg',
-'img/Ig/Z/P_20250430_204619.jpg',
-'img/Ig/Z/P_20250529_164154.jpg',
-'img/Ig/Z/P_20250529_175134.jpg',
- 'img/Ig/Z/P_20250517_124710_1.jpg',
-'img/Ig/Z/P_20250530_182744_1.jpg',
-'img/Ig/Z/P_20250607_183125.jpg',
-'img/Ig/Z/P_20250607_183204.jpg',
-'img/Ig/Z/1749828591682.jpg',
-'img/Ig/Z/P_20250621_110540.jpg',
-'img/Ig/Z/無標題241_20250626225516.jpg',
-'img/Ig/Z/P_20250703_142646.jpg',
-'img/Ig/Z/P_20250703_151305 (1).jpg',
-'img/Ig/Z/P_20250703_153119.jpg',
-'img/Ig/Z/P_20250703_164742 (2).jpg',
-'img/Ig/Z/P_20250709_130423.jpg',
-'img/Ig/Z/P_20250720_000245.jpg',
-'img/Ig/Z/P_20250720_190904.jpg',
-'img/Ig/Z/P_20250722_123631.jpg',
-'img/Ig/Z/P_20250722_153945.jpg',
-'img/Ig/Z/P_20250723_094152.jpg',
-'img/Ig/Z/P_20250723_162206.jpg',
-'img/Ig/Z/P_20250724_145508 (1).jpg',
-'img/Ig/Z/P_20250724_145723.jpg',
-'img/Ig/Z/P_20250724_160133.jpg',
-'img/Ig/Z/P_20250724_200729.jpg',
-'img/Ig/Z/P_20250725_143529.jpg',
-'img/Ig/Z/P_20250725_184953.jpg',
-'img/Ig/Z/P_20250725_191144.jpg',
-'img/Ig/Z/P_20250725_192120.jpg',
-'img/Ig/Z/P_20250725_194220.jpg',
-'img/Ig/Z/P_20250727_131330.jpg',
-'img/Ig/Z/P_20250727_140555.jpg',
-'img/Ig/Z/P_20250727_155143.jpg',
-'img/Ig/Z/P_20250727_205217.jpg',
-'img/Ig/Z/P_20250728_090323.jpg',
-'img/Ig/Z/P_20250728_091205.jpg',
-'img/Ig/Z/P_20250728_131624.jpg',
-'img/Ig/Z/P_20250728_151652.jpg',
-                'img/Ig/Z/P_20250805_135721.jpg',
-'img/Ig/Z/P_20250809_200738.jpg',
-'img/Ig/Z/P_20250809_202603.jpg',
-'img/Ig/Z/P_20250810_171633.jpg',
-'img/Ig/Z/P_20250817_202452.jpg',
-'img/Ig/Z/IMG_20250821_134926_779.jpg',
-'img/Ig/Z/P_20250823_202854.jpg',
-'img/Ig/Z/P_20250824_202712.jpg',
-'img/Ig/Z/P_20250824_203200.jpg',
-'img/Ig/Z/P_20250827_124143.jpg',
-'img/Ig/Z/P_20250828_153252.jpg',
-'img/Ig/Z/P_20250904_111114.jpg',
-'img/Ig/Z/P_20250904_113723.jpg',
-                'img/Ig/Z/P_20250907_132903.jpg',
-'img/Ig/Z/IMG_20250920_203331_961.jpg',
-'img/Ig/Z/P_20250928_123242.jpg',
-'img/Ig/Z/P_20250930_195551.jpg',
-'img/Ig/Z/P_20250930_195701.jpg',
-'img/Ig/Z/P_20251010_130729.jpg',
-'img/Ig/Z/P_20251010_182649_1 (1).jpg',
-'img/Ig/Z/P_20251109_155929.jpg',
-'img/Ig/Z/P_20251109_160358.jpg',
-'img/Ig/Z/P_20251109_173110.jpg',
-'img/Ig/Z/P_20251122_143753.jpg',
-'img/Ig/Z/P_20251122_145940.jpg',
-'img/Ig/Z/P_20251122_150316.jpg',
-'img/Ig/Z/P_20251122_151547.jpg',
-'img/Ig/Z/IMG_20251205_130714.jpg',
-'img/Ig/Z/P_20251205_130257.jpg',
- 'img/Ig/Z/IMG_20251205_182531_581.jpg',
-'img/Ig/Z/P_20251207_195048.jpg',
-'img/Ig/Z/P_20260115_225042_1.jpg',
-                'img/Ig/Z/P_20260116_003409_1.jpg',
-'img/Ig/Z/P_20260125_172717.jpg',
-'img/Ig/Z/P_20260125_172722.jpg',
-'img/Ig/Z/P_20260125_233350.jpg',
-'img/Ig/Z/P_20260202_113319.jpg',
-'img/Ig/Z/P_20260204_232736.jpg',
-'img/Ig/Z/P_20260205_135623.jpg',
-'img/Ig/Z/P_20260205_171206 (1).jpg',
-'img/Ig/Z/MEITU_20260205_215749914 (1).jpg'
-'img/Ig/Z/P_20260206_074924.jpg',
-'img/Ig/Z/P_20260206_172631 (1).jpg',
-'img/Ig/Z/P_20260206_201521.jpg',
-'img/Ig/Z/P_20260207_131713 (1).jpg',
-'img/Ig/Z/P_20260207_200210.jpg',
-'img/Ig/Z/P_20260210_144008.jpg',
-'img/Ig/Z/P_20260210_173739 (1).jpg',
-'img/Ig/Z/P_20260211_214356 (1).jpg',
-'img/Ig/Z/P_20260211_224123 (1).jpg',
-                'img/Ig/Z/P_20260213_003730.jpg',
-                'img/Ig/Z/20260227_124415 (1).jpg',
-'img/Ig/Z/20260227_124327 (1).jpg',
-'img/Ig/Z/P_20260227_135806 (1).jpg',
-'img/Ig/Z/P_20260227_161154.jpg',
-'img/Ig/Z/P_20260301_184012.jpg',
-'img/Ig/Z/P_20260314_115646.jpg',
-'img/Ig/Z/P_20260315_204405.jpg',
-'img/Ig/Z/P_20260328_134613 (1).jpg',
-'img/Ig/Z/無標題343_20260330142308.jpg',
-'img/Ig/Z/P_20260404_122644.jpg',
-'img/Ig/Z/P_20260404_123317.jpg',
-'img/Ig/Z/P_20260424_114104.jpg',
-                
-'img/Ig/Z/P_20260501_103122.jpg',
-'img/Ig/Z/P_20260501_105942_1.jpg',
-'img/Ig/Z/P_20260501_144638.jpg',
-'img/Ig/Z/IMG_20260501_105314_885 (1).jpg',
-'img/Ig/Z/P_20260507_224947.jpg',
-'img/Ig/Z/P_20260509_174632.jpg',
-'img/Ig/Z/P_20260514_102738 (1).jpg',
-'img/Ig/Z/P_20260514_151212.jpg',
-'img/Ig/Z/P_20260516_125126.jpg',
-'img/Ig/Z/P_20260516_153756.jpg',
-                'img/Ig/Z/P_20260516_161328_1.jpg',
-'img/Ig/Z/MEITU_20260516_162236916.jpg',
-'img/Ig/Z/P_20260517_153153_1.jpg',
-'img/Ig/Z/P_20260517_165412.jpg',
-'img/Ig/Z/無標題365_20260502200312.jpg',
-'img/Ig/Z/P_20260523_122057.jpg',
-'img/Ig/Z/P_20260523_123128 (1).jpg',
-'img/Ig/Z/P_20260523_185444.jpg',
-'img/Ig/Z/IMG_20260527_103905_013.jpg',
-'img/Ig/Z/P_20260530_200825.jpg',
-'img/Ig/Z/P_20260613_114348.jpg',
-'img/Ig/Z/1781869204918.jpg',
-'img/Ig/Z/P_20260627_192017.jpg',
-'img/Ig/Z/P_20260627_192244.jpg',
-'img/Ig/Z/IMG_20260630_155222_911.jpg',
-'img/Ig/Z/P_20260704_115039.jpg',
-               
+                'img/Ig/Z/IMG_20230721_212356_300.jpg','img/Ig/Z/IMG_20230813_232134_016.jpg','img/Ig/Z/IMG_20231001_012241_999.jpg',
+                'img/Ig/Z/P_20231012_173650.jpg','img/Ig/Z/IMG_20231203_140329_446.jpg','img/Ig/Z/IMG_20231203_140329_565.jpg',
+                'img/Ig/Z/IMG_20231203_140329_644.jpg','img/Ig/Z/P_20231206_164046.jpg','img/Ig/Z/P_20231209_191109.jpg',
+                'img/Ig/Z/P_20231210_161204.jpg','img/Ig/Z/P_20231210_161224_1.jpg','img/Ig/Z/P_20231211_234107.jpg',
+                'img/Ig/Z/P_20231214_212537.jpg','img/Ig/Z/P_20231215_201631 (1).jpg','img/Ig/Z/P_20231215_202112 (1).jpg',
+                'img/Ig/Z/IMG_20231224_221520_059.jpg','img/Ig/Z/P_20231224_185930.jpg','img/Ig/Z/P_20231224_190255.jpg',
+                'img/Ig/Z/P_20231224_191124.jpg','img/Ig/Z/P_20231225_181030.jpg','img/Ig/Z/P_20231229_221225.jpg',
+                'img/Ig/Z/P_20231231_175854.jpg','img/Ig/Z/P_20231231_182712.jpg','img/Ig/Z/P_20231231_182724.jpg',
+                'img/Ig/Z/P_20231231_182745.jpg','img/Ig/Z/IMG_20240113_145456_160.jpg','img/Ig/Z/IMG_20240129_205922_014.jpg',
+                'img/Ig/Z/P_20240126_122436.jpg','img/Ig/Z/P_20240126_155158.jpg','img/Ig/Z/P_20240127_190703.jpg',
+                'img/Ig/Z/P_20240127_192954.jpg','img/Ig/Z/P_20240129_162542.jpg','img/Ig/Z/P_20240130_125107.jpg',
+                'img/Ig/Z/P_20240202_171029.jpg','img/Ig/Z/P_20240202_171852.jpg','img/Ig/Z/P_20240203_095637.jpg',
+                'img/Ig/Z/P_20240203_103052_1.jpg','img/Ig/Z/P_20240203_115747.jpg','img/Ig/Z/P_20240203_115843.jpg',
+                'img/Ig/Z/P_20240203_154216.jpg','img/Ig/Z/IMG_20240203_135422_811.jpg','img/Ig/Z/IMG_20240203_140315_934.jpg',
+                'img/Ig/Z/IMG_20240203_140652_077.jpg','img/Ig/Z/IMG_20240203_141312_963.jpg','img/Ig/Z/IMG_20240203_141559_086.jpg',
+                'img/Ig/Z/IMG_20240203_152516_870.jpg','img/Ig/Z/IMG_20240203_153208_828.jpg','img/Ig/Z/IMG_20240203_153443_780.jpg',
+                'img/Ig/Z/IMG_20240203_153517_333.jpg','img/Ig/Z/IMG_20240203_160038_803.jpg','img/Ig/Z/IMG_20240204_113705_191.jpg',
+                'img/Ig/Z/IMG_20240204_115902_411.jpg','img/Ig/Z/P_20240204_121946.jpg','img/Ig/Z/P_20240204_123835 (1).jpg',
+                'img/Ig/Z/P_20240207_153820.jpg','img/Ig/Z/P_20240207_153950.jpg','img/Ig/Z/P_20240207_161903.jpg',
+                'img/Ig/Z/P_20240208_162804.jpg','img/Ig/Z/P_20240208_163824 (1).jpg','img/Ig/Z/P_20240208_165414.jpg',
+                'img/Ig/Z/P_20240208_173202.jpg','img/Ig/Z/P_20240210_183802.jpg','img/Ig/Z/IMG_20240211_160523_272.jpg',
+                'img/Ig/Z/IMG_20240211_211652_795.jpg','img/Ig/Z/P_20240214_213217.jpg','img/Ig/Z/P_20240425_225016.jpg',
+                'img/Ig/Z/無標題169_20240512182142.jpg','img/Ig/Z/IMG_20240425_191600_063.jpg','img/Ig/Z/IMG_20240604_142211_675.jpg',
+                'img/Ig/Z/P_20240712_183612.jpg','img/Ig/Z/IMG_20240714_181813_894.jpg','img/Ig/Z/P_20240715_175240.jpg',
+                'img/Ig/Z/P_20240715_175504.jpg','img/Ig/Z/P_20240718_114339.jpg','img/Ig/Z/P_20240718_140105.jpg',
+                'img/Ig/Z/P_20240718_144706.jpg','img/Ig/Z/P_20240718_144729.jpg','img/Ig/Z/P_20240718_180205.jpg',
+                'img/Ig/Z/P_20240719_132453.jpg','img/Ig/Z/P_20240719_144641.jpg','img/Ig/Z/P_20240719_160106.jpg',
+                'img/Ig/Z/P_20240719_165936.jpg','img/Ig/Z/P_20240721_114344.jpg','img/Ig/Z/P_20240730_120346.jpg',
+                'img/Ig/Z/P_20240730_143906.jpg','img/Ig/Z/P_20240801_142544.jpg','img/Ig/Z/P_20240801_155647.jpg',
+                'img/Ig/Z/P_20240811_184443 (1).jpg','img/Ig/Z/P_20240816_135004.jpg','img/Ig/Z/P_20240819_190537.jpg',
+                'img/Ig/Z/P_20240822_184756 (1).jpg','img/Ig/Z/P_20240826_123258.jpg','img/Ig/Z/P_20240916_202945.jpg',
+                'img/Ig/Z/P_20240917_144029.jpg','img/Ig/Z/P_20240917_170320.jpg','img/Ig/Z/IMG_20240819_202850.jpg',
+                'img/Ig/Z/P_20240921_182054.jpg','img/Ig/Z/Messenger_creation_FA1F6238-E300-4D21-8439-D49F6CFC7DF5.jpg',
+                'img/Ig/Z/1000024603.jpg','img/Ig/Z/P_20240928_165934.jpg','img/Ig/Z/P_20240928_171240.jpg',
+                'img/Ig/Z/P_20241005_144659 (1).jpg','img/Ig/Z/IMG_20241010_125015_963.jpg','img/Ig/Z/P_20241018_165625.jpg',
+                'img/Ig/Z/P_20241027_141129.jpg','img/Ig/Z/P_20241027_195639_1.jpg','img/Ig/Z/P_20241102_133908_1.jpg',
+                'img/Ig/Z/P_20241102_153116_2.jpg','img/Ig/Z/P_20241102_183149.jpg','img/Ig/Z/P_20241116_182301.jpg',
+                'img/Ig/Z/MEITU_20241123_095407636.jpg','img/Ig/Z/P_20241130_115916.jpg','img/Ig/Z/P_20241130_135911.jpg',
+                'img/Ig/Z/P_20241130_150458.jpg','img/Ig/Z/P_20241206_163941.jpg','img/Ig/Z/P_20241206_174814.jpg',
+                'img/Ig/Z/P_20241206_183644.jpg','img/Ig/Z/P_20241206_200718_2.jpg','img/Ig/Z/P_20241208_194041.jpg',
+                'img/Ig/Z/P_20241208_194105.jpg','img/Ig/Z/P_20241208_203649.jpg','img/Ig/Z/P_20241220_200540.jpg',
+                'img/Ig/Z/P_20241220_200855.jpg','img/Ig/Z/IMG_20241220_150051_999.jpg','img/Ig/Z/IMG_20241220_150744_630.jpg',
+                'img/Ig/Z/無標題200_20241221013849.jpg','img/Ig/Z/P_20241228_171459.jpg','img/Ig/Z/P_20241229_164401.jpg',
+                'img/Ig/Z/P_20241231_203023.jpg','img/Ig/Z/P_20241231_224415.jpg','img/Ig/Z/P_20250101_000231.jpg',
+                'img/Ig/Z/P_20250101_000232.jpg','img/Ig/Z/P_20250101_000352.jpg','img/Ig/Z/P_20250101_013053.jpg',
+                'img/Ig/Z/P_20250121_005327_1.jpg','img/Ig/Z/P_20250122_233644.jpg','img/Ig/Z/P_20250126_211332.jpg',
+                'img/Ig/Z/P_20250128_202224.jpg','img/Ig/Z/P_20250205_190322.jpg','img/Ig/Z/P_20250206_003725_1.jpg',
+                'img/Ig/Z/P_20250213_223542_1.jpg','img/Ig/Z/P_20250214_125024.jpg','img/Ig/Z/1753242023277.jpg',
+                'img/Ig/Z/P_20250223_192008.jpg','img/Ig/Z/P_20250228_162156.jpg','img/Ig/Z/P_20250228_173428.jpg',
+                'img/Ig/Z/P_20250228_173740.jpg','img/Ig/Z/P_20250228_173912.jpg','img/Ig/Z/P_20250228_210531.jpg',
+                'img/Ig/Z/P_20250301_090659.jpg','img/Ig/Z/P_20250301_090847.jpg','img/Ig/Z/P_20250301_092619.jpg',
+                'img/Ig/Z/P_20250301_092838.jpg','img/Ig/Z/P_20250301_094201.jpg','img/Ig/Z/P_20250301_094310.jpg',
+                'img/Ig/Z/P_20250301_095649.jpg','img/Ig/Z/P_20250301_101150.jpg','img/Ig/Z/P_20250301_105838.jpg',
+                'img/Ig/Z/P_20250301_110102.jpg','img/Ig/Z/P_20250303_164523.jpg','img/Ig/Z/P_20250315_175017 (1).jpg',
+                'img/Ig/Z/P_20250322_104908.jpg','img/Ig/Z/P_20250323_110828.jpg','img/Ig/Z/20250323_122729.jpg',
+                'img/Ig/Z/P_20250323_122758.jpg','img/Ig/Z/20250323_154845_1.jpg','img/Ig/Z/P_20250323_160547.jpg',
+                'img/Ig/Z/P_20250329_115038.jpg','img/Ig/Z/IMG_20250329_153541_702.jpg','img/Ig/Z/P_20250331_210927.jpg',
+                'img/Ig/Z/P_20250404_125911.jpg','img/Ig/Z/P_20250404_132242_1 (1).jpg','img/Ig/Z/WataameCamera_20250419_140438.jpg',
+                'img/Ig/Z/WataameCamera_20250419_140614.jpg','img/Ig/Z/P_20250430_204619.jpg','img/Ig/Z/P_20250529_164154.jpg',
+                'img/Ig/Z/P_20250529_175134.jpg','img/Ig/Z/P_20250517_124710_1.jpg','img/Ig/Z/P_20250530_182744_1.jpg',
+                'img/Ig/Z/P_20250607_183125.jpg','img/Ig/Z/P_20250607_183204.jpg','img/Ig/Z/1749828591682.jpg',
+                'img/Ig/Z/P_20250621_110540.jpg','img/Ig/Z/無標題241_20250626225516.jpg','img/Ig/Z/P_20250703_142646.jpg',
+                'img/Ig/Z/P_20250703_151305 (1).jpg','img/Ig/Z/P_20250703_153119.jpg','img/Ig/Z/P_20250703_164742 (2).jpg',
+                'img/Ig/Z/P_20250709_130423.jpg','img/Ig/Z/P_20250720_000245.jpg','img/Ig/Z/P_20250720_190904.jpg',
+                'img/Ig/Z/P_20250722_123631.jpg','img/Ig/Z/P_20250722_153945.jpg','img/Ig/Z/P_20250723_094152.jpg',
+                'img/Ig/Z/P_20250723_162206.jpg','img/Ig/Z/P_20250724_145508 (1).jpg','img/Ig/Z/P_20250724_145723.jpg',
+                'img/Ig/Z/P_20250724_160133.jpg','img/Ig/Z/P_20250724_200729.jpg','img/Ig/Z/P_20250725_143529.jpg',
+                'img/Ig/Z/P_20250725_184953.jpg','img/Ig/Z/P_20250725_191144.jpg','img/Ig/Z/P_20250725_192120.jpg',
+                'img/Ig/Z/P_20250725_194220.jpg','img/Ig/Z/P_20250727_131330.jpg','img/Ig/Z/P_20250727_140555.jpg',
+                'img/Ig/Z/P_20250727_155143.jpg','img/Ig/Z/P_20250727_205217.jpg','img/Ig/Z/P_20250728_090323.jpg',
+                'img/Ig/Z/P_20250728_091205.jpg','img/Ig/Z/P_20250728_131624.jpg','img/Ig/Z/P_20250728_151652.jpg',
+                'img/Ig/Z/P_20250805_135721.jpg','img/Ig/Z/P_20250809_200738.jpg','img/Ig/Z/P_20250809_202603.jpg',
+                'img/Ig/Z/P_20250810_171633.jpg','img/Ig/Z/P_20250817_202452.jpg','img/Ig/Z/IMG_20250821_134926_779.jpg',
+                'img/Ig/Z/P_20250823_202854.jpg','img/Ig/Z/P_20250824_202712.jpg','img/Ig/Z/P_20250824_203200.jpg',
+                'img/Ig/Z/P_20250827_124143.jpg','img/Ig/Z/P_20250828_153252.jpg','img/Ig/Z/P_20250904_111114.jpg',
+                'img/Ig/Z/P_20250904_113723.jpg','img/Ig/Z/P_20250907_132903.jpg','img/Ig/Z/IMG_20250920_203331_961.jpg',
+                'img/Ig/Z/P_20250928_123242.jpg','img/Ig/Z/P_20250930_195551.jpg','img/Ig/Z/P_20250930_195701.jpg',
+                'img/Ig/Z/P_20251010_130729.jpg','img/Ig/Z/P_20251010_182649_1 (1).jpg','img/Ig/Z/P_20251109_155929.jpg',
+                'img/Ig/Z/P_20251109_160358.jpg','img/Ig/Z/P_20251109_173110.jpg','img/Ig/Z/P_20251122_143753.jpg',
+                'img/Ig/Z/P_20251122_145940.jpg','img/Ig/Z/P_20251122_150316.jpg','img/Ig/Z/P_20251122_151547.jpg',
+                'img/Ig/Z/IMG_20251205_130714.jpg','img/Ig/Z/P_20251205_130257.jpg','img/Ig/Z/IMG_20251205_182531_581.jpg',
+                'img/Ig/Z/P_20251207_195048.jpg','img/Ig/Z/P_20260115_225042_1.jpg','img/Ig/Z/P_20260116_003409_1.jpg',
+                'img/Ig/Z/P_20260125_172717.jpg','img/Ig/Z/P_20260125_172722.jpg','img/Ig/Z/P_20260125_233350.jpg',
+                'img/Ig/Z/P_20260202_113319.jpg','img/Ig/Z/P_20260204_232736.jpg','img/Ig/Z/P_20260205_135623.jpg',
+                'img/Ig/Z/P_20260205_171206 (1).jpg','img/Ig/Z/MEITU_20260205_215749914 (1).jpg',
+                'img/Ig/Z/P_20260206_074924.jpg','img/Ig/Z/P_20260206_172631 (1).jpg','img/Ig/Z/P_20260206_201521.jpg',
+                'img/Ig/Z/P_20260207_131713 (1).jpg','img/Ig/Z/P_20260207_200210.jpg','img/Ig/Z/P_20260210_144008.jpg',
+                'img/Ig/Z/P_20260210_173739 (1).jpg','img/Ig/Z/P_20260211_214356 (1).jpg','img/Ig/Z/P_20260211_224123 (1).jpg',
+                'img/Ig/Z/P_20260213_003730.jpg','img/Ig/Z/20260227_124415 (1).jpg','img/Ig/Z/20260227_124327 (1).jpg',
+                'img/Ig/Z/P_20260227_135806 (1).jpg','img/Ig/Z/P_20260227_161154.jpg','img/Ig/Z/P_20260301_184012.jpg',
+                'img/Ig/Z/P_20260314_115646.jpg','img/Ig/Z/P_20260315_204405.jpg','img/Ig/Z/P_20260328_134613 (1).jpg',
+                'img/Ig/Z/無標題343_20260330142308.jpg','img/Ig/Z/P_20260404_122644.jpg','img/Ig/Z/P_20260404_123317.jpg',
+                'img/Ig/Z/P_20260424_114104.jpg','img/Ig/Z/P_20260501_103122.jpg','img/Ig/Z/P_20260501_105942_1.jpg',
+                'img/Ig/Z/P_20260501_144638.jpg','img/Ig/Z/IMG_20260501_105314_885 (1).jpg','img/Ig/Z/P_20260507_224947.jpg',
+                'img/Ig/Z/P_20260509_174632.jpg','img/Ig/Z/P_20260514_102738 (1).jpg','img/Ig/Z/P_20260514_151212.jpg',
+                'img/Ig/Z/P_20260516_125126.jpg','img/Ig/Z/P_20260516_153756.jpg','img/Ig/Z/P_20260516_161328_1.jpg',
+                'img/Ig/Z/MEITU_20260516_162236916.jpg','img/Ig/Z/P_20260517_153153_1.jpg','img/Ig/Z/P_20260517_165412.jpg',
+                'img/Ig/Z/無標題365_20260502200312.jpg','img/Ig/Z/P_20260523_122057.jpg','img/Ig/Z/P_20260523_123128 (1).jpg',
+                'img/Ig/Z/P_20260523_185444.jpg','img/Ig/Z/IMG_20260527_103905_013.jpg','img/Ig/Z/P_20260530_200825.jpg',
+                'img/Ig/Z/P_20260613_114348.jpg','img/Ig/Z/1781869204918.jpg','img/Ig/Z/P_20260627_192017.jpg',
+                'img/Ig/Z/P_20260627_192244.jpg','img/Ig/Z/IMG_20260630_155222_911.jpg','img/Ig/Z/P_20260704_115039.jpg',
             ]
         },
 
-        /* ── VanilLa ── */
         {
             id: 'vani', label: 'VanilLa', type: 'photos',
+            anniv: { title: 'ᴠᴀɴɪʟʟᴀ 推し中...', date: '2025-04-25' },
             photos: [
-               'img/Ig/Z/P_20250523_202933.jpg',
-                'img/Ig/Z/IMG_20250524_104342.jpg',
-                'img/Ig/Z/P_20250524_131818.jpg',
-                'img/Ig/Z/P_20250529_164048.jpg',
-                'img/Ig/Z/P_20250529_175040.jpg',
-                'img/Ig/Z/P_20250529_175839.jpg'
-                'img/Ig/Z/P_20250530_182829.jpg',
-                'img/Ig/Z/P_20250607_183310.jpg',
-                'img/Ig/Z/P_20250621_110959.jpg',
-                'img/Ig/Z/P_20250628_154905.jpg',
-                'img/Ig/Z/1753242027948.jpg',
-                'img/Ig/Z/P_20250723_162340.jpg',
-                'img/Ig/Z/P_20250724_150036.jpg',
-                'img/Ig/Z/P_20250724_200808.jpg',
-                'img/Ig/Z/P_20250725_160712.jpg',
-                'img/Ig/Z/P_20250725_190100.jpg',
-                'img/Ig/Z/P_20250725_190352.jpg',
-                'img/Ig/Z/P_20250727_131101.jpg',
-                'img/Ig/Z/P_20250727_205250.jpg',
-                'img/Ig/Z/P_20250728_121454.jpg',
-                'img/Ig/Z/P_20250728_151353 (1).jpg',
-                'img/Ig/Z/1771996740200.jpg',
-                'img/Ig/Z/1775287849801.jpg',
-                'img/Ig/Z/P_20250810_195502 (1).jpg',
-                'img/Ig/Z/P_20250824_203221.jpg',
-                'img/Ig/Z/P_20250827_124238.jpg',
-                'img/Ig/Z/P_20250828_153417.jpg',
-                'img/Ig/Z/P_20250904_160137 (1).jpg',
-                'img/Ig/Z/P_20250925_174824.jpg',
-                'img/Ig/Z/P_20250930_190609.jpg',
-                'img/Ig/Z/P_20251004_102841.jpg',
-                'img/Ig/Z/P_20251010_130729.jpg',
-                'img/Ig/Z/P_20251019_202536.jpg',
-                'img/Ig/Z/IMG_20251101_134103_536.jpg',
-                'img/Ig/Z/P_20251109_160007.jpg',
-                'img/Ig/Z/P_20251114_153616.jpg',
-                'img/Ig/Z/P_20251129_145428.jpg',
-                'img/Ig/Z/IMG_20251205_182531_581.jpg',
-                'img/Ig/Z/P_20251205_180945.jpg',
-                'img/Ig/Z/1783177532716.jpg',
-                'img/Ig/Z/P_20251212_201156.jpg',
-                'img/Ig/Z/img/Ig/Z/WataameCamera_20251212_204321 (1).jpg',
-                'img/Ig/Z/P_20251224_201803.jpg',
-                'img/Ig/Z/P_20260101_182604 (1).jpg',
-                'img/Ig/Z/P_20260111_145300 (1).jpg',
-                'img/Ig/Z/P_20260119_194033 (1).jpg',
-                'img/Ig/Z/無標題308_20260122162106 (1).jpg',
-                'img/Ig/Z/P_20260201_120116.jpg',
-                'img/Ig/Z/P_20260202_132207.jpg',
-                'img/Ig/Z/P_20260205_094427.jpg',
-                'img/Ig/Z/P_20260205_135623.jpg',
-                'img/Ig/Z/P_20260205_160835.jpg',
-                'img/Ig/Z/P_20260205_171231 (1).jpg',
-                'img/Ig/Z/P_20260205_214353.jpg',
-                'img/Ig/Z/1770181430744_1.jpg'
-                'img/Ig/Z/P_20260206_074855.jpg',
-                'img/Ig/Z/P_20260206_191950.jpg',
-                'img/Ig/Z/P_20260207_120025.jpg',
-                'img/Ig/Z/P_20260207_200121.jpg',
-                'img/Ig/Z/P_20260209_120623_1.jpg',
-                'img/Ig/Z/P_20260209_193742.jpg',
-                'img/Ig/Z/P_20260210_173804.jpg',
-                'img/Ig/Z/P_20260211_152751.jpg',
-                /*日本行*/
-                'img/Ig/Z/20260227_124459 (1).jpg',
-                'img/Ig/Z/P_20260301_183719.jpg',
-                'img/Ig/Z/P_20260306_113036.jpg',
-                'img/Ig/Z/P_20260314_131703 (1).jpg',
-                'img/Ig/Z/P_20260328_205730.jpg',
-                'img/Ig/Z/P_20260328_210414.jpg',
-                'img/Ig/Z/P_20260328_211129.jpg',
-                'img/Ig/Z/P_20260405_142933.jpg',
-                'img/Ig/Z/IMG_0134-1.jpg',
-               
-                /*FES*/
-                'img/Ig/Z/IMG_0106.jpg',
-                'img/Ig/Z/IMG_0107.jpg',
-                'img/Ig/Z/P_20260420_201753.jpg',
-                'img/Ig/Z/P_20260423_183553 (1).jpg',
-                'img/Ig/Z/P_20260424_121001 (1).jpg',
-                'img/Ig/Z/P_20260424_154211.jpg',
-                'img/Ig/Z/P_20260501_105942_1.jpg',
-                'img/Ig/Z/P_20260501_143950 (2).jpg',
-                'img/Ig/Z/P_20260501_144638.jpg',
-                'img/Ig/Z/P_20260501_180841.jpg',
-                'img/Ig/Z/P_20260507_143926.jpg',
-                'img/Ig/Z/P_20260507_181715.jpg',
-                'img/Ig/Z/P_20260507_184833.jpg',
-                'img/Ig/Z/P_20260509_191450.jpg',
-                'img/Ig/Z/無標題370_20260509192556.jpg',
-                'img/Ig/Z/P_20260514_102716.jpg',
-                'img/Ig/Z/P_20260515_211922.jpg',
-                'img/Ig/Z/IMG_0306.jpg',
-                'img/Ig/Z/P_20260517_125042.jpg',
-                'img/Ig/Z/IMG_2120.jpg',
-                'img/Ig/Z/P_20260523_122136.jpg',
-                'img/Ig/Z/P_20260523_123030 (1).jpg',
-                'img/Ig/Z/P_20260523_190211 (1).jpg',
-                'img/Ig/Z/P_20260530_200906.jpg',
-                'img/Ig/Z/P_20260613_114514 (1).jpg',
-                'img/Ig/Z/P_20260619_201153 (1).jpg',
-                'img/Ig/Z/無標題391.jpg',
-                'img/Ig/Z/P_20260627_192337.jpg',
-                'img/Ig/Z/無標題391_20260630151319.jpg',
-                'img/Ig/Z/P_20260704_115228.jpg',
-
+                'img/Ig/Z/P_20250523_202933.jpg','img/Ig/Z/IMG_20250524_104342.jpg','img/Ig/Z/P_20250524_131818.jpg',
+                'img/Ig/Z/P_20250529_164048.jpg','img/Ig/Z/P_20250529_175040.jpg','img/Ig/Z/P_20250529_175839.jpg',
+                'img/Ig/Z/P_20250530_182829.jpg','img/Ig/Z/P_20250607_183310.jpg','img/Ig/Z/P_20250621_110959.jpg',
+                'img/Ig/Z/P_20250628_154905.jpg','img/Ig/Z/1753242027948.jpg','img/Ig/Z/P_20250723_162340.jpg',
+                'img/Ig/Z/P_20250724_150036.jpg','img/Ig/Z/P_20250724_200808.jpg','img/Ig/Z/P_20250725_160712.jpg',
+                'img/Ig/Z/P_20250725_190100.jpg','img/Ig/Z/P_20250725_190352.jpg','img/Ig/Z/P_20250727_131101.jpg',
+                'img/Ig/Z/P_20250727_205250.jpg','img/Ig/Z/P_20250728_121454.jpg','img/Ig/Z/P_20250728_151353 (1).jpg',
+                'img/Ig/Z/1771996740200.jpg','img/Ig/Z/1775287849801.jpg','img/Ig/Z/P_20250810_195502 (1).jpg',
+                'img/Ig/Z/P_20250824_203221.jpg','img/Ig/Z/P_20250827_124238.jpg','img/Ig/Z/P_20250828_153417.jpg',
+                'img/Ig/Z/P_20250904_160137 (1).jpg','img/Ig/Z/P_20250925_174824.jpg','img/Ig/Z/P_20250930_190609.jpg',
+                'img/Ig/Z/P_20251004_102841.jpg','img/Ig/Z/P_20251010_130729.jpg','img/Ig/Z/P_20251019_202536.jpg',
+                'img/Ig/Z/IMG_20251101_134103_536.jpg','img/Ig/Z/P_20251109_160007.jpg','img/Ig/Z/P_20251114_153616.jpg',
+                'img/Ig/Z/P_20251129_145428.jpg','img/Ig/Z/IMG_20251205_182531_581.jpg','img/Ig/Z/P_20251205_180945.jpg',
+                'img/Ig/Z/1783177532716.jpg','img/Ig/Z/P_20251212_201156.jpg','img/Ig/Z/WataameCamera_20251212_204321 (1).jpg',
+                'img/Ig/Z/P_20251224_201803.jpg','img/Ig/Z/P_20260101_182604 (1).jpg','img/Ig/Z/P_20260111_145300 (1).jpg',
+                'img/Ig/Z/P_20260119_194033 (1).jpg','img/Ig/Z/無標題308_20260122162106 (1).jpg','img/Ig/Z/P_20260201_120116.jpg',
+                'img/Ig/Z/P_20260202_132207.jpg','img/Ig/Z/P_20260205_094427.jpg','img/Ig/Z/P_20260205_135623.jpg',
+                'img/Ig/Z/P_20260205_160835.jpg','img/Ig/Z/P_20260205_171231 (1).jpg','img/Ig/Z/P_20260205_214353.jpg',
+                'img/Ig/Z/1770181430744_1.jpg','img/Ig/Z/P_20260206_074855.jpg','img/Ig/Z/P_20260206_191950.jpg',
+                'img/Ig/Z/P_20260207_120025.jpg','img/Ig/Z/P_20260207_200121.jpg','img/Ig/Z/P_20260209_120623_1.jpg',
+                'img/Ig/Z/P_20260209_193742.jpg','img/Ig/Z/P_20260210_173804.jpg','img/Ig/Z/P_20260211_152751.jpg',
+                'img/Ig/Z/20260227_124459 (1).jpg','img/Ig/Z/P_20260301_183719.jpg','img/Ig/Z/P_20260306_113036.jpg',
+                'img/Ig/Z/P_20260314_131703 (1).jpg','img/Ig/Z/P_20260328_205730.jpg','img/Ig/Z/P_20260328_210414.jpg',
+                'img/Ig/Z/P_20260328_211129.jpg','img/Ig/Z/P_20260405_142933.jpg','img/Ig/Z/IMG_0134-1.jpg',
+                'img/Ig/Z/IMG_0106.jpg','img/Ig/Z/IMG_0107.jpg','img/Ig/Z/P_20260420_201753.jpg',
+                'img/Ig/Z/P_20260423_183553 (1).jpg','img/Ig/Z/P_20260424_121001 (1).jpg','img/Ig/Z/P_20260424_154211.jpg',
+                'img/Ig/Z/P_20260501_105942_1.jpg','img/Ig/Z/P_20260501_143950 (2).jpg','img/Ig/Z/P_20260501_144638.jpg',
+                'img/Ig/Z/P_20260501_180841.jpg','img/Ig/Z/P_20260507_143926.jpg','img/Ig/Z/P_20260507_181715.jpg',
+                'img/Ig/Z/P_20260507_184833.jpg','img/Ig/Z/P_20260509_191450.jpg','img/Ig/Z/無標題370_20260509192556.jpg',
+                'img/Ig/Z/P_20260514_102716.jpg','img/Ig/Z/P_20260515_211922.jpg','img/Ig/Z/IMG_0306.jpg',
+                'img/Ig/Z/P_20260517_125042.jpg','img/Ig/Z/IMG_2120.jpg','img/Ig/Z/P_20260523_122136.jpg',
+                'img/Ig/Z/P_20260523_123030 (1).jpg','img/Ig/Z/P_20260523_190211 (1).jpg','img/Ig/Z/P_20260530_200906.jpg',
+                'img/Ig/Z/P_20260613_114514 (1).jpg','img/Ig/Z/P_20260619_201153 (1).jpg','img/Ig/Z/無標題391.jpg',
+                'img/Ig/Z/P_20260627_192337.jpg','img/Ig/Z/無標題391_20260630151319.jpg','img/Ig/Z/P_20260704_115228.jpg',
             ]
         },
 
-        /* ── Sumeragi Reo ── */
         {
             id: 'reo', label: 'Sumeragi Reo', type: 'photos',
+            anniv: { title: 'ʀᴇᴏ 推し中...', date: '2025-09-19' },
             photos: [
-                'img/Ig/Z/P_20251017_201117.jpg',
-                'img/Ig/Z/P_20260204_232736.jpg',
-                'img/Ig/Z/P_20260205_171206 (1).jpg',
-                'img/Ig/Z/MEITU_20260205_215749914 (1).jpg',
-                'img/Ig/Z/P_20260206_074924.jpg',
-                'img/Ig/Z/P_20260206_172631 (1).jpg',
-                'img/Ig/Z/P_20260207_131713 (1).jpg',
-                'img/Ig/Z/P_20260207_163046.jpg',
-                'img/Ig/Z/P_20260207_163304.jpg',
-                'img/Ig/Z/P_20260207_163319.jpg',
-                'img/Ig/Z/P_20260207_163434.jpg',
-                'img/Ig/Z/P_20260207_200210.jpg',
-                'img/Ig/Z/P_20260210_144058.jpg',
-                'img/Ig/Z/P_20260210_173739 (1).jpg',
-                'img/Ig/Z/P_20260210_173739 (1).jpg',
-                'img/Ig/Z/P_20260211_214356 (1).jpg',
-                'img/Ig/Z/P_20260211_224123 (1).jpg',
-                'img/Ig/Z/P_20260301_184012.jpg',
-                'img/Ig/Z/P_20260314_115646.jpg',
-                'img/Ig/Z/P_20260501_104221 (1).jpg',
-                'img/Ig/Z/P_20260501_105942_1.jpg',
-                'img/Ig/Z/P_20260501_144638.jpg',
-                'img/Ig/Z/P_20260502_192803.jpg',
-                'img/Ig/Z/無標題344_20260401222949_1.jpg',
-
-
-
+                'img/Ig/Z/P_20251017_201117.jpg','img/Ig/Z/P_20260204_232736.jpg','img/Ig/Z/P_20260205_171206 (1).jpg',
+                'img/Ig/Z/MEITU_20260205_215749914 (1).jpg','img/Ig/Z/P_20260206_074924.jpg','img/Ig/Z/P_20260206_172631 (1).jpg',
+                'img/Ig/Z/P_20260207_131713 (1).jpg','img/Ig/Z/P_20260207_163046.jpg','img/Ig/Z/P_20260207_163304.jpg',
+                'img/Ig/Z/P_20260207_163319.jpg','img/Ig/Z/P_20260207_163434.jpg','img/Ig/Z/P_20260207_200210.jpg',
+                'img/Ig/Z/P_20260210_144058.jpg','img/Ig/Z/P_20260210_173739 (1).jpg','img/Ig/Z/P_20260211_214356 (1).jpg',
+                'img/Ig/Z/P_20260211_224123 (1).jpg','img/Ig/Z/P_20260301_184012.jpg','img/Ig/Z/P_20260314_115646.jpg',
+                'img/Ig/Z/P_20260501_104221 (1).jpg','img/Ig/Z/P_20260501_105942_1.jpg','img/Ig/Z/P_20260501_144638.jpg',
+                'img/Ig/Z/P_20260502_192803.jpg','img/Ig/Z/無標題344_20260401222949_1.jpg',
             ]
         },
 
-          /* ── nijisanji ── */
         {
             id: 'niji', label: 'nijisanji', type: 'photos',
             photos: [
-                'img/Ig/Z/FB_IMG_1677261910308.jpg',
-                'img/Ig/Z/FB_IMG_1690219174379.jpg',
-                'img/Ig/Z/P_20230722_002510.jpg',
-                'img/Ig/Z/P_20230722_234725_1.jpg',
-                'img/Ig/Z/P_20230924_144530.jpg',
-                'img/Ig/Z/P_20240921_224546.jpg',
+                'img/Ig/Z/FB_IMG_1677261910308.jpg','img/Ig/Z/FB_IMG_1690219174379.jpg','img/Ig/Z/P_20230722_002510.jpg',
+                'img/Ig/Z/P_20230722_234725_1.jpg','img/Ig/Z/P_20230924_144530.jpg','img/Ig/Z/P_20240921_224546.jpg',
             ]
         },
 
-        /* ── Osaka Sogo ── */
         {
             id: 'sogo', label: 'Osaka Sogo', type: 'photos',
+            anniv: { title: 'マネージャーになってから', date: '2023-06-19' },
             photos: [
-                'img/Ig/Z/IMG_20230712_143328_649.jpg',
-                'img/Ig/Z/Image (1).jpg',
-                'img/Ig/Z/P_20250315_000057.jpg',
-                'img/Ig/Z/IMG_20230727_005708_839.jpg',
-                'img/Ig/Z/P_20230727_172957_1.jpg',
-                'img/Ig/Z/P_20231010_090824.jpg',
-                'img/Ig/Z/P_20240525_230945.jpg',
-                'img/Ig/Z/WataameCamera_20240526_015114.jpg',
-                'img/Ig/Z/P_20240610_180723 (1).jpg',
-                'img/Ig/Z/P_20240630_200540.jpg',
-                'img/Ig/Z/P_20240712_225404_1.jpg',
-                'img/Ig/Z/P_20240712_230454_1_1.jpg',
-                'img/Ig/Z/IMG_20250503_204905_948.jpg',
-                'img/Ig/Z/P_20240718_115236.jpg',
-                'img/Ig/Z/P_20240718_144339.jpg',
-                'img/Ig/Z/P_20250822_222645.jpg',
-                'img/Ig/Z/Image (6).jpg',
-                'img/Ig/Z/Image (8)_1.jpg',
-                'img/Ig/Z/P_20250822_220728.jpg',
-                'img/Ig/Z/P_20250121_005327_1.jpg',
-                
-               
-                'img/Ig/Z/IMG_2119.jpg',
+                'img/Ig/Z/IMG_20230712_143328_649.jpg','img/Ig/Z/Image (1).jpg','img/Ig/Z/P_20250315_000057.jpg',
+                'img/Ig/Z/IMG_20230727_005708_839.jpg','img/Ig/Z/P_20230727_172957_1.jpg','img/Ig/Z/P_20231010_090824.jpg',
+                'img/Ig/Z/P_20240525_230945.jpg','img/Ig/Z/WataameCamera_20240526_015114.jpg','img/Ig/Z/P_20240610_180723 (1).jpg',
+                'img/Ig/Z/P_20240630_200540.jpg','img/Ig/Z/P_20240712_225404_1.jpg','img/Ig/Z/P_20240712_230454_1_1.jpg',
+                'img/Ig/Z/IMG_20250503_204905_948.jpg','img/Ig/Z/P_20240718_115236.jpg','img/Ig/Z/P_20240718_144339.jpg',
+                'img/Ig/Z/P_20250822_222645.jpg','img/Ig/Z/Image (6).jpg','img/Ig/Z/Image (8)_1.jpg',
+                'img/Ig/Z/P_20250822_220728.jpg','img/Ig/Z/P_20250121_005327_1.jpg','img/Ig/Z/IMG_2119.jpg',
             ]
         },
 
-        /* ── Aoi Hinata ── */
         {
             id: 'hinata', label: 'Aoi Hinata', type: 'photos',
+            anniv: { title: 'プロデューサーになってから', date: '2023-01-20' },
             photos: [
-                'img/Ig/Z/Picsart_26-02-18_19-43-10-660.jpg',
-                'img/Ig/Z/無標題233_20250426015940.jpg',
-                'img/Ig/Z/20250323_154845_1.jpg',
-                'img/Ig/Z/IMG_20240427_180403_915.jpg',
-                'img/Ig/Z/IMG_20240427_202213_944.jpg',
-                'img/Ig/Z/IMG_20240504_183338_871.jpg',
-                'img/Ig/Z/P_20240512_181835.jpg',
-                'img/Ig/Z/P_20240512_185846.jpg',
-                'img/Ig/Z/IMG_20240604_142211_675.jpg',
-                'img/Ig/Z/P_20240604_183549.jpg',
-                'img/Ig/Z/P_20240712_214715.jpg',
-                'img/Ig/Z/P_20240712_215120_1.jpg',
-                'img/Ig/Z/P_20240718_115423.jpg',
-                'img/Ig/Z/P_20240928_170108.jpg',
-                'img/Ig/Z/P_20240928_171009.jpg',
-                'img/Ig/Z/P_20240928_171240.jpg',
-                'img/Ig/Z/P_20241030_162942_1.jpg',
-                'img/Ig/Z/P_20250228_194325.jpg',
-                'img/Ig/Z/無標題325_20260218013114.jpg',
-                'img/Ig/Z/1771349047279_3.jpg',
-                'img/Ig/Z/P_20250323_131217_1.jpg',
-                'img/Ig/Z/P_20250323_155315.jpg',
-                'img/Ig/Z/P_20250323_134033.jpg',
-                'img/Ig/Z/P_20250128_202224.jpg',
-                'img/Ig/Z/P_20250430_204430 (1).jpg',
-                'img/Ig/Z/P_20250517_124710_1.jpg',
-                'img/Ig/Z/P_20250808_232856_1.jpg',
-                'img/Ig/Z/P_20260303_185550.jpg',
-                'img/Ig/Z/332_20260303185933.jpg',
+                'img/Ig/Z/Picsart_26-02-18_19-43-10-660.jpg','img/Ig/Z/無標題233_20250426015940.jpg','img/Ig/Z/20250323_154845_1.jpg',
+                'img/Ig/Z/IMG_20240427_180403_915.jpg','img/Ig/Z/IMG_20240427_202213_944.jpg','img/Ig/Z/IMG_20240504_183338_871.jpg',
+                'img/Ig/Z/P_20240512_181835.jpg','img/Ig/Z/P_20240512_185846.jpg','img/Ig/Z/IMG_20240604_142211_675.jpg',
+                'img/Ig/Z/P_20240604_183549.jpg','img/Ig/Z/P_20240712_214715.jpg','img/Ig/Z/P_20240712_215120_1.jpg',
+                'img/Ig/Z/P_20240718_115423.jpg','img/Ig/Z/P_20240928_170108.jpg','img/Ig/Z/P_20240928_171009.jpg',
+                'img/Ig/Z/P_20240928_171240.jpg','img/Ig/Z/P_20241030_162942_1.jpg','img/Ig/Z/P_20250228_194325.jpg',
+                'img/Ig/Z/無標題325_20260218013114.jpg','img/Ig/Z/1771349047279_3.jpg','img/Ig/Z/P_20250323_131217_1.jpg',
+                'img/Ig/Z/P_20250323_155315.jpg','img/Ig/Z/P_20250323_134033.jpg','img/Ig/Z/P_20250128_202224.jpg',
+                'img/Ig/Z/P_20250430_204430 (1).jpg','img/Ig/Z/P_20250517_124710_1.jpg','img/Ig/Z/P_20250808_232856_1.jpg',
+                'img/Ig/Z/P_20260303_185550.jpg','img/Ig/Z/332_20260303185933.jpg',
             ]
         },
 
-        /* ── Nishizono Renga ── */
         {
             id: 'renga', label: 'Nishizono Renga', type: 'photos',
+            anniv: { title: 'hamaツアーズ入社から', date: '2024-06-02' },
             photos: [
-                'img/Ig/Z/20240810214205.jpg',
-                'img/Ig/Z/P_20241110_182941_1.jpg',
-                'img/Ig/Z/P_20250314_231641.jpg',
-                'img/Ig/Z/P_20250405_021409_1.jpg',
-                'img/Ig/Z/P_20250412_141131 (1).jpg',
-                'img/Ig/Z/P_20250509_225335.jpg',
-                'img/Ig/Z/P_20250810_195219.jpg',
-                'img/Ig/Z/20260205163903.jpg',
-                'img/Ig/Z/ 無標題394_20260703011854.jpg',
+                'img/Ig/Z/20240810214205.jpg','img/Ig/Z/P_20241110_182941_1.jpg','img/Ig/Z/P_20250314_231641.jpg',
+                'img/Ig/Z/P_20250405_021409_1.jpg','img/Ig/Z/P_20250412_141131 (1).jpg','img/Ig/Z/P_20250509_225335.jpg',
+                'img/Ig/Z/P_20250810_195219.jpg','img/Ig/Z/20260205163903.jpg','img/Ig/Z/ 無標題394_20260703011854.jpg',
                 'img/Ig/Z/20260515145809.jpg',
-                
             ]
         },
 
-          /* ── REN ── */
         {
             id: 'REN', label: 'Kagamine Ren', type: 'photos',
             photos: [
-                'img/Ig/Z/P_20250618_190001_1 (1).jpg',
-                'img/Ig/Z/1783176744371.jpg',
-             
+                'img/Ig/Z/P_20250618_190001_1 (1).jpg','img/Ig/Z/1783176744371.jpg',
             ]
         },
 
-        /* ── Nagito ── */
         {
             id: 'Nagito', label: 'Komaeda Nagito', type: 'photos',
+            anniv: { title: 'ɴᴀɢɪᴛᴏ 推し中...', date: '2022-10-15' },
             photos: [
                 'img/Ig/Z/P_20230430_012521 (2).jpg',
-               
-             
             ]
         },
 
-        /* ── Yasusada ── */
         {
             id: 'Yasusada', label: 'Yamatonokami Yasusada', type: 'photos',
+            anniv: { title: '審神者就任から', date: '2019-05-02' },
             photos: [
                 'img/Ig/Z/P_20250822_222645.jpg',
-               
-             
             ]
         },
 
-        /* ── コレシキ── */
         {
             id: 'MANGA', label: 'Manga', type: 'photos',
+            anniv: { title: '読み始めてから', date: '2025-04-05' },
             photos: [
                 'img/Ig/Z/P_20250322_231349.jpg',
-             
-             
             ]
         },
 
-        
-        /* ── Pikmin ── */
         {
             id: 'pikmin', label: 'Pikmin', type: 'photos',
             photos: [
-                'img/Ig/Z/P_20260205_142555.jpg',
-                'img/Ig/Z/1770519209539.jpg',
-                'img/Ig/Z/1771054486678_2.jpg',
-                'img/Ig/Z/P_20260424_121400.jpg',
-                'img/Ig/Z/P_20260523_103806.jpg',
-                'img/Ig/Z/P_20260523_121912.jpg',
-                'img/Ig/Z/P_20260523_122005.jpg',
-                'img/Ig/Z/無標題383_20260704162947.jpg',
-                'img/Ig/Z/無標題383_20260704163216.jpg',     
+                'img/Ig/Z/P_20260205_142555.jpg','img/Ig/Z/1770519209539.jpg','img/Ig/Z/1771054486678_2.jpg',
+                'img/Ig/Z/P_20260424_121400.jpg','img/Ig/Z/P_20260523_103806.jpg','img/Ig/Z/P_20260523_121912.jpg',
+                'img/Ig/Z/P_20260523_122005.jpg','img/Ig/Z/無標題383_20260704162947.jpg','img/Ig/Z/無標題383_20260704163216.jpg',
             ]
         },
-
-        /* ── 新增更多根目錄資料夾：在這裡加 { id, label, type, ... } ── */
     ]
 };
 
 /* ================================================================
+   計時器
+================================================================ */
+let timerInterval = null;
+let timerEl = null; // { time, sub } DOM 元素
+
+function calcDiff(dateStr) {
+    const start = new Date(dateStr + 'T00:00:00');
+    const diff = Math.max(0, new Date() - start);
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+    return { days, hours, mins, secs };
+}
+
+function startTimer(anniv) {
+    if (timerInterval) clearInterval(timerInterval);
+    timerEl = null;
+    if (!anniv || !anniv.date) return;
+
+    const card = document.createElement('div');
+    card.className = 'anniv-card';
+    card.innerHTML = `
+        <div class="anniv-left">
+            <div class="anniv-title">${anniv.title || ''}</div>
+            <div class="anniv-time" id="__annivTime">— 天</div>
+            <div class="anniv-sub"  id="__annivSub"></div>
+        </div>`;
+
+    // 插入到 content-page 最前面
+    const page = contentScroll.querySelector('.content-page');
+    if (page) page.insertBefore(card, page.firstChild);
+
+    const timeEl = card.querySelector('#__annivTime');
+    const subEl  = card.querySelector('#__annivSub');
+
+    function tick() {
+        const { days, hours, mins, secs } = calcDiff(anniv.date);
+        timeEl.textContent = `${days} 天`;
+        subEl.textContent  = `${hours} 小時 ${mins} 分 ${secs} 秒`;
+    }
+    tick();
+    timerInterval = setInterval(tick, 1000);
+}
+
+function stopTimer() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+}
+
+/* ================================================================
    導航系統
 ================================================================ */
-const sidebar      = document.getElementById('sidebar');
-const backBtn      = document.getElementById('backBtn');
-const breadcrumbEl = document.getElementById('breadcrumb');
+const sidebar       = document.getElementById('sidebar');
+const backBtn       = document.getElementById('backBtn');
+const breadcrumbEl  = document.getElementById('breadcrumb');
 const contentScroll = document.getElementById('contentScroll');
 
-// navStack：存放從根到目前位置的 node 路徑
-// navStack[0] 一定是 ROOT，最後一個是目前正在看的 node
 let navStack = [ROOT];
 let selectedItem = null;
 
-// 找 node by id（深度優先搜尋）
 function findNode(id, node = ROOT) {
     if (node.id === id) return node;
     if (node.children) {
-        for (const c of node.children) {
-            const r = findNode(id, c);
-            if (r) return r;
-        }
+        for (const c of node.children) { const r = findNode(id, c); if (r) return r; }
     }
     return null;
 }
-
 function currentNode() { return navStack[navStack.length - 1]; }
 
 function renderBreadcrumb() {
-    breadcrumbEl.innerHTML = navStack
-        .map(n => `<span class="crumb">${n.label}</span>`)
-        .join('<span class="sep">/</span>');
+    breadcrumbEl.innerHTML = navStack.map(n => `<span class="crumb">${n.label}</span>`).join('<span class="sep">/</span>');
     backBtn.style.visibility = navStack.length > 1 ? 'visible' : 'hidden';
 }
 
 function shouldHideSidebar(node) {
-    // 隱藏側邊欄：純圖片頁，或子資料夾列表（非根目錄）
     return node.type === 'photos' || (node.type === 'folder-list' && node.id !== 'root');
 }
 
 function renderNode(node) {
+    stopTimer();
     contentScroll.innerHTML = '';
 
     if (node.type === 'folder-list') {
@@ -1077,8 +709,7 @@ function renderNode(node) {
             item.innerHTML = `<div class="folder-icon"></div><div class="folder-name">${child.label}</div>`;
             item.addEventListener('click', () => {
                 if (selectedItem) selectedItem.classList.remove('selected');
-                selectedItem = item;
-                item.classList.add('selected');
+                selectedItem = item; item.classList.add('selected');
             });
             item.addEventListener('dblclick', () => navigateTo(child.id));
             grid.appendChild(item);
@@ -1105,11 +736,9 @@ function renderNode(node) {
                 const item = document.createElement('div');
                 item.className = 'photo-item';
                 const img = document.createElement('img');
-                img.src = src;
-                img.loading = 'lazy';
+                img.src = src; img.loading = 'lazy';
                 item.appendChild(img);
                 item.addEventListener('click', () => {
-                    if (!item.querySelector('img')) return;
                     if (unlocked) openLightboxFromEl(item, node.photos);
                     else showPwModal(item, node.photos);
                 });
@@ -1118,6 +747,8 @@ function renderNode(node) {
             page.appendChild(grid);
         }
         contentScroll.appendChild(page);
+        // 計時器加在 page-title 之後
+        if (node.anniv) startTimer(node.anniv);
 
     } else if (node.type === 'text') {
         const page = document.createElement('div');
@@ -1131,9 +762,9 @@ function renderNode(node) {
         body.innerHTML = node.html || '';
         page.appendChild(body);
         contentScroll.appendChild(page);
+        if (node.anniv) startTimer(node.anniv);
     }
 
-    // 側邊欄
     if (shouldHideSidebar(node)) sidebar.classList.add('sidebar-hidden');
     else sidebar.classList.remove('sidebar-hidden');
 
@@ -1155,16 +786,13 @@ function navigateBack() {
 }
 
 backBtn.addEventListener('click', navigateBack);
-
-// 初始渲染
 renderNode(ROOT);
 
 /* ================================================================
    密碼
 ================================================================ */
 let unlocked = false;
-let pendingImgEl = null;
-let pendingPhotos = [];
+let pendingImgEl = null, pendingPhotos = [];
 
 const pwOverlay = document.getElementById('pwOverlay');
 const pwInput   = document.getElementById('pwInput');
@@ -1174,8 +802,7 @@ const pwCancel  = document.getElementById('pwCancel');
 const pwConfirm = document.getElementById('pwConfirm');
 
 function showPwModal(el, photos) {
-    pendingImgEl = el;
-    pendingPhotos = photos;
+    pendingImgEl = el; pendingPhotos = photos;
     pwInput.value = ''; pwError.textContent = '';
     pwOverlay.classList.remove('hidden');
     requestAnimationFrame(() => pwOverlay.classList.add('show'));
@@ -1185,11 +812,7 @@ function hidePwModal() {
     pwOverlay.classList.remove('show');
     setTimeout(() => pwOverlay.classList.add('hidden'), 200);
 }
-
-pwToggle.addEventListener('click', () => {
-    pwInput.type = pwInput.type === 'password' ? 'text' : 'password';
-});
-
+pwToggle.addEventListener('click', () => { pwInput.type = pwInput.type === 'password' ? 'text' : 'password'; });
 function attemptUnlock() {
     if (pwInput.value === CORRECT_PASSWORD) {
         unlocked = true; hidePwModal();
@@ -1199,7 +822,6 @@ function attemptUnlock() {
         pwInput.value = ''; pwInput.focus();
     }
 }
-
 pwConfirm.addEventListener('click', attemptUnlock);
 pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') attemptUnlock(); });
 pwCancel.addEventListener('click', hidePwModal);
@@ -1220,7 +842,7 @@ function openLightboxFromEl(el, photos) {
     const src = el.querySelector('img')?.src || '';
     lbIndex = lbImages.indexOf(src);
     if (lbIndex < 0) lbIndex = 0;
-    if (lbImages.length === 0) return;
+    if (!lbImages.length) return;
     lbImg.src = lbImages[lbIndex];
     updateLbNav();
     lbOverlay.classList.remove('hidden');
@@ -1234,12 +856,10 @@ function updateLbNav() {
     lbPrev.classList.toggle('nav-hidden', lbIndex <= 0);
     lbNext.classList.toggle('nav-hidden', lbIndex >= lbImages.length - 1);
 }
-
 lbClose.addEventListener('click', closeLightbox);
 lbOverlay.addEventListener('click', e => { if (e.target === lbOverlay) closeLightbox(); });
 lbPrev.addEventListener('click', () => { if (lbIndex > 0) { lbIndex--; lbImg.src = lbImages[lbIndex]; updateLbNav(); } });
 lbNext.addEventListener('click', () => { if (lbIndex < lbImages.length - 1) { lbIndex++; lbImg.src = lbImages[lbIndex]; updateLbNav(); } });
-
 document.addEventListener('keydown', e => {
     if (lbOverlay.classList.contains('hidden')) return;
     if (e.key === 'Escape') closeLightbox();
