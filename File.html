@@ -450,6 +450,11 @@ const ROOT = {
                 },
                 {
                     id: 'w-CWT68', label: 'CWT68 24/12/15', type: 'photos',
+                    desc: `
+        <p>當天的場次紀錄與碎碎念～</p>
+        <p>🔗 <a href="https://www.plurk.com/p/3gnjsgw531" target="_blank" style="color:var(--mint-dark);text-decoration:none;font-weight:600;">噗浪貼文 ↗</a></p>
+        
+      `,
                     photos: [
                         'img/Ig/Z/P_20240721_125227.jpg',
                         'img/Ig/Z/P_20240721_125344.jpg',
@@ -458,7 +463,12 @@ const ROOT = {
                 },
                 {
                     id: 'w-NIJI', label: '霓集箱 25/11/22', type: 'photos',
-                    photos: [
+                    desc: `
+        <p>當天的場次紀錄與碎碎念～</p>
+        <p>🔗 <a href="https://www.threads.com/@hashita_986db2/post/DRWv-F3jwYd" target="_blank" style="color:var(--mint-dark);text-decoration:none;font-weight:600;">Threads 紀錄 ↗</a></p>
+        
+      `,
+                      photos: [
                         'img/Ig/Z/P_20251122_143753.jpg',
                         'img/Ig/Z/P_20251122_145940.jpg',
                         'img/Ig/Z/P_20251122_150316.jpg',
@@ -467,7 +477,12 @@ const ROOT = {
                 },
                 {
                     id: 'w-NiCE2', label: 'NiCE2 創回響2', type: 'photos',
-                    photos: [
+                     desc: `
+        <p>當天的場次紀錄與碎碎念～</p>
+        <p>🔗 <a href="https://www.plurk.com/p/3j1d2w1dyv" target="_blank" style="color:var(--mint-dark);text-decoration:none;font-weight:600;">噗浪貼文 ↗</a></p>
+        
+      `,
+                      photos: [
                         'img/Ig/Z/P_20260815_084311_1.jpg', 
                           'img/Ig/Z/IMG_9193_1.jpg',
                           'img/Ig/Z/P_20260815_100706.jpg',                          
@@ -940,7 +955,13 @@ function renderNode(node) {
         title.className = 'page-title';
         title.textContent = node.label;
         page.appendChild(title);
-
+if (node.desc || node.html) {
+    const descBox = document.createElement('div');
+    descBox.className = 'page-body';
+    descBox.style.cssText = 'margin-bottom: 20px;';
+    descBox.innerHTML = node.desc || node.html;
+    page.appendChild(descBox);
+  }
         if (!node.photos || node.photos.length === 0) {
             const empty = document.createElement('p');
             empty.style.cssText = 'color:#aaa;font-size:13px;';
