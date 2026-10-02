@@ -939,11 +939,16 @@ function renderNode(node) {
             const item = document.createElement('div');
             item.className = 'folder-item';
             item.innerHTML = `<div class="folder-icon"></div><div class="folder-name">${child.label}</div>`;
-            item.addEventListener('click', () => {
+            
+            // 合併為單一事件監聽，確保選取並觸發導航
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
                 if (selectedItem) selectedItem.classList.remove('selected');
-                selectedItem = item; item.classList.add('selected');
+                selectedItem = item;
+                item.classList.add('selected');
+                navigateTo(child.id);
             });
-            item.addEventListener('click', () => navigateTo(child.id));
+
             grid.appendChild(item);
         });
         contentScroll.appendChild(grid);
@@ -955,13 +960,15 @@ function renderNode(node) {
         title.className = 'page-title';
         title.textContent = node.label;
         page.appendChild(title);
-if (node.desc || node.html) {
-    const descBox = document.createElement('div');
-    descBox.className = 'page-body';
-    descBox.style.cssText = 'margin-bottom: 20px;';
-    descBox.innerHTML = node.desc || node.html;
-    page.appendChild(descBox);
-  }
+
+        if (node.desc || node.html) {
+            const descBox = document.createElement('div');
+            descBox.className = 'page-body';
+            descBox.style.cssText = 'margin-bottom: 20px;';
+            descBox.innerHTML = node.desc || node.html;
+            page.appendChild(descBox);
+        }
+
         if (!node.photos || node.photos.length === 0) {
             const empty = document.createElement('p');
             empty.style.cssText = 'color:#aaa;font-size:13px;';
@@ -985,7 +992,6 @@ if (node.desc || node.html) {
             page.appendChild(grid);
         }
         contentScroll.appendChild(page);
-        // 計時器加在 page-title 之後
         if (node.anniv) startTimer(node.anniv);
 
     } else if (node.type === 'text') {
@@ -1042,7 +1048,7 @@ backBtn.addEventListener('click', navigateBack);
 
 // 頁面載入或重新整理時，檢查網址上的 hash 並恢復位置
 function initFromHash() {
-    const hashId = location.hash.replace('#', '');
+    const hashId = decodeURIComponent(location.hash.replace('#', ''));
     if (hashId) {
         const stack = buildNavStack(hashId);
         if (stack) {
@@ -1057,7 +1063,7 @@ function initFromHash() {
 
 // 支援瀏覽器的「上一頁」與「下一頁」按鈕
 window.addEventListener('hashchange', () => {
-    const hashId = location.hash.replace('#', '');
+    const hashId = decodeURIComponent(location.hash.replace('#', ''));
     const current = currentNode();
     if ((!hashId && current.id === 'root') || (current && current.id === hashId)) return;
     initFromHash();
