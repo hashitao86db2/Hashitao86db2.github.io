@@ -1010,21 +1010,61 @@ if (node.desc || node.html) {
     selectedItem = null;
 }
 
+// 輔助函式：根據目標 id 找出完整的導航路徑（重新整理時重建上一層階層）
+function buildNavStack(id, current = ROOT, stack = []) {
+    if (current.id === id) return [...stack, current];
+    if (current.children) {
+        for (const child of current.children) {
+            const res = buildNavStack(id, child, [...stack, current]);
+            if (res) return res;
+        }
+    }
+    return null;
+}
+
 function navigateTo(id) {
     const node = findNode(id);
     if (!node) return;
     navStack.push(node);
+    location.hash = node.id === 'root' ? '' : node.id;
     renderNode(node);
 }
 
 function navigateBack() {
     if (navStack.length <= 1) return;
     navStack.pop();
-    renderNode(currentNode());
+    const prev = currentNode();
+    location.hash = prev.id === 'root' ? '' : prev.id;
+    renderNode(prev);
 }
 
 backBtn.addEventListener('click', navigateBack);
-renderNode(ROOT);
+
+// 頁面載入或重新整理時，檢查網址上的 hash 並恢復位置
+function initFromHash() {
+    const hashId = location.hash.replace('#', '');
+    if (hashId) {
+        const stack = buildNavStack(hashId);
+        if (stack) {
+            navStack = stack;
+            renderNode(currentNode());
+            return;
+        }
+    }
+    navStack = [ROOT];
+    renderNode(ROOT);
+}
+
+// 支援瀏覽器的「上一頁」與「下一頁」按鈕
+window.addEventListener('hashchange', () => {
+    const hashId = location.hash.replace('#', '');
+    const current = currentNode();
+    if ((!hashId && current.id === 'root') || (current && current.id === hashId)) return;
+    initFromHash();
+});
+
+// 啟動頁面
+initFromHash();
 
 /* ================================================================
    密碼
